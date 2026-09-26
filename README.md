@@ -61,6 +61,19 @@ benchmark_inference_efficiency.py  parameter count and inference latency per arc
 visualize_attention.py         attention weights on healthy vs degraded windows
 run_all_manuscript_figures.py  runs the four figure scripts above in order
 
+cell_clustered_bootstrap.py    cell-clustered (not per-window) bootstrap coverage CIs
+hgc_cp.py                      heterogeneity-guided conformal prediction (HGC-CP): MMD-based
+                                per-source weights + a corrected weighted conformal quantile
+generate_val_predictions.py    MC-Dropout predictions on the validation set (input to the below)
+hgc_cp_evaluation_harness.py   HGC-CP vs pooled vs groupwise, calibration-level LODO
+nested_hyperparameter_search.py  selects HGC-CP's (lambda, beta) without tuning on the target
+hgc_cp_ablations.py            isolates HGC-CP's weighting, lambda, and inflation components
+few_shot_calibration.py        HGC-CP with 0/1/3/5/10 target-owned calibration cells
+plot_hgc_cp_comparison.py      regenerates the HGC-CP comparison figure from reported numbers
+
+field_experiment.py            single- and multi-vehicle field-EV capacity extraction (exploratory)
+plot_field_results.py          plots the single-vehicle field capacity trend vs plausible fade
+
 results/                       reference outputs from the runs reported in the paper (see below)
 ```
 
@@ -91,6 +104,12 @@ sources (each has its own licence and citation requirements):
 
 \*Cells that contribute at least one training/validation/test window after
 preprocessing (337 in total).
+
+A single-vehicle sample of real field-EV telemetry (Liu et al., *Nature
+Communications* 16, 1137, 2025) is used only for the exploratory,
+illustrative analysis in `field_experiment.py` / `plot_field_results.py` —
+https://github.com/HoraceLiu1010/Multi-modal-SOH-estimation-framework. This
+data is not part of the seven training/evaluation datasets above.
 
 Place everything under one folder (default: `./data`, or set the
 `BATTERY_DATA_ROOT` environment variable) with this layout, which is what
@@ -142,6 +161,23 @@ Two corrections are applied inside the loaders and are part of the reported resu
   `run_xjtu_sensitivity_experiment.py` for the full with/without comparison.
 - **RWTH**: isolated single-row capacity outliers (mostly at the start of each session
   file) are removed by `rwth_local_outlier_fix.py`.
+
+### Heterogeneity-guided conformal prediction (HGC-CP) and cell-clustered coverage
+
+Two further analyses build on the main pipeline's saved predictions:
+
+- **Cell-clustered bootstrap** (`cell_clustered_bootstrap.py`): Table 7's per-window
+  Clopper-Pearson intervals treat every test window as an independent trial; this
+  resamples whole test *cells* instead to check how much within-cell correlation
+  widens the true coverage uncertainty.
+- **HGC-CP** (`hgc_cp.py`): an alternative to groupwise/hierarchical calibration for a
+  target with little or no calibration data of its own, weighting each of the other
+  six datasets by MMD-based distributional similarity to the target. Run in order:
+  `generate_val_predictions.py` (once, to produce validation-set MC-Dropout
+  predictions) → `nested_hyperparameter_search.py` (selects λ, β) →
+  `hgc_cp_evaluation_harness.py` (main comparison, calibration-level LODO) →
+  `hgc_cp_ablations.py` / `few_shot_calibration.py` (component and calibration-budget
+  ablations) → `plot_hgc_cp_comparison.py` (figure).
 
 ## Reference results
 
