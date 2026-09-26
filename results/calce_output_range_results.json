@@ -1,0 +1,12 @@
+{
+  "pool_train_min": 0.07580983638763428,
+  "pool_train_p1": 0.22316887974739075,
+  "pool_train_p5": 0.2855079174041748,
+  "calce_test_min": 0.3092185854911804,
+  "calce_test_mean": 0.7048771977424622,
+  "n_calce_test": 98,
+  "frac_below_pool_min": 0.0,
+  "frac_below_pool_p1": 0.0,
+  "frac_below_pool_p5": 0.0,
+  "units": "raw SOH (de-normalized)"
+}

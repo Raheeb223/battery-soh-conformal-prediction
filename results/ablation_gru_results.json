@@ -1,0 +1,38 @@
+{
+  "run_name": "ablation_gru",
+  "model_variant": "gru",
+  "seed": 42,
+  "conformal_mode": "groupwise",
+  "best_epoch": 74,
+  "best_val_loss": 0.004569280037152249,
+  "test_mae": 0.02584068477153778,
+  "test_rmse": 0.0830644741654396,
+  "overall_coverage": 0.8338885830991628,
+  "per_dataset_mae": {
+    "BIT": 0.1732645183801651,
+    "CALCE": 0.44475480914115906,
+    "MIT": 0.016705960035324097,
+    "NASA": 0.18732933700084686,
+    "Oxford": 0.03895483538508415,
+    "RWTH": 0.0183850210160017,
+    "XJTU": 0.06434690207242966
+  },
+  "per_dataset_coverage": {
+    "BIT": 0.8533834586466166,
+    "CALCE": 0.8469387755102041,
+    "MIT": 0.8760920459087534,
+    "NASA": 0.3333333333333333,
+    "Oxford": 1.0,
+    "RWTH": 0.7597798601814666,
+    "XJTU": 0.9232245681381958
+  },
+  "dataset_signature": [
+    "BIT",
+    "CALCE",
+    "MIT",
+    "NASA",
+    "Oxford",
+    "RWTH",
+    "XJTU"
+  ]
+}

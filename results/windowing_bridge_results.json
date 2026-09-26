@@ -1,0 +1,58 @@
+{
+  "BIT": {
+    "n_total": 798,
+    "n_bridging": 88,
+    "frac_bridging": 0.11027568922305764,
+    "full_set_coverage": 0.8709273182957393,
+    "non_bridging_coverage": 0.8802816901408451,
+    "delta_pp": 0.9354371845105791
+  },
+  "CALCE": {
+    "n_total": 98,
+    "n_bridging": 98,
+    "frac_bridging": 1.0,
+    "full_set_coverage": 0.7142857142857143,
+    "non_bridging_coverage": NaN,
+    "delta_pp": NaN
+  },
+  "MIT": {
+    "n_total": 17513,
+    "n_bridging": 19,
+    "frac_bridging": 0.0010849083537943242,
+    "full_set_coverage": 0.9100097070747445,
+    "non_bridging_coverage": 0.9099119698182234,
+    "delta_pp": -0.00977372565210688
+  },
+  "NASA": {
+    "n_total": 3,
+    "n_bridging": 3,
+    "frac_bridging": 1.0,
+    "full_set_coverage": 0.3333333333333333,
+    "non_bridging_coverage": NaN,
+    "delta_pp": NaN
+  },
+  "Oxford": {
+    "n_total": 56,
+    "n_bridging": 56,
+    "frac_bridging": 1.0,
+    "full_set_coverage": 1.0,
+    "non_bridging_coverage": NaN,
+    "delta_pp": NaN
+  },
+  "RWTH": {
+    "n_total": 13446,
+    "n_bridging": 19,
+    "frac_bridging": 0.001413059645991373,
+    "full_set_coverage": 0.8505875353264911,
+    "non_bridging_coverage": 0.850599538243837,
+    "delta_pp": 0.0012002917345932396
+  },
+  "XJTU": {
+    "n_total": 2605,
+    "n_bridging": 376,
+    "frac_bridging": 0.14433781190019193,
+    "full_set_coverage": 0.9604606525911709,
+    "non_bridging_coverage": 0.9582772543741588,
+    "delta_pp": -0.2183398217012078
+  }
+}

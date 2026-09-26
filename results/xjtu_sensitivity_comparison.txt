@@ -1,0 +1,18 @@
+XJTU SENTINEL-VALUE FIX: BEFORE/AFTER SENSITIVITY COMPARISON
+======================================================================
+
+Metric                                       WITH fix  WITHOUT fix        Delta
+Linear MAE                                    0.03040      0.02897     -0.00143
+SVR MAE                                       0.01840      0.02319     +0.00479
+XGBoost MAE                                   0.02071      0.01785     -0.00286
+Proposed model MAE                            0.02464      0.02057     -0.00408
+Proposed model RMSE                           0.08363      0.06498     -0.01865
+Proposed model overall coverage               0.88931      0.68887     -0.20044
+
+Per-dataset XJTU-specific comparison (conformal_groupwise):
+  WITH fix      XJTU MAE=0.051747456192970276  XJTU coverage=0.9604606525911709
+  WITHOUT fix   XJTU MAE=0.04831282049417496  XJTU coverage=0.9405111018014244
+
+LODO (XJTU held out) comparison:
+  WITH fix      MAE=0.012879813396435326  RMSE=0.021442157086459863  coverage=0.20185984381422112
+  WITHOUT fix   MAE=0.0222268182361711  RMSE=0.06914242580680842  coverage=0.3100713297136165

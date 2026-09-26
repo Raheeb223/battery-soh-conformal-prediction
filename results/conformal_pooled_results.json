@@ -1,0 +1,38 @@
+{
+  "run_name": "conformal_pooled",
+  "model_variant": "full",
+  "seed": 42,
+  "conformal_mode": "pooled",
+  "best_epoch": 66,
+  "best_val_loss": 0.004274701544238275,
+  "test_mae": 0.02464369311928749,
+  "test_rmse": 0.08363324403762817,
+  "overall_coverage": 0.8634375271589559,
+  "per_dataset_mae": {
+    "BIT": 0.157332181930542,
+    "CALCE": 0.39118802547454834,
+    "MIT": 0.016238436102867126,
+    "NASA": 0.13556309044361115,
+    "Oxford": 0.03383732959628105,
+    "RWTH": 0.0197308287024498,
+    "XJTU": 0.051747456192970276
+  },
+  "per_dataset_coverage": {
+    "BIT": 0.38721804511278196,
+    "CALCE": 0.10204081632653061,
+    "MIT": 0.9160623536801233,
+    "NASA": 0.0,
+    "Oxford": 0.6428571428571429,
+    "RWTH": 0.8756507511527591,
+    "XJTU": 0.6268714011516314
+  },
+  "dataset_signature": [
+    "BIT",
+    "CALCE",
+    "MIT",
+    "NASA",
+    "Oxford",
+    "RWTH",
+    "XJTU"
+  ]
+}

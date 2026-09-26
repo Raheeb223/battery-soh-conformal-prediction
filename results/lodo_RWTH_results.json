@@ -1,0 +1,20 @@
+{
+  "run_name": "lodo_RWTH",
+  "held_out_dataset": "RWTH",
+  "model_variant": "full",
+  "test_mae": 0.004271852906616275,
+  "test_rmse": 0.007556520350975284,
+  "test_mae_normalized_space": 0.018001340329647064,
+  "test_rmse_normalized_space": 0.03184273838996887,
+  "held_out_soh_std": 0.23730749090837444,
+  "coverage": 0.8857305853375833,
+  "n_test_samples": 110432,
+  "training_dataset_signature": [
+    "BIT",
+    "CALCE",
+    "MIT",
+    "NASA",
+    "Oxford",
+    "XJTU"
+  ]
+}

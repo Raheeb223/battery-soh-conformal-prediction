@@ -1,0 +1,76 @@
+{
+  "mu_hat_all": 0.17629756191522844,
+  "tau2_all": 0.006096637232062483,
+  "tau2_ci": [
+    0.00028291881609942844,
+    0.02861838140208198
+  ],
+  "per_dataset": {
+    "MIT": {
+      "q_hat_true": 0.038404226303100586,
+      "n_g": 17814,
+      "mu_hat_loo": 0.21014848669968517,
+      "tau2_loo": 0.011057825155009726,
+      "coverage_pooled_approx": 0.9523211328727231,
+      "coverage_prior_only": 0.9995431964826129,
+      "coverage_prior_plus_100": 0.9993718951635927,
+      "coverage_true_groupwise": 0.9100097070747445,
+      "shrinkage_weight_full_n": 0.8946469590185938
+    },
+    "RWTH": {
+      "q_hat_true": 0.03656407445669174,
+      "n_g": 16784,
+      "mu_hat_loo": 0.2104917971486228,
+      "tau2_loo": 0.011006292495605047,
+      "coverage_pooled_approx": 0.9489067380633646,
+      "coverage_prior_only": 0.9985869403540086,
+      "coverage_prior_plus_100": 0.9983638256730626,
+      "coverage_true_groupwise": 0.8505875353264911,
+      "shrinkage_weight_full_n": 0.9345995426483327
+    },
+    "XJTU": {
+      "q_hat_true": 0.17210818827152252,
+      "n_g": 3175,
+      "mu_hat_loo": 0.1709472158392227,
+      "tau2_loo": 0.0035949230430235178,
+      "coverage_pooled_approx": 0.7439539347408829,
+      "coverage_prior_only": 0.9600767754318618,
+      "coverage_prior_plus_100": 0.9600767754318618,
+      "coverage_true_groupwise": 0.9604606525911709,
+      "shrinkage_weight_full_n": 0.9282226154059908
+    },
+    "BIT": {
+      "q_hat_true": 0.29540175199508667,
+      "n_g": 813,
+      "mu_hat_loo": 0.14870466119526876,
+      "tau2_loo": 0.004809392590807139,
+      "coverage_pooled_approx": 0.5125313283208021,
+      "coverage_prior_only": 0.7944862155388471,
+      "coverage_prior_plus_100": 0.8596491228070176,
+      "coverage_true_groupwise": 0.8709273182957393,
+      "shrinkage_weight_full_n": 0.9620436770415342
+    },
+    "Oxford": {
+      "q_hat_true": 0.17396961152553558,
+      "n_g": 53,
+      "mu_hat_loo": 0.17670010416434764,
+      "tau2_loo": 0.006053724791968576,
+      "coverage_pooled_approx": 0.8035714285714286,
+      "coverage_prior_only": 1.0,
+      "coverage_prior_plus_100": 1.0,
+      "coverage_true_groupwise": 1.0,
+      "shrinkage_weight_full_n": 0.7000310544288266
+    },
+    "CALCE": {
+      "q_hat_true": 0.4062618613243103,
+      "n_g": 125,
+      "mu_hat_loo": 0.1422948094263846,
+      "tau2_loo": 0.005904001975540741,
+      "coverage_pooled_approx": 0.12244897959183673,
+      "coverage_prior_only": 0.30612244897959184,
+      "coverage_prior_plus_100": 0.7040816326530612,
+      "coverage_true_groupwise": 0.7142857142857143,
+      "shrinkage_weight_full_n": 0.9796668889768212
+    }
+  }
+}

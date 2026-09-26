@@ -1,0 +1,8 @@
+{
+  "auc": 0.5014535439395469,
+  "frac_calce_propensity_gt_0.9": 0.011345218800648298,
+  "mean_calce_propensity": 0.5034130435828574,
+  "mean_pool_propensity": 0.4930656045874702,
+  "n_calce": 617,
+  "n_pool": 247709
+}

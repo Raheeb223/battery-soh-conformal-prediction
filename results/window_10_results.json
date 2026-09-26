@@ -1,0 +1,38 @@
+{
+  "run_name": "window_10",
+  "model_variant": "full",
+  "seed": 42,
+  "conformal_mode": "groupwise",
+  "best_epoch": 38,
+  "best_val_loss": 0.00547034130555623,
+  "test_mae": 0.023413054645061493,
+  "test_rmse": 0.0936766192317009,
+  "overall_coverage": 0.669017301433221,
+  "per_dataset_mae": {
+    "BIT": 0.17294637858867645,
+    "CALCE": 0.46006399393081665,
+    "MIT": 0.013221642933785915,
+    "NASA": 0.1153588593006134,
+    "Oxford": 0.04945838823914528,
+    "RWTH": 0.01569676399230957,
+    "XJTU": 0.058674588799476624
+  },
+  "per_dataset_coverage": {
+    "BIT": 0.8810572687224669,
+    "CALCE": 0.788135593220339,
+    "MIT": 0.7233538340010156,
+    "NASA": 0.23076923076923078,
+    "Oxford": 0.9848484848484849,
+    "RWTH": 0.5246799378376378,
+    "XJTU": 0.9541899441340782
+  },
+  "dataset_signature": [
+    "BIT",
+    "CALCE",
+    "MIT",
+    "NASA",
+    "Oxford",
+    "RWTH",
+    "XJTU"
+  ]
+}

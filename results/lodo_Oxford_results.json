@@ -1,0 +1,20 @@
+{
+  "run_name": "lodo_Oxford",
+  "held_out_dataset": "Oxford",
+  "model_variant": "full",
+  "test_mae": 0.003806385376671239,
+  "test_rmse": 0.012667686552452224,
+  "test_mae_normalized_space": 0.0556442029774189,
+  "test_rmse_normalized_space": 0.18518443405628204,
+  "held_out_soh_std": 0.06840578484367756,
+  "coverage": 0.5431754874651811,
+  "n_test_samples": 359,
+  "training_dataset_signature": [
+    "BIT",
+    "CALCE",
+    "MIT",
+    "NASA",
+    "RWTH",
+    "XJTU"
+  ]
+}

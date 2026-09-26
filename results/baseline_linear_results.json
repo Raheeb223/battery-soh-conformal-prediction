@@ -1,0 +1,24 @@
+{
+  "run_name": "baseline_linear",
+  "model_variant": "baseline_linear",
+  "test_mae": 0.030404692515730858,
+  "test_rmse": 0.12355895340442657,
+  "per_dataset_mae": {
+    "BIT": 0.3200710415840149,
+    "CALCE": 0.966404139995575,
+    "MIT": 0.009481744840741158,
+    "NASA": 0.22186140716075897,
+    "Oxford": 0.08883918821811676,
+    "RWTH": 0.0110990134999156,
+    "XJTU": 0.14529119431972504
+  },
+  "dataset_signature": [
+    "BIT",
+    "CALCE",
+    "MIT",
+    "NASA",
+    "Oxford",
+    "RWTH",
+    "XJTU"
+  ]
+}

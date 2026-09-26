@@ -1,0 +1,38 @@
+{
+  "run_name": "ablation_plain_lstm",
+  "model_variant": "plain_lstm",
+  "seed": 42,
+  "conformal_mode": "groupwise",
+  "best_epoch": 58,
+  "best_val_loss": 0.004175205742645791,
+  "test_mae": 0.02171764336526394,
+  "test_rmse": 0.08130539953708649,
+  "overall_coverage": 0.7023378429270837,
+  "per_dataset_mae": {
+    "BIT": 0.14767131209373474,
+    "CALCE": 0.40578240156173706,
+    "MIT": 0.014394531957805157,
+    "NASA": 0.1769065111875534,
+    "Oxford": 0.03839169070124626,
+    "RWTH": 0.01538685243576765,
+    "XJTU": 0.05005727335810661
+  },
+  "per_dataset_coverage": {
+    "BIT": 0.8634085213032582,
+    "CALCE": 0.8163265306122449,
+    "MIT": 0.7625192713983898,
+    "NASA": 0.3333333333333333,
+    "Oxford": 1.0,
+    "RWTH": 0.5631414547077198,
+    "XJTU": 0.9566218809980807
+  },
+  "dataset_signature": [
+    "BIT",
+    "CALCE",
+    "MIT",
+    "NASA",
+    "Oxford",
+    "RWTH",
+    "XJTU"
+  ]
+}

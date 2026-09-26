@@ -1,0 +1,93 @@
+[
+  {
+    "comparison": "proposed_vs_baseline_linear",
+    "n_samples": 34519,
+    "proposed_mae": 0.02464369311928749,
+    "other_mae": 0.030404692515730858,
+    "wilcoxon_p_value": 0.0,
+    "cliffs_delta": 0.2516488599029018,
+    "effect_size": "small",
+    "mae_diff_95ci": [
+      -0.006762881577014923,
+      -0.004786509973928335
+    ]
+  },
+  {
+    "comparison": "proposed_vs_baseline_svr",
+    "n_samples": 34519,
+    "proposed_mae": 0.02464369311928749,
+    "other_mae": 0.01839643589983563,
+    "wilcoxon_p_value": 0.0,
+    "cliffs_delta": 0.5265630118061541,
+    "effect_size": "large",
+    "mae_diff_95ci": [
+      0.005438868378420657,
+      0.007049101661080668
+    ]
+  },
+  {
+    "comparison": "proposed_vs_baseline_xgboost",
+    "n_samples": 34519,
+    "proposed_mae": 0.02464369311928749,
+    "other_mae": 0.020709870383143425,
+    "wilcoxon_p_value": 0.0,
+    "cliffs_delta": 0.33643217556464555,
+    "effect_size": "medium",
+    "mae_diff_95ci": [
+      0.003390886727720499,
+      0.004509079083800316
+    ]
+  },
+  {
+    "comparison": "proposed_vs_ablation_no_attention",
+    "n_samples": 34519,
+    "proposed_mae": 0.02464369311928749,
+    "other_mae": 0.021628404036164284,
+    "wilcoxon_p_value": 1.3186734726800426e-167,
+    "cliffs_delta": 0.0939472960973262,
+    "effect_size": "negligible",
+    "mae_diff_95ci": [
+      0.0026359375566244124,
+      0.0034056369215250014
+    ]
+  },
+  {
+    "comparison": "proposed_vs_ablation_no_multiscale",
+    "n_samples": 34519,
+    "proposed_mae": 0.02464369311928749,
+    "other_mae": 0.028178740292787552,
+    "wilcoxon_p_value": 2.0319452833507257e-253,
+    "cliffs_delta": -0.14753105106770914,
+    "effect_size": "small",
+    "mae_diff_95ci": [
+      -0.003945274651050568,
+      -0.0031288954429328445
+    ]
+  },
+  {
+    "comparison": "proposed_vs_ablation_plain_lstm",
+    "n_samples": 34519,
+    "proposed_mae": 0.02464369311928749,
+    "other_mae": 0.02171764336526394,
+    "wilcoxon_p_value": 2.3591863388570344e-92,
+    "cliffs_delta": 0.0632915563296786,
+    "effect_size": "negligible",
+    "mae_diff_95ci": [
+      0.0025153354741632938,
+      0.0033357418142259117
+    ]
+  },
+  {
+    "comparison": "proposed_vs_ablation_gru",
+    "n_samples": 34519,
+    "proposed_mae": 0.02464369311928749,
+    "other_mae": 0.02584068477153778,
+    "wilcoxon_p_value": 4.3755086654668334e-23,
+    "cliffs_delta": -0.031671016059407114,
+    "effect_size": "negligible",
+    "mae_diff_95ci": [
+      -0.0016296785790473223,
+      -0.0007763746194541455
+    ]
+  }
+]

@@ -1,0 +1,35 @@
+{
+  "run_name": "window_50",
+  "model_variant": "full",
+  "seed": 42,
+  "conformal_mode": "groupwise",
+  "best_epoch": 81,
+  "best_val_loss": 0.0028394000624656556,
+  "test_mae": 0.02081787772476673,
+  "test_rmse": 0.06952414661645889,
+  "overall_coverage": 0.8108377961332486,
+  "per_dataset_mae": {
+    "BIT": 0.13391229510307312,
+    "CALCE": 0.24361734092235565,
+    "MIT": 0.015451308339834213,
+    "Oxford": 0.02665344811975956,
+    "RWTH": 0.016790194436907768,
+    "XJTU": 0.05522582307457924
+  },
+  "per_dataset_coverage": {
+    "BIT": 0.8525641025641025,
+    "CALCE": 0.9302325581395349,
+    "MIT": 0.8689214002250785,
+    "Oxford": 1.0,
+    "RWTH": 0.7144580129654756,
+    "XJTU": 0.9243128964059196
+  },
+  "dataset_signature": [
+    "BIT",
+    "CALCE",
+    "MIT",
+    "Oxford",
+    "RWTH",
+    "XJTU"
+  ]
+}
