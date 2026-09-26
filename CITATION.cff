@@ -3,7 +3,10 @@ message: "If you use this code, please cite it as below."
 title: "Multi-Scale BiLSTM with Attention and Groupwise Conformal Calibration for Reliable State-of-Health Prediction Across Heterogeneous Lithium-Ion Battery Datasets"
 type: software
 authors:
-  - alias: "Raheeb223"
+  - given-names: "Raheeb"
+    family-names: "Sadman"
+    affiliation: "Department of Electrical and Electronic Engineering, BRAC University"
+    email: raheebsadman1@gmail.com
 license: MIT
 repository-code: "https://github.com/Raheeb223/battery-soh-conformal-prediction"
 keywords:
