@@ -108,14 +108,12 @@ def main():
     print("NOTE ON SCOPE")
     print("=" * 78)
     print("This uses the EXISTING multiseed_{42,123,2024} runs, which all used\n"
-          "groupwise calibration (train_one()'s default). This directly\n"
-          "strengthens the groupwise-coverage claim -- your paper's central\n"
-          "result -- with real seed-to-seed variability, no new training\n"
+          "groupwise calibration (train_one()'s default), giving seed-to-seed\n"
+          "coverage variability for the groupwise result with no new training\n"
           "required. It does NOT give seed-level variability for pooled or\n"
-          "normalized-groupwise calibration; if you want that too, a further\n"
-          "experiment training 3 seeds under each of the other two conformal\n"
-          "modes would be needed (9 additional short runs total) -- ask if you\n"
-          "want that script written as well.")
+          "normalized-groupwise calibration; that would require training 3\n"
+          "seeds under each of the other two conformal modes (9 additional\n"
+          "runs total).")
 
 
 if __name__ == "__main__":

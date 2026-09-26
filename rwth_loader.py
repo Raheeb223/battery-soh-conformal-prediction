@@ -69,10 +69,10 @@ def _parse_session_file(path: str, drop_first: bool = True) -> pd.DataFrame:
         return pd.DataFrame(columns=["cycle_in_session", "capacity"])
 
     # IMPORTANT: AhEla is a CUMULATIVE counter (total Ah discharged since the
-    # test began), not a per-cycle value. Taking max(AhEla) per cycle would
-    # just capture the ever-growing running total (confirmed empirically —
-    # early debugging showed capacity increasing ~1.08/cycle instead of
-    # fading). The actual Ah discharged DURING a given cycle is the
+    # test began), not a per-cycle value. Since it only ever increases within
+    # a session, taking max(AhEla) per cycle would report a monotonically
+    # growing running total rather than the fading per-cycle discharge
+    # capacity. The actual Ah discharged DURING a given cycle is instead the
     # within-cycle range: max(AhEla) - min(AhEla) for that Zyklus group.
     per_cycle = (
         df.groupby("Zyklus")["AhEla"]

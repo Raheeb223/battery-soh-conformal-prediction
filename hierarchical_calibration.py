@@ -60,8 +60,7 @@ def _load_predictions():
     path = os.path.join(config.OUTPUT_DIR, "conformal_groupwise_predictions.npz")
     if not os.path.exists(path):
         print(f"  [!] {path} not found -- run the main groupwise conformal "
-              f"pipeline first (this is the same file identified via "
-              f"locate_groupwise_predictions.py earlier).")
+              f"pipeline first (experiments.py's conformal-ablation section).")
         return None
     return np.load(path, allow_pickle=True)
 

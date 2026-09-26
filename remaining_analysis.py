@@ -100,8 +100,8 @@ def run_significance_testing():
 
     proposed = _load_predictions("ablation_full")
     if proposed is None:
-        print("  [skip] could not find ablation_full predictions -- adjust "
-              "_load_predictions()'s glob pattern to match your actual filenames.")
+        print("  [skip] could not find ablation_full predictions in outputs/ -- "
+              "check that _load_predictions()'s glob pattern matches the files present.")
         return
 
     prop_err = np.abs(proposed["mean_pred"] - proposed["y_test"])

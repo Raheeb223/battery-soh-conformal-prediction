@@ -180,9 +180,9 @@ def compare_summaries():
     with open(out_path, "w") as fh:
         fh.write(output)
     print(f"\nsaved {out_path}")
-    print("\nSend me this file (or the printed output above) along with "
-          f"{without_path} -- I'll write the actual before/after comparison "
-          "into the manuscript's XJTU forensic section from these real numbers.")
+    print(f"\nThis comparison, together with {without_path}, constitutes the "
+          "full before/after evidence for the XJTU sentinel-value correction's "
+          "effect on downstream results.")
 
 
 if __name__ == "__main__":

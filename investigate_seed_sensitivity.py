@@ -67,9 +67,9 @@ def main():
     lab_test = preds[SEEDS[0]]["lab_test"]
     datasets_present = [d for d in DATASET_ORDER if d in set(np.unique(lab_test))]
 
-    # --- Part 1: borderline-margin analysis ---
+    # --- Borderline-margin analysis ---
     print(f"\n{'='*78}")
-    print("PART 1: Borderline-margin analysis")
+    print("Borderline-margin analysis")
     print(f"{'='*78}")
     print("For each seed, margin = min(y_true - lower, upper - y_true), "
           "normalized by interval half-width. Margin near 0 = sample sits "
@@ -100,9 +100,9 @@ def main():
         print(f"  {ds:8s}  borderline fraction (mean across seeds): {mean_borderline:.4f}  "
               f"(per-seed: {[f'{v:.4f}' for v in borderline_fractions]})")
 
-    # --- Part 2: direct flip-sample analysis ---
+    # --- Direct flip-sample analysis ---
     print(f"\n{'='*78}")
-    print("PART 2: Direct flip-sample analysis")
+    print("Direct flip-sample analysis")
     print(f"{'='*78}")
     print("For each dataset, counts samples whose covered/uncovered status "
           "DIFFERS across at least 2 of the 3 seeds -- the direct, "
@@ -130,7 +130,7 @@ def main():
 
     # --- Correlation check: does higher borderline fraction predict higher flip rate? ---
     print(f"\n{'='*78}")
-    print("PART 3: Does borderline fraction predict flip rate (and thus coverage instability)?")
+    print("Does borderline fraction predict flip rate (and thus coverage instability)?")
     print(f"{'='*78}")
     borderline_vals = [borderline_summary[d]["mean_borderline_fraction"] for d in datasets_present]
     flip_vals = [flip_summary[d]["flip_rate"] for d in datasets_present]
@@ -144,11 +144,11 @@ def main():
     else:
         corr = None
 
-    # --- Part 4: direct point-prediction variance across seeds (more fundamental
-    # than the boundary-margin proxy -- tests whether MIT/RWTH's predictions
-    # THEMSELVES are less stable across seeds, independent of interval position) ---
+    # --- Point-prediction variance across seeds: more fundamental than the
+    # boundary-margin proxy above -- tests whether a dataset's predictions
+    # THEMSELVES are less stable across seeds, independent of interval position ---
     print(f"\n{'='*78}")
-    print("PART 4: Point-prediction variance across seeds (more direct mechanism)")
+    print("Point-prediction variance across seeds (more direct mechanism)")
     print(f"{'='*78}")
     print("For each sample, std of mean_pred across the 3 seeds, normalized by "
           "that dataset's target-value scale (so datasets with naturally larger "
@@ -178,19 +178,18 @@ def main():
               f"predictions THEMSELVES vary more across seeds, rather than just "
               f"happening to sit near interval boundaries more often?)")
 
-    # --- Part 5: relative interval width -- tests the refined hypothesis that
-    # emerged from Part 4's result: if a dataset's predictions are STABLE
-    # (low Part 4 instability) but it STILL has a high flip rate, the likely
-    # explanation is that its calibrated interval is simply narrower relative
-    # to its own residual scale, making it more sensitive to any small noise
-    # -- not that the noise itself is larger. ---
+    # --- Relative interval width: if a dataset's predictions are stable (low
+    # point-prediction instability above) but it still has a high flip rate,
+    # the likely explanation is that its calibrated interval is simply
+    # narrower relative to its own residual scale, making it more sensitive
+    # to any small noise -- not that the noise itself is larger. ---
     print(f"\n{'='*78}")
-    print("PART 5: Relative interval width (tests the interval-tightness hypothesis)")
+    print("Relative interval width (tests the interval-tightness hypothesis)")
     print(f"{'='*78}")
     print("interval_width / y_scale, per dataset -- a dataset with tight "
           "intervals RELATIVE TO its own value scale should be more sensitive "
           "to any given amount of prediction noise, independent of how much "
-          "noise it actually has (Part 4).\n")
+          "noise it actually has (see the point-prediction variance analysis above).\n")
 
     width_summary = {}
     for ds in datasets_present:
@@ -212,20 +211,21 @@ def main():
     if corr_width is not None:
         print(f"\n  Correlation between relative interval width and flip rate: {corr_width:.4f}")
         print(f"  (A strong negative correlation here alone would confirm interval "
-              f"tightness as a standalone cause -- if this is weak, check Part 6, "
-              f"which combines this with prediction instability.)")
+              f"tightness as a standalone cause -- a weak correlation here motivates "
+              f"the combined sensitivity ratio below, which combines this with "
+              f"prediction instability.)")
 
-    # --- Part 6: combined sensitivity ratio -- tests whether flip rate is
-    # driven by the RATIO of prediction instability to relative interval
-    # width, rather than either factor alone. A sample flips when the
-    # seed-to-seed prediction perturbation is large RELATIVE TO the
-    # interval's own width; this ratio measures exactly that directly. ---
+    # --- Combined sensitivity ratio: tests whether flip rate is driven by
+    # the RATIO of prediction instability to relative interval width, rather
+    # than either factor alone. A sample flips when the seed-to-seed
+    # prediction perturbation is large RELATIVE TO the interval's own width;
+    # this ratio measures exactly that directly. ---
     print(f"\n{'='*78}")
-    print("PART 6: Combined sensitivity ratio (instability / relative interval width)")
+    print("Combined sensitivity ratio (instability / relative interval width)")
     print(f"{'='*78}")
     print("Tests whether flip rate is jointly determined by BOTH prediction "
-          "instability (Part 4) AND interval tightness (Part 5), rather than "
-          "either factor alone explaining it in isolation.\n")
+          "instability AND interval tightness (both analyzed above), rather "
+          "than either factor alone explaining it in isolation.\n")
 
     sensitivity_summary = {}
     for ds in datasets_present:
@@ -240,7 +240,8 @@ def main():
         corr_sensitivity = float(np.corrcoef(sensitivity_vals, flip_vals)[0, 1])
         print(f"\n  Correlation (all {len(datasets_present)} datasets, including NASA): "
               f"{corr_sensitivity:.4f}")
-        print(f"  (Compare against Part 4 alone and Part 5 alone above.)")
+        print(f"  (Compare against prediction instability alone and relative "
+              f"interval width alone above.)")
 
         # NASA has only 3 test samples (Table 7 in the manuscript already
         # establishes it as illustrative-only, not statistically well-powered,
@@ -284,10 +285,10 @@ def main():
         json.dump(out, fh, indent=2)
     print(f"\nsaved {out_path}")
 
-    # Figure: the scatter plot that actually visualizes the confirmed
-    # mechanism (Part 6, r=0.95 excl. NASA), not the earlier, superseded
-    # borderline-margin hypothesis (Part 1, r=0.55). This is the figure
-    # used in the paper's seed-sensitivity discussion.
+    # Figure: the combined sensitivity ratio plotted against flip rate
+    # (r=0.95 excl. NASA), a stronger predictor of coverage instability than
+    # the borderline-margin proxy alone (r=0.55). This is the figure used in
+    # the paper's seed-sensitivity discussion.
     fig, axes = plt.subplots(1, 2, figsize=(12, 5.5))
     colors = [DATASET_COLORS.get(d, "#999999") for d in datasets_present]
 

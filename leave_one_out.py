@@ -202,8 +202,9 @@ def run_lodo(held_out_dataset: str, model_variant="full", save_outputs=True):
         "model_variant": model_variant,
         "test_mae": mae,
         "test_rmse": rmse,
-        # kept for transparency / debugging against older logged runs, which
-        # reported these normalized-space numbers as if they were "test_mae"
+        # retained alongside the de-normalized metrics above for direct
+        # comparison with the model's internal per-dataset normalized-space
+        # loss (see module docstring: these two scales are not interchangeable)
         "test_mae_normalized_space": mae_normalized,
         "test_rmse_normalized_space": rmse_normalized,
         "held_out_soh_std": held_out_soh_std,
