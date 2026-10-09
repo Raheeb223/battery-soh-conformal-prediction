@@ -24,3 +24,14 @@ outputs/
 
 # IDE
 .idea/
+
+# LaTeX build artifacts (regenerable from main.tex + references.bib)
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.out
+paper/*.pdf
+paper/*.spl
+paper/*.fls
+paper/*.fdb_latexmk
