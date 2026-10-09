@@ -17,4 +17,9 @@
 | 1 | Loaders: unseeded randomness sweep | PASS (grep-level) | No unseeded `np.random.*` in loaders/baselines.py |
 | 1 | config.py audit | PASS | No `CALIBRATION_PREDICTOR`, no `SPLIT_SEED` present (brief overstates; `train.py` uses a soft `getattr` default) |
 
+| 1 | All "never seen" files read in full (conformal.py, baselines.py, model.py, 7 loaders, hgc_cp*.py, nearest_source_baseline.py, nested_hyperparameter_search.py, 4 plot_*.py, hierarchical_calibration_v2.py + _corrected.py) | **COMPLETE** | |
+| 1 | K5 (HGC-CP arm semantics: nearest_source, few-shot "Pooled") | PASS -- verified consistent, as documented | `hgc_cp_evaluation_harness.py:243-260`, `few_shot_calibration.py:114-133` |
+| 1 | plot_*.py hardcoded values | PASS (not a defect) -- all 4 transparently labeled as "copied from the actual run", to be superseded by Stage 11's registry-driven generation | |
+| 1 | E9: xjtu_loader cycle-renumbering claim vs code | INVESTIGATING -- pending Stage 2's window_cycle_indices output | |
+
 *(Table continues as each stage completes.)*

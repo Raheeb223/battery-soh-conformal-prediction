@@ -81,10 +81,17 @@ the withdrawn shrinkage-weight formula (see E5).
 **Consequence:** Any number this script currently produces is invalid and must not be used.
 **Fix:** Repoint the import to `hierarchical_calibration_v2`, update any API calls that changed
 between the two files (the function/variable names differ), rerun.
-**Status:** **RESOLVED.** Rewritten (not a simple import swap -- v2's model has no `n`-based
-weight function at all; the correct EB weight `tau2/(tau2+sigma2_g)` requires `sigma2_g` to be
-the cell-clustered bootstrap variance of whichever n-window subsample is being evaluated, so the
-script now bootstraps that variance per draw). Re-run launched.
+**Status:** **RESOLVED and verified.** Rewritten (not a simple import swap -- v2's model has no
+`n`-based weight function at all; the correct EB weight `tau2/(tau2+sigma2_g)` requires
+`sigma2_g` to be the cell-clustered bootstrap variance of whichever n-window subsample is being
+evaluated, so the script now bootstraps that variance per draw). Output (`prior_plus_n_e6_fixed.log`):
+coverage rises from 0.639 (n=5) to 0.743 (n=100) toward the true-groupwise ceiling of 0.756, from
+a prior-only baseline of 0.595 -- the qualitative pattern the brief expects. The shrinkage weight
+is NOT smoothly monotonic in n (0.685/0.590/0.500/0.680/0.860 for n=5/10/25/50/100), because it
+now genuinely depends on each random subsample's own bootstrapped variance rather than n alone --
+this is the correct, honest behavior (the withdrawn formula would have been artificially smooth
+in n by construction). At n=5, 41/500 draws (8.2%) were skipped because the subsample landed in
+only 1 of CALCE's 2 cells -- direct, independent confirmation of CALCE's small-cell-count problem.
 
 ### E7 | MINOR (pending) | config.py CALCE_DIRS / brief K8 | CX2_31 is not actually empty
 **Problem:** K8 asserts "CX2_31 folder is empty." Direct check: `CX2_31/` contains 80 `.txt`
@@ -122,6 +129,31 @@ something introduced by my fix.
 **Fix:** None needed in code; this is reported as a verified, current, correct result. Logged
 so a reader comparing against the brief's own stated anchors is not confused by the mismatch.
 **Status:** CONFIRMED (informational, not a bug to fix) -- new numbers are real and verified.
+
+### E9 | MODERATE | xjtu_loader.py vs preprocessing.py docstring | "Known limitation" may be stale
+**Problem:** `preprocessing.py`'s module docstring (KNOWN LIMITATION section) claims
+`xjtu_loader.py`'s sentinel-stripping function "RE-NUMBERS the 'cycle' column sequentially
+(1..N) over the REMAINING rows -- so there is no gap left ... for this function to detect."
+Direct read of `xjtu_loader.py`'s `detect_and_strip_sentinel_values()` (current version) shows
+it only does `df.loc[~drop_mask].reset_index(drop=True)` -- this resets the pandas ROW INDEX,
+not the `cycle` COLUMN's values, which were assigned once via `np.arange(1, len+1)` before
+filtering and are never recomputed. Surviving rows should therefore retain their *original*
+cycle numbers, with gaps exactly where sentinel rows were removed -- the opposite of what the
+docstring says (also note: the function is now named `detect_and_strip_sentinel_values`, not
+`strip_calibration_blocks` as K7/the docstring call it -- a naming drift from an earlier
+version, harmless by itself).
+**Evidence:** Direct read, `xjtu_loader.py:102-120,136,143`.
+**Consequence:** If confirmed, `windowing_bridge_sensitivity.py`'s bridge-detection (which reads
+`window_cycle_indices_*` and looks for non-contiguous cycle sequences) should actually be ABLE
+to detect windows bridging a removed XJTU sentinel block, contradicting the documented
+"undetectable" limitation. This would mean the limitation is either already caught by the
+existing bridge-sensitivity check (making the docstring's caveat obsolete) or needs re-running
+to get a real number instead of an assumed one.
+**Fix:** Verify directly once Stage 2's `window_cycle_indices_test` data is available (checking
+for gaps in XJTU Sim_satellite cells' windows); update `preprocessing.py`'s docstring to match
+reality; re-run `windowing_bridge_sensitivity.py` / `xjtu_bridging_isolation.py` against the
+current loader if their own outputs predate this code state.
+**Status:** INVESTIGATING (verification pending Stage 2 completion).
 
 ---
 
