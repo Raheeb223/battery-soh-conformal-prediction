@@ -15,7 +15,24 @@ test nonconformity scores come from different predictors, breaking exchangeabili
 **Fix:** Use `mc_dropout_predict()` for the validation calibration pass too, matching `train.py`.
 No saved LODO checkpoints exist, so this requires a full retrain of all 7 held-out
 configurations.
-**Status:** CONFIRMED. Fix + retrain in progress (background).
+**Status:** CONFIRMED. Fix applied; retrain in progress (background, `run_all_lodo()`, order
+NASA/CALCE/Oxford/MIT/BIT/XJTU/RWTH). First 2 of 7 configs complete as of this check, both with
+`calibration_predictor: "mc_mean"` confirming the fix is active:
+```
+              MAE (real)   RMSE (real)   coverage      vs. brief's as-run (pre-fix) anchor
+NASA (fixed)  0.006679     0.010788      65.48%        was 0.00644 / 0.01090 / 57.3%
+CALCE (fixed) 0.014472     0.041236      60.16%        was 0.01344 / 0.03968 / 46.65%
+```
+Coverage improved substantially in both (NASA +8.2pp, CALCE +13.5pp) as expected from restoring
+predictor-consistency -- the direction and rough magnitude match what fixing a calibration/test
+predictor mismatch should produce. MAE/RMSE shifted only modestly (consistent with MC-Dropout
+sampling noise, since point predictions don't depend on the calibration predictor choice at all).
+Both held-out coverages remain far below the 90% nominal target -- expected and correctly
+interpreted as a genuine finding, not a bug: this is MODEL-LEVEL LODO (the held-out dataset was
+never seen in training at all), a much harder generalization task than calibration-level
+LODO/hierarchical pooling, and poor coverage here is an honest result to report, not something to
+chase down further. Remaining 5 configs (Oxford/MIT/BIT/XJTU/RWTH) still running; full comparison
+table against all 7 as-run anchors to follow once complete.
 
 ### E2 | MAJOR | baselines.py:82-84 | No baseline conformal coverage possible (K3)
 **Problem:** `baseline_{name}_predictions.npz` saves only `y_test, mean_pred, lab_test` — no
