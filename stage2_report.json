@@ -1,0 +1,57 @@
+{
+  "generated_at": "2026-10-09 12:24:07",
+  "checks": {
+    "no_nan_capacity_raw": {
+      "pass": true,
+      "detail": "0 NaN capacity rows in raw data"
+    },
+    "no_dup_dataset_cell_cycle_raw": {
+      "pass": true,
+      "detail": "0 duplicate (dataset,cell_id,cycle) rows in raw data"
+    },
+    "cycle_sortable_per_cell": {
+      "pass": true,
+      "detail": "checked 339 cells; cycle column sortable in all (strict monotonicity not required, loaders sort before use)"
+    },
+    "cell_reconciliation_339_vs_337": {
+      "pass": true,
+      "detail": "cells loaded(incl. train<3-cell fallback)=339, cells assigned to a split=339, cells contributing >=1 window=337 (cells with no window = too few cycles for window+horizon)"
+    },
+    "per_dataset_cell_counts": {
+      "pass": true,
+      "detail": "{\"all_cells\": {\"BIT\": 72, \"CALCE\": 10, \"MIT\": 139, \"NASA\": 7, \"Oxford\": 8, \"RWTH\": 48, \"XJTU\": 55}, \"cells_with_windows\": {\"BIT\": 72, \"CALCE\": 10, \"MIT\": 139, \"NASA\": 6, \"Oxford\": 8, \"RWTH\": 47, \"XJTU\": 55}}"
+    },
+    "split_cells_disjoint": {
+      "pass": true,
+      "detail": "train&val=0, train&test=0, val&test=0"
+    },
+    "min_1_val_1_test_per_dataset_with_3plus_cells": {
+      "pass": true,
+      "detail": "BIT(n=72): val=11 test=11 OK; CALCE(n=10): val=2 test=2 OK; MIT(n=139): val=21 test=21 OK; NASA(n=7): val=1 test=1 OK; Oxford(n=8): val=1 test=1 OK; RWTH(n=48): val=7 test=7 OK; XJTU(n=55): val=8 test=8 OK"
+    },
+    "normalization_stats_reproduce_independently": {
+      "pass": true,
+      "detail": "mismatches: {}"
+    },
+    "windows_cycle_ascending_within_window": {
+      "pass": true,
+      "detail": "0 of 37164 test windows have a non-ascending cycle sequence"
+    },
+    "determinism_two_runs_identical_hash": {
+      "pass": true,
+      "detail": "run1=b3e611aedb05 run2=b3e611aedb05"
+    },
+    "calce_total_rows_14188": {
+      "pass": true,
+      "detail": "actual rows: 14188 (brief claims 14,188)"
+    },
+    "calce_soh_filter_pass_rate_ge_99pct": {
+      "pass": true,
+      "detail": "pass rate = 99.4643%"
+    },
+    "calce_median_abs_step_in_0.001_0.003": {
+      "pass": true,
+      "detail": "median |step| = 0.00168"
+    }
+  }
+}
