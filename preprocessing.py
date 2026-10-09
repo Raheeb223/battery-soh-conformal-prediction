@@ -58,21 +58,24 @@ Key design choices (match what your project already established):
     papered over) ---
 make_windows() slides windows positionally over each cell's SOH array,
 in cycle-sorted order. For XJTU's Sim_satellite_* cells, xjtu_loader.py's
-strip_calibration_blocks() removes calibration rows and then the loader
-RE-NUMBERS the 'cycle' column sequentially (1..N) over the REMAINING rows
--- so there is no gap left in the 'cycle' column for this function to
-detect. A handful of windows for those 8 cells may therefore still
-silently bridge across a removed calibration block, joining the
-capacity reading just before it to the one just after it as if they
-were consecutive real cycles. This is the same class of issue as the
-already-documented CALCE/RWTH concatenation-boundary limitation (no
-cell-ID field to mark internal boundaries) -- just smaller in magnitude
-here. A real fix requires xjtu_loader.py to preserve original cycle
-numbers (or emit an explicit boundary flag) instead of re-numbering
-after stripping; that's a loader change, not something this function
-can correct after the fact. State this explicitly in the manuscript's
-Limitations alongside the existing XJTU calibration-block note, rather
-than treating XJTU as now fully clean.
+detect_and_strip_sentinel_values() removes sentinel rows but does NOT
+re-number the 'cycle' column afterward -- only the pandas row index is
+reset; surviving rows keep their original (now-gapped) cycle numbers.
+Verified directly (E9/xjtu_bridging_isolation.py, run against
+cache/processed.npz's window_cycle_indices_test): of XJTU's 2,605 test
+windows, the 376 drawn from the 8 Sim_satellite_* cells bridge a removed
+block on EVERY SINGLE WINDOW (bridging fraction 1.0000); the other 2,229
+windows, from cells never touched by this correction, show ZERO bridging.
+So the gap is not erased and not undetectable -- every Sim_satellite test
+window joins the capacity reading just before a removed sentinel block to
+the one just after it as if they were 20 consecutive real cycles, when
+they are not. This is the same class of issue as the already-documented
+CALCE/RWTH concatenation-boundary limitation (no cell-ID field to mark
+internal boundaries), but unlike CALCE/NASA/Oxford's diffuse native
+sparsity (see diagnose_bridging_anomaly.py), it is 100% concentrated in
+these 8 cells and should be reported as such, with an explicit
+with/without-these-376-windows sensitivity check
+(xjtu_bridging_sensitivity.py) rather than dismissed as negligible.
 
 Run:
     python preprocessing.py
@@ -216,18 +219,14 @@ def make_windows(df: pd.DataFrame, cell_ids: set, soh_mean: dict, soh_std: dict,
                   window: int = None, horizon: int = None):
     """Slide a fixed-length window over each cell's SOH curve.
     Returns X (N, window, 1), y (N,), per-sample dataset labels, per-sample
-    cell-ID labels, AND per-sample raw cycle-index arrays (new in this
-    version -- needed for windowing_bridge_sensitivity.py to detect
+    cell-ID labels, AND per-sample raw cycle-index arrays (needed for
+    xjtu_bridging_isolation.py / xjtu_bridging_sensitivity.py to detect
     windows that bridge across rows removed during data-quality cleaning.
-    NOTE: this only detects a bridge where a genuine gap survives in the
-    'cycle' column. It will NOT catch XJTU's Sim_satellite_* cells, since
-    xjtu_loader.py's strip_calibration_blocks() re-numbers 'cycle'
-    sequentially (1..N) after removing rows, erasing the gap before it
-    ever reaches this function (see this file's module-level docstring,
-    'KNOWN LIMITATION' section). Catching that specific case requires a
-    xjtu_loader.py change to preserve original cycle numbers or emit an
-    explicit boundary flag -- a loader fix, not something addressable
-    here."""
+    This DOES catch XJTU's Sim_satellite_* cells -- confirmed directly
+    (E9): xjtu_loader.py's detect_and_strip_sentinel_values() does not
+    re-number 'cycle' after removing rows, so the gap survives and every
+    Sim_satellite_* test window bridges it (see this file's module-level
+    docstring, 'KNOWN LIMITATION' section, for the verified numbers)."""
     w = window if window is not None else config.INPUT_WINDOW
     h = horizon if horizon is not None else config.FORECAST_HORIZON
 
