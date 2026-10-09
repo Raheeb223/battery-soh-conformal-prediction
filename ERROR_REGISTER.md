@@ -440,6 +440,28 @@ CPU/memory forensics to guess whether a job is alive.
 affected -- this was purely lost compute time on a job that had not yet written any cache or output
 file, so nothing was overwritten or corrupted by the restart.
 
+### E18 | MINOR (confirmed expected behavior, not a defect) | K6 repeated splits | NASA's cell-level split guarantee does not imply a window-level guarantee
+**Problem (observed):** Under split seed 43, `[conformal] WARNING: no calibration data for
+['NASA']` fired during groupwise calibration, triggering the pooled-qhat fallback for that dataset.
+**Investigation:** `[split] NASA: 7 cells -> train=5, val=1, test=1` confirms
+`cell_independent_split()`'s guarantee (at least 1 cell in val/test for any dataset with >=3 cells)
+held correctly -- this is NOT a repeat of the original sklearn-rounding bug that guarantee was
+built to fix (see the function's own docstring). The subsequent `[windows:val]` line lists BIT,
+CALCE, MIT, Oxford, RWTH, XJTU but has no NASA entry at all -- confirming NASA's one guaranteed
+validation cell, under this particular seed's random assignment, happens to be the specific NASA
+cell too short to contribute even one window (NASA already has only 6 of 7 cells contributing
+windows at all under seed 42, per Stage 2's 339-vs-337 reconciliation).
+**Conclusion:** A cell-level split guarantee is not the same as a window-level one for a dataset
+this small (7 cells, one unwindowable) -- which cell lands in validation is seed-dependent, and for
+roughly 1-in-7 seeds it will be NASA's unwindowable cell, zeroing out NASA's validation windows for
+that seed specifically. The existing pooled-qhat fallback already handles this safely and visibly
+(a loud warning, not a silent wrong number). This is exactly the kind of between-split fragility K6
+is designed to surface for very small datasets, not a code defect to fix.
+**Status:** RESOLVED (understood, not a bug). Report this explicitly in the manuscript's K6 results
+subsection once all 4 new split seeds complete: state how many of the 4 trigger this fallback for
+NASA (and check Oxford, the other very-small dataset, for the same pattern) rather than silently
+averaging over it.
+
 ---
 
 *(IDs continue as Stage 1 proceeds. Severity: CRITICAL/MAJOR/MODERATE/MINOR.)*
