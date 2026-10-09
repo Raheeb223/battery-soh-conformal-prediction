@@ -29,6 +29,15 @@ class SplitConformal:
         # the (1-alpha) empirical quantile, with the standard finite-sample correction
         q_level = np.ceil((n + 1) * (1 - self.alpha)) / n
         q_level = min(q_level, 1.0)
+        # NOTE (confirmed by direct test, tests/stage4_conformal_unit_tests.py):
+        # np.quantile's default linear interpolation does not land exactly on
+        # the textbook discrete order statistic residuals_sorted[ceil((n+1)
+        # (1-alpha))-1] -- it linearly blends that order statistic with the
+        # next one up, which (since residuals are sorted ascending) makes
+        # this qhat PROVABLY >= the discrete order statistic, i.e. at least
+        # as conservative, never less. Coverage validity is unaffected (if
+        # anything strengthened slightly); this is a precision note, not a
+        # correctness concern.
         self.qhat = np.quantile(residuals, q_level)
         return self.qhat
 
