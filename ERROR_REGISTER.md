@@ -264,6 +264,42 @@ now states explicitly not to use it alone as the reported uncertainty.
 **Status:** RESOLVED. Syntax-checked and run successfully; output above. No retrain needed (pure
 post-hoc recomputation from already-saved predictions).
 
+### E14 | MAJOR (finding, not a code defect) | K4 nested hyperparameter search | HGC-CP has no single (lam, beta) that generalizes across targets
+**Problem:** K4 required re-selecting HGC-CP's (lambda, beta) via a genuine nested/held-out
+protocol (`run_nested_hp_search_all.py`, rotating the other 6 datasets as pseudo-targets, never
+touching the real target's test set during selection) rather than the brief's anchor (lambda=3.0,
+beta=0.0), which was selected on the pre-fix pipeline using direct test-set feedback.
+**Result (all 7 datasets as real target, in turn):**
+```
+Target    selected (lam, beta)   resulting test coverage (target 90%)
+MIT       lam=5.0, beta=1.0      100.0%   (massively over-covers)
+RWTH      lam=3.0, beta=1.0       99.6%   (over-covers)
+XJTU      lam=3.0, beta=1.0       96.7%   (mildly over-covers)
+BIT       lam=3.0, beta=1.0       48.2%   (badly UNDER-covers)
+CALCE     lam=3.0, beta=0.5       85.1%   (close to target)
+Oxford    lam=3.0, beta=1.0      100.0%   (massively over-covers)
+NASA      lam=3.0, beta=0.5      100.0%   (massively over-covers, n=3 test windows)
+```
+**Consequence:** (1) NONE of the 7 nested-selected settings match the brief's anchor beta=0.0 --
+every single one prefers beta>=0.5, confirming the anchor was indeed chosen via test-set feedback
+on the pre-fix pipeline, not a held-out procedure (as K4 already suspected). (2) No single (lam,
+beta) compromise generalizes well: optimizing "mean |coverage-90%| across 6 pseudo-target
+rotations" produces settings that push several datasets to ~100% coverage (uninformatively wide
+intervals) while BIT still badly under-covers (48.2%) under its own nested-selected setting. This
+is a real limitation of HGC-CP as specified (the MMD-softmax weighting + linear heterogeneity
+inflation), not a bug in the search code -- the search faithfully found the best available
+compromise, and that compromise is still poor for at least one target every time.
+**Fix:** None applicable -- this is the honest empirical result K4 asked for, not a defect to
+patch. The manuscript MUST report: (a) HGC-CP hyperparameters are exploratory, selected via a
+pseudo-target nested rotation that approximates but does not replace true held-out validation
+(only 6 "folds" available, each itself only 1 dataset); (b) the resulting coverage is highly
+target-dependent and NOT uniformly close to the 90% nominal target even under this honest
+protocol; (c) do not claim HGC-CP achieves reliable 90% coverage across arbitrary target domains
+-- the BIT result alone (nested-selected setting still produces 48.2% coverage) refutes that
+claim directly.
+**Status:** RESOLVED (K4 complete). `outputs/nested_hp_search_results.json` has full grid results
+for all 7 targets x 20 (lam,beta) combinations.
+
 ---
 
 *(IDs continue as Stage 1 proceeds. Severity: CRITICAL/MAJOR/MODERATE/MINOR.)*
