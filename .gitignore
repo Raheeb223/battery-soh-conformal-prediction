@@ -21,6 +21,10 @@ tmp_determinism_check/
 # Pipeline cache and model outputs (large, regenerable)
 cache/
 outputs/
+cache_WITHOUT_fix/
+outputs_WITHOUT_fix/
+*.npz
+*.pt
 
 # IDE
 .idea/
