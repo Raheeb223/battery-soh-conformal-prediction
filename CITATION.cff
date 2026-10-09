@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite it as below."
+title: "Dataset-Aware Conformal Calibration for Cross-Dataset Lithium-Ion Battery State-of-Health Prediction"
+type: software
+authors:
+  - given-names: "Raheeb"
+    family-names: "Sadman"
+    affiliation: "Department of Electrical and Electronic Engineering, BRAC University"
+    email: raheeb.sadman@g.bracu.ac.bd
+license: MIT
+repository-code: "https://github.com/Raheeb223/battery-soh-conformal-prediction"
+keywords:
+  - lithium-ion battery
+  - state of health
+  - conformal prediction
+  - uncertainty quantification
+  - cross-dataset generalization
+  - hierarchical calibration
