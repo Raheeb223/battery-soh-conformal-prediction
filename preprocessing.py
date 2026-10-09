@@ -282,7 +282,7 @@ def _print_window_summary(name: str, labels: np.ndarray):
     print(f"  [windows:{name}] {parts}")
 
 
-def run(window: int = None, split_seed: int = None):
+def run(window: int = None, split_seed: int = None, raw_df=None):
     """window: override config.INPUT_WINDOW for this run (used by the window-size
     ablation in experiments.py). The cell split itself is NOT affected by window
     size for a GIVEN split_seed — it's computed once per seed so every window-size
@@ -290,12 +290,20 @@ def run(window: int = None, split_seed: int = None):
     comparison fair.
 
     split_seed: override config.SPLIT_SEED (K6 repeated-split experiment). Left
-    None, this reproduces the original seed-42 cache exactly."""
+    None, this reproduces the original seed-42 cache exactly.
+
+    raw_df: pre-loaded, pre-SOH'd dataframe (add_soh(load_all_raw())), reused
+    across multiple split_seed / window variants by a caller that needs several
+    caches built in one run (e.g. the K6 repeated-split experiment) so raw data
+    is parsed once rather than once per variant. Pass None to load fresh."""
     os.makedirs(config.CACHE_DIR, exist_ok=True)
     w = window if window is not None else config.INPUT_WINDOW
 
-    raw = load_all_raw()
-    df = add_soh(raw)
+    if raw_df is None:
+        raw = load_all_raw()
+        df = add_soh(raw)
+    else:
+        df = raw_df
 
     train_ids, val_ids, test_ids = cell_independent_split(df, split_seed=split_seed)
     print(f"[split] train cells: {len(train_ids)}, val cells: {len(val_ids)}, "
