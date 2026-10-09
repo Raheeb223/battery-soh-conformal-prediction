@@ -349,6 +349,29 @@ forward: do not assume a long-running git background process is benign gc withou
 actual exit status/output when it runs unusually long, and periodically check free disk space
 during long multi-job sessions rather than only when something fails.
 
+### E16 | MAJOR | make_results_registry.py (Stage 11, caught before commit) | First draft silently mixed stale pre-K1-fix LODO results with fixed ones
+**Problem:** `run_all_lodo()`'s background run writes each held-out config's `lodo_{dataset}_
+results.json` as soon as that config finishes, in order NASA/CALCE/Oxford/MIT/BIT/XJTU/RWTH. While
+only 2 of 7 configs (NASA, CALCE) had completed under the K1 fix, the other 5 files on disk were
+still the OLD pre-fix results (dated 10/1/2026, predating this session, missing the
+`calibration_predictor` field the fix adds). The registry script's first draft just checked file
+EXISTENCE, not freshness/validity, and would have silently compiled a results_registry.json mixing
+2 valid fixed numbers with 5 invalid pre-fix ones -- exactly the "silently overwriting/conflating
+results" failure mode rule 3 warns against, just in the read direction rather than the write
+direction.
+**Evidence:** Direct comparison: the loaded `lodo_MIT_results.json` matched the brief's own stale
+"as-run" anchor (MAE 0.00089, coverage 92.16%) exactly and lacked `calibration_predictor` entirely,
+while the 2 genuinely fixed files (NASA, CALCE) both have that field set to `"mc_mean"`.
+**Consequence:** Caught before any commit or manuscript number was generated from it -- no
+downstream impact. Logged because it's a real class of bug (registry/aggregation scripts need
+their own content-based validity checks, not just "does the file exist") worth remembering for the
+rest of Stage 11's registry work.
+**Fix:** `make_results_registry.py` now requires `"calibration_predictor" in result` for a LODO
+file to be accepted; anything missing that field (including a config `run_all_lodo()` hasn't
+reached yet) is marked `UNVERIFIED` rather than silently used.
+**Status:** RESOLVED. Re-ran after the fix: 10 of 28 numbers.tex macros now correctly show
+UNVERIFIED (5 remaining LODO configs x 2 macros each), down from 0 before the fix.
+
 ---
 
 *(IDs continue as Stage 1 proceeds. Severity: CRITICAL/MAJOR/MODERATE/MINOR.)*
