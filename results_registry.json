@@ -1,0 +1,1624 @@
+{
+  "generated_from": "make_results_registry.py",
+  "sections": {
+    "main_model": {
+      "run_name": "conformal_groupwise",
+      "model_variant": "full",
+      "seed": 42,
+      "conformal_mode": "groupwise",
+      "calibration_predictor": "mc_mean",
+      "best_epoch": 97,
+      "best_val_loss": 0.004746637342734083,
+      "test_mae": 0.024789657443761826,
+      "test_rmse": 0.10174031555652618,
+      "overall_coverage": 0.9046658056183403,
+      "per_dataset_mae": {
+        "BIT": 0.1415572464466095,
+        "CALCE": 0.08280643075704575,
+        "MIT": 0.014270326122641563,
+        "NASA": 0.05493752285838127,
+        "Oxford": 0.026076747104525566,
+        "RWTH": 0.015627646818757057,
+        "XJTU": 0.045877695083618164
+      },
+      "per_dataset_coverage": {
+        "BIT": 0.8796992481203008,
+        "CALCE": 0.7568355814801312,
+        "MIT": 0.9228002055615828,
+        "NASA": 0.6666666666666666,
+        "Oxford": 1.0,
+        "RWTH": 0.9074074074074074,
+        "XJTU": 0.9301343570057582
+      },
+      "dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "NASA",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    },
+    "conformal_mode_comparison": {
+      "groupwise": {
+        "run_name": "conformal_groupwise",
+        "model_variant": "full",
+        "seed": 42,
+        "conformal_mode": "groupwise",
+        "calibration_predictor": "mc_mean",
+        "best_epoch": 97,
+        "best_val_loss": 0.004746637342734083,
+        "test_mae": 0.024789657443761826,
+        "test_rmse": 0.10174031555652618,
+        "overall_coverage": 0.9046658056183403,
+        "per_dataset_mae": {
+          "BIT": 0.1415572464466095,
+          "CALCE": 0.08280643075704575,
+          "MIT": 0.014270326122641563,
+          "NASA": 0.05493752285838127,
+          "Oxford": 0.026076747104525566,
+          "RWTH": 0.015627646818757057,
+          "XJTU": 0.045877695083618164
+        },
+        "per_dataset_coverage": {
+          "BIT": 0.8796992481203008,
+          "CALCE": 0.7568355814801312,
+          "MIT": 0.9228002055615828,
+          "NASA": 0.6666666666666666,
+          "Oxford": 1.0,
+          "RWTH": 0.9074074074074074,
+          "XJTU": 0.9301343570057582
+        },
+        "dataset_signature": [
+          "BIT",
+          "CALCE",
+          "MIT",
+          "NASA",
+          "Oxford",
+          "RWTH",
+          "XJTU"
+        ]
+      },
+      "pooled": {
+        "run_name": "conformal_pooled",
+        "model_variant": "full",
+        "seed": 42,
+        "conformal_mode": "pooled",
+        "calibration_predictor": "mc_mean",
+        "best_epoch": 97,
+        "best_val_loss": 0.004746637342734083,
+        "test_mae": 0.024789657443761826,
+        "test_rmse": 0.10174031555652618,
+        "overall_coverage": 0.8988268216553654,
+        "per_dataset_mae": {
+          "BIT": 0.1415572464466095,
+          "CALCE": 0.08280643075704575,
+          "MIT": 0.014270326122641563,
+          "NASA": 0.05493752285838127,
+          "Oxford": 0.026076747104525566,
+          "RWTH": 0.015627646818757057,
+          "XJTU": 0.045877695083618164
+        },
+        "per_dataset_coverage": {
+          "BIT": 0.4423558897243108,
+          "CALCE": 0.6310608822457163,
+          "MIT": 0.9489522069319933,
+          "NASA": 0.6666666666666666,
+          "Oxford": 0.8214285714285714,
+          "RWTH": 0.9483117655808418,
+          "XJTU": 0.7301343570057581
+        },
+        "dataset_signature": [
+          "BIT",
+          "CALCE",
+          "MIT",
+          "NASA",
+          "Oxford",
+          "RWTH",
+          "XJTU"
+        ]
+      },
+      "normalized_groupwise": {
+        "run_name": "conformal_normalized_groupwise",
+        "model_variant": "full",
+        "seed": 42,
+        "conformal_mode": "normalized_groupwise",
+        "calibration_predictor": "mc_mean",
+        "best_epoch": 97,
+        "best_val_loss": 0.004746637342734083,
+        "test_mae": 0.024789657443761826,
+        "test_rmse": 0.10174031555652618,
+        "overall_coverage": 0.8969701862017005,
+        "per_dataset_mae": {
+          "BIT": 0.1415572464466095,
+          "CALCE": 0.08280643075704575,
+          "MIT": 0.014270326122641563,
+          "NASA": 0.05493752285838127,
+          "Oxford": 0.026076747104525566,
+          "RWTH": 0.015627646818757057,
+          "XJTU": 0.045877695083618164
+        },
+        "per_dataset_coverage": {
+          "BIT": 0.8696741854636592,
+          "CALCE": 0.7641268683922713,
+          "MIT": 0.9204590875349741,
+          "NASA": 1.0,
+          "Oxford": 0.9821428571428571,
+          "RWTH": 0.8942436412315931,
+          "XJTU": 0.8994241842610364
+        },
+        "dataset_signature": [
+          "BIT",
+          "CALCE",
+          "MIT",
+          "NASA",
+          "Oxford",
+          "RWTH",
+          "XJTU"
+        ]
+      }
+    },
+    "baselines_point_prediction": {
+      "linear": {
+        "run_name": "baseline_linear",
+        "model_variant": "baseline_linear",
+        "test_mae": 0.03399040177464485,
+        "test_rmse": 0.1334550380706787,
+        "per_dataset_mae": {
+          "BIT": 0.3091830313205719,
+          "CALCE": 0.11876223236322403,
+          "MIT": 0.009409022517502308,
+          "NASA": 0.17545831203460693,
+          "Oxford": 0.09113894402980804,
+          "RWTH": 0.01087773684412241,
+          "XJTU": 0.14359086751937866
+        },
+        "dataset_signature": [
+          "BIT",
+          "CALCE",
+          "MIT",
+          "NASA",
+          "Oxford",
+          "RWTH",
+          "XJTU"
+        ]
+      },
+      "svr": {
+        "run_name": "baseline_svr",
+        "model_variant": "baseline_svr",
+        "test_mae": 0.023564682638626176,
+        "test_rmse": 0.12188604027599374,
+        "per_dataset_mae": {
+          "BIT": 0.23587300643309964,
+          "CALCE": 0.10778231971993753,
+          "MIT": 0.004790498437347924,
+          "NASA": 0.761980554742795,
+          "Oxford": 0.026333608557354192,
+          "RWTH": 0.005990382980011536,
+          "XJTU": 0.08586602342823474
+        },
+        "dataset_signature": [
+          "BIT",
+          "CALCE",
+          "MIT",
+          "NASA",
+          "Oxford",
+          "RWTH",
+          "XJTU"
+        ]
+      },
+      "xgboost": {
+        "run_name": "baseline_xgboost",
+        "model_variant": "baseline_xgboost",
+        "test_mae": 0.02404698170721531,
+        "test_rmse": 0.10844731330871582,
+        "per_dataset_mae": {
+          "BIT": 0.2079988270998001,
+          "CALCE": 0.08645279705524445,
+          "MIT": 0.009959413670003414,
+          "NASA": 0.19294404983520508,
+          "Oxford": 0.03805169463157654,
+          "RWTH": 0.00813550129532814,
+          "XJTU": 0.07832631468772888
+        },
+        "dataset_signature": [
+          "BIT",
+          "CALCE",
+          "MIT",
+          "NASA",
+          "Oxford",
+          "RWTH",
+          "XJTU"
+        ]
+      }
+    },
+    "baseline_conformal_coverage": {
+      "linear": {
+        "architecture": "linear",
+        "test_mae": 0.03399040177464485,
+        "test_rmse": 0.1334550380706787,
+        "pooled_overall_coverage": 0.8831934129803035,
+        "pooled_per_dataset_coverage": {
+          "BIT": 0.16666666666666666,
+          "CALCE": 0.5854903390448414,
+          "MIT": 0.9752184091817507,
+          "NASA": 0.6666666666666666,
+          "Oxford": 0.26785714285714285,
+          "RWTH": 0.9829689126877882,
+          "XJTU": 0.2959692898272553
+        },
+        "groupwise_overall_coverage": 0.9045312668173501,
+        "groupwise_per_dataset_coverage": {
+          "BIT": 0.8909774436090225,
+          "CALCE": 0.8337586584032082,
+          "MIT": 0.9082395934448695,
+          "NASA": 0.6666666666666666,
+          "Oxford": 0.9821428571428571,
+          "RWTH": 0.9090435817343447,
+          "XJTU": 0.9335892514395393
+        }
+      },
+      "svr": {
+        "architecture": "svr",
+        "test_mae": 0.023564682638626176,
+        "test_rmse": 0.12188604027599374,
+        "pooled_overall_coverage": 0.8912119255193198,
+        "pooled_per_dataset_coverage": {
+          "BIT": 0.21303258145363407,
+          "CALCE": 0.5027342325920525,
+          "MIT": 0.9894935191000971,
+          "NASA": 0.0,
+          "Oxford": 0.6428571428571429,
+          "RWTH": 0.9763498438197233,
+          "XJTU": 0.4142034548944338
+        },
+        "groupwise_overall_coverage": 0.9065493488322032,
+        "groupwise_per_dataset_coverage": {
+          "BIT": 0.8734335839598998,
+          "CALCE": 0.8308421436383522,
+          "MIT": 0.9209158910523612,
+          "NASA": 0.0,
+          "Oxford": 1.0,
+          "RWTH": 0.8942436412315931,
+          "XJTU": 0.9623800383877159
+        }
+      },
+      "xgboost": {
+        "architecture": "xgboost",
+        "test_mae": 0.02404698170721531,
+        "test_rmse": 0.10844731330871582,
+        "pooled_overall_coverage": 0.8813905930470347,
+        "pooled_per_dataset_coverage": {
+          "BIT": 0.24060150375939848,
+          "CALCE": 0.5632519139628145,
+          "MIT": 0.9589447838748358,
+          "NASA": 0.3333333333333333,
+          "Oxford": 0.5714285714285714,
+          "RWTH": 0.9747136694927859,
+          "XJTU": 0.4168905950095969
+        },
+        "groupwise_overall_coverage": 0.9004143795070498,
+        "groupwise_per_dataset_coverage": {
+          "BIT": 0.8609022556390977,
+          "CALCE": 0.7743346700692673,
+          "MIT": 0.9283960486495746,
+          "NASA": 0.3333333333333333,
+          "Oxford": 1.0,
+          "RWTH": 0.8825673062620853,
+          "XJTU": 0.9477927063339732
+        }
+      },
+      "plain_lstm": {
+        "architecture": "plain_lstm",
+        "test_mae": 0.025103554129600525,
+        "test_rmse": 0.10236666351556778,
+        "pooled_overall_coverage": 0.8995533311807126,
+        "pooled_per_dataset_coverage": {
+          "BIT": 0.43107769423558895,
+          "CALCE": 0.6336128326649654,
+          "MIT": 0.954091246502598,
+          "NASA": 0.0,
+          "Oxford": 0.7142857142857143,
+          "RWTH": 0.9590956418265655,
+          "XJTU": 0.654126679462572
+        },
+        "groupwise_overall_coverage": 0.9013830588741794,
+        "groupwise_per_dataset_coverage": {
+          "BIT": 0.8609022556390977,
+          "CALCE": 0.7531899380240612,
+          "MIT": 0.922514703363216,
+          "NASA": 0.3333333333333333,
+          "Oxford": 1.0,
+          "RWTH": 0.9036888293916406,
+          "XJTU": 0.9143953934740883
+        },
+        "groupwise_source": "reused from outputs/ablation_plain_lstm_results.json (not recomputed)",
+        "no_retrain": true
+      },
+      "gru": {
+        "architecture": "gru",
+        "test_mae": 0.02798338048160076,
+        "test_rmse": 0.10199239104986191,
+        "pooled_overall_coverage": 0.89134646432031,
+        "pooled_per_dataset_coverage": {
+          "BIT": 0.38345864661654133,
+          "CALCE": 0.6000729128691215,
+          "MIT": 0.9610575001427512,
+          "NASA": 0.3333333333333333,
+          "Oxford": 0.5892857142857143,
+          "RWTH": 0.9504685408299867,
+          "XJTU": 0.5869481765834933
+        },
+        "groupwise_overall_coverage": 0.8999031320632871,
+        "groupwise_per_dataset_coverage": {
+          "BIT": 0.87468671679198,
+          "CALCE": 0.7353262850893183,
+          "MIT": 0.9206303888539942,
+          "NASA": 0.3333333333333333,
+          "Oxford": 1.0,
+          "RWTH": 0.9003421091774505,
+          "XJTU": 0.9378119001919386
+        },
+        "groupwise_source": "reused from outputs/ablation_gru_results.json (not recomputed)",
+        "no_retrain": true
+      }
+    },
+    "ablations": {
+      "full": {
+        "run_name": "ablation_full",
+        "model_variant": "full",
+        "seed": 42,
+        "conformal_mode": "groupwise",
+        "calibration_predictor": "mc_mean",
+        "best_epoch": 97,
+        "best_val_loss": 0.004746637342734083,
+        "test_mae": 0.024789657443761826,
+        "test_rmse": 0.10174031555652618,
+        "overall_coverage": 0.9046658056183403,
+        "per_dataset_mae": {
+          "BIT": 0.1415572464466095,
+          "CALCE": 0.08280643075704575,
+          "MIT": 0.014270326122641563,
+          "NASA": 0.05493752285838127,
+          "Oxford": 0.026076747104525566,
+          "RWTH": 0.015627646818757057,
+          "XJTU": 0.045877695083618164
+        },
+        "per_dataset_coverage": {
+          "BIT": 0.8796992481203008,
+          "CALCE": 0.7568355814801312,
+          "MIT": 0.9228002055615828,
+          "NASA": 0.6666666666666666,
+          "Oxford": 1.0,
+          "RWTH": 0.9074074074074074,
+          "XJTU": 0.9301343570057582
+        },
+        "dataset_signature": [
+          "BIT",
+          "CALCE",
+          "MIT",
+          "NASA",
+          "Oxford",
+          "RWTH",
+          "XJTU"
+        ]
+      },
+      "no_attention": {
+        "run_name": "ablation_no_attention",
+        "model_variant": "no_attention",
+        "seed": 42,
+        "conformal_mode": "groupwise",
+        "calibration_predictor": "mc_mean",
+        "best_epoch": 74,
+        "best_val_loss": 0.0051259528647785765,
+        "test_mae": 0.02679341472685337,
+        "test_rmse": 0.10054898262023926,
+        "overall_coverage": 0.8983693897319988,
+        "per_dataset_mae": {
+          "BIT": 0.14366520941257477,
+          "CALCE": 0.08295883238315582,
+          "MIT": 0.015321864746510983,
+          "NASA": 0.1591140776872635,
+          "Oxford": 0.035595569759607315,
+          "RWTH": 0.017951229587197304,
+          "XJTU": 0.054270561784505844
+        },
+        "per_dataset_coverage": {
+          "BIT": 0.8634085213032582,
+          "CALCE": 0.7400656215822092,
+          "MIT": 0.923999314794724,
+          "NASA": 0.3333333333333333,
+          "Oxford": 1.0,
+          "RWTH": 0.8961773017997917,
+          "XJTU": 0.9132437619961612
+        },
+        "dataset_signature": [
+          "BIT",
+          "CALCE",
+          "MIT",
+          "NASA",
+          "Oxford",
+          "RWTH",
+          "XJTU"
+        ]
+      },
+      "no_multiscale": {
+        "run_name": "ablation_no_multiscale",
+        "model_variant": "no_multiscale",
+        "seed": 42,
+        "conformal_mode": "groupwise",
+        "calibration_predictor": "mc_mean",
+        "best_epoch": 83,
+        "best_val_loss": 0.005260218843133679,
+        "test_mae": 0.02523637004196644,
+        "test_rmse": 0.10352665185928345,
+        "overall_coverage": 0.9056613927456678,
+        "per_dataset_mae": {
+          "BIT": 0.15039095282554626,
+          "CALCE": 0.08513281494379044,
+          "MIT": 0.014396874234080315,
+          "NASA": 0.07003172487020493,
+          "Oxford": 0.02872697450220585,
+          "RWTH": 0.0150124691426754,
+          "XJTU": 0.049345191568136215
+        },
+        "per_dataset_coverage": {
+          "BIT": 0.8784461152882206,
+          "CALCE": 0.7513671162960263,
+          "MIT": 0.9231428081996231,
+          "NASA": 0.6666666666666666,
+          "Oxford": 1.0,
+          "RWTH": 0.9065893202439387,
+          "XJTU": 0.9523992322456813
+        },
+        "dataset_signature": [
+          "BIT",
+          "CALCE",
+          "MIT",
+          "NASA",
+          "Oxford",
+          "RWTH",
+          "XJTU"
+        ]
+      },
+      "plain_lstm": {
+        "run_name": "ablation_plain_lstm",
+        "model_variant": "plain_lstm",
+        "seed": 42,
+        "conformal_mode": "groupwise",
+        "calibration_predictor": "mc_mean",
+        "best_epoch": 84,
+        "best_val_loss": 0.004920763873877074,
+        "test_mae": 0.025318900123238564,
+        "test_rmse": 0.10267552733421326,
+        "overall_coverage": 0.9013830588741794,
+        "per_dataset_mae": {
+          "BIT": 0.1428295373916626,
+          "CALCE": 0.08248792588710785,
+          "MIT": 0.015162738971412182,
+          "NASA": 0.09693995863199234,
+          "Oxford": 0.030488504096865654,
+          "RWTH": 0.015246884897351265,
+          "XJTU": 0.049196310341358185
+        },
+        "per_dataset_coverage": {
+          "BIT": 0.8609022556390977,
+          "CALCE": 0.7531899380240612,
+          "MIT": 0.922514703363216,
+          "NASA": 0.3333333333333333,
+          "Oxford": 1.0,
+          "RWTH": 0.9036888293916406,
+          "XJTU": 0.9143953934740883
+        },
+        "dataset_signature": [
+          "BIT",
+          "CALCE",
+          "MIT",
+          "NASA",
+          "Oxford",
+          "RWTH",
+          "XJTU"
+        ]
+      },
+      "gru": {
+        "run_name": "ablation_gru",
+        "model_variant": "gru",
+        "seed": 42,
+        "conformal_mode": "groupwise",
+        "calibration_predictor": "mc_mean",
+        "best_epoch": 63,
+        "best_val_loss": 0.00529502362561932,
+        "test_mae": 0.027866916730999947,
+        "test_rmse": 0.1018964871764183,
+        "overall_coverage": 0.8999031320632871,
+        "per_dataset_mae": {
+          "BIT": 0.1578376591205597,
+          "CALCE": 0.08617907017469406,
+          "MIT": 0.015910163521766663,
+          "NASA": 0.34599682688713074,
+          "Oxford": 0.041563730686903,
+          "RWTH": 0.017393283545970917,
+          "XJTU": 0.060434598475694656
+        },
+        "per_dataset_coverage": {
+          "BIT": 0.87468671679198,
+          "CALCE": 0.7353262850893183,
+          "MIT": 0.9206303888539942,
+          "NASA": 0.3333333333333333,
+          "Oxford": 1.0,
+          "RWTH": 0.9003421091774505,
+          "XJTU": 0.9378119001919386
+        },
+        "dataset_signature": [
+          "BIT",
+          "CALCE",
+          "MIT",
+          "NASA",
+          "Oxford",
+          "RWTH",
+          "XJTU"
+        ]
+      }
+    },
+    "window_size": {
+      "10": {
+        "run_name": "window_10",
+        "model_variant": "full",
+        "seed": 42,
+        "conformal_mode": "groupwise",
+        "calibration_predictor": "mc_mean",
+        "best_epoch": 96,
+        "best_val_loss": 0.0062771728413223244,
+        "test_mae": 0.02607196755707264,
+        "test_rmse": 0.10927167534828186,
+        "overall_coverage": 0.9053383239096388,
+        "per_dataset_mae": {
+          "BIT": 0.16706350445747375,
+          "CALCE": 0.08611488342285156,
+          "MIT": 0.013762716203927994,
+          "NASA": 0.078134685754776,
+          "Oxford": 0.02931199036538601,
+          "RWTH": 0.016602082177996635,
+          "XJTU": 0.045183274894952774
+        },
+        "per_dataset_coverage": {
+          "BIT": 0.8788546255506607,
+          "CALCE": 0.7810351067680058,
+          "MIT": 0.9236585228234497,
+          "NASA": 0.5384615384615384,
+          "Oxford": 1.0,
+          "RWTH": 0.9013542514615556,
+          "XJTU": 0.9407821229050279
+        },
+        "dataset_signature": [
+          "BIT",
+          "CALCE",
+          "MIT",
+          "NASA",
+          "Oxford",
+          "RWTH",
+          "XJTU"
+        ]
+      },
+      "20": {
+        "run_name": "window_20",
+        "model_variant": "full",
+        "seed": 42,
+        "conformal_mode": "groupwise",
+        "calibration_predictor": "mc_mean",
+        "best_epoch": 97,
+        "best_val_loss": 0.004746637342734083,
+        "test_mae": 0.024789657443761826,
+        "test_rmse": 0.10174031555652618,
+        "overall_coverage": 0.9046658056183403,
+        "per_dataset_mae": {
+          "BIT": 0.1415572464466095,
+          "CALCE": 0.08280643075704575,
+          "MIT": 0.014270326122641563,
+          "NASA": 0.05493752285838127,
+          "Oxford": 0.026076747104525566,
+          "RWTH": 0.015627646818757057,
+          "XJTU": 0.045877695083618164
+        },
+        "per_dataset_coverage": {
+          "BIT": 0.8796992481203008,
+          "CALCE": 0.7568355814801312,
+          "MIT": 0.9228002055615828,
+          "NASA": 0.6666666666666666,
+          "Oxford": 1.0,
+          "RWTH": 0.9074074074074074,
+          "XJTU": 0.9301343570057582
+        },
+        "dataset_signature": [
+          "BIT",
+          "CALCE",
+          "MIT",
+          "NASA",
+          "Oxford",
+          "RWTH",
+          "XJTU"
+        ]
+      },
+      "30": {
+        "run_name": "window_30",
+        "model_variant": "full",
+        "seed": 42,
+        "conformal_mode": "groupwise",
+        "calibration_predictor": "mc_mean",
+        "best_epoch": 98,
+        "best_val_loss": 0.004232989867690258,
+        "test_mae": 0.02405904419720173,
+        "test_rmse": 0.09817791730165482,
+        "overall_coverage": 0.9028660249243271,
+        "per_dataset_mae": {
+          "BIT": 0.12128026783466339,
+          "CALCE": 0.08235786855220795,
+          "MIT": 0.014091912657022476,
+          "Oxford": 0.03158530592918396,
+          "RWTH": 0.015867004171013832,
+          "XJTU": 0.04629184678196907
+        },
+        "per_dataset_coverage": {
+          "BIT": 0.8590116279069767,
+          "CALCE": 0.7249357326478149,
+          "MIT": 0.9223834017222446,
+          "Oxford": 1.0,
+          "RWTH": 0.9089347079037801,
+          "XJTU": 0.939009900990099
+        },
+        "dataset_signature": [
+          "BIT",
+          "CALCE",
+          "MIT",
+          "Oxford",
+          "RWTH",
+          "XJTU"
+        ]
+      },
+      "50": {
+        "run_name": "window_50",
+        "model_variant": "full",
+        "seed": 42,
+        "conformal_mode": "groupwise",
+        "calibration_predictor": "mc_mean",
+        "best_epoch": 85,
+        "best_val_loss": 0.0038596832125262982,
+        "test_mae": 0.022346612066030502,
+        "test_rmse": 0.09549952298402786,
+        "overall_coverage": 0.9045697794962315,
+        "per_dataset_mae": {
+          "BIT": 0.1274377703666687,
+          "CALCE": 0.08339761197566986,
+          "MIT": 0.013440952636301517,
+          "Oxford": 0.02514401264488697,
+          "RWTH": 0.014027075842022896,
+          "XJTU": 0.04250138998031616
+        },
+        "per_dataset_coverage": {
+          "BIT": 0.8782051282051282,
+          "CALCE": 0.742079761461051,
+          "MIT": 0.9237694722501925,
+          "Oxford": 1.0,
+          "RWTH": 0.905171114126338,
+          "XJTU": 0.9526427061310783
+        },
+        "dataset_signature": [
+          "BIT",
+          "CALCE",
+          "MIT",
+          "Oxford",
+          "RWTH",
+          "XJTU"
+        ]
+      }
+    },
+    "multiseed": {
+      "42": {
+        "run_name": "multiseed_42",
+        "model_variant": "full",
+        "seed": 42,
+        "conformal_mode": "groupwise",
+        "calibration_predictor": "mc_mean",
+        "best_epoch": 97,
+        "best_val_loss": 0.004746637342734083,
+        "test_mae": 0.024789657443761826,
+        "test_rmse": 0.10174031555652618,
+        "overall_coverage": 0.9046658056183403,
+        "per_dataset_mae": {
+          "BIT": 0.1415572464466095,
+          "CALCE": 0.08280643075704575,
+          "MIT": 0.014270326122641563,
+          "NASA": 0.05493752285838127,
+          "Oxford": 0.026076747104525566,
+          "RWTH": 0.015627646818757057,
+          "XJTU": 0.045877695083618164
+        },
+        "per_dataset_coverage": {
+          "BIT": 0.8796992481203008,
+          "CALCE": 0.7568355814801312,
+          "MIT": 0.9228002055615828,
+          "NASA": 0.6666666666666666,
+          "Oxford": 1.0,
+          "RWTH": 0.9074074074074074,
+          "XJTU": 0.9301343570057582
+        },
+        "dataset_signature": [
+          "BIT",
+          "CALCE",
+          "MIT",
+          "NASA",
+          "Oxford",
+          "RWTH",
+          "XJTU"
+        ]
+      },
+      "123": {
+        "run_name": "multiseed_123",
+        "model_variant": "full",
+        "seed": 123,
+        "conformal_mode": "groupwise",
+        "calibration_predictor": "mc_mean",
+        "best_epoch": 78,
+        "best_val_loss": 0.004893397730715343,
+        "test_mae": 0.02613239735364914,
+        "test_rmse": 0.10148081928491592,
+        "overall_coverage": 0.9074642126789366,
+        "per_dataset_mae": {
+          "BIT": 0.14499811828136444,
+          "CALCE": 0.082093246281147,
+          "MIT": 0.015729790553450584,
+          "NASA": 0.12099790573120117,
+          "Oxford": 0.030475258827209473,
+          "RWTH": 0.016583643853664398,
+          "XJTU": 0.049813803285360336
+        },
+        "per_dataset_coverage": {
+          "BIT": 0.8609022556390977,
+          "CALCE": 0.7703244622675902,
+          "MIT": 0.9274253411751271,
+          "NASA": 0.6666666666666666,
+          "Oxford": 1.0,
+          "RWTH": 0.9025732559869106,
+          "XJTU": 0.9554702495201536
+        },
+        "dataset_signature": [
+          "BIT",
+          "CALCE",
+          "MIT",
+          "NASA",
+          "Oxford",
+          "RWTH",
+          "XJTU"
+        ]
+      },
+      "2024": {
+        "run_name": "multiseed_2024",
+        "model_variant": "full",
+        "seed": 2024,
+        "conformal_mode": "groupwise",
+        "calibration_predictor": "mc_mean",
+        "best_epoch": 84,
+        "best_val_loss": 0.004691607423832651,
+        "test_mae": 0.02550564333796501,
+        "test_rmse": 0.10082897543907166,
+        "overall_coverage": 0.8978312345280379,
+        "per_dataset_mae": {
+          "BIT": 0.14656740427017212,
+          "CALCE": 0.08046842366456985,
+          "MIT": 0.014363092370331287,
+          "NASA": 0.37304770946502686,
+          "Oxford": 0.02899538166821003,
+          "RWTH": 0.015838101506233215,
+          "XJTU": 0.054880306124687195
+        },
+        "per_dataset_coverage": {
+          "BIT": 0.8521303258145363,
+          "CALCE": 0.7411593146190303,
+          "MIT": 0.9208016901730144,
+          "NASA": 0.3333333333333333,
+          "Oxford": 1.0,
+          "RWTH": 0.8981853339283058,
+          "XJTU": 0.9190019193857966
+        },
+        "dataset_signature": [
+          "BIT",
+          "CALCE",
+          "MIT",
+          "NASA",
+          "Oxford",
+          "RWTH",
+          "XJTU"
+        ]
+      }
+    },
+    "multiseed_summary": {
+      "mae_mean": 0.02547589937845866,
+      "mae_std": 0.0005485746037057522,
+      "coverage_mean": 0.9033204176084383,
+      "coverage_std": 0.004046077828120629
+    },
+    "persistence": {
+      "per_dataset": {
+        "MIT": {
+          "n": 17513,
+          "model": {
+            "mae_real": 0.0006535948486998677,
+            "rmse_real": 0.0014368100091814995
+          },
+          "persistence": {
+            "mae_real": 0.0003261458477936685,
+            "rmse_real": 0.0015237965853884816
+          },
+          "lag2": {
+            "mae_real": 0.0005473298951983452,
+            "rmse_real": 0.0016966165276244283
+          },
+          "linear_extrapolation": {
+            "mae_real": 0.0002931932685896754,
+            "rmse_real": 0.0025304441805928946
+          }
+        },
+        "RWTH": {
+          "n": 13446,
+          "model": {
+            "mae_real": 0.003728404175490141,
+            "rmse_real": 0.006135224364697933
+          },
+          "persistence": {
+            "mae_real": 0.001122044981457293,
+            "rmse_real": 0.004971850663423538
+          },
+          "lag2": {
+            "mae_real": 0.0015983368502929807,
+            "rmse_real": 0.006334233097732067
+          },
+          "linear_extrapolation": {
+            "mae_real": 0.0016157696954905987,
+            "rmse_real": 0.006942670792341232
+          }
+        },
+        "XJTU": {
+          "n": 2605,
+          "model": {
+            "mae_real": 0.0027214116416871548,
+            "rmse_real": 0.010605464689433575
+          },
+          "persistence": {
+            "mae_real": 0.011759953573346138,
+            "rmse_real": 0.023889485746622086
+          },
+          "lag2": {
+            "mae_real": 0.018894966691732407,
+            "rmse_real": 0.03018226847052574
+          },
+          "linear_extrapolation": {
+            "mae_real": 0.0167580284178257,
+            "rmse_real": 0.03693629801273346
+          }
+        },
+        "BIT": {
+          "n": 798,
+          "model": {
+            "mae_real": 0.03521272912621498,
+            "rmse_real": 0.07657816261053085
+          },
+          "persistence": {
+            "mae_real": 0.039346881210803986,
+            "rmse_real": 0.10009268671274185
+          },
+          "lag2": {
+            "mae_real": 0.07369786500930786,
+            "rmse_real": 0.13886363804340363
+          },
+          "linear_extrapolation": {
+            "mae_real": 0.07031260430812836,
+            "rmse_real": 0.14419753849506378
+          }
+        },
+        "CALCE": {
+          "n": 2743,
+          "model": {
+            "mae_real": 0.014361332170665264,
+            "rmse_real": 0.0467827245593071
+          },
+          "persistence": {
+            "mae_real": 0.016303541138768196,
+            "rmse_real": 0.06327953934669495
+          },
+          "lag2": {
+            "mae_real": 0.019563661888241768,
+            "rmse_real": 0.06461084634065628
+          },
+          "linear_extrapolation": {
+            "mae_real": 0.02914838120341301,
+            "rmse_real": 0.1089104413986206
+          }
+        },
+        "Oxford": {
+          "n": 56,
+          "model": {
+            "mae_real": 0.0017129422631114721,
+            "rmse_real": 0.0022355136461555958
+          },
+          "persistence": {
+            "mae_real": 0.0027355419006198645,
+            "rmse_real": 0.00324203260242939
+          },
+          "lag2": {
+            "mae_real": 0.005319823976606131,
+            "rmse_real": 0.005899684503674507
+          },
+          "linear_extrapolation": {
+            "mae_real": 0.002230828395113349,
+            "rmse_real": 0.0027365845162421465
+          }
+        },
+        "NASA": {
+          "n": 3,
+          "model": {
+            "mae_real": 0.007890097796916962,
+            "rmse_real": 0.009078423492610455
+          },
+          "persistence": {
+            "mae_real": 0.015488681383430958,
+            "rmse_real": 0.016678621992468834
+          },
+          "lag2": {
+            "mae_real": 0.014951705932617188,
+            "rmse_real": 0.015173410065472126
+          },
+          "linear_extrapolation": {
+            "mae_real": 0.02478080429136753,
+            "rmse_real": 0.024914374575018883
+          }
+        }
+      },
+      "pooled": {
+        "model": {
+          "mae_z": 0.024789657443761826,
+          "rmse_z": 0.10174031555652618,
+          "mae_real": 0.0036669974498732246,
+          "rmse_real": 0.017605287456760592
+        },
+        "persistence": {
+          "mae_z": 0.02935970388352871,
+          "rmse_z": 0.15923140943050385,
+          "mae_real": 0.0034375356124111724,
+          "rmse_real": 0.023680182042165678
+        },
+        "lag2": {
+          "mae_z": 0.04520045220851898,
+          "rmse_z": 0.18972812592983246,
+          "mae_real": 0.005196286865948461,
+          "rmse_real": 0.028319048244137793
+        },
+        "linear_extrapolation": {
+          "mae_z": 0.043808430433273315,
+          "rmse_z": 0.25543779134750366,
+          "mae_real": 0.005563925764706889,
+          "rmse_real": 0.03792220410178165
+        }
+      },
+      "macro_over_datasets": {
+        "model": {
+          "mae_real_7": 0.009468644574683691,
+          "mae_real_6_excl_nasa": 0.00973173570431148
+        },
+        "persistence": {
+          "mae_real_7": 0.012440398576602871,
+          "mae_real_6_excl_nasa": 0.011932351442131525
+        },
+        "lag2": {
+          "mae_real_7": 0.019224812891999527,
+          "mae_real_6_excl_nasa": 0.019936997385229915
+        },
+        "linear_extrapolation": {
+          "mae_real_7": 0.020734229939989746,
+          "mae_real_6_excl_nasa": 0.02005980088142678
+        }
+      }
+    },
+    "hierarchical_calibration": {
+      "alpha": 0.1,
+      "fit_groups": [
+        "MIT",
+        "RWTH",
+        "XJTU",
+        "BIT",
+        "CALCE"
+      ],
+      "global": {
+        "mu_hat": 0.007781289206096804,
+        "tau2_hat": 2.1102893957315697e-05,
+        "tau2_group_bootstrap_ci95": [
+          3.501677013324257e-08,
+          9.219039113141767e-05
+        ]
+      },
+      "global_excluding_calce": {
+        "mu_hat": 0.006506254388325213,
+        "tau2_hat": 2.1751232074502603e-05
+      },
+      "q_g": {
+        "MIT": 0.0015175881070926896,
+        "RWTH": 0.008102529325815018,
+        "XJTU": 0.007971393053573885,
+        "BIT": 0.06869575651626009,
+        "CALCE": 0.011381067149970373,
+        "Oxford": 0.013539716566227503,
+        "NASA": 0.011546285111910186
+      },
+      "sigma2_g": {
+        "MIT": 6.964101203829865e-08,
+        "RWTH": 2.4336101764103088e-08,
+        "XJTU": 1.2057672176786945e-05,
+        "BIT": 0.0005336245125973724,
+        "CALCE": 7.016153435576105e-07,
+        "Oxford": null,
+        "NASA": null
+      },
+      "per_target": {
+        "MIT": {
+          "n_test": 17513,
+          "mu_hat_loo": 0.009710213067626093,
+          "tau2_loo": 6.3952723721194915e-06,
+          "w_eb": 0.9892278507228026,
+          "cov_prior_only": 0.999714497801633,
+          "cov_eb_shrunk": 0.9297664592017358,
+          "cov_own_quantile": 0.9218294980871353,
+          "cov_cross_source_pooled": 0.9996002969222862,
+          "prior_only_width_over_own_width": 6.398450951377298
+        },
+        "RWTH": {
+          "n_test": 13446,
+          "mu_hat_loo": 0.008667730904579505,
+          "tau2_loo": 4.873356742237273e-05,
+          "w_eb": 0.9995008788318379,
+          "cov_prior_only": 0.9209430313847985,
+          "cov_eb_shrunk": 0.9071842927264614,
+          "cov_own_quantile": 0.9071842927264614,
+          "cov_cross_source_pooled": 0.7479547820913283,
+          "prior_only_width_over_own_width": 1.0697561904483
+        },
+        "XJTU": {
+          "n_test": 2605,
+          "mu_hat_loo": 0.007746589549998768,
+          "tau2_loo": 2.1255835520958452e-05,
+          "w_eb": 0.63805456074495,
+          "cov_prior_only": 0.927063339731286,
+          "cov_eb_shrunk": 0.9293666026871401,
+          "cov_own_quantile": 0.9301343570057582,
+          "cov_cross_source_pooled": 0.909021113243762,
+          "prior_only_width_over_own_width": 0.9717987179826331
+        },
+        "BIT": {
+          "n_test": 798,
+          "mu_hat_loo": 0.007136482690545757,
+          "tau2_loo": 2.0841658568331253e-05,
+          "w_eb": 0.03758869278627761,
+          "cov_prior_only": 0.3258145363408521,
+          "cov_eb_shrunk": 0.41478696741854637,
+          "cov_own_quantile": 0.8809523809523809,
+          "cov_cross_source_pooled": 0.2982456140350877,
+          "prior_only_width_over_own_width": 0.10388534972835728
+        },
+        "CALCE": {
+          "n_test": 2743,
+          "mu_hat_loo": 0.006506254388325213,
+          "tau2_loo": 2.1751232074502603e-05,
+          "w_eb": 0.968751609517764,
+          "cov_prior_only": 0.5946044476850164,
+          "cov_eb_shrunk": 0.7531899380240612,
+          "cov_own_quantile": 0.7564710171345242,
+          "cov_cross_source_pooled": 0.5891359825009114,
+          "prior_only_width_over_own_width": 0.5716734909469495
+        },
+        "Oxford": {
+          "n_test": 56,
+          "mu_hat_loo": 0.007781289206096804,
+          "tau2_loo": 2.1102893957315697e-05,
+          "w_eb": null,
+          "cov_prior_only": 0.9821428571428571,
+          "cov_eb_shrunk": null,
+          "cov_own_quantile": 1.0,
+          "cov_cross_source_pooled": 0.9821428571428571,
+          "prior_only_width_over_own_width": 0.5747010410473358
+        }
+      }
+    },
+    "hgc_cp_nested_search": {
+      "MIT": {
+        "real_target": "MIT",
+        "pseudo_target_rotation": [
+          "RWTH",
+          "XJTU",
+          "BIT",
+          "CALCE",
+          "Oxford",
+          "NASA"
+        ],
+        "grid_results_mean_deviation": {
+          "lam=1.0,beta=0.0": 0.15450859223215277,
+          "lam=1.0,beta=0.25": 0.1543465789471481,
+          "lam=1.0,beta=0.5": 0.15367356303915372,
+          "lam=1.0,beta=1.0": 0.15218847974003213,
+          "lam=3.0,beta=0.0": 0.15396820332010466,
+          "lam=3.0,beta=0.25": 0.15362734711176412,
+          "lam=3.0,beta=0.5": 0.15321607377230473,
+          "lam=3.0,beta=1.0": 0.15145815547461827,
+          "lam=5.0,beta=0.0": 0.15313071397743525,
+          "lam=5.0,beta=0.25": 0.15278342016452737,
+          "lam=5.0,beta=0.5": 0.1519170296536996,
+          "lam=5.0,beta=1.0": 0.15144499558997238,
+          "lam=10.0,beta=0.0": 0.1740662612550575,
+          "lam=10.0,beta=0.25": 0.1736582067178818,
+          "lam=10.0,beta=0.5": 0.17310205743296056,
+          "lam=10.0,beta=1.0": 0.17270044050035216,
+          "lam=20.0,beta=0.0": 0.17246539753976894,
+          "lam=20.0,beta=0.25": 0.17186862322522237,
+          "lam=20.0,beta=0.5": 0.17127828651524316,
+          "lam=20.0,beta=1.0": 0.16955311961943575
+        },
+        "selected_lam": 5.0,
+        "selected_beta": 1.0,
+        "selected_mean_deviation_on_pseudo_targets": 0.15144499558997238,
+        "real_target_test_coverage": 0.9998286986809798,
+        "real_target_test_mpiw": 0.02222237507762443
+      },
+      "RWTH": {
+        "real_target": "RWTH",
+        "pseudo_target_rotation": [
+          "MIT",
+          "XJTU",
+          "BIT",
+          "CALCE",
+          "Oxford",
+          "NASA"
+        ],
+        "grid_results_mean_deviation": {
+          "lam=1.0,beta=0.0": 0.15529587876481646,
+          "lam=1.0,beta=0.25": 0.15496872064655112,
+          "lam=1.0,beta=0.5": 0.15374216111368078,
+          "lam=1.0,beta=1.0": 0.15292283323704564,
+          "lam=3.0,beta=0.0": 0.1390186751300583,
+          "lam=3.0,beta=0.25": 0.13846252584513705,
+          "lam=3.0,beta=0.5": 0.13783499688125098,
+          "lam=3.0,beta=1.0": 0.13601523547645802,
+          "lam=5.0,beta=0.0": 0.16057045948619977,
+          "lam=5.0,beta=0.25": 0.1587634095569906,
+          "lam=5.0,beta=0.5": 0.15660373042505757,
+          "lam=5.0,beta=1.0": 0.15230794063155254,
+          "lam=10.0,beta=0.0": 0.22361053922771715,
+          "lam=10.0,beta=0.25": 0.22234594049335402,
+          "lam=10.0,beta=0.5": 0.21968591880958135,
+          "lam=10.0,beta=1.0": 0.21616305499095945,
+          "lam=20.0,beta=0.0": 0.2306185248895857,
+          "lam=20.0,beta=0.25": 0.22909157044444925,
+          "lam=20.0,beta=0.5": 0.22700414569735647,
+          "lam=20.0,beta=1.0": 0.22411785834196593
+        },
+        "selected_lam": 3.0,
+        "selected_beta": 1.0,
+        "selected_mean_deviation_on_pseudo_targets": 0.13601523547645802,
+        "real_target_test_coverage": 0.9963557935445486,
+        "real_target_test_mpiw": 0.051156536248482265
+      },
+      "XJTU": {
+        "real_target": "XJTU",
+        "pseudo_target_rotation": [
+          "MIT",
+          "RWTH",
+          "BIT",
+          "CALCE",
+          "Oxford",
+          "NASA"
+        ],
+        "grid_results_mean_deviation": {
+          "lam=1.0,beta=0.0": 0.1478101598470494,
+          "lam=1.0,beta=0.25": 0.1468656117705128,
+          "lam=1.0,beta=0.5": 0.14587269822976093,
+          "lam=1.0,beta=1.0": 0.14446328932097732,
+          "lam=3.0,beta=0.0": 0.14400800081417287,
+          "lam=3.0,beta=0.25": 0.14311181820185156,
+          "lam=3.0,beta=0.5": 0.14215487486526243,
+          "lam=3.0,beta=1.0": 0.14067109439616346,
+          "lam=5.0,beta=0.0": 0.1460720115474328,
+          "lam=5.0,beta=0.25": 0.14520240223432138,
+          "lam=5.0,beta=0.5": 0.14494518129809272,
+          "lam=5.0,beta=1.0": 0.14311684586928738,
+          "lam=10.0,beta=0.0": 0.14771353020246156,
+          "lam=10.0,beta=0.25": 0.1466692528423947,
+          "lam=10.0,beta=0.5": 0.14598192570208682,
+          "lam=10.0,beta=1.0": 0.14474775204336837,
+          "lam=20.0,beta=0.0": 0.15175015902083147,
+          "lam=20.0,beta=0.25": 0.15150711612376014,
+          "lam=20.0,beta=0.5": 0.15102864445546557,
+          "lam=20.0,beta=1.0": 0.14980208492259522
+        },
+        "selected_lam": 3.0,
+        "selected_beta": 1.0,
+        "selected_mean_deviation_on_pseudo_targets": 0.14067109439616346,
+        "real_target_test_coverage": 0.9669865642994242,
+        "real_target_test_mpiw": 0.02048360689088069
+      },
+      "BIT": {
+        "real_target": "BIT",
+        "pseudo_target_rotation": [
+          "MIT",
+          "RWTH",
+          "XJTU",
+          "CALCE",
+          "Oxford",
+          "NASA"
+        ],
+        "grid_results_mean_deviation": {
+          "lam=1.0,beta=0.0": 0.12055777469691603,
+          "lam=1.0,beta=0.25": 0.12109726050712423,
+          "lam=1.0,beta=0.5": 0.12144037335939932,
+          "lam=1.0,beta=1.0": 0.12221985551226565,
+          "lam=3.0,beta=0.0": 0.11604677256477192,
+          "lam=3.0,beta=0.25": 0.11564144391213098,
+          "lam=3.0,beta=0.5": 0.11501664730652884,
+          "lam=3.0,beta=1.0": 0.11431268503774017,
+          "lam=5.0,beta=0.0": 0.13808217845128573,
+          "lam=5.0,beta=0.25": 0.13729297263933576,
+          "lam=5.0,beta=0.5": 0.1370965802389867,
+          "lam=5.0,beta=1.0": 0.13513541938824822,
+          "lam=10.0,beta=0.0": 0.17767132763454174,
+          "lam=10.0,beta=0.25": 0.17698280718021886,
+          "lam=10.0,beta=0.5": 0.17629053291197064,
+          "lam=10.0,beta=1.0": 0.17516336481052108,
+          "lam=20.0,beta=0.0": 0.1788648035421565,
+          "lam=20.0,beta=0.25": 0.17817950189011725,
+          "lam=20.0,beta=0.5": 0.1774200292930339,
+          "lam=20.0,beta=1.0": 0.17622244406046553
+        },
+        "selected_lam": 3.0,
+        "selected_beta": 1.0,
+        "selected_mean_deviation_on_pseudo_targets": 0.11431268503774017,
+        "real_target_test_coverage": 0.4824561403508772,
+        "real_target_test_mpiw": 0.023573648880279095
+      },
+      "CALCE": {
+        "real_target": "CALCE",
+        "pseudo_target_rotation": [
+          "MIT",
+          "RWTH",
+          "XJTU",
+          "BIT",
+          "Oxford",
+          "NASA"
+        ],
+        "grid_results_mean_deviation": {
+          "lam=1.0,beta=0.0": 0.1612535896494605,
+          "lam=1.0,beta=0.25": 0.16069100275997192,
+          "lam=1.0,beta=0.5": 0.16069100275997192,
+          "lam=1.0,beta=1.0": 0.1595658289809947,
+          "lam=3.0,beta=0.0": 0.15476307490286184,
+          "lam=3.0,beta=0.25": 0.15467765685164517,
+          "lam=3.0,beta=0.5": 0.1539701940166947,
+          "lam=3.0,beta=1.0": 0.1540003397585285,
+          "lam=5.0,beta=0.0": 0.17693519128130145,
+          "lam=5.0,beta=0.25": 0.1762953960157864,
+          "lam=5.0,beta=0.5": 0.17555778743900216,
+          "lam=5.0,beta=1.0": 0.1742443631232544,
+          "lam=10.0,beta=0.0": 0.22713287872567597,
+          "lam=10.0,beta=0.25": 0.22594741346303118,
+          "lam=10.0,beta=0.5": 0.22504429993889685,
+          "lam=10.0,beta=1.0": 0.2236124333099916,
+          "lam=20.0,beta=0.0": 0.2290876938289359,
+          "lam=20.0,beta=0.25": 0.22838391903686936,
+          "lam=20.0,beta=0.5": 0.22757121867159094,
+          "lam=20.0,beta=1.0": 0.22573855799101783
+        },
+        "selected_lam": 3.0,
+        "selected_beta": 0.5,
+        "selected_mean_deviation_on_pseudo_targets": 0.1539701940166947,
+        "real_target_test_coverage": 0.8508931826467372,
+        "real_target_test_mpiw": 0.03644200890543847
+      },
+      "Oxford": {
+        "real_target": "Oxford",
+        "pseudo_target_rotation": [
+          "MIT",
+          "RWTH",
+          "XJTU",
+          "BIT",
+          "CALCE",
+          "NASA"
+        ],
+        "grid_results_mean_deviation": {
+          "lam=1.0,beta=0.0": 0.1659615983616416,
+          "lam=1.0,beta=0.25": 0.16526952914184337,
+          "lam=1.0,beta=0.5": 0.16526156826006946,
+          "lam=1.0,beta=1.0": 0.16416774891450658,
+          "lam=3.0,beta=0.0": 0.1532428112168524,
+          "lam=3.0,beta=0.25": 0.15277721475769254,
+          "lam=3.0,beta=0.5": 0.152054397362304,
+          "lam=3.0,beta=1.0": 0.15195875952519397,
+          "lam=5.0,beta=0.0": 0.1626214086062158,
+          "lam=5.0,beta=0.25": 0.16183577484739295,
+          "lam=5.0,beta=0.5": 0.16038391219075063,
+          "lam=5.0,beta=1.0": 0.15852364135659233,
+          "lam=10.0,beta=0.0": 0.24209744630203067,
+          "lam=10.0,beta=0.25": 0.24121782694172797,
+          "lam=10.0,beta=0.5": 0.23935741644066422,
+          "lam=10.0,beta=1.0": 0.2352166282400723,
+          "lam=20.0,beta=0.0": 0.24336730876936208,
+          "lam=20.0,beta=0.25": 0.24247481419992467,
+          "lam=20.0,beta=0.5": 0.2411868609686353,
+          "lam=20.0,beta=1.0": 0.2375511177355479
+        },
+        "selected_lam": 3.0,
+        "selected_beta": 1.0,
+        "selected_mean_deviation_on_pseudo_targets": 0.15195875952519397,
+        "real_target_test_coverage": 1.0,
+        "real_target_test_mpiw": 0.03125813998969118
+      },
+      "NASA": {
+        "real_target": "NASA",
+        "pseudo_target_rotation": [
+          "MIT",
+          "RWTH",
+          "XJTU",
+          "BIT",
+          "CALCE",
+          "Oxford"
+        ],
+        "grid_results_mean_deviation": {
+          "lam=1.0,beta=0.0": 0.15166957325961997,
+          "lam=1.0,beta=0.25": 0.15056013985172087,
+          "lam=1.0,beta=0.5": 0.150050699560652,
+          "lam=1.0,beta=1.0": 0.14930465397707915,
+          "lam=3.0,beta=0.0": 0.13527747546806831,
+          "lam=3.0,beta=0.25": 0.1343024387178396,
+          "lam=3.0,beta=0.5": 0.13404569773069305,
+          "lam=3.0,beta=1.0": 0.13438191610336875,
+          "lam=5.0,beta=0.0": 0.16127651331773893,
+          "lam=5.0,beta=0.25": 0.16005803715131695,
+          "lam=5.0,beta=0.5": 0.1599139840867956,
+          "lam=5.0,beta=1.0": 0.15792488843981214,
+          "lam=10.0,beta=0.0": 0.20846336247624997,
+          "lam=10.0,beta=0.25": 0.20779055630695767,
+          "lam=10.0,beta=0.5": 0.2065039192638546,
+          "lam=10.0,beta=1.0": 0.20534928295707874,
+          "lam=20.0,beta=0.0": 0.21740267559615015,
+          "lam=20.0,beta=0.25": 0.2166115667806058,
+          "lam=20.0,beta=0.5": 0.21535458217209089,
+          "lam=20.0,beta=1.0": 0.21418267533261584
+        },
+        "selected_lam": 3.0,
+        "selected_beta": 0.5,
+        "selected_mean_deviation_on_pseudo_targets": 0.13404569773069305,
+        "real_target_test_coverage": 1.0,
+        "real_target_test_mpiw": 0.03469660943537156
+      }
+    },
+    "lodo": {
+      "NASA": {
+        "run_name": "lodo_NASA",
+        "held_out_dataset": "NASA",
+        "model_variant": "full",
+        "test_mae": 0.006679353190692909,
+        "test_rmse": 0.010788073939226074,
+        "test_mae_normalized_space": 0.0480758361518383,
+        "test_rmse_normalized_space": 0.0776490867137909,
+        "held_out_soh_std": 0.13893368738501924,
+        "calibration_predictor": "mc_mean",
+        "coverage": 0.6548042704626335,
+        "n_test_samples": 562,
+        "training_dataset_signature": [
+          "BIT",
+          "CALCE",
+          "MIT",
+          "Oxford",
+          "RWTH",
+          "XJTU"
+        ]
+      },
+      "CALCE": {
+        "run_name": "lodo_CALCE",
+        "held_out_dataset": "CALCE",
+        "model_variant": "full",
+        "test_mae": 0.01447222516833097,
+        "test_rmse": 0.0412363476790146,
+        "test_mae_normalized_space": 0.09087688475847244,
+        "test_rmse_normalized_space": 0.2589395046234131,
+        "held_out_soh_std": 0.1592508942928056,
+        "calibration_predictor": "mc_mean",
+        "coverage": 0.6015669925244393,
+        "n_test_samples": 13912,
+        "training_dataset_signature": [
+          "BIT",
+          "MIT",
+          "NASA",
+          "Oxford",
+          "RWTH",
+          "XJTU"
+        ]
+      },
+      "Oxford": "UNVERIFIED",
+      "MIT": "UNVERIFIED",
+      "BIT": "UNVERIFIED",
+      "XJTU": "UNVERIFIED",
+      "RWTH": "UNVERIFIED"
+    },
+    "lodo_complete": false,
+    "predictor_consistent_coverage": {
+      "alpha": 0.1,
+      "q_pooled_z": 0.042349916655286236,
+      "q_pooled_real": 0.006818663981953112,
+      "per_dataset": {
+        "MIT": {
+          "n_test": 17513,
+          "n_val": 17814,
+          "q_groupwise_z": 0.03313441092924891,
+          "cov_groupwise": 0.9218294980871353,
+          "cp95_window_level_see_docstring_caveat": [
+            0.917754784621472,
+            0.9257634712498396
+          ],
+          "cell_bootstrap_95ci": [
+            0.9091459822671865,
+            0.9321508469331189
+          ],
+          "cov_pooled_z": 0.9490664078113401,
+          "cov_pooled_real": 0.9984582881288185
+        },
+        "RWTH": {
+          "n_test": 13446,
+          "n_val": 16784,
+          "q_groupwise_z": 0.03396184334053779,
+          "cov_groupwise": 0.9071842927264614,
+          "cp95_window_level_see_docstring_caveat": [
+            0.9021539007358792,
+            0.912037651011319
+          ],
+          "cell_bootstrap_95ci": [
+            0.8921241252821285,
+            0.9225054400878313
+          ],
+          "cov_pooled_z": 0.9486092518221032,
+          "cov_pooled_real": 0.8644206455451435
+        },
+        "XJTU": {
+          "n_test": 2605,
+          "n_val": 3175,
+          "q_groupwise_z": 0.13438214925330452,
+          "cov_groupwise": 0.9301343570057582,
+          "cp95_window_level_see_docstring_caveat": [
+            0.919661081167336,
+            0.9396277817165255
+          ],
+          "cell_bootstrap_95ci": [
+            0.8449577965348734,
+            0.9925925925925926
+          ],
+          "cov_pooled_z": 0.7309021113243762,
+          "cov_pooled_real": 0.910940499040307
+        },
+        "BIT": {
+          "n_test": 798,
+          "n_val": 813,
+          "q_groupwise_z": 0.2761609742708897,
+          "cov_groupwise": 0.8809523809523809,
+          "cp95_window_level_see_docstring_caveat": [
+            0.8564385957900419,
+            0.9026074232124971
+          ],
+          "cell_bootstrap_95ci": [
+            0.8432642487046632,
+            0.9163786636605862
+          ],
+          "cov_pooled_z": 0.4423558897243108,
+          "cov_pooled_real": 0.31203007518796994
+        },
+        "CALCE": {
+          "n_test": 2743,
+          "n_val": 2960,
+          "q_groupwise_z": 0.06562242636809475,
+          "cov_groupwise": 0.7564710171345242,
+          "cp95_window_level_see_docstring_caveat": [
+            0.7399578724798657,
+            0.7724351134211219
+          ],
+          "cell_bootstrap_95ci": [
+            0.6995470558631102,
+            0.906084656084656
+          ],
+          "cov_pooled_z": 0.6321545752825374,
+          "cov_pooled_real": 0.6088224571636894
+        },
+        "Oxford": {
+          "n_test": 56,
+          "n_val": 53,
+          "q_groupwise_z": 0.2061200681722387,
+          "cov_groupwise": 1.0,
+          "cp95_window_level_see_docstring_caveat": [
+            0.9362499033376378,
+            1.0
+          ],
+          "cell_bootstrap_95ci": null,
+          "cov_pooled_z": 0.8214285714285714,
+          "cov_pooled_real": 0.9821428571428571
+        },
+        "NASA": {
+          "n_test": 3,
+          "n_val": 148,
+          "q_groupwise_z": 0.0803949791636016,
+          "cov_groupwise": 0.6666666666666666,
+          "cp95_window_level_see_docstring_caveat": [
+            0.09429932405024612,
+            0.9915962413403874
+          ],
+          "cell_bootstrap_95ci": null,
+          "cov_pooled_z": 0.6666666666666666,
+          "cov_pooled_real": 0.6666666666666666
+        }
+      }
+    },
+    "xjtu_bridging_isolation": {
+      "n_sim_satellite": 376,
+      "frac_bridging_sim_satellite": 1.0,
+      "n_other_47_cells": 2229,
+      "frac_bridging_other_47_cells": 0.0
+    },
+    "xjtu_bridging_sensitivity": {
+      "all_xjtu": {
+        "n": 2605,
+        "mae_z": 0.045877695083618164,
+        "rmse_z": 0.1787874698638916,
+        "mae_real": 0.0027214116416871548,
+        "rmse_real": 0.010605464689433575,
+        "coverage": 0.9301343570057582
+      },
+      "bridging_windows_only": {
+        "n": 376,
+        "mae_z": 0.06837055832147598,
+        "rmse_z": 0.4317750632762909,
+        "mae_real": 0.0040556625463068485,
+        "rmse_real": 0.025612395256757736,
+        "coverage": 0.9468085106382979
+      },
+      "clean_windows_only": {
+        "n": 2229,
+        "mae_z": 0.04208347201347351,
+        "rmse_z": 0.07686998695135117,
+        "mae_real": 0.002496342873200774,
+        "rmse_real": 0.004559838213026524,
+        "coverage": 0.927321668909825
+      },
+      "bridging_fraction": 0.14433781190019193,
+      "headline_mae_z_shift_from_excluding_bridging_windows": 0.0037942230701446533
+    },
+    "rwth_verification": {
+      "production (drop_first=T, outlier_fix=T)": {
+        "n_rows": 113868,
+        "n_cells": 48,
+        "median_abs_step": 0.0006212972075392287
+      },
+      "no drop_first (F, outlier_fix=T)": {
+        "n_rows": 113929,
+        "n_cells": 48,
+        "median_abs_step": 0.0006217056361386142
+      },
+      "no outlier_fix (drop_first=T, F)": {
+        "n_rows": 113982,
+        "n_cells": 48,
+        "median_abs_step": 0.0006213402084398467
+      },
+      "neither correction (F, F)": {
+        "n_rows": 114716,
+        "n_cells": 48,
+        "median_abs_step": 0.0006268800570943256
+      },
+      "summary": {
+        "rows_removed_by_drop_first_alone": 734,
+        "rows_removed_by_outlier_fix_alone": 787,
+        "rows_removed_by_both_combined": 848,
+        "pct_removed_by_both_combined": 0.7392168485651522
+      }
+    }
+  }
+}
