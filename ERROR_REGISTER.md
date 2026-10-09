@@ -300,6 +300,38 @@ claim directly.
 **Status:** RESOLVED (K4 complete). `outputs/nested_hp_search_results.json` has full grid results
 for all 7 targets x 20 (lam,beta) combinations.
 
+### E15 | CRITICAL (infrastructure, not a code/science defect) | C: drive filled to 20MB free -- background git gc failing silently for hours
+**Problem:** A background `git pack-objects` process (misdiagnosed earlier in this session as
+"benign gc housekeeping") had actually been failing repeatedly with `fatal: ... Out of diskspace`
+during a "geometric repack," for a long period, while C: drive filled to just 20MB free. Root
+cause: the earlier (pre-`.gitignore`) aborted `git add -A` attempt (staging `.venv/` and all raw
+datasets before being caught) had written ~24,000 loose blob objects into `.git/objects` -- these
+were never part of any commit (confirmed: `git log` only ever contained `.py`/`.md` files), but
+`git reset` does not delete already-written loose objects, so ~5 GB of unreachable garbage sat in
+`.git/objects` from early in the session onward. git's automatic gc kept trying to repack this
+into a single pack file and kept running out of temp space to do it, leaving a 1.68 GB failed
+`tmp_pack_wgs2EV` temp file behind each time, compounding the problem.
+**Evidence:** `bxnsjjrb9` task notification surfaced the literal `Out of diskspace` error.
+`Get-PSDrive C` showed 0.02 GB free. `git fsck --unreachable` / `git prune --dry-run --expire=now`
+confirmed 23,843 of ~24,145 loose objects were unreachable blobs from the old aborted add.
+**Consequence:** Real risk -- both Stage 2 verification and the K1-fixed LODO retrain were running
+in the background throughout, and either one's cache/checkpoint/log WRITE could have failed or
+been silently truncated at any point while free space was near zero. Checked their log tails
+immediately after discovery: both showed healthy, sensible in-progress output with no visible
+write errors, but this was fortunate timing, not something the pipeline itself guarded against.
+**Fix:** (1) Deleted the failed `tmp_pack_wgs2EV` temp file directly (1.68 GB, safe -- an
+incomplete temp artifact, not committed history) for immediate headroom. (2) Ran
+`git prune --expire=now` (not a full `git gc`, which would need to build a new pack file and
+risked failing again at low free space) to directly unlink the ~23,843 confirmed-unreachable loose
+objects -- no new pack file needed, minimal temp space required. (3) Verified with `git fsck --full`
+(clean, no errors) and `git log --oneline` (all prior commits intact) that history was never
+touched -- only genuinely unreachable garbage was removed. `.git` dropped from 6.62 GB to 0.04 GB;
+C: free space recovered from 0.02 GB to 7.02 GB.
+**Status:** RESOLVED. No data, commits, or in-progress background job output were lost. Going
+forward: do not assume a long-running git background process is benign gc without checking its
+actual exit status/output when it runs unusually long, and periodically check free disk space
+during long multi-job sessions rather than only when something fails.
+
 ---
 
 *(IDs continue as Stage 1 proceeds. Severity: CRITICAL/MAJOR/MODERATE/MINOR.)*
