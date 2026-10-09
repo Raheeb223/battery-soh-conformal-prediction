@@ -181,6 +181,21 @@ filtering inside `build_lodo_cache()` (unchanged) differs per run.
 **Status:** RESOLVED. Original (slow, unoptimized) run killed before any iteration completed --
 no partial results lost. Optimized version relaunched.
 
+### E11 | MINOR (performance only, K6-enabling) | preprocessing.py run() | Same 7x-reload risk for the K6 repeated-split experiment
+**Problem:** `preprocessing.run()` always called `load_all_raw()` + `add_soh()` internally. K6
+requires building 4 additional split-seed caches (43/44/45/46) end to end; calling `run()` once
+per seed would re-parse all 7 raw datasets 4 more times, the same unnecessary cost E10 fixed for
+LODO.
+**Evidence:** Direct read, `preprocessing.py` `run()` signature before this fix.
+**Consequence:** Would make the K6 repeated-split run impractically slow, not incorrect.
+**Fix:** `run(window=None, split_seed=None, raw_df=None)` now accepts an optional pre-loaded,
+pre-SOH'd dataframe; when given, skips its own `load_all_raw()`/`add_soh()` call and uses the
+caller's dataframe instead. `repeated_split_experiment.py` (new) loads raw data once and passes
+it to all 4 new-seed `run()` calls. Purely a performance change -- deterministic functions, byte-
+identical result to calling `run()` standalone per seed.
+**Status:** RESOLVED. Syntax-checked (`ast.parse`). Not yet exercised end-to-end (blocked behind
+LODO finishing, to avoid GPU contention between two simultaneous training jobs).
+
 ---
 
 *(IDs continue as Stage 1 proceeds. Severity: CRITICAL/MAJOR/MODERATE/MINOR.)*
