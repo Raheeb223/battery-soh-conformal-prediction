@@ -223,16 +223,21 @@ def heterogeneity_inflation(min_distance: float, scale: float = 1.0) -> float:
     return 1 - np.exp(-min_distance / scale)
 
 
-def hgc_cp_interval(y_hat: float, calib_scores: np.ndarray, calib_group_ids: np.ndarray,
-                     group_distances: dict, lam: float, alpha: float, beta: float,
-                     inflation_scale: float = 1.0) -> tuple:
-    """Full 3-stage HGC-CP interval for one test point.
+def compute_hgc_cp_qstar(calib_scores: np.ndarray, calib_group_ids: np.ndarray,
+                          group_distances: dict, lam: float, alpha: float, beta: float,
+                          inflation_scale: float = 1.0) -> tuple:
+    """Everything in HGC-CP's 3-stage pipeline that does NOT depend on the
+    test point's y_hat, computed ONCE (K10 -- split out of hgc_cp_interval
+    purely for performance: when evaluating many test points against the
+    SAME calibration set, as every caller in this project does,
+    hgc_cp_interval() recomputed this entire pipeline from scratch on every
+    single call. This split changes nothing numerically -- see
+    tests/stage6_k10_equivalence.py for a direct equivalence proof against
+    the original monolithic code path.
 
-    calib_scores: |y - yhat| for every calibration point across ALL source groups.
-    calib_group_ids: which source group each calibration point belongs to.
-    group_distances: {group_name: MMD^2(target, that group)}, from Stage 1.
-    Returns (lower, upper, q_star, weights_used).
-    """
+    Returns (q_star, q_t, weights_by_group). q_star is NaN when q_t is inf
+    (the caller must check np.isinf(q_t) first and build an unbounded
+    interval directly -- see apply_hgc_cp_interval)."""
     weights_by_group = compute_group_weights(group_distances, lam)
 
     # Normalize each point's weight by its group's SIZE, so a group's total
@@ -273,13 +278,45 @@ def hgc_cp_interval(y_hat: float, calib_scores: np.ndarray, calib_group_ids: np.
         # coverage -- not zero-width (confirmed and fixed; see module
         # docstring, FIXES item 1). A zero-width interval here would almost
         # always fail to cover, the opposite of what q_t=inf signals.
-        return -np.inf, np.inf, q_t, weights_by_group
+        return np.nan, q_t, weights_by_group
 
     min_dist = min(group_distances.values())
     h_t = heterogeneity_inflation(min_dist, inflation_scale)
     q_star = q_t * (1 + beta * h_t)
+    return q_star, q_t, weights_by_group
 
+
+def apply_hgc_cp_interval(y_hat: float, q_star: float, q_t: float, weights_by_group: dict) -> tuple:
+    """Apply a precomputed q_star (from compute_hgc_cp_qstar, called ONCE
+    per calibration set) to one test point's y_hat. Returns the same
+    (lower, upper, q_star_or_q_t, weights_by_group) shape as
+    hgc_cp_interval, for drop-in use in a loop over many test points."""
+    if np.isinf(q_t):
+        return -np.inf, np.inf, q_t, weights_by_group
     return y_hat - q_star, y_hat + q_star, q_star, weights_by_group
+
+
+def hgc_cp_interval(y_hat: float, calib_scores: np.ndarray, calib_group_ids: np.ndarray,
+                     group_distances: dict, lam: float, alpha: float, beta: float,
+                     inflation_scale: float = 1.0) -> tuple:
+    """Full 3-stage HGC-CP interval for one test point.
+
+    calib_scores: |y - yhat| for every calibration point across ALL source groups.
+    calib_group_ids: which source group each calibration point belongs to.
+    group_distances: {group_name: MMD^2(target, that group)}, from Stage 1.
+    Returns (lower, upper, q_star, weights_used).
+
+    PERFORMANCE NOTE (K10): if calling this for many test points against the
+    SAME calibration set (every evaluation loop in this project does), call
+    compute_hgc_cp_qstar() once and apply_hgc_cp_interval() per point
+    instead -- this function recomputes the whole pipeline on every call,
+    which is wasteful when only y_hat changes between calls. Kept as-is
+    (not removed) since several existing scripts call it directly per
+    point; behavior is identical either way (see
+    tests/stage6_k10_equivalence.py)."""
+    q_star, q_t, weights_by_group = compute_hgc_cp_qstar(
+        calib_scores, calib_group_ids, group_distances, lam, alpha, beta, inflation_scale)
+    return apply_hgc_cp_interval(y_hat, q_star, q_t, weights_by_group)
 
 
 # ---------------------------------------------------------------------------
