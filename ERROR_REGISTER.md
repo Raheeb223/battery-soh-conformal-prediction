@@ -234,6 +234,36 @@ identical result to calling `run()` standalone per seed.
 **Status:** RESOLVED. Syntax-checked (`ast.parse`). Not yet exercised end-to-end (blocked behind
 LODO finishing, to avoid GPU contention between two simultaneous training jobs).
 
+### E13 | MAJOR | predictor_consistent_recalibration.py:50-54,81 | Per-dataset coverage CI treated windows as independent trials (Stage 9)
+**Problem:** `clopper_pearson(k, n)` computed a window-level binomial CI for each dataset's
+groupwise coverage, treating all n test WINDOWS as independent Bernoulli trials. This is exactly
+the violation the brief's own rules warn against ("windows from the same cell are not
+independent") -- for datasets with few test cells (XJTU, CALCE, and especially Oxford/NASA with
+1-2 test cells per the brief's own anchors), a window-level CI is overconfident because it treats
+hundreds of correlated within-cell windows as if they were hundreds of independent draws.
+**Evidence:** Direct read, confirmed no other script consumed this field (so the bug was
+self-contained, not yet propagated), then ran both CIs side by side after the fix:
+```
+Dataset   n_test  groupwise   window CP CI    cell-boot CI
+XJTU        2605      93.0%  [ 92.0,  94.0]  [ 84.5,  99.3]   <- window CI is ~5x narrower
+CALCE       2743      75.6%  [ 74.0,  77.2]  [ 70.0,  90.6]   <- window CI is ~4x narrower
+MIT        17513      92.2%  [ 91.8,  92.6]  [ 90.9,  93.2]   <- close (many cells, less severe)
+Oxford        56     100.0%  [ 93.6, 100.0]  n/a (<2 cells)   <- cell-level CI correctly undefined
+NASA           3      66.7%  [  9.4,  99.2]  n/a (<2 cells)   <- cell-level CI correctly undefined
+```
+**Consequence:** If this script's `cp95` field had been pulled into the manuscript as the
+reported per-dataset coverage uncertainty, XJTU and CALCE's true uncertainty would have been
+understated by roughly 4-5x -- a reader would see a deceptively tight interval around 93%/76%
+coverage when the cell-level truth is a much wider, less conclusive range.
+**Fix:** Reused the already-verified `cell_clustered_bootstrap_coverage()` (from
+`cell_clustered_bootstrap.py`, K6) to compute a second, cell-valid 95% CI alongside the window-
+level one. Renamed the old field to `cp95_window_level_see_docstring_caveat` and added
+`cell_bootstrap_95ci` (`null` when a dataset has fewer than 2 test cells, matching
+`cell_clustered_bootstrap.py`'s own convention for Oxford/NASA). `clopper_pearson()`'s docstring
+now states explicitly not to use it alone as the reported uncertainty.
+**Status:** RESOLVED. Syntax-checked and run successfully; output above. No retrain needed (pure
+post-hoc recomputation from already-saved predictions).
+
 ---
 
 *(IDs continue as Stage 1 proceeds. Severity: CRITICAL/MAJOR/MODERATE/MINOR.)*
