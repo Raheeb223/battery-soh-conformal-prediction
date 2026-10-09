@@ -697,10 +697,31 @@ K6 of the audit plan. No claim is made here in its absence.]}
 % TODO: write last, after Discussion -- a conclusion should not introduce new claims.
 
 \section*{Data and code availability}
-% TODO: finalize dataset licensing/citation details (flagged in REPRODUCIBILITY.md as needing a
-% human verification pass) before submission. Code: this manuscript's companion repository will be
-% made available upon publication (author's own prior related repository is intentionally not
-% cited here, per author's instruction, pending its own update).
+
+All seven datasets used in this study are public and were obtained from their original sources;
+none is redistributed with this manuscript or its code repository. Each dataset's own license
+governs any further redistribution.
+
+\begin{itemize}
+  \item \textbf{MIT/Stanford/Toyota Research Institute} (``MIT''):
+  \url{https://data.matr.io/1/projects/5c48dd2bc625d700019f3204} \citep{natcomm2023soh}; originally
+  described by Severson et al., \emph{Nature Energy} 4:383--391 (2019).
+  \item \textbf{RWTH Aachen}: \url{https://publications.rwth-aachen.de/record/818642}, DOI:
+  10.18154/RWTH-2021-04545.
+  \item \textbf{XJTU}: \url{https://doi.org/10.5281/zenodo.10963339} (Zenodo).
+  \item \textbf{BIT}: \url{https://data.mendeley.com/datasets/kw34hhw7xg/3}, DOI:
+  10.17632/kw34hhw7xg.3 (Mendeley Data).
+  \item \textbf{CALCE} (CS2/CX2): \url{https://calce.umd.edu/battery-data} (CALCE Battery Research
+  Group, University of Maryland).
+  \item \textbf{Oxford}: \url{https://ora.ox.ac.uk/objects/uuid:03ba4b01-cfed-46d3-9b1a-7d4a7bdf6fac},
+  DOI: 10.5287/bodleian:KO2kdmYGg (Oxford University Research Archive).
+  \item \textbf{NASA}: \url{https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/}
+  (NASA Prognostics Center of Excellence).
+\end{itemize}
+
+All preprocessing, model, calibration, and verification code, along with the machine-generated
+results registry this manuscript's numbers are drawn from, is available at
+\url{https://github.com/Raheeb223/battery-soh-conformal-prediction}.
 
 \appendix
 \section{Independent verification of statistical components}

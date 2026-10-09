@@ -27,16 +27,20 @@ All raw dataset folders/files are excluded from version control (`.gitignore`) b
 size. Place them directly under the project root (`config.ROOT_DIR`) using these exact names, or
 edit the corresponding path in `config.py`:
 
-| Dataset | Expected path (relative to project root) | Loader |
-|---|---|---|
-| NASA | `5. Battery Data Set/` (contains `B0005.mat`, `B0006.mat`, ...) | `nasa_loader.py` |
-| CALCE (CS2) | `CS2_33/`, `CS2_34/`, `CS2_35/`, `CS2_38/` | `calce_loader_v2.py` |
-| CALCE (CX2) | `CX2_16/`, `CX2_31/`, `CX2_33/`, `CX2_34/`, `CX2_35/`, `CX2_36/`, `CX2_37/` | `calce_loader_v2.py` |
-| Oxford | `Oxford_Battery_Degradation_Dataset_1.mat` | `oxford_loader.py` |
-| MIT/Severson (FastCharge) | loose `*_structure.json` files directly under project root, or a `FastCharge/` subfolder (loader searches recursively) | `mit_loader.py` |
-| BIT | `kw34hhw7xg-3/` | `bit_loader.py` |
-| XJTU | `Battery Dataset/` | `xjtu_loader.py` |
-| RWTH | `RWTH-2021-04545_818642/Rawdata/Rohdaten/` | `rwth_loader.py` |
+| Dataset | Expected path (relative to project root) | Loader | Source |
+|---|---|---|---|
+| NASA | `5. Battery Data Set/` (contains `B0005.mat`, `B0006.mat`, ...) | `nasa_loader.py` | [NASA PCoE Prognostics Data Repository](https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/) |
+| CALCE (CS2) | `CS2_33/`, `CS2_34/`, `CS2_35/`, `CS2_38/` | `calce_loader_v2.py` | [CALCE Battery Research Group, University of Maryland](https://calce.umd.edu/battery-data) |
+| CALCE (CX2) | `CX2_16/`, `CX2_31/`, `CX2_33/`, `CX2_34/`, `CX2_35/`, `CX2_36/`, `CX2_37/` | `calce_loader_v2.py` | [CALCE Battery Research Group, University of Maryland](https://calce.umd.edu/battery-data) |
+| Oxford | `Oxford_Battery_Degradation_Dataset_1.mat` | `oxford_loader.py` | [Oxford University Research Archive, DOI: 10.5287/bodleian:KO2kdmYGg](https://ora.ox.ac.uk/objects/uuid:03ba4b01-cfed-46d3-9b1a-7d4a7bdf6fac) |
+| MIT/Severson (FastCharge) | loose `*_structure.json` files directly under project root, or a `FastCharge/` subfolder (loader searches recursively) | `mit_loader.py` | [data.matr.io (MIT/Stanford/Toyota Research Institute)](https://data.matr.io/1/projects/5c48dd2bc625d700019f3204) — cite Severson et al., *Nature Energy* 4:383–391 (2019) |
+| BIT | `kw34hhw7xg-3/` | `bit_loader.py` | [Mendeley Data, DOI: 10.17632/kw34hhw7xg.3](https://data.mendeley.com/datasets/kw34hhw7xg/3) (Beijing Institute of Technology, Advanced Energy Storage and Application Group) |
+| XJTU | `Battery Dataset/` | `xjtu_loader.py` | [Zenodo, DOI: 10.5281/zenodo.10963339](https://doi.org/10.5281/zenodo.10963339) (Xi'an Jiaotong University) |
+| RWTH | `RWTH-2021-04545_818642/Rawdata/Rohdaten/` | `rwth_loader.py` | [RWTH Aachen Publications, DOI: 10.18154/RWTH-2021-04545](https://publications.rwth-aachen.de/record/818642) |
+
+Each dataset's own license/usage terms govern redistribution; consult the source page above before
+redistributing raw files. This project does not commit any raw dataset file to version control
+(see `.gitignore`) -- only the processing code.
 
 **Known, independently-confirmed data-quality caveats** (see `ERROR_REGISTER.md` for the full
 evidence trail on each):
