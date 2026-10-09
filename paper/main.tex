@@ -624,12 +624,62 @@ K6 of the audit plan. No claim is made here in its absence.]}
 \appendix
 \section{Independent verification of statistical components}
 \label{app:verification}
-% TODO: transcribe already-completed verification results (see TEST_REPORT.md) into appendix form:
-% conformal.py unit tests (6/6 pass, including Monte Carlo marginal coverage and an independent
-% order-statistic reimplementation), HGC-CP property tests (13/13) and K10 equivalence proof
-% (250 combinations + inf-width edge case), DerSimonian-Laird hand-calculated cases (3) and
-% independent from-scratch reimplementation (30 random trials), Stage 2 data-layer determinism
-% check (two independent end-to-end runs, identical SHA-256 hash).
+
+All verification code referenced below is included in the companion repository under
+\texttt{tests/}; each item was run and its output logged before any number derived from it was
+used elsewhere in this paper.
+
+\subsection{Data-layer verification}
+An independent script re-derives, from the raw files, every structural fact the main pipeline
+relies on: cell counts per dataset, the cell-level train/validation/test split's disjointness, that
+every dataset with at least three cells receives at least one validation and one test cell, that
+normalization statistics (per-dataset mean/standard deviation) reproduce independently, and that no
+windowed sample's cycle sequence is non-ascending. Critically, it also runs the entire
+preprocessing pipeline twice, end to end, into a temporary cache directory, and confirms the two
+runs produce byte-identical output (matching SHA-256 hash) -- full pipeline determinism, not
+merely determinism of an isolated function.
+
+\subsection{Conformal calibration unit tests}
+Six unit tests validate \texttt{conformal.py} against synthetic data with a known distribution,
+independently of any project-specific data: (1) a Monte Carlo estimate of marginal coverage over
+300 independent calibration/test draws from $\mathcal{N}(0,1)$ confirms empirical coverage sits at
+or above the finite-sample theorem's guarantee; (2) an independently-written order-statistic
+reimplementation of the calibration quantile is compared against the module's
+\texttt{np.quantile}-based implementation across 20 random configurations -- the two are not
+bit-identical (\texttt{np.quantile}'s linear interpolation provably yields a value at least as
+large as the textbook discrete order statistic, since it blends toward the next-higher order
+statistic), but the module's version is confirmed to never fall below the textbook value, i.e. it
+is never less conservative; (3) groupwise calibration is confirmed to match running split-conformal
+calibration separately per group; (4) normalized split-conformal calibration is confirmed to reduce
+to plain split-conformal calibration when the per-sample uncertainty estimate is held constant; (5)
+the fallback path for a group with zero calibration data is directly triggered (not merely read)
+and confirmed to use the pooled quantile across calibrated groups with no resulting NaNs.
+
+\subsection{Hierarchical calibration verification}
+The DerSimonian-Laird random-effects estimator is checked against three hand-calculated cases
+(by-hand arithmetic, not derived from the code under test): a homogeneous three-group case
+correctly yields zero between-group variance; a deliberately heterogeneous two-group case yields
+the exact hand-calculated non-zero variance and shrunk mean; a case where the heterogeneity
+statistic falls below its degrees-of-freedom correctly clips the variance estimate to zero rather
+than allowing a negative value. An independent from-scratch reimplementation (written separately,
+not imported from the module under test) matches the module's output exactly across 30 random
+configurations.
+
+\subsection{HGC-CP property tests}
+Beyond the module's own built-in checks (correct MMD-based distance ranking, reproducible MMD
+bandwidth selection, correct unbounded-interval behavior when calibration mass is insufficient),
+four additional property tests confirm: group weights sum to exactly 1 across 10 random
+configurations; the weight on the closest source group is non-decreasing in the MMD temperature
+$\lambda$; calibration against a single homogeneous group reduces HGC-CP's quantile to within
+0.05\% of the ordinary split-conformal quantile; and a finite weighted quantile always falls within
+the bounds of the underlying calibration scores, across 20 random trials.
+
+A further equivalence proof (motivated by a purely computational observation: the per-window
+interval computation recomputes the entire weight/quantile pipeline on every call even though only
+the test point's prediction varies across calls within one calibration set) confirms that splitting
+this computation into a once-per-calibration-set step and a trivial per-point step produces
+bit-identical results to the original monolithic computation, across 250 (test-point, random-
+configuration) combinations including the inf-width edge case deliberately triggered.
 
 \bibliographystyle{elsarticle-harv}
 \bibliography{references}
