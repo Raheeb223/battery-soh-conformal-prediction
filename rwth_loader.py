@@ -117,14 +117,20 @@ def _parse_session_file(path: str, drop_first: bool = True) -> pd.DataFrame:
     return per_cycle
 
 
-def load_rwth_cell(session_files: list, cell_id: str) -> pd.DataFrame:
+def load_rwth_cell(session_files: list, cell_id: str, drop_first: bool = True,
+                    apply_local_outlier_fix: bool = True) -> pd.DataFrame:
+    """drop_first / apply_local_outlier_fix: both default True (the
+    production path). Exposed as toggles ONLY so a K7-style with/without
+    sensitivity check (verify_rwth_v2.py) can quantify each correction's
+    effect independently, same convention as CALCE's INCOMPLETE_POLICY and
+    XJTU's XJTU_APPLY_SENTINEL_FIX -- not meant to be changed for a real run."""
     # sort sessions chronologically using the embedded filename timestamp
     session_files = sorted(session_files, key=_extract_timestamp)
 
     all_rows = []
     for path in session_files:
         try:
-            per_cycle = _parse_session_file(path)
+            per_cycle = _parse_session_file(path, drop_first=drop_first)
             per_cycle["source_file"] = os.path.basename(path)
             all_rows.append(per_cycle)
         except Exception as e:
@@ -143,12 +149,13 @@ def load_rwth_cell(session_files: list, cell_id: str) -> pd.DataFrame:
     # session-boundary truncation mechanism above (e.g. a genuinely
     # corrupted session's AhEla trace producing a multi-row near-zero
     # stretch, as seen in RWTH_ep_sanyo_019).
-    combined = strip_local_outliers(combined, verbose=True)
+    if apply_local_outlier_fix:
+        combined = strip_local_outliers(combined, verbose=True)
 
     return combined
 
 
-def load_all() -> pd.DataFrame:
+def load_all(drop_first: bool = True, apply_local_outlier_fix: bool = True) -> pd.DataFrame:
     if not RWTH_ROOT or not os.path.isdir(RWTH_ROOT):
         raise FileNotFoundError(f"RWTH_DIR not set or not found: {RWTH_ROOT}")
 
@@ -171,7 +178,8 @@ def load_all() -> pd.DataFrame:
     for i, (cell_id, files) in enumerate(sorted(cell_files.items()), 1):
         print(f"  [RWTH] ({i}/{len(cell_files)}) parsing {cell_id} ({len(files)} sessions)...", flush=True)
         try:
-            df = load_rwth_cell(files, cell_id)
+            df = load_rwth_cell(files, cell_id, drop_first=drop_first,
+                                 apply_local_outlier_fix=apply_local_outlier_fix)
             if len(df) > 5:
                 frames.append(df)
         except Exception as e:
