@@ -1,0 +1,85 @@
+[
+  {
+    "variant": "full",
+    "n_parameters": 292033,
+    "latency_batch1_ms": 1.1845279997214675,
+    "latency_batch1_std_ms": 0.050487755090631546,
+    "latency_batch256_ms": 1.9157159986207262,
+    "latency_batch256_std_ms": 0.06250149174980224,
+    "model_size_mb": 1.1208114624023438,
+    "device": "cuda"
+  },
+  {
+    "variant": "no_attention",
+    "n_parameters": 283777,
+    "latency_batch1_ms": 1.291514002950862,
+    "latency_batch1_std_ms": 0.31539376851436207,
+    "latency_batch256_ms": 1.690112000796944,
+    "latency_batch256_std_ms": 0.028991670730056963,
+    "model_size_mb": 1.0884552001953125,
+    "device": "cuda"
+  },
+  {
+    "variant": "no_multiscale",
+    "n_parameters": 146113,
+    "latency_batch1_ms": 0.748299999977462,
+    "latency_batch1_std_ms": 0.03239096752258186,
+    "latency_batch256_ms": 1.119930000277236,
+    "latency_batch256_std_ms": 0.09512272907700074,
+    "model_size_mb": 0.5623130798339844,
+    "device": "cuda"
+  },
+  {
+    "variant": "plain_lstm",
+    "n_parameters": 141953,
+    "latency_batch1_ms": 0.51428199687507,
+    "latency_batch1_std_ms": 0.022178034355752784,
+    "latency_batch256_ms": 1.0086939990287647,
+    "latency_batch256_std_ms": 0.01027093730882466,
+    "model_size_mb": 0.5454540252685547,
+    "device": "cuda"
+  },
+  {
+    "variant": "gru",
+    "n_parameters": 42049,
+    "latency_batch1_ms": 0.4374779970385134,
+    "latency_batch1_std_ms": 0.012576870493686275,
+    "latency_batch256_ms": 0.5332119995728135,
+    "latency_batch256_std_ms": 0.008025527301256698,
+    "model_size_mb": 0.1634359359741211,
+    "device": "cuda"
+  },
+  {
+    "variant": "baseline_linear",
+    "n_parameters": null,
+    "latency_batch1_ms": 0.05690800026059151,
+    "latency_batch1_std_ms": 0.016149758362547992,
+    "latency_batch256_ms": 0.07754600141197443,
+    "latency_batch256_std_ms": 0.11130652068251383,
+    "model_size_mb": null,
+    "device": "cpu",
+    "note": "timed on a freshly-fit model of matching hyperparameters, not the exact fitted weights from the main experiment run \u2014 inference speed characteristics are what's measured here."
+  },
+  {
+    "variant": "baseline_svr",
+    "n_parameters": null,
+    "latency_batch1_ms": 0.1545980025548488,
+    "latency_batch1_std_ms": 0.013502820937814226,
+    "latency_batch256_ms": 9.339333997340873,
+    "latency_batch256_std_ms": 0.4990147608982473,
+    "model_size_mb": null,
+    "device": "cpu",
+    "note": "timed on a freshly-fit model of matching hyperparameters, not the exact fitted weights from the main experiment run \u2014 inference speed characteristics are what's measured here."
+  },
+  {
+    "variant": "baseline_xgboost",
+    "n_parameters": null,
+    "latency_batch1_ms": 0.4645580006763339,
+    "latency_batch1_std_ms": 0.22873050663692257,
+    "latency_batch256_ms": 0.9698719973675907,
+    "latency_batch256_std_ms": 0.10098314663524932,
+    "model_size_mb": null,
+    "device": "cpu",
+    "note": "timed on a freshly-fit model of matching hyperparameters, not the exact fitted weights from the main experiment run \u2014 inference speed characteristics are what's measured here."
+  }
+]

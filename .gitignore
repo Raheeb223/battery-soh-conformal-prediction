@@ -1,0 +1,26 @@
+# Environment
+.venv/
+__pycache__/
+*.pyc
+
+# Backups (local safety copies, not tracked)
+backup_*/
+
+# Raw datasets (large, not redistributed; see README / data availability)
+5. Battery Data Set/
+Battery Dataset/
+CS2_*/
+CX2_*/
+kw34hhw7xg-3/
+RWTH-2021-04545_818642/
+FastCharge/
+*.mat
+*.csv
+tmp_determinism_check/
+
+# Pipeline cache and model outputs (large, regenerable)
+cache/
+outputs/
+
+# IDE
+.idea/

@@ -1,0 +1,10 @@
+XJTU test samples: 2605
+True-value range: [-8.589, 1.614], median=-0.003
+
+Magnitude-outlier detection (robust z-score < -6.0):
+  count: 1
+  index range: 2552-2552
+
+[!!!] CRITICAL: padding/duplication artifact confirmed -- these samples should be excluded and XJTU stats recomputed.
+
+Specific XJTU cell IDs responsible: ['XJTU_Batch-6_Sim_satellite_7']

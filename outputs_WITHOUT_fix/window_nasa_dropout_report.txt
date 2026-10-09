@@ -1,0 +1,40 @@
+
+--- window=10 ---
+  B0005                n_cycles=  168  valid_windows=  158
+  B0006                n_cycles=  168  valid_windows=  158
+  B0007                n_cycles=  168  valid_windows=  158
+  B0018                n_cycles=  132  valid_windows=  122
+  B0049                n_cycles=   25  valid_windows=   15
+  B0050                n_cycles=   21  valid_windows=   11
+  B0051                n_cycles=   25  valid_windows=   15
+  TOTAL valid NASA windows at w=10: 637
+
+--- window=20 ---
+  B0005                n_cycles=  168  valid_windows=  148
+  B0006                n_cycles=  168  valid_windows=  148
+  B0007                n_cycles=  168  valid_windows=  148
+  B0018                n_cycles=  132  valid_windows=  112
+  B0049                n_cycles=   25  valid_windows=    5
+  B0050                n_cycles=   21  valid_windows=    1
+  B0051                n_cycles=   25  valid_windows=    5
+  TOTAL valid NASA windows at w=20: 567
+
+--- window=30 ---
+  B0005                n_cycles=  168  valid_windows=  138
+  B0006                n_cycles=  168  valid_windows=  138
+  B0007                n_cycles=  168  valid_windows=  138
+  B0018                n_cycles=  132  valid_windows=  102
+  B0049                n_cycles=   25  valid_windows=    0  <-- TOO SHORT FOR THIS WINDOW
+  B0050                n_cycles=   21  valid_windows=    0  <-- TOO SHORT FOR THIS WINDOW
+  B0051                n_cycles=   25  valid_windows=    0  <-- TOO SHORT FOR THIS WINDOW
+  TOTAL valid NASA windows at w=30: 516
+
+--- window=50 ---
+  B0005                n_cycles=  168  valid_windows=  118
+  B0006                n_cycles=  168  valid_windows=  118
+  B0007                n_cycles=  168  valid_windows=  118
+  B0018                n_cycles=  132  valid_windows=   82
+  B0049                n_cycles=   25  valid_windows=    0  <-- TOO SHORT FOR THIS WINDOW
+  B0050                n_cycles=   21  valid_windows=    0  <-- TOO SHORT FOR THIS WINDOW
+  B0051                n_cycles=   25  valid_windows=    0  <-- TOO SHORT FOR THIS WINDOW
+  TOTAL valid NASA windows at w=50: 436

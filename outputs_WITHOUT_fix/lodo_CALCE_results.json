@@ -1,0 +1,20 @@
+{
+  "run_name": "lodo_CALCE",
+  "held_out_dataset": "CALCE",
+  "model_variant": "full",
+  "test_mae": 0.30648417360583,
+  "test_rmse": 0.3473913772612662,
+  "test_mae_normalized_space": 1.2134274244308472,
+  "test_rmse_normalized_space": 1.3753865957260132,
+  "held_out_soh_std": 0.25257725961615307,
+  "coverage": 0.008103727714748784,
+  "n_test_samples": 617,
+  "training_dataset_signature": [
+    "BIT",
+    "MIT",
+    "NASA",
+    "Oxford",
+    "RWTH",
+    "XJTU"
+  ]
+}

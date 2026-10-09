@@ -1,0 +1,68 @@
+{
+  "reliability": [
+    {
+      "target": 0.5,
+      "actual_coverage": 0.9026333323676816,
+      "abs_calibration_error": 0.4026333323676816
+    },
+    {
+      "target": 0.7,
+      "actual_coverage": 0.9517656942553376,
+      "abs_calibration_error": 0.2517656942553377
+    },
+    {
+      "target": 0.8,
+      "actual_coverage": 0.9647440539992468,
+      "abs_calibration_error": 0.16474405399924674
+    },
+    {
+      "target": 0.9,
+      "actual_coverage": 0.9761580578811669,
+      "abs_calibration_error": 0.07615805788116692
+    },
+    {
+      "target": 0.95,
+      "actual_coverage": 0.9816622729511284,
+      "abs_calibration_error": 0.031662272951128445
+    }
+  ],
+  "ece_approx": 0.18539268229091227,
+  "ece_note": "Approximated by Gaussian z-scaling of a single MC-Dropout std per sample across multiple nominal levels, not independently recalibrated at each level -- report as an approximation, not an exact ECE.",
+  "ause_overall": {
+    "ause_vs_oracle": 0.009310469101183116,
+    "ause_vs_random_gap": -0.007228274224326013,
+    "uncertainty_error_correlation": 0.15777997181773104
+  },
+  "ause_per_dataset": {
+    "MIT": {
+      "ause_vs_oracle": 0.0042068201466463504,
+      "ause_vs_random_gap": -0.005972836888395249,
+      "uncertainty_error_correlation": 0.42183077610891045
+    },
+    "BIT": {
+      "ause_vs_oracle": 0.1174471763893962,
+      "ause_vs_random_gap": 0.0016466442495584486,
+      "uncertainty_error_correlation": -0.043775412547649474
+    },
+    "XJTU": {
+      "ause_vs_oracle": 0.024760346766561272,
+      "ause_vs_random_gap": -0.009554849052801727,
+      "uncertainty_error_correlation": 0.09500564447963193
+    },
+    "RWTH": {
+      "ause_vs_oracle": 0.006203566305339336,
+      "ause_vs_random_gap": -0.005488455551676452,
+      "uncertainty_error_correlation": 0.3149469088540471
+    },
+    "CALCE": {
+      "ause_vs_oracle": 0.22986494228243828,
+      "ause_vs_random_gap": -0.014295817166566846,
+      "uncertainty_error_correlation": 0.15608925189468986
+    },
+    "Oxford": {
+      "ause_vs_oracle": 0.01916369087994099,
+      "ause_vs_random_gap": 0.0013608623296022418,
+      "uncertainty_error_correlation": -0.007209781622600671
+    }
+  }
+}

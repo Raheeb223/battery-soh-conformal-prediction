@@ -1,0 +1,20 @@
+{
+  "run_name": "lodo_BIT",
+  "held_out_dataset": "BIT",
+  "model_variant": "full",
+  "test_mae": 0.08131922018902094,
+  "test_rmse": 0.12699202567436924,
+  "test_mae_normalized_space": 0.331851601600647,
+  "test_rmse_normalized_space": 0.5182355046272278,
+  "held_out_soh_std": 0.24504694205719452,
+  "coverage": 0.15190330146130254,
+  "n_test_samples": 5543,
+  "training_dataset_signature": [
+    "CALCE",
+    "MIT",
+    "NASA",
+    "Oxford",
+    "RWTH",
+    "XJTU"
+  ]
+}

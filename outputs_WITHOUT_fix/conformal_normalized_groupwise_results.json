@@ -1,0 +1,38 @@
+{
+  "run_name": "conformal_normalized_groupwise",
+  "model_variant": "full",
+  "seed": 42,
+  "conformal_mode": "normalized_groupwise",
+  "best_epoch": 58,
+  "best_val_loss": 0.003287365501624885,
+  "test_mae": 0.020729470998048782,
+  "test_rmse": 0.06593547761440277,
+  "overall_coverage": 0.8151657386082038,
+  "per_dataset_mae": {
+    "BIT": 0.13905970752239227,
+    "CALCE": 0.3892674744129181,
+    "MIT": 0.013792524114251137,
+    "NASA": 0.06246702000498772,
+    "Oxford": 0.031839389353990555,
+    "RWTH": 0.014697163365781307,
+    "XJTU": 0.05060190334916115
+  },
+  "per_dataset_coverage": {
+    "BIT": 0.8822055137844611,
+    "CALCE": 0.7857142857142857,
+    "MIT": 0.8687260891908868,
+    "NASA": 1.0,
+    "Oxford": 0.9821428571428571,
+    "RWTH": 0.7168674698795181,
+    "XJTU": 0.9505655634687893
+  },
+  "dataset_signature": [
+    "BIT",
+    "CALCE",
+    "MIT",
+    "NASA",
+    "Oxford",
+    "RWTH",
+    "XJTU"
+  ]
+}

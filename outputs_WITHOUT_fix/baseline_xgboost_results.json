@@ -1,0 +1,24 @@
+{
+  "run_name": "baseline_xgboost",
+  "model_variant": "baseline_xgboost",
+  "test_mae": 0.01785433664917946,
+  "test_rmse": 0.07311636954545975,
+  "per_dataset_mae": {
+    "BIT": 0.191502183675766,
+    "CALCE": 0.4986448585987091,
+    "MIT": 0.010128973983228207,
+    "NASA": 0.32394203543663025,
+    "Oxford": 0.03668760135769844,
+    "RWTH": 0.007755842059850693,
+    "XJTU": 0.05280083045363426
+  },
+  "dataset_signature": [
+    "BIT",
+    "CALCE",
+    "MIT",
+    "NASA",
+    "Oxford",
+    "RWTH",
+    "XJTU"
+  ]
+}

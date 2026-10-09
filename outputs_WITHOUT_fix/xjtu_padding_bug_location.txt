@@ -1,0 +1,34 @@
+XJTU cells by row/cycle count (shortest first):
+    XJTU_Batch-2_3C_11: 131 rows
+    XJTU_Batch-6_Sim_satellite_1: 137 rows
+    XJTU_Batch-2_3C_14: 147 rows
+    XJTU_Batch-6_Sim_satellite_3: 149 rows
+    XJTU_Batch-6_Sim_satellite_4: 149 rows
+    XJTU_Batch-6_Sim_satellite_7: 150 rows
+    XJTU_Batch-2_3C_10: 164 rows
+    XJTU_Batch-2_3C_15: 168 rows
+    XJTU_Batch-6_Sim_satellite_8: 168 rows
+    XJTU_Batch-6_Sim_satellite_6: 181 rows
+
+Duplicate-value runs found (the actual padding signature):
+  cell=XJTU_Batch-1_2C_2  col=capacity  rows[164:169]  run_len=5  value=1.94
+  cell=XJTU_Batch-1_2C_3  col=capacity  rows[91:96]  run_len=5  value=1.954
+  cell=XJTU_Batch-1_2C_3  col=capacity  rows[128:134]  run_len=6  value=1.944
+  cell=XJTU_Batch-1_2C_4  col=capacity  rows[163:169]  run_len=6  value=1.943
+  cell=XJTU_Batch-1_2C_5  col=capacity  rows[162:168]  run_len=6  value=1.942
+  cell=XJTU_Batch-1_2C_6  col=capacity  rows[90:95]  run_len=5  value=1.956
+  cell=XJTU_Batch-1_2C_8  col=capacity  rows[51:56]  run_len=5  value=1.95
+  cell=XJTU_Batch-2_3C_1  col=capacity  rows[40:47]  run_len=7  value=1.961
+  cell=XJTU_Batch-2_3C_15  col=capacity  rows[40:45]  run_len=5  value=1.895
+  cell=XJTU_Batch-2_3C_3  col=capacity  rows[41:48]  run_len=7  value=1.971
+  cell=XJTU_Batch-2_3C_4  col=capacity  rows[41:47]  run_len=6  value=1.956
+  cell=XJTU_Batch-2_3C_5  col=capacity  rows[38:47]  run_len=9  value=1.964
+  cell=XJTU_Batch-2_3C_6  col=capacity  rows[42:47]  run_len=5  value=1.963
+  cell=XJTU_Batch-2_3C_6  col=capacity  rows[139:145]  run_len=6  value=1.919
+  cell=XJTU_Batch-2_3C_7  col=capacity  rows[44:51]  run_len=7  value=1.972
+  cell=XJTU_Batch-2_3C_8  col=capacity  rows[38:46]  run_len=8  value=1.963
+  cell=XJTU_Batch-2_3C_9  col=capacity  rows[40:46]  run_len=6  value=1.919
+
+==> These are the exact cell(s)/column(s)/rows responsible for the padding artifact. Fix the loader/windowing code so these rows are not duplicated (or exclude them), then re-run experiments.py for XJTU before trusting its MAE/RMSE/coverage.
+
+Static search of source files for padding/repeat patterns:

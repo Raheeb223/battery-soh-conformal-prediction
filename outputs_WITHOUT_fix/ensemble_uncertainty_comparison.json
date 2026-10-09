@@ -1,0 +1,33 @@
+{
+  "ause_ensemble_overall": 0.009566841763444245,
+  "ause_mcdropout_overall": 0.012267690378939733,
+  "correlation_ensemble": 0.29765732314139165,
+  "correlation_mcdropout": 0.09218307100712245,
+  "per_dataset": {
+    "BIT": {
+      "ause_ensemble": 0.0498729704064317,
+      "ause_mcdropout": 0.11230071471072735
+    },
+    "CALCE": {
+      "ause_ensemble": 0.27101023793220524,
+      "ause_mcdropout": 0.29950934629887344
+    },
+    "MIT": {
+      "ause_ensemble": 0.003030117871821858,
+      "ause_mcdropout": 0.004032728411402786
+    },
+    "Oxford": {
+      "ause_ensemble": 0.023076998395845295,
+      "ause_mcdropout": 0.04764169293921441
+    },
+    "RWTH": {
+      "ause_ensemble": 0.018465970928082238,
+      "ause_mcdropout": 0.016704879370809066
+    },
+    "XJTU": {
+      "ause_ensemble": 0.022488975297892465,
+      "ause_mcdropout": 0.0158925083844224
+    }
+  },
+  "note": "Ensemble uses only 3 members (your multi-seed runs) \u2014 a small ensemble; treat as a preliminary comparison, not definitive."
+}

@@ -1,0 +1,31 @@
+{
+  "run_analyzed": "conformal_normalized_groupwise",
+  "ause_vs_oracle": 0.012267690378939733,
+  "ause_vs_random_gap": 0.007636047201231122,
+  "per_dataset": {
+    "BIT": {
+      "ause_vs_oracle": 0.11230071471072735,
+      "ause_vs_random_gap": 0.017948856577277184
+    },
+    "CALCE": {
+      "ause_vs_oracle": 0.29950934629887344,
+      "ause_vs_random_gap": 0.04202816933393477
+    },
+    "MIT": {
+      "ause_vs_oracle": 0.004032728411402786,
+      "ause_vs_random_gap": 0.004319549456704408
+    },
+    "Oxford": {
+      "ause_vs_oracle": 0.04764169293921441,
+      "ause_vs_random_gap": 0.017753649037331343
+    },
+    "RWTH": {
+      "ause_vs_oracle": 0.016704879370809066,
+      "ause_vs_random_gap": 0.0019911585841327906
+    },
+    "XJTU": {
+      "ause_vs_oracle": 0.0158925083844224,
+      "ause_vs_random_gap": 0.014441760862246158
+    }
+  }
+}
