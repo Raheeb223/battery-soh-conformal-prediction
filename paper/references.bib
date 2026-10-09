@@ -1,0 +1,141 @@
+% references.bib
+% Every entry here was retrieved via a live web search during this audit (October 2026) and
+% cross-checked against its source page (title/authors/venue/date), not reproduced from memory
+% or invented. Where a field could not be confirmed with confidence (e.g. exact volume/page
+% numbers for a very recent arXiv preprint that may since have moved to a journal), a comment
+% flags it for a final verification pass before camera-ready submission -- do not treat any
+% entry here as final without that pass.
+
+@article{angelopoulos2023gentle,
+  author  = {Angelopoulos, Anastasios N. and Bates, Stephen},
+  title   = {Conformal Prediction: A Gentle Introduction},
+  journal = {Foundations and Trends in Machine Learning},
+  volume  = {16},
+  number  = {4},
+  pages   = {494--591},
+  year    = {2023}
+}
+
+@article{barber2023beyond,
+  author  = {Barber, Rina Foygel and Cand{\`e}s, Emmanuel J. and Ramdas, Aaditya and Tibshirani, Ryan J.},
+  title   = {Conformal Prediction Beyond Exchangeability},
+  journal = {Annals of Statistics},
+  year    = {2023}
+  % already independently cited in hgc_cp.py's own docstring, confirmed consistent.
+}
+
+@inproceedings{tibshirani2019covariate,
+  author    = {Tibshirani, Ryan J. and Barber, Rina Foygel and Cand{\`e}s, Emmanuel J. and Ramdas, Aaditya},
+  title     = {Conformal Prediction Under Covariate Shift},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2019}
+  % pre-2023, retained as foundational method citation (the corrected weighted-quantile formula
+  % this project's HGC-CP module implements comes directly from this paper); not counted toward
+  % the 2023-2026 prior-works comparison, only cited as the originating method reference.
+}
+
+@inproceedings{jonkers2024cps,
+  author    = {Jonkers, Jef and others},
+  title     = {Conformal Predictive Systems Under Covariate Shift},
+  booktitle = {Proceedings of Machine Learning Research (PMLR)},
+  volume    = {230},
+  year      = {2024},
+  note      = {arXiv:2404.15018; verify complete author list before camera-ready}
+}
+
+@misc{posteriordrift2025,
+  title  = {Conformal Prediction Under Generalized Covariate Shift with Posterior Drift},
+  year   = {2025},
+  note   = {arXiv:2502.17744; authors not confirmed from abstract alone -- verify before citing with full author list}
+}
+
+@misc{filgueira2026conformalized,
+  author = {Filgueira da Silva, Samuel and Ozkan, Mehmet Fatih and El Idrissi, Faissal and Canova, Marcello},
+  title  = {Conformalized Transfer Learning for Li-ion Battery State of Health Forecasting under Manufacturing and Usage Variability},
+  year   = {2026},
+  note   = {arXiv:2603.24475, submitted 2026-03-25. Uses MMD-based domain adaptation + conformal
+            prediction on a SYNTHETIC virtual battery dataset simulating manufacturing/usage
+            variability -- the key contrast with this work, which applies MMD-weighted conformal
+            calibration across seven REAL heterogeneous public datasets.}
+}
+
+@misc{learningtofuse2025,
+  title  = {Learning to Fuse: Dynamic Integration of Multi-Source Data for Accurate Battery Lifespan Prediction},
+  year   = {2025},
+  note   = {arXiv:2504.18230. Entropy-weighted fusion of NASA/CALCE/MIT-Stanford-TRI sources via
+            Ridge/LSTM/XGBoost; no conformal or other distribution-free coverage guarantee reported.
+            Verify author list before camera-ready.}
+}
+
+@misc{batterylife2025,
+  title  = {BatteryLife: A Comprehensive Dataset and Benchmark for Battery Life Prediction},
+  year   = {2025},
+  note   = {arXiv:2502.18807. 998 battery samples / 99,800 tests spanning Li-ion, Na-ion, Zn-ion,
+            and industrial large-capacity cells. A benchmark/dataset contribution, not an
+            uncertainty-quantification method -- no conformal calibration. Verify author list.}
+}
+
+@misc{multitasksohrul2026,
+  title  = {A Multi-Task Targeted Learning Framework for Lithium-Ion Battery State-of-Health and Remaining Useful Life},
+  year   = {2026},
+  note   = {arXiv:2603.22323. Combines 5 public datasets (NASA, CALCE, XJTU, Oxford, MIT) across
+            LCO/NCM/LFP chemistries; point-prediction multi-task framework, no distribution-free
+            uncertainty quantification reported. Verify author list.}
+}
+
+@article{transformertransfer2025,
+  title   = {Transformer-Based Transfer Learning for Battery State-of-Health Estimation},
+  journal = {Energies},
+  volume  = {18},
+  number  = {20},
+  pages   = {5439},
+  year    = {2025},
+  doi     = {10.3390/en18205439},
+  note    = {Single-source-to-single-target transfer (e.g. NASA to Oxford), not pooled multi-source
+             calibration across many sources simultaneously. Verify author list.}
+}
+
+@article{fastcharge2025,
+  journal = {iScience},
+  title   = {Battery State of Health Estimation Under Fast Charging via Deep Transfer Learning},
+  year    = {2025},
+  note    = {PMC12033934. Verify exact author list and volume/page before camera-ready.}
+}
+
+@article{natcomm2023soh,
+  journal = {Nature Communications},
+  title   = {Deep Learning to Estimate Lithium-ion Battery State of Health Without Additional Degradation Experiments},
+  year    = {2023},
+  doi     = {10.1038/s41467-023-38458-w},
+  note    = {Verify exact author list before camera-ready.}
+}
+
+@article{agingdatasetsreview2024,
+  journal = {Journal of Energy Storage},
+  title   = {Aging Datasets of Commercial Lithium-Ion Batteries: A Review},
+  year    = {2024},
+  note    = {ScienceDirect pii S2352152X24001440. Directly supports this paper's CALCE/RWTH/XJTU
+             forensic data-quality correction contribution -- same target journal as this
+             submission. Verify exact author list and volume/issue.}
+}
+
+@article{bull2023hierarchical,
+  author  = {Bull, Lawrence A. and others},
+  title   = {Hierarchical Bayesian Modeling for Knowledge Transfer Across Engineering Fleets via Multitask Learning},
+  journal = {Computer-Aided Civil and Infrastructure Engineering},
+  year    = {2023},
+  doi     = {10.1111/mice.12901},
+  note    = {Cross-disciplinary analogue of this paper's partial-pooling hierarchical calibration,
+             applied to structural-health-monitoring fleets rather than batteries. Verify complete
+             author list before camera-ready.}
+}
+
+@misc{beck2025naiveforecast,
+  title  = {Mind the Naive Forecast! A Rigorous Evaluation of Forecasting Models for Time Series with Low Predictability},
+  author = {Beck, Maximilian E. R. and others},
+  year   = {2025},
+  note   = {Directly supports this paper's honest reporting that the model does not beat a
+            persistence baseline on MIT/RWTH -- independent recent methodological evidence that
+            under-reporting naive-forecast strength is a recognized, real problem in applied time
+            series ML, not an isolated finding here. Verify complete author list before camera-ready.}
+}
