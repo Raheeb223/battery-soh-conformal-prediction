@@ -410,6 +410,36 @@ bit-identical to the original monolithic path. Module's own built-in `__main__` 
 Stage 6 property-test suite (13/13) both re-run clean after this change.
 **Status:** RESOLVED.
 
+### E17 | MODERATE (process/tooling, not a code or science defect) | Stage 10 (K6) background job killed on a false-positive stall signal
+**Problem:** Throughout this session, every long-running `python script.py 2>&1 | Tee-Object -FilePath
+log` background job showed the same symptom: its log file would stop advancing for long stretches
+while the process's CPU time kept climbing, because Python buffers stdout heavily when it isn't
+attached to a real terminal (piped through Tee-Object counts as non-interactive). This was noted
+repeatedly as "probably fine, just buffered" earlier in this session -- but for the K6 repeated-
+split run, the log sat on the exact same line ("parsing RWTH_ep_sanyo_049") for roughly 18 minutes
+of wall-clock time, and a 20-second memory snapshot showed `WorkingSet`/`PrivateMemorySize` as
+BYTE-FOR-BYTE IDENTICAL while CPU was pegged near 100% -- a signature that, reasonably, looked more
+like a stuck loop than ordinary buffering lag. Acting on that signal, the job was killed via
+`TaskStop` (confirmed: the underlying OS process was actually gone afterward, unlike an earlier
+`TaskStop` incident this session where it wasn't).
+**Investigation:** Ran `rwth_loader.load_rwth_cell()` on exactly the cell the job appeared stuck on
+(`RWTH_ep_sanyo_049`), isolated, timed, in the foreground. It completed in 4.45 seconds with no
+anomaly (2,303 rows, 1 outlier row removed) -- ruling out a data-specific slowdown for that cell.
+**Conclusion:** The kill was very likely premature -- the job was almost certainly healthy and
+simply deep in a buffering lull (a 20-second static-memory window does not, in isolation, prove a
+stall; small/reused Python objects don't always show up as `WorkingSet` growth). Roughly 80 minutes
+of raw-data-loading progress (CPU time, not wall-clock-only -- this was genuine compute) was lost by
+killing and having to restart from scratch.
+**Fix:** Relaunched with `python -u` (unbuffered stdout) instead of relying on default buffering
+through the pipe. Confirmed immediately effective: the new run's log advanced from NASA into CALCE
+within 10 seconds of starting, compared to the old run needing tens of minutes between visible log
+updates for the same stretch. Use `-u` (or `PYTHONUNBUFFERED=1`) for every future long-running
+background Python job in this project -- this removes the ambiguity entirely rather than requiring
+CPU/memory forensics to guess whether a job is alive.
+**Status:** RESOLVED (process fix applied; job relaunched). No code, data, or committed results were
+affected -- this was purely lost compute time on a job that had not yet written any cache or output
+file, so nothing was overwritten or corrupted by the restart.
+
 ---
 
 *(IDs continue as Stage 1 proceeds. Severity: CRITICAL/MAJOR/MODERATE/MINOR.)*
