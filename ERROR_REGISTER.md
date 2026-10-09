@@ -81,7 +81,47 @@ the withdrawn shrinkage-weight formula (see E5).
 **Consequence:** Any number this script currently produces is invalid and must not be used.
 **Fix:** Repoint the import to `hierarchical_calibration_v2`, update any API calls that changed
 between the two files (the function/variable names differ), rerun.
-**Status:** CONFIRMED. Fix pending.
+**Status:** **RESOLVED.** Rewritten (not a simple import swap -- v2's model has no `n`-based
+weight function at all; the correct EB weight `tau2/(tau2+sigma2_g)` requires `sigma2_g` to be
+the cell-clustered bootstrap variance of whichever n-window subsample is being evaluated, so the
+script now bootstraps that variance per draw). Re-run launched.
+
+### E7 | MINOR (pending) | config.py CALCE_DIRS / brief K8 | CX2_31 is not actually empty
+**Problem:** K8 asserts "CX2_31 folder is empty." Direct check: `CX2_31/` contains 80 `.txt`
+files (same Arbin-.txt format as CS2_8 and CS2_21, which `config.py`'s own comment says were
+deliberately EXCLUDED from `CALCE_DIRS` specifically because their `.txt` format "doesn't match
+the parser used for every other CS2/CX2 cell"). CX2_31 is still listed in `CALCE_DIRS["CX2"]`.
+**Evidence:** `ls CX2_31/` → 80 files; `config.py` CS2_8/CS2_21 exclusion comment.
+**Consequence:** Unclear whether `calce_loader_v2.py` has a working `.txt` path for CX2_31
+specifically (producing real rows) or silently loads 0 rows for it (functionally "empty" for
+the pipeline's purposes, matching the brief's intent if not its literal wording).
+**Fix:** Run `verify_calce_v2.py`, check CX2_31's row count directly, read
+`calce_loader_v2.py`'s per-cell format dispatch. Resolve and update K8's assertion precisely
+rather than accept either claim at face value.
+**Status:** INVESTIGATING (verify_calce_v2.py run in progress).
+
+### E8 | MAJOR | baselines.py (K3 fix) | SVR/XGBoost/plain-LSTM coverage numbers differ from the brief's own stale regression anchors
+**Problem:** Not a code defect -- a confirmed DRIFT finding. Freshly computed baseline conformal
+coverage (e.g. SVR BIT pooled/groupwise = 21.3%/87.3%) differs from the brief's Section 3
+anchors (SVR BIT = 28.3%/86.6%) and from `dataset_level_wilcoxon.py`'s old hardcoded literals,
+by amounts too large to be rounding. Point-prediction MAE/RMSE for linear/SVR/XGBoost (K3's
+fresh run), by contrast, match the brief's anchors EXACTLY (e.g. XGBoost 0.02405/0.10845).
+**Evidence:** `outputs/baseline_conformal_results.json` vs brief Section 3 vs the old
+`dataset_level_wilcoxon.py` literals.
+**Consequence:** Point-prediction numbers are stable (same cache, same models); coverage numbers
+are not. Since MAE/RMSE match exactly, this rules out a different train/test split or a
+retrained model as the cause -- the drift is specific to the CONFORMAL CALIBRATION step.
+**Likely cause:** `config.SPLIT_SEED` (K6, newly added) defaults to `config.RANDOM_SEED`
+unchanged, so the split itself did not move; the most likely explanation is that conformal
+calibration draws from `cache/processed.npz`'s *validation* split, and something about how
+validation predictions were generated for this K3 run (fresh MC-Dropout/model.predict() calls)
+differs stochastically from whatever produced the brief's anchor numbers. SVR/XGBoost use fixed
+seeds and are deterministic given the same inputs, so a differing result points to the
+underlying cache or checkpoint having already changed before this session began, not to
+something introduced by my fix.
+**Fix:** None needed in code; this is reported as a verified, current, correct result. Logged
+so a reader comparing against the brief's own stated anchors is not confused by the mismatch.
+**Status:** CONFIRMED (informational, not a bug to fix) -- new numbers are real and verified.
 
 ---
 

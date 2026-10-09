@@ -6,29 +6,67 @@ The manuscript's 24 paired observations are 4 architectures x 6 datasets.
 The four architectures for a given dataset are evaluated on the SAME test
 cells, so the 24 pairs are not independent; the independent units are the six
 datasets (and, more fundamentally, the cells within them). This script
-reproduces the 24-pair statistic from the manuscript's own table values and
-reports the analysis at the dataset level, where the exact one-sided
-Wilcoxon signed-rank p-value with n=6 cannot go below 1/64 = 0.0156.
+reproduces the 24-pair statistic and reports the analysis at the dataset
+level, where the exact one-sided Wilcoxon signed-rank p-value with n=6
+cannot go below 1/64 = 0.0156.
 
-Input values are copied from the manuscript's Table (BiLSTM: pooled and
-groupwise coverage, %) and the baseline conformal table (SVR, XGBoost, plain
-LSTM). They come from stored run outputs; this script does not retrain.
+ERROR_REGISTER E-fix (K2): coverage values are now read directly from the
+machine-generated result files below, never hand-copied. BiLSTM comes from
+the main conformal pipeline (outputs/conformal_{groupwise,pooled}_results.json);
+SVR, XGBoost, and plain LSTM come from outputs/baseline_conformal_results.json
+(baseline_conformal_coverage.py, the K3 fix). NASA is excluded from this
+table, consistent with its treatment as illustrative-only elsewhere in this
+project (n=3 test windows, 1 test cell).
 
 Run:  python dataset_level_wilcoxon.py
 """
 
+import json
+import os
+
 import numpy as np
 from scipy.stats import wilcoxon
 
+import config
+
 DATASETS = ["MIT", "BIT", "XJTU", "RWTH", "CALCE", "Oxford"]
-# (pooled coverage %, groupwise coverage %) per dataset, in the order above
-COVERAGE = {
-    "BiLSTM":  [(91.5, 90.8), (38.7, 87.1), (62.7, 96.0), (87.6, 85.1), (10.2, 71.4), (64.3, 100.0)],
-    "SVR":     [(97.0, 92.9), (28.3, 86.6), (46.6, 95.2), (94.6, 89.3), (5.1, 83.7), (80.4, 100.0)],
-    "XGBoost": [(94.9, 92.5), (22.3, 85.2), (46.4, 93.4), (97.2, 89.7), (4.1, 75.5), (58.9, 100.0)],
-    "LSTM":    [(95.1, 92.2), (42.2, 86.6), (62.8, 95.4), (94.7, 90.2), (11.2, 84.7), (62.5, 100.0)],
-}
 NOMINAL = 90.0
+
+
+def _load(path):
+    full = os.path.join(config.OUTPUT_DIR, path)
+    if not os.path.exists(full):
+        raise FileNotFoundError(
+            f"{full} not found -- run the scripts that produce it before this one "
+            f"(train.py / experiments.py for the BiLSTM conformal results, "
+            f"baseline_conformal_coverage.py for the baseline architectures)."
+        )
+    with open(full) as fh:
+        return json.load(fh)
+
+
+def load_coverage_table():
+    """Returns {architecture: [(pooled_pct, groupwise_pct), ...]} in DATASETS
+    order, read from the actual result files -- never hand-typed."""
+    bilstm_group = _load("conformal_groupwise_results.json")["per_dataset_coverage"]
+    bilstm_pool = _load("conformal_pooled_results.json")["per_dataset_coverage"]
+    baselines = _load("baseline_conformal_results.json")
+
+    table = {
+        "BiLSTM": [(bilstm_pool[d] * 100, bilstm_group[d] * 100) for d in DATASETS],
+    }
+    name_map = {"SVR": "svr", "XGBoost": "xgboost", "LSTM": "plain_lstm"}
+    for label, key in name_map.items():
+        if key not in baselines:
+            raise KeyError(f"'{key}' missing from baseline_conformal_results.json -- "
+                            f"rerun baseline_conformal_coverage.py.")
+        pooled = baselines[key]["pooled_per_dataset_coverage"]
+        group = baselines[key]["groupwise_per_dataset_coverage"]
+        table[label] = [(pooled[d] * 100, group[d] * 100) for d in DATASETS]
+    return table
+
+
+COVERAGE = load_coverage_table()
 
 
 def main():

@@ -43,7 +43,13 @@ FORECAST_HORIZON = 1 # predict SOH this many cycles ahead (1 = next cycle)
 TRAIN_FRAC = 0.70
 VAL_FRAC   = 0.15
 TEST_FRAC  = 0.15
-RANDOM_SEED = 42
+RANDOM_SEED = 42          # model init / training seed
+
+# Cell-level split seed, kept SEPARATE from RANDOM_SEED (model-init seed) so
+# repeated-split experiments (K6) can vary the split without also changing
+# model initialization, and vice versa. Defaults to RANDOM_SEED so existing
+# seed-42 results reproduce exactly when this is left unset.
+SPLIT_SEED = RANDOM_SEED
 
 # ---- 4. Model hyperparameters -----------------------------------------------
 HIDDEN_SIZE   = 64

@@ -41,8 +41,12 @@ def flatten(X):
 def run_baseline(name: str, model, cache_path=None, save_outputs=True, max_train_samples=None):
     data = load_cached(cache_path)
     X_train, y_train = flatten(data["X_train"]), data["y_train"]
+    X_val, y_val = flatten(data["X_val"]), data["y_val"]
     X_test, y_test = flatten(data["X_test"]), data["y_test"]
+    lab_val = data["lab_val"]
     lab_test = data["lab_test"]
+    cell_val = data["cell_val"] if "cell_val" in data.files else None
+    cell_test = data["cell_test"] if "cell_test" in data.files else None
 
     if max_train_samples is not None and X_train.shape[0] > max_train_samples:
         rng = np.random.RandomState(config.RANDOM_SEED)
@@ -54,6 +58,10 @@ def run_baseline(name: str, model, cache_path=None, save_outputs=True, max_train
     print(f"[baseline:{name}] training on {X_train.shape[0]} samples...")
     model.fit(X_train, y_train)
     pred = model.predict(X_test)
+    # ERROR_REGISTER E2 fix: also predict on the VALIDATION set, so conformal
+    # calibration (which needs held-out residuals, never test residuals) can
+    # be computed for this architecture downstream (baseline_conformal_coverage.py).
+    val_pred = model.predict(X_val)
 
     mae = float(np.mean(np.abs(y_test - pred)))
     rmse = float(np.sqrt(np.mean((y_test - pred) ** 2)))
@@ -79,8 +87,13 @@ def run_baseline(name: str, model, cache_path=None, save_outputs=True, max_train
         os.makedirs(config.OUTPUT_DIR, exist_ok=True)
         with open(os.path.join(config.OUTPUT_DIR, f"baseline_{name}_results.json"), "w") as fh:
             json.dump(results, fh, indent=2)
-        np.savez(os.path.join(config.OUTPUT_DIR, f"baseline_{name}_predictions.npz"),
-                 y_test=y_test, mean_pred=pred, lab_test=lab_test)
+        payload = dict(y_test=y_test, mean_pred=pred, lab_test=lab_test,
+                       y_val=y_val, val_pred=val_pred, lab_val=lab_val)
+        if cell_val is not None:
+            payload["cell_val"] = cell_val
+        if cell_test is not None:
+            payload["cell_test"] = cell_test
+        np.savez(os.path.join(config.OUTPUT_DIR, f"baseline_{name}_predictions.npz"), **payload)
     return results
 
 

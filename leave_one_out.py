@@ -192,9 +192,23 @@ def run_lodo(held_out_dataset: str, model_variant="full", save_outputs=True):
 
     # simple pooled conformal here — the held-out dataset IS the only test
     # group, so per-group calibration would be identical to pooled anyway
+    #
+    # PREDICTOR CONSISTENCY (fix for ERROR_REGISTER E1 / brief K1): split-conformal
+    # validity requires calibration and test nonconformity scores to come from the
+    # SAME predictor. This previously calibrated on predict_in_batches() (dropout
+    # off) but evaluated on mc_dropout_predict() (dropout on, MC-mean) -- a
+    # predictor mismatch. Now both use the same predictor, matching train.py's
+    # default (config.CALIBRATION_PREDICTOR, defaulting to "mc_mean").
     model.eval()
-    val_preds = predict_in_batches(model, torch.tensor(X_val).to(device))
-    val_preds = val_preds.cpu().numpy()
+    calibration_predictor = getattr(config, "CALIBRATION_PREDICTOR", "mc_mean")
+    if calibration_predictor == "mc_mean":
+        val_preds, _ = mc_dropout_predict(model, torch.tensor(X_val).to(device))
+        val_preds = val_preds.cpu().numpy()
+    elif calibration_predictor == "deterministic":
+        val_preds = predict_in_batches(model, torch.tensor(X_val).to(device))
+        val_preds = val_preds.cpu().numpy()
+    else:
+        raise ValueError("config.CALIBRATION_PREDICTOR must be 'mc_mean' or 'deterministic'")
     conformal = SplitConformal(alpha=config.CONFORMAL_ALPHA)
     conformal.calibrate(y_val, val_preds)
 
@@ -232,6 +246,12 @@ def run_lodo(held_out_dataset: str, model_variant="full", save_outputs=True):
         "test_mae_normalized_space": mae_normalized,
         "test_rmse_normalized_space": rmse_normalized,
         "held_out_soh_std": held_out_soh_std,
+        "calibration_predictor": calibration_predictor,
+        # Coverage is a hit-rate (is y_test inside the interval?): applying the
+        # SAME affine de-normalization to y_test and to [lower, upper] preserves
+        # the inequality, so coverage is numerically identical in z-units and
+        # real SOH units. Reported once rather than duplicated as two equal
+        # numbers; see ERROR_REGISTER.md note on this under E1.
         "coverage": coverage,
         "n_test_samples": int(len(y_test)),
         # datasets actually used for TRAINING in this LODO run (everything

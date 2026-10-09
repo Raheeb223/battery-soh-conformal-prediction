@@ -158,7 +158,7 @@ def add_soh(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def cell_independent_split(df: pd.DataFrame):
+def cell_independent_split(df: pd.DataFrame, split_seed: int = None):
     """Split whole cells (not individual cycles) into train/val/test,
     stratified by dataset so every split has representation from every source.
 
@@ -169,9 +169,14 @@ def cell_independent_split(df: pd.DataFrame):
     what happened to NASA's 7 cells, silently leaving it with 0 validation
     cells and breaking conformal calibration for that group. This version
     computes explicit integer counts up front and never lets a required
-    split fall to 0."""
+    split fall to 0.
+
+    split_seed: overrides config.SPLIT_SEED for this call (used by the
+    repeated-split experiment, K6, to vary the split independently of the
+    model-init seed, config.RANDOM_SEED)."""
     cell_table = df[["dataset", "cell_id"]].drop_duplicates()
-    rng = np.random.RandomState(config.RANDOM_SEED)
+    seed = split_seed if split_seed is not None else getattr(config, "SPLIT_SEED", config.RANDOM_SEED)
+    rng = np.random.RandomState(seed)
 
     train_cells, val_cells, test_cells = [], [], []
     for dataset_name, group in cell_table.groupby("dataset"):
@@ -248,10 +253,19 @@ def make_windows(df: pd.DataFrame, cell_ids: set, soh_mean: dict, soh_std: dict,
     return X, y, np.array(labels), np.array(cell_labels), cycle_windows
 
 
-def cache_path_for(window: int) -> str:
+def cache_path_for(window: int, split_seed: int = None) -> str:
     """Each window size gets its own cache file so ablation runs never
-    clobber each other or the main experiment's cache."""
-    suffix = "" if window == config.INPUT_WINDOW else f"_w{window}"
+    clobber each other or the main experiment's cache. A non-default
+    split_seed also gets its own suffix (K6 repeated-split experiment), so
+    those runs never overwrite the verified seed-42 cache."""
+    default_seed = getattr(config, "SPLIT_SEED", config.RANDOM_SEED)
+    seed = split_seed if split_seed is not None else default_seed
+    parts = []
+    if window != config.INPUT_WINDOW:
+        parts.append(f"w{window}")
+    if seed != default_seed:
+        parts.append(f"split{seed}")
+    suffix = ("_" + "_".join(parts)) if parts else ""
     return os.path.join(config.CACHE_DIR, f"processed{suffix}.npz")
 
 
@@ -268,18 +282,22 @@ def _print_window_summary(name: str, labels: np.ndarray):
     print(f"  [windows:{name}] {parts}")
 
 
-def run(window: int = None):
+def run(window: int = None, split_seed: int = None):
     """window: override config.INPUT_WINDOW for this run (used by the window-size
     ablation in experiments.py). The cell split itself is NOT affected by window
-    size — it's computed once from config.RANDOM_SEED so every window-size variant
-    trains/tests on the exact same cells, making the comparison fair."""
+    size for a GIVEN split_seed — it's computed once per seed so every window-size
+    variant at that seed trains/tests on the exact same cells, making the
+    comparison fair.
+
+    split_seed: override config.SPLIT_SEED (K6 repeated-split experiment). Left
+    None, this reproduces the original seed-42 cache exactly."""
     os.makedirs(config.CACHE_DIR, exist_ok=True)
     w = window if window is not None else config.INPUT_WINDOW
 
     raw = load_all_raw()
     df = add_soh(raw)
 
-    train_ids, val_ids, test_ids = cell_independent_split(df)
+    train_ids, val_ids, test_ids = cell_independent_split(df, split_seed=split_seed)
     print(f"[split] train cells: {len(train_ids)}, val cells: {len(val_ids)}, "
           f"test cells: {len(test_ids)}")
 
@@ -300,7 +318,7 @@ def run(window: int = None):
     _print_window_summary("val", lab_val)
     _print_window_summary("test", lab_test)
 
-    out_path = cache_path_for(w)
+    out_path = cache_path_for(w, split_seed=split_seed)
     np.savez(out_path,
              X_train=X_train, y_train=y_train, lab_train=lab_train, cell_train=cell_train,
              window_cycle_indices_train=cyc_train,
