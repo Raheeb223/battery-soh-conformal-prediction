@@ -393,6 +393,23 @@ reached yet) is marked `UNVERIFIED` rather than silently used.
 **Status:** RESOLVED. Re-ran after the fix: 10 of 28 numbers.tex macros now correctly show
 UNVERIFIED (5 remaining LODO configs x 2 macros each), down from 0 before the fix.
 
+### K10 | MINOR (performance only) | hgc_cp.py `hgc_cp_interval()` | Redundant per-window recomputation (optional item, done)
+**Problem:** `hgc_cp_interval()` recomputed the entire weight/quantile/inflation pipeline
+(`compute_group_weights`, per-point weight normalization, `corrected_weighted_quantile`,
+`heterogeneity_inflation`) on every call, even though none of it depends on the test point's
+`y_hat` -- every evaluation loop in this project calls it once per test window against the SAME
+calibration set.
+**Fix:** Split into `compute_hgc_cp_qstar(calib_scores, calib_group_ids, group_distances, lam,
+alpha, beta, inflation_scale)` (everything y_hat-independent, call once per calibration set) and
+`apply_hgc_cp_interval(y_hat, q_star, q_t, weights_by_group)` (the trivial per-point step).
+`hgc_cp_interval()` itself is unchanged in signature/behavior -- it now just calls both internally
+-- so no existing caller needed to change.
+**Equivalence proof:** `tests/stage6_k10_equivalence.py` -- 250 (test-point, random-config)
+combinations (including the inf-width edge case, deliberately triggered) show the split path is
+bit-identical to the original monolithic path. Module's own built-in `__main__` self-test and the
+Stage 6 property-test suite (13/13) both re-run clean after this change.
+**Status:** RESOLVED.
+
 ---
 
 *(IDs continue as Stage 1 proceeds. Severity: CRITICAL/MAJOR/MODERATE/MINOR.)*
