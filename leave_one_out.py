@@ -53,18 +53,27 @@ from model import build_model, mc_dropout_predict, predict_in_batches
 from conformal import SplitConformal
 
 
-def build_lodo_cache(held_out_dataset: str, window=None):
+def build_lodo_cache(held_out_dataset: str, window=None, raw_df=None):
     """Loads raw data, then splits by DATASET rather than by cell:
     - train/val: all cells from the 3 datasets NOT held out (further split by cell
       into train/val so we still get early stopping)
     - test: ALL cells from the held-out dataset
     Returns the same dict shape as preprocessing's cache so train_one-style
     logic can reuse it directly, PLUS the held-out dataset's own soh_std so
-    callers can de-normalize error metrics back into real SOH units."""
+    callers can de-normalize error metrics back into real SOH units.
+
+    raw_df: pre-loaded, pre-SOH'd dataframe (preprocessing.add_soh(load_all_raw())),
+    reused across all 7 held-out datasets by run_all_lodo() so raw data (CALCE's
+    366+ files, RWTH's 1600+ CSVs, etc.) is parsed ONCE rather than 7 times --
+    the raw data is identical across LODO runs; only which dataset is held out
+    changes. Pass None to load fresh (used when calling this function standalone)."""
     w = window if window is not None else config.INPUT_WINDOW
 
-    raw = preprocessing.load_all_raw()
-    df = preprocessing.add_soh(raw)
+    if raw_df is None:
+        raw = preprocessing.load_all_raw()
+        df = preprocessing.add_soh(raw)
+    else:
+        df = raw_df
 
     test_df = df[df["dataset"] == held_out_dataset]
     train_val_df = df[df["dataset"] != held_out_dataset]
@@ -130,12 +139,12 @@ def build_lodo_cache(held_out_dataset: str, window=None):
     }
 
 
-def run_lodo(held_out_dataset: str, model_variant="full", save_outputs=True):
+def run_lodo(held_out_dataset: str, model_variant="full", save_outputs=True, raw_df=None):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     run_name = f"lodo_{held_out_dataset}"
     print(f"[{run_name}] holding out '{held_out_dataset}' entirely for testing...")
 
-    data = build_lodo_cache(held_out_dataset)
+    data = build_lodo_cache(held_out_dataset, raw_df=raw_df)
     X_train, y_train = data["X_train"], data["y_train"]
     X_val, y_val = data["X_val"], data["y_val"]
     X_test, y_test = data["X_test"], data["y_test"]
@@ -269,7 +278,15 @@ def run_lodo(held_out_dataset: str, model_variant="full", save_outputs=True):
 
 
 def run_all_lodo(datasets=("NASA", "CALCE", "Oxford", "MIT", "BIT", "XJTU", "RWTH")):
-    return [run_lodo(d) for d in datasets]
+    """Loads and SOH-processes raw data ONCE and reuses it for all 7 held-out
+    runs (see build_lodo_cache's raw_df docstring) -- the original version
+    called preprocessing.load_all_raw() fresh inside each run_lodo() call,
+    re-parsing identical raw data (CALCE, RWTH, XJTU, ...) seven times over."""
+    print("[run_all_lodo] loading and SOH-processing raw data once for all "
+          f"{len(datasets)} held-out configurations...")
+    raw = preprocessing.load_all_raw()
+    raw_df = preprocessing.add_soh(raw)
+    return [run_lodo(d, raw_df=raw_df) for d in datasets]
 
 
 if __name__ == "__main__":

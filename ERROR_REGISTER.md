@@ -164,6 +164,23 @@ reality; re-run `windowing_bridge_sensitivity.py` / `xjtu_bridging_isolation.py`
 current loader if their own outputs predate this code state.
 **Status:** INVESTIGATING (verification pending Stage 2 completion).
 
+### E10 | MINOR (performance only, K10-adjacent) | leave_one_out.py run_all_lodo() | Raw data reloaded 7x unnecessarily
+**Problem:** `run_all_lodo()` called `run_lodo()` for each of the 7 held-out datasets, and each
+`run_lodo()` called `build_lodo_cache()`, which called `preprocessing.load_all_raw()` fresh --
+re-parsing ALL 7 raw datasets (CALCE's 366+ files, RWTH's ~1,600 CSVs, etc.) from scratch 7
+times, even though the raw data is identical across all 7 runs (only which dataset is held out
+changes).
+**Evidence:** Direct read; empirically, the first (pre-fix) LODO run spent its first ~45 minutes
+still inside held-out-config #1's BIT-folder parse, with no model training yet.
+**Consequence:** Made the K1 verification retrain impractically slow, not incorrect.
+**Fix:** `build_lodo_cache()` now accepts an optional pre-loaded `raw_df`; `run_all_lodo()` loads
+and SOH-processes raw data ONCE and passes it to all 7 `run_lodo()` calls. Purely a performance
+change -- `load_all_raw()`/`add_soh()` are deterministic (no randomness), so the reused dataframe
+is byte-identical to what 7 separate calls would have produced; only the held-out-dataset
+filtering inside `build_lodo_cache()` (unchanged) differs per run.
+**Status:** RESOLVED. Original (slow, unoptimized) run killed before any iteration completed --
+no partial results lost. Optimized version relaunched.
+
 ---
 
 *(IDs continue as Stage 1 proceeds. Severity: CRITICAL/MAJOR/MODERATE/MINOR.)*
