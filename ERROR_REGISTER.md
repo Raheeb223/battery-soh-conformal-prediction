@@ -162,7 +162,45 @@ to get a real number instead of an assumed one.
 for gaps in XJTU Sim_satellite cells' windows); update `preprocessing.py`'s docstring to match
 reality; re-run `windowing_bridge_sensitivity.py` / `xjtu_bridging_isolation.py` against the
 current loader if their own outputs predate this code state.
-**Status:** INVESTIGATING (verification pending Stage 2 completion).
+**Status:** **RESOLVED and escalated to MAJOR.** Ran `xjtu_bridging_isolation.py` directly
+against the existing seed-42 `cache/processed.npz` (no rerun needed -- `window_cycle_indices_test`
+was already cached). Result: Sim_satellite_* cells, n=376 test windows, bridging fraction =
+**1.0000** (every single one); other 47 XJTU cells, n=2229, bridging fraction = **0.0000** (none).
+This is the OPPOSITE of what `preprocessing.py`'s docstring predicted ("renumbering erases the
+gap" -> expected near-zero bridging for satellite cells) and CONFIRMS E9's code-level reading:
+`detect_and_strip_sentinel_values()` does not renumber the `cycle` column, so surviving rows keep
+their original (now-gapped) cycle numbers, and every 20-cycle window drawn from a Sim_satellite
+cell that straddles a removed sentinel block is detectably non-contiguous.
+376/2605 = 14.43% exactly matches the previously-reported "overall XJTU bridging" figure -- this
+was never diffuse native sparsity (unlike CALCE/NASA/Oxford, confirmed separately by
+`diagnose_bridging_anomaly.py`); it is 100% concentrated in the 8 Sim_satellite cells, each of
+which bridges on every test window. `preprocessing.py`'s "KNOWN LIMITATION" docstring is factually
+wrong about the mechanism and must be corrected.
+**Consequence for K7/manuscript:** all 376 Sim_satellite test windows (14.4% of XJTU's 2,605-
+window test set) are trained/evaluated as if they span 20 contiguous cycles when they actually
+span more real elapsed cycling than that, due to the removed calibration/sentinel rows. XJTU's
+reported coverage/MAE are not wrong, but they are not cleanly interpretable as "20-cycle-ahead
+prediction" for this subset. Needs a sensitivity run (K7): recompute XJTU coverage/MAE excluding
+these 376 windows, see whether XJTU's headline numbers change materially, and state the result
+explicitly in the manuscript rather than assert "no limitation" or assert "near-zero bridging."
+**Sensitivity result** (`xjtu_bridging_sensitivity.py`, run against existing
+`outputs/conformal_groupwise_predictions.npz`, no retrain): bridging windows (n=376) have RMSE(z)
+= 0.4318 vs. 0.0769 for clean windows (n=2229) -- **5.6x higher**, consistent with the model
+seeing a larger real capacity drop than its 20-cycle input implies. Pooled-XJTU MAE(z) shifts from
+0.0459 (all windows) to 0.0421 (clean only) if excluded, a modest but real +8.3% relative
+reduction. Coverage is NOT degraded by the bridging windows (94.7% bridging vs. 92.7% clean --
+both near/above the 90% target), so split-conformal validity is not broken by this issue, but
+point-prediction accuracy on this 14.4%-of-XJTU subset is clearly worse and must be disclosed.
+**Status: RESOLVED, with numbers.** `preprocessing.py`'s docstring corrected to state the real
+mechanism (no re-numbering; gap survives; verified 100%/0% bridging split). Manuscript must state:
+(a) the mechanism correctly, (b) that bridging is 100% concentrated in 8 Sim_satellite_* cells
+(376/2605 windows, matching the dataset's own calibration-sweep frequency, not diffuse native
+sparsity like CALCE/NASA/Oxford), (c) the RMSE elevation and modest pooled-MAE shift above, (d)
+that conformal coverage validity is unaffected. No loader fix (preserving original cycle numbers
+was already happening; a FURTHER fix would mean excluding or re-flagging these specific windows
+at the windowing stage) is required to report this honestly -- excluding them outright would
+change XJTU's reported n and is a judgment call for the paper's primary-vs-sensitivity-analysis
+split, not something to do silently here.
 
 ### E10 | MINOR (performance only, K10-adjacent) | leave_one_out.py run_all_lodo() | Raw data reloaded 7x unnecessarily
 **Problem:** `run_all_lodo()` called `run_lodo()` for each of the 7 held-out datasets, and each

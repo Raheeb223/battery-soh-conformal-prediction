@@ -147,6 +147,17 @@ def nested_search(real_target: str, seed: int = 0):
           f"beta={best_setting[1]}): {result['coverage']:.3f} (target: {1-ALPHA:.0%})")
     print(f"{real_target} MPIW: {result['MPIW']:.4f}")
 
+    return {
+        "real_target": real_target,
+        "pseudo_target_rotation": other_six,
+        "grid_results_mean_deviation": {f"lam={l},beta={b}": v for (l, b), v in grid_results.items()},
+        "selected_lam": best_setting[0],
+        "selected_beta": best_setting[1],
+        "selected_mean_deviation_on_pseudo_targets": grid_results[best_setting],
+        "real_target_test_coverage": result["coverage"],
+        "real_target_test_mpiw": result["MPIW"],
+    }
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
