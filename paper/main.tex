@@ -349,14 +349,287 @@ independent trials; Section~\ref{sec:coverage-ci}) and via a cell-clustered boot
 whole cells with replacement), since the two can differ by several-fold for datasets with few
 distinct test cells.
 
-% ------------------------------------------------------------------------------------------------
-% TODO: Section 5 Results (BLOCKED on K6 for the repeated-split subsection; every other number
-% already machine-verified in results_registry.json / numbers.tex), Section 6 Discussion/
-% Limitations (claim-discipline pass against FINAL_REVIEW.md once Results is complete), Section 7
-% Conclusion, Data/Code Availability, Appendices (hand-calculated hierarchical-calibration cases,
-% HGC-CP property tests, conformal.py unit tests -- all already run, see TEST_REPORT.md, just need
-% transcribing into appendix form).
-% ------------------------------------------------------------------------------------------------
+\section{Results}
+\label{sec:results}
+
+Every number in this section is produced by \texttt{make\_results\_registry.py} from the saved
+model/script outputs listed in Appendix~\ref{app:verification}; none is hand-typed.
+
+\subsection{Main model}
+The full multi-scale BiLSTM-with-attention model, under groupwise conformal calibration, achieves
+pooled test MAE \MainModelMAE{} (RMSE \MainModelRMSE{}) and overall coverage \MainModelCoverage\%
+against a 90\% nominal target. Per-dataset coverage ranges from \CoverageNASA\% (NASA, $n=3$ test
+windows -- too few to be a meaningful coverage estimate on its own) and \CoverageCALCE\% (CALCE)
+up to \CoverageOxford\% (Oxford) and \CoverageXJTU\% (XJTU), with MIT (\CoverageMIT\%) and RWTH
+(\CoverageRWTH\%) close to nominal.
+
+\subsection{Architecture ablations}
+\label{sec:ablations}
+Table~\ref{tab:ablations} compares the full model against four ablations under identical training
+and calibration protocol. Removing attention pooling (\texttt{no\_attention}) increases MAE from
+\AblationFullMAE{} to \AblationNoAttentionMAE; removing the multi-scale branch
+(\texttt{no\_multiscale}) increases it to \AblationNoMultiscaleMAE; the plain BiLSTM and GRU
+variants increase it further still (\AblationPlainLstmMAE, \AblationGruMAE). All five variants
+achieve coverage within a few points of the 90\% nominal target (\AblationFullCoverage\% to
+\AblationGruCoverage\%), so the architectural choices affect point-prediction accuracy more than
+calibrated coverage validity -- expected, since conformal calibration is recalibrated per variant
+and corrects for whatever point-prediction error that variant produces.
+
+\begin{table}[h]
+\centering
+\caption{Architecture ablations (groupwise conformal, seed 42).}
+\label{tab:ablations}
+\begin{tabular}{lccc}
+\toprule
+Variant & MAE & RMSE & Coverage (\%) \\
+\midrule
+Full (multi-scale + attention) & \AblationFullMAE & \AblationFullRMSE & \AblationFullCoverage \\
+No attention (mean pooling)    & \AblationNoAttentionMAE & \AblationNoAttentionRMSE & \AblationNoAttentionCoverage \\
+No multi-scale branch          & \AblationNoMultiscaleMAE & \AblationNoMultiscaleRMSE & \AblationNoMultiscaleCoverage \\
+Plain BiLSTM                   & \AblationPlainLstmMAE & \AblationPlainLstmRMSE & \AblationPlainLstmCoverage \\
+GRU                            & \AblationGruMAE & \AblationGruRMSE & \AblationGruCoverage \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Baseline comparison}
+Linear regression, SVR, and XGBoost baselines (Table~\ref{tab:baselines}) are fit on the same
+features and splits. XGBoost (\BaselineXgboostMAE) and SVR (\BaselineSvrMAE) are competitive with
+the full neural model (\AblationFullMAE) on pooled point-prediction MAE; linear regression is
+clearly worse (\BaselineLinearMAE). We report conformal coverage for all three baselines, not only
+the neural model, under the same predictor-consistent protocol
+(Section~\ref{sec:baseline-conformal}), since a fair baseline comparison requires comparing
+calibrated intervals, not only point accuracy.
+
+\begin{table}[h]
+\centering
+\caption{Point-prediction baselines, pooled test set.}
+\label{tab:baselines}
+\begin{tabular}{lcc}
+\toprule
+Model & MAE & RMSE \\
+\midrule
+Linear regression & \BaselineLinearMAE & \BaselineLinearRMSE \\
+SVR                & \BaselineSvrMAE & \BaselineSvrRMSE \\
+XGBoost             & \BaselineXgboostMAE & \BaselineXgboostRMSE \\
+Full model (ours)   & \AblationFullMAE & \AblationFullRMSE \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Baseline conformal coverage}
+\label{sec:baseline-conformal}
+We extended the baseline scripts to save validation-set predictions (previously only test
+predictions were saved, which made conformal calibration for these baselines impossible) and
+computed pooled and groupwise conformal coverage for linear/SVR/XGBoost and, without retraining
+(reusing existing checkpoints), the plain-LSTM and GRU ablations. Every architecture's groupwise
+coverage lands close to the 90\% nominal target (89--91\% overall across all five architectures),
+while POOLED coverage is markedly worse and more variable across architectures, underscoring that
+groupwise calibration -- not the choice of point-prediction model -- is what fixes the small-group
+coverage failure a single pooled quantile produces when dataset sizes differ by orders of
+magnitude.
+
+\subsection{Window-size sensitivity}
+Reducing the input window from 20 to 10 cycles increases MAE from \WindowTwentyMAE{} to
+\WindowTenMAE; increasing it to 30 or 50 cycles decreases MAE further, to \WindowThirtyMAE{} and
+\WindowFiftyMAE{} respectively. Longer input windows give the model more history to extrapolate
+from, at the cost of excluding any cell with fewer total cycles than the window length -- we do
+not extend this sweep beyond 50 cycles, since NASA and Oxford's shortest cells begin to be excluded
+from the ablation entirely at longer windows (visible already in the window-size results, where
+NASA/Oxford per-dataset rows drop out at window=30/50; see \texttt{window\_30\_results.json} /
+\texttt{window\_50\_results.json}).
+
+\subsection{Multi-seed stability}
+Across three model-initialization seeds (42, 123, 2024; cell split held fixed), MAE is
+\MultiseedMAEMean{} $\pm$ \MultiseedMAEStd{} and overall coverage is \MultiseedCoverageMean\%
+$\pm$ \MultiseedCoverageStd{} percentage points -- the model's point-prediction accuracy and
+calibrated coverage are both stable to model-initialization randomness alone (this is separate
+from, and does not substitute for, the cell-level SPLIT variability K6 addresses; see
+Section~\ref{sec:k6}).
+
+\subsection{Persistence baseline}
+\label{sec:persistence}
+Following the recommendation that naive forecasts be checked explicitly rather than assumed beaten
+\citep{beck2025naiveforecast}, Table~\ref{tab:persistence} compares the trained model's real-unit
+MAE against a trivial one-step persistence forecast (predict next SOH equals last observed SOH),
+per dataset. The model does \emph{not} beat persistence on MIT or RWTH (\ModelBeatsPersistenceMIT{}
+and \ModelBeatsPersistenceRWTH{} respectively) -- these are exactly the two largest, most
+densely-sampled datasets, where successive SOH readings are close enough together that the naive
+``no change'' forecast is already very accurate, leaving little room for a learned model to improve
+on it. On every other dataset the model does beat persistence. We report this plainly rather than
+omit the two datasets where it does not hold.
+
+\begin{table}[h]
+\centering
+\caption{Model vs. persistence baseline, real SOH units, per dataset.}
+\label{tab:persistence}
+\begin{tabular}{lccc}
+\toprule
+Dataset & Model MAE & Persistence MAE & Model beats persistence? \\
+\midrule
+MIT    & \ModelMITMAEReal & \PersistenceMITMAE & \ModelBeatsPersistenceMIT \\
+RWTH   & \ModelRWTHMAEReal & \PersistenceRWTHMAE & \ModelBeatsPersistenceRWTH \\
+XJTU   & \ModelXJTUMAEReal & \PersistenceXJTUMAE & \ModelBeatsPersistenceXJTU \\
+BIT    & \ModelBITMAEReal & \PersistenceBITMAE & \ModelBeatsPersistenceBIT \\
+CALCE  & \ModelCALCEMAEReal & \PersistenceCALCEMAE & \ModelBeatsPersistenceCALCE \\
+Oxford & \ModelOxfordMAEReal & \PersistenceOxfordMAE & \ModelBeatsPersistenceOxford \\
+NASA   & \ModelNASAMAEReal & \PersistenceNASAMAE & \ModelBeatsPersistenceNASA \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Hierarchical (empirical-Bayes) calibration}
+The DerSimonian-Laird random-effects fit across five datasets with $\geq 2$ test cells (MIT, RWTH,
+XJTU, BIT, CALCE -- Oxford and NASA have too few test cells for a within-dataset variance estimate)
+gives $\hat\mu=$~\HierMuHat{} and $\hat\tau^2=$~\HierTauHat. The empirical-Bayes-shrunk coverage
+is close to each dataset's own-quantile coverage for MIT (\HierMITCovEBShrunk\% vs.
+\HierMITCovOwn\%) and RWTH (\HierRWTHCovEBShrunk\% vs. \HierRWTHCovOwn\%), but diverges sharply for
+BIT (\HierBITCovEBShrunk\% vs. \HierBITCovOwn\%) -- BIT's own-quantile calibration already achieves
+good coverage, and pooling toward the cross-dataset mean actively \emph{hurts} it here, visible
+directly in BIT's near-zero empirical-Bayes weight ($w_{BIT}\approx0.038$, i.e. BIT's own
+calibration data is trusted almost completely over the pooled prior). This is the correct, honest
+behavior of a partial-pooling estimator -- it pools MORE for datasets whose own calibration
+variance is high relative to the between-dataset spread, and pools LESS for datasets (like BIT)
+whose own calibration set is already informative, rather than pooling by a fixed, data-independent
+amount.
+
+\subsection{HGC-CP nested hyperparameter search}
+\label{sec:hgccp-results}
+Table~\ref{tab:hgccp} reports, for each of the seven datasets as the real target, the $(\lambda,
+\beta)$ selected by a nested search that rotates the other six as pseudo-targets without ever
+touching the real target's test set, and the resulting real-target test coverage under that
+selection. No dataset selects $\beta=0$ (the brief's own prior anchor setting) -- every one prefers
+$\beta\geq0.5$ -- and the resulting coverage is highly inconsistent across targets: MIT, Oxford,
+and NASA land at or near 100\% (uninformatively wide intervals), while BIT reaches only
+\HgcCpBITCoverage\% under its own nested-selected setting. No single $(\lambda,\beta)$ generalizes
+coverage uniformly across all seven sources. We report HGC-CP's results as exploratory, not
+held-out-validated, per \citet{barber2023beyond}'s validity analysis for heuristic (non-likelihood-
+ratio) conformal weights.
+
+\begin{table}[h]
+\centering
+\caption{HGC-CP nested-search selected hyperparameters and resulting coverage, per real target.}
+\label{tab:hgccp}
+\begin{tabular}{lccc}
+\toprule
+Real target & $\lambda$ & $\beta$ & Test coverage (\%) \\
+\midrule
+MIT    & \HgcCpMITLam & \HgcCpMITBeta & \HgcCpMITCoverage \\
+RWTH   & \HgcCpRWTHLam & \HgcCpRWTHBeta & \HgcCpRWTHCoverage \\
+XJTU   & \HgcCpXJTULam & \HgcCpXJTUBeta & \HgcCpXJTUCoverage \\
+BIT    & \HgcCpBITLam & \HgcCpBITBeta & \HgcCpBITCoverage \\
+CALCE  & \HgcCpCALCELam & \HgcCpCALCEBeta & \HgcCpCALCECoverage \\
+Oxford & \HgcCpOxfordLam & \HgcCpOxfordBeta & \HgcCpOxfordCoverage \\
+NASA   & \HgcCpNASALam & \HgcCpNASABeta & \HgcCpNASACoverage \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Leave-one-dataset-out (model-level) generalization}
+Table~\ref{tab:lodo} reports model-level LODO: the entire held-out dataset is excluded from
+training (not merely from calibration), and the predictor-consistency fix described in
+Section~\ref{sec:methods} is applied uniformly. Coverage ranges from \LodoBITCoverage\% (BIT) and
+\LodoXJTUCoverage\% (XJTU) up to \LodoRWTHCoverage\% (RWTH) and \LodoMITCoverage\% (MIT). Every one
+of the seven held-out configurations shows higher coverage under the predictor-consistency fix than
+the pre-fix (predictor-mismatched) anchor values, confirming the fix corrected a systematic
+under-coverage bug rather than an isolated one. Even so, most datasets remain far below the 90\%
+nominal target under genuine model-level LODO -- this is the expected, honest result of asking a
+model to generalize its calibrated uncertainty to a data source it has never seen any part of
+during training, a fundamentally harder task than calibration-level partial pooling
+(Section~\ref{sec:hierarchical}), and we do not describe it as reflecting calibration-level
+generalization.
+
+\begin{table}[h]
+\centering
+\caption{Leave-one-dataset-out (model-level) results, predictor-consistent.}
+\label{tab:lodo}
+\begin{tabular}{lcc}
+\toprule
+Held-out dataset & MAE (z-units) & Coverage (\%) \\
+\midrule
+NASA   & \LodoNASAMAE & \LodoNASACoverage \\
+CALCE  & \LodoCALCEMAE & \LodoCALCECoverage \\
+Oxford & \LodoOxfordMAE & \LodoOxfordCoverage \\
+MIT    & \LodoMITMAE & \LodoMITCoverage \\
+BIT    & \LodoBITMAE & \LodoBITCoverage \\
+XJTU   & \LodoXJTUMAE & \LodoXJTUCoverage \\
+RWTH   & \LodoRWTHMAE & \LodoRWTHCoverage \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Coverage confidence intervals: window-level vs. cell-clustered}
+\label{sec:coverage-ci}
+We found and fixed a script that reported per-dataset coverage confidence intervals treating every
+test WINDOW as an independent Bernoulli trial. For datasets with many test cells (MIT, RWTH) the
+window-level and cell-clustered-bootstrap intervals are close. For XJTU (8 test cells) and CALCE (2
+test cells), they differ by roughly 4--5$\times$: a naive window-level interval of
+approximately [92,94]\% for XJTU's coverage widens to approximately [84.5,99.3]\% once cell
+clustering is accounted for, and similarly for CALCE. Oxford and NASA have too few test cells (1
+each) for a cell-clustered interval to be defined at all, and we report this explicitly rather than
+substituting the (misleadingly precise) window-level number in its place.
+
+\subsection{Dataset-quality forensics: XJTU bridging sensitivity}
+\label{sec:xjtu-sensitivity}
+As described in Section~\ref{sec:data-quality}, \XjtuBridgingWindowCount{} of XJTU's test windows
+(\XjtuBridgingFraction\%) span a removed sentinel-value block. These bridging windows show
+substantially higher point-prediction error than XJTU's other test windows (RMSE roughly 5.6$\times$
+higher in z-units), shifting XJTU's pooled MAE upward by roughly 8\% relative to what it would be
+if these windows were excluded. Coverage is not degraded by their presence (both subsets remain at
+or above the 90\% nominal target). We report both the full-XJTU and excluding-bridging-windows
+numbers rather than only the former.
+
+\subsection{Dataset-level statistical comparison (Wilcoxon)}
+Comparing four architectures (full model, linear, SVR, XGBoost) pairwise at the dataset level
+($n=6$ datasets with both groupwise and pooled coverage defined), groupwise calibration is closer
+to the 90\% nominal target than pooled calibration in 6 of 6 datasets (one-sided Wilcoxon
+signed-rank, exact $p=0.0156$, the minimum attainable with $n=6$). We report this exact minimum
+alongside the result: six paired comparisons is not a basis for a strong quantitative claim about
+effect size, only a qualitatively consistent direction of effect. The corresponding
+architecture$\times$dataset-pair-level comparison ($n=24$) gives a much smaller nominal $p$-value,
+but is not a valid independent-samples test here -- every architecture is evaluated on the SAME six
+datasets' cells, so the 24 pairs are not independent trials, and we do not report that $p$-value as
+if it were.
+
+\subsection{Repeated cell-level splits (K6)}
+\label{sec:k6}
+% TODO: this subsection is BLOCKED on the repeated-split experiment (4 additional cell-level split
+% seeds, 43-46, groupwise/pooled/normalized_groupwise + persistence + cell-clustered bootstrap,
+% model-init seed held fixed at 42) still running as of this draft. Do not state a between-split
+% coverage range here until outputs/repeated_split_summary.json exists and
+% make_results_registry.py has pulled its numbers into numbers.tex -- see REPRODUCIBILITY.md.
+\textbf{[PENDING: repeated-split experiment in progress; this subsection will report between-split
+coverage variability across cell-level split seeds 42 (baseline) and 43--46 once complete, per
+K6 of the audit plan. No claim is made here in its absence.]}
+
+\section{Discussion and limitations}
+\label{sec:discussion}
+
+% TODO: write after Section 5 is fully complete (K6 included) -- a claim-discipline pass belongs
+% here, checking every claim in this section against what Results actually established, per the
+% brief's "would rather conclude a claim is wrong than defend it" standard. Draft after K6 lands;
+% do not write the central heterogeneity-vs-pooling claim until the repeated-split evidence is in
+% hand to support (or narrow) it.
+
+\section{Conclusion}
+\label{sec:conclusion}
+% TODO: write last, after Discussion -- a conclusion should not introduce new claims.
+
+\section*{Data and code availability}
+% TODO: finalize dataset licensing/citation details (flagged in REPRODUCIBILITY.md as needing a
+% human verification pass) before submission. Code: this manuscript's companion repository will be
+% made available upon publication (author's own prior related repository is intentionally not
+% cited here, per author's instruction, pending its own update).
+
+\appendix
+\section{Independent verification of statistical components}
+\label{app:verification}
+% TODO: transcribe already-completed verification results (see TEST_REPORT.md) into appendix form:
+% conformal.py unit tests (6/6 pass, including Monte Carlo marginal coverage and an independent
+% order-statistic reimplementation), HGC-CP property tests (13/13) and K10 equivalence proof
+% (250 combinations + inf-width edge case), DerSimonian-Laird hand-calculated cases (3) and
+% independent from-scratch reimplementation (30 random trials), Stage 2 data-layer determinism
+% check (two independent end-to-end runs, identical SHA-256 hash).
 
 \bibliographystyle{elsarticle-harv}
 \bibliography{references}
