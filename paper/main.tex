@@ -79,6 +79,15 @@ lithium-ion battery \sep state of health \sep conformal prediction \sep uncertai
 \section{Introduction}
 \label{sec:intro}
 
+Global electric-vehicle battery demand grew to over 950~GWh in 2024 and is projected to exceed
+3~TWh by 2030 \citep{iea2025evoutlook}, and retired packs are increasingly repurposed into
+grid-scale stationary storage rather than discarded \citep{cui2024secondlife}, making both the
+scale and the stakes of reliable state-of-health (SOH) estimation substantially larger than a
+single-application, single-chemistry study can capture. Unreliable SOH estimates are not a purely
+academic concern: poorly calibrated predictions in safety-relevant settings have documented,
+measurable consequences in other high-stakes domains where models are actively deployed
+\citep{liou2024calibration}, and battery-specific safety concerns such as thermal runaway make the
+cost of an overconfident prediction concrete rather than abstract \citep{chen2026thermalrunaway}.
 Accurate state-of-health (SOH) estimation underlies safe and economical operation of lithium-ion
 battery systems in electric vehicles and stationary storage, and the great majority of recent
 data-driven SOH work reports point-prediction accuracy (MAE/RMSE) without a calibrated,
@@ -155,11 +164,47 @@ we report honestly where our own results fall short of what a reader might hope 
 
 \subsection{Deep learning architectures for SOH/RUL estimation}
 Recurrent and attention-based architectures remain the dominant approach for capacity-fade
-forecasting from cycling data. CNN-LSTM-attention hybrids and multi-scale designs that combine a
-raw-resolution branch with a coarser, pooled branch are an active direction for capturing both
-short-term noise and longer-term degradation trend. Our model variant ablations
-(Section~\ref{sec:ablations}) isolate the contribution of the self-attention pooling layer and the
-multi-scale branch directly, rather than only reporting the full model's accuracy.
+forecasting from cycling data. Bidirectional LSTMs capture both forward and backward temporal
+context within a window, an established advantage for sequence modeling generally, and recent
+battery-specific variants combine this with deep-belief pretraining or convolutional front-ends to
+improve multivariate forecasting stability. Spatio-temporal attention networks have been applied
+directly to RUL prediction to jointly model spatial (feature-wise) and temporal dependencies
+\citep{suh2024stman}, and graph-structured representations combined with self-attention-guided
+pruning are a further recent direction for identifying which operational variables and time steps
+matter most for a given SOH estimate \citep{gu2025gnnsoh}. Whether a simpler gated unit (GRU) or a
+full LSTM cell is preferable is still empirically unsettled and appears to depend on the specific
+dataset and horizon; we include a GRU ablation (Section~\ref{sec:ablations}) rather than assume
+either architecture dominates a priori. Gradient-boosted trees (XGBoost) remain a strong,
+much-cheaper point-prediction baseline for battery capacity degradation when engineered features
+(e.g.\ incremental-capacity-curve features \citep{hamed2023ica}) are available
+\citep{jafari2024xgboost}; we include XGBoost as one of our point-prediction baselines
+(Section~\ref{sec:baseline-conformal}) precisely because of this competitiveness. CNN-LSTM-
+attention hybrids and multi-scale designs that combine a raw-resolution branch with a coarser,
+pooled branch are an active direction for capturing both short-term noise and longer-term
+degradation trend. Our model variant ablations (Section~\ref{sec:ablations}) isolate the
+contribution of the self-attention pooling layer and the multi-scale branch directly, rather than
+only reporting the full model's accuracy.
+
+Non-neural-network probabilistic approaches remain competitive for SOH/RUL specifically: Gaussian
+process regression with degradation-pattern-aware composite kernels gives early RUL estimates with
+a Bayesian uncertainty treatment built in, rather than added post hoc
+\citep{fu2025gpr}, and a recent active/physics-guided/zero-shot ``discovery learning'' framework
+demonstrates that battery cycle life can be predicted for an entirely new cell design from a
+minimal number of physical experiments \citep{zhang2026discoverylearning} -- a different, more
+data-efficient response to cross-design generalization than the purely post-hoc calibration
+approach we take here. Early-cycle internal-impedance features have similarly been shown to
+transfer cycle-life predictions across different cell manufacturers
+\citep{sours2024impedance}, a point-prediction analogue of the cross-dataset calibration transfer
+problem this paper addresses for uncertainty quantification specifically.
+
+MC-Dropout approximates Bayesian epistemic uncertainty by resampling dropout masks at inference
+time, but recent work emphasizes that the resulting uncertainty estimates can be unreliable or
+narrower than the true epistemic uncertainty if the scope of what is actually being resampled is
+not stated precisely \citep{djupskas2025mcdropout} -- a general concern a reader of any MC-Dropout-
+based uncertainty claim should have, and one we address directly for our own architecture in
+Section~\ref{sec:methods} (only the post-fusion and head dropout layers are resampled; the LSTM
+branches' own internal recurrent dropout, a mechanism reviewed generally in
+\citet{salehin2023dropout}, is not).
 
 \subsection{Conformal prediction and distribution-free uncertainty quantification}
 Split conformal prediction \citep{angelopoulos2023gentle} gives a marginal, distribution-free
@@ -172,6 +217,15 @@ approximate, non-likelihood-ratio weights \citep{barber2023beyond} and to poster
 heterogeneity-weighted calibration we apply in Section~\ref{sec:hgccp}, while making clear -- a
 point we carry through explicitly -- that a heuristic (non-likelihood-ratio) weight choice does not
 inherit an exact finite-sample guarantee merely by using the corrected weighted-quantile formula.
+Conformal prediction's reach within energy-systems research specifically is also growing: recent
+work applies hierarchical, partial-pooling-style conformal calibration to distributed energy
+resource adoption forecasting \citep{zhou2024hierarchicalconformal}, a direct cross-domain parallel
+to the hierarchical calibration we apply to battery datasets (Section~\ref{sec:hierarchical}).
+Separately, online/adaptive conformal methods address temporal dependence in multi-step forecast
+errors \citep{wang2024onlineconformal} -- a concern structurally similar to, but distinct from, the
+within-cell window correlation we address via a cell-clustered bootstrap rather than an online
+scheme (Section~\ref{sec:coverage-ci}), since our setting recalibrates once per dataset rather than
+updating sequentially as new data arrives.
 
 \subsection{Cross-dataset and multi-source battery generalization}
 Transfer-learning approaches to battery SOH typically adapt a model from one source dataset to one
@@ -184,7 +238,22 @@ across several datasets at once \citep{multitasksohrul2026}; a recent large benc
 None of these report a calibrated, distribution-free coverage guarantee for the resulting
 predictions. The only directly comparable MMD-weighted-conformal approach we are aware of,
 \citet{filgueira2026conformalized}, targets manufacturing/usage variability via a synthetic
-dataset rather than real heterogeneous public sources, as discussed above.
+dataset rather than real heterogeneous public sources, as discussed above. More broadly, domain
+generalization -- learning a model that performs reliably on a target distribution never seen
+during training -- is itself an active, general machine-learning research direction
+\citep{khoee2024domaingen}, of which our leave-one-dataset-out evaluation
+(Section~\ref{sec:lodo}) is a battery-specific instance. Real-world fleet evidence that cross-cell
+manufacturing inconsistency alone (not even cross-institution or cross-chemistry heterogeneity)
+measurably degrades pack-level health, lifetime, and power capability
+\citep{zou2026cellinconsistency} underscores that the cross-\emph{dataset} heterogeneity this paper
+studies sits atop an already-substantial cross-\emph{cell} heterogeneity baseline, and that physics-
+based degradation-mechanism accounts of why different chemistries and manufacturing conditions age
+differently \citep{nazeeruddin2025reservoirs} are consistent with, and help explain, why a single
+pooled calibration performs so unevenly across our seven sources (Section~\ref{sec:results}).
+Physics-informed neural networks that embed an explicit degradation-mechanism prior into the
+learned model are a complementary direction to our purely data-driven architecture
+\citep{wang2024pinn}, trading some of our model's flexibility for mechanism-consistent
+extrapolation.
 
 \subsection{Hierarchical and partial-pooling calibration across heterogeneous sources}
 Outside the battery literature, hierarchical (partial-pooling) models are an established way to
@@ -203,6 +272,18 @@ study emphasizes that naive forecasts are frequently stronger than they are give
 time series with high persistence \citep{beck2025naiveforecast}. We follow this recommendation
 directly: Section~\ref{sec:persistence} reports where our trained model does, and does not, beat a
 persistence baseline, including cases where it does not.
+
+\subsection{Reproducibility}
+A recent, large-scale survey of reproducibility barriers and drivers in machine-learning-based
+research identifies missing code, missing data, unreported hyperparameters, and unreported
+randomness as recurring, documented causes of irreproducible results across the field
+\citep{semmelrock2025reproducibility}. We respond to this directly rather than only citing it:
+every number in this manuscript is generated by a single script
+(\texttt{make\_results\_registry.py}) from saved model outputs, never hand-typed; a companion
+reproducibility document and driver script specify the exact run order, environment, and which
+artifacts each step produces; and model-initialization seeds are kept explicitly separate from
+cell-level split seeds throughout, so that either source of variability can be reported on its own
+terms rather than conflated.
 
 \section{Datasets and preprocessing}
 \label{sec:data-quality}

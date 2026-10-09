@@ -147,6 +147,234 @@
              Hojjat Adeli Award for Innovation in Computing.}
 }
 
+@misc{djupskas2025mcdropout,
+  author = {Djupsk{\aa}s, Aslak and Stasik, Alexander Johannes and Riemer-S{\o}rensen, Signe},
+  title  = {Unreliable Uncertainty Estimates with Monte Carlo Dropout},
+  year   = {2025},
+  note   = {arXiv:2512.14851. Directly supports this paper's precise documentation of MC-Dropout's
+            scope limitation (only post-fusion/head dropout layers are resampled, not the LSTM's
+            internal recurrent dropout) -- recent independent evidence that MC-Dropout uncertainty
+            estimates require this kind of scope precision rather than a blanket claim of
+            network-wide stochasticity.}
+}
+
+@article{jafari2024xgboost,
+  author  = {Jafari, Sadiqa and Yang, Ji-Hyeok and Byun, Yung-Cheol},
+  title   = {Optimized {XGBoost} Modeling for Accurate Battery Capacity Degradation Prediction},
+  journal = {Results in Engineering},
+  volume  = {24},
+  year    = {2024},
+  doi     = {10.1016/j.rineng.2024.102786}
+}
+
+@misc{suh2024stman,
+  author = {Suh, Sungho and Mittal, Dhruv Aditya and Bello, Hymalai and Zhou, Bo and
+            Jha, Mayank Shekhar and Lukowicz, Paul},
+  title  = {Remaining Useful Life Prediction of Lithium-Ion Batteries Using Spatio-Temporal Multimodal Attention Networks},
+  year   = {2023},
+  note   = {arXiv:2310.18924, later published in Heliyon}
+}
+
+@article{khoee2024domaingen,
+  author  = {Khoee, Arsham Gholamzadeh and Yu, Yinan and Feldt, Robert},
+  title   = {Domain Generalization Through Meta-Learning: A Survey},
+  journal = {Artificial Intelligence Review},
+  year    = {2024},
+  note    = {arXiv:2404.02785}
+}
+
+@article{fu2025gpr,
+  author  = {Fu, Linlin and Jiang, Bo and Zhu, Jiangong and Wei, Xuezhe and Dai, Haifeng},
+  title   = {Early Remaining Useful Life Prediction for Lithium-Ion Batteries Using a Gaussian Process Regression Model Based on Degradation Pattern Recognition},
+  journal = {Batteries},
+  volume  = {11},
+  number  = {6},
+  pages   = {221},
+  year    = {2025},
+  doi     = {10.3390/batteries11060221}
+}
+
+@article{zou2026cellinconsistency,
+  author  = {Zou, Changfu and others},
+  title   = {Quantifying the Impact of Cell-to-Cell Inconsistency on Electric Vehicle Battery Degradation and Utilization},
+  journal = {Nature Energy},
+  year    = {2026},
+  note    = {Full author list not confirmed from available search results (paywalled) -- verify
+             complete author list before camera-ready. Real-world EV fleet data quantifying how
+             cell-to-cell manufacturing inconsistency degrades pack-level health (6.2-7.5\%),
+             lifetime (17.7-22.8\%), and power capability (12.9-15.1\%) -- strong independent
+             support for this paper's central premise that cross-source heterogeneity, not just
+             cross-cell heterogeneity within one source, is a first-order concern for battery
+             health modeling.}
+}
+
+@article{zhang2026discoverylearning,
+  author  = {Zhang, Jiawei and Zhang, Yifei and Song, Ziyou and others},
+  title   = {Discovery Learning Predicts Battery Cycle Life from Minimal Experiments},
+  journal = {Nature},
+  volume  = {650},
+  pages   = {110--115},
+  year    = {2026},
+  doi     = {10.1038/s41586-025-09951-7},
+  note    = {Full author list abbreviated with "and others" -- lead authors confirmed, complete
+             list not retrieved; verify before camera-ready.}
+}
+
+@article{wang2024pinn,
+  author  = {Wang, Fujin and Zhai, Zhi and Zhao, Zhibin and Di, Yi and Chen, Xuefeng},
+  title   = {Physics-Informed Neural Network for Lithium-Ion Battery Degradation Stable Modeling and Prognosis},
+  journal = {Nature Communications},
+  volume  = {15},
+  pages   = {4332},
+  year    = {2024},
+  doi     = {10.1038/s41467-024-48779-z}
+}
+
+@misc{sours2024impedance,
+  author = {Sours, Tyler and Agarwal, Shivang and Cormier, Marc and Crivelli-Decker, Jordan and
+            Ridderbusch, Steffen and Glazier, Stephen L. and Aiken, Connor P. and others},
+  title  = {Early-Cycle Internal Impedance Enables {ML}-Based Battery Cycle Life Predictions Across Manufacturers},
+  year   = {2024},
+  note   = {arXiv:2410.05326 (v2, 2025). Full author list abbreviated with "and others"; verify
+            before camera-ready. Directly relevant: cross-manufacturer generalization using
+            early-cycle features, a point-prediction analogue of this paper's cross-dataset
+            calibration problem.}
+}
+
+@misc{zhou2024hierarchicalconformal,
+  author = {Zhou, Wenbin and Zhu, Shixiang},
+  title  = {Hierarchical Probabilistic Conformal Prediction for Distributed Energy Resources Adoption},
+  year   = {2024},
+  note   = {arXiv:2411.12193. A direct cross-domain parallel to this paper's own hierarchical
+            (partial-pooling) conformal calibration -- applied to grid/distributed-energy-resource
+            adoption forecasting rather than battery SOH, independent evidence that hierarchical
+            conformal calibration across heterogeneous groups is an active, cross-domain direction
+            within energy-systems research specifically (not only battery-specific).}
+}
+
+@techreport{iea2025evoutlook,
+  author       = {{International Energy Agency}},
+  title        = {Global {EV} Outlook 2025},
+  institution  = {International Energy Agency},
+  year         = {2025},
+  note         = {Electric car sales exceeded 17 million units in 2024 (+25\% y/y); EV battery
+                  demand grew to over 950\,GWh in 2024, projected to exceed 3\,TWh by 2030 --
+                  motivates the practical stakes of reliable, calibrated SOH prediction at the
+                  scale this paper's 339-cell, 7-dataset evaluation targets.}
+}
+
+@article{salehin2023dropout,
+  author  = {Salehin, Imrus and Kang, Dae-Ki},
+  title   = {A Review on Dropout Regularization Approaches for Deep Neural Networks within the Scholarly Domain},
+  journal = {Electronics},
+  volume  = {12},
+  number  = {14},
+  pages   = {3106},
+  year    = {2023},
+  doi     = {10.3390/electronics12143106}
+}
+
+@article{liou2024calibration,
+  author  = {Liou, L. and Scott, E. and Parchure, P. and Ouyang, Y. and Egorova, N. and
+             Freeman, R. and Hofer, I. S. and Nadkarni, G. N. and Timsina, P. and Kia, A. and
+             Levin, M. A.},
+  title   = {Assessing Calibration and Bias of a Deployed Machine Learning Malnutrition Prediction Model Within a Large Healthcare System},
+  journal = {npj Digital Medicine},
+  volume  = {7},
+  year    = {2024},
+  doi     = {10.1038/s41746-024-01141-5},
+  note    = {Cross-domain evidence (clinical ML, not batteries) that an actively deployed model's
+             calibration can differ meaningfully across subgroups and must be checked explicitly
+             rather than assumed -- the same principle this paper applies across battery datasets
+             rather than patient demographics.}
+}
+
+@article{cui2024secondlife,
+  author  = {Cui, Xiaofan and Khan, Muhammad Aadil and Pozzato, Gabriele and Singh, Surinder and
+             Sharma, Ratnesh and Onori, Simona},
+  title   = {Taking Second-Life Batteries from Exhausted to Empowered Using Experiments, Data Analysis, and Health Estimation},
+  journal = {Cell Reports Physical Science},
+  year    = {2024},
+  doi     = {10.1016/j.xcrp.2024.101941},
+  note    = {Grid-storage (second-life) application context for why accurate, calibrated SOH
+             estimation across heterogeneous battery sources matters practically, not only
+             methodologically -- directly relevant to this journal's scope.}
+}
+
+@article{semmelrock2025reproducibility,
+  author  = {Semmelrock, Harald and Ross-Hellauer, Tony and Kopeinik, Simone and Theiler, Dieter and
+             Haberl, Armin and Thalmann, Stefan and Kowald, Dominik},
+  title   = {Reproducibility in Machine-Learning-Based Research: Overview, Barriers, and Drivers},
+  journal = {AI Magazine},
+  volume  = {46},
+  number  = {2},
+  pages   = {e70002},
+  year    = {2025},
+  doi     = {10.1002/aaai.70002},
+  note    = {Directly motivates this paper's registry-driven, machine-generated-numbers discipline
+             (every figure traced to results\_registry.json, never hand-typed) and its full
+             reproducibility package (REPRODUCIBILITY.md, run\_all.py) -- a documented, general
+             response to exactly the class of irreproducibility failure this survey catalogs.}
+}
+
+@article{chen2026thermalrunaway,
+  author  = {Chen, Zeyu and Zhang, Jiakai and Liu, Chengxin and Yang, Chengyan and Chen, Shuxian},
+  title   = {Thermal Runaway in Lithium-Ion Batteries: A Review of Mechanisms, Prediction Approaches, and Mitigation Strategies},
+  journal = {Batteries},
+  volume  = {12},
+  number  = {3},
+  pages   = {88},
+  year    = {2026},
+  doi     = {10.3390/batteries12030088}
+}
+
+@article{gu2025gnnsoh,
+  author  = {Gu, Xuanyuan and Liu, Mu and Tian, Jilun},
+  title   = {State of Health Estimation for Batteries Based on a Dynamic Graph Pruning Neural Network with a Self-Attention Mechanism},
+  journal = {Energies},
+  volume  = {18},
+  number  = {20},
+  pages   = {5333},
+  year    = {2025},
+  doi     = {10.3390/en18205333},
+  note    = {A further self-attention-based SOH architecture, applied to a graph-structured
+             representation rather than this paper's multi-scale BiLSTM -- both approaches target
+             the same underlying problem of identifying which parts of a degradation trajectory
+             matter most for the next-step prediction.}
+}
+
+@article{hamed2023ica,
+  author  = {Hamed, Hamid},
+  title   = {An Incremental Capacity Analysis-Based State-of-Health Estimation Model for Lithium-Ion Batteries in High-Power Applications},
+  journal = {Batteries \& Supercaps},
+  year    = {2023},
+  doi     = {10.1002/batt.202300140}
+}
+
+@misc{wang2024onlineconformal,
+  author = {Wang, Xiaoqian and Hyndman, Rob J.},
+  title  = {Online Conformal Inference for Multi-Step Time Series Forecasting},
+  year   = {2024},
+  note   = {arXiv:2410.13115. Addresses temporal dependence in multi-step forecast errors for
+            conformal prediction intervals -- directly relevant to this paper's own windowed,
+            next-cycle SOH forecasting setting, where successive windows from one cell are
+            correlated rather than independent (the same concern this paper addresses via a
+            cell-clustered bootstrap rather than an online/adaptive conformal scheme).}
+}
+
+@misc{nazeeruddin2025reservoirs,
+  author = {Nazeeruddin, Mohammed Asheruddin and Li, Ruihe and O'Kane, Simon E. J. and
+            Marinescu, Monica and Offer, Gregory J.},
+  title  = {Lithium-Ion Battery Degradation: Introducing the Concept of Reservoirs to Design for Lifetime},
+  year   = {2025},
+  note   = {arXiv:2512.15440. A physics-based (not data-driven) degradation-mechanism perspective
+            -- included to situate this paper's purely data-driven approach relative to the
+            mechanistic degradation literature; the datasets used here span multiple chemistries
+            whose underlying reservoir dynamics (lithium, porosity, electrolyte) this physics-based
+            framework would predict should differ, consistent with this paper's own observed
+            cross-dataset heterogeneity.}
+}
+
 @article{beck2025naiveforecast,
   author  = {Beck, N. and Dovern, J. and Vogl, S.},
   title   = {Mind the Naive Forecast! A Rigorous Evaluation of Forecasting Models for Time Series with Low Predictability},
