@@ -152,7 +152,19 @@ class GRUBaseline(nn.Module):
 def enable_mc_dropout(model: nn.Module):
     """Call before inference: keeps ONLY dropout layers in train mode
     (so they still sample), while everything else (e.g. batchnorm, if any)
-    stays in eval mode. This is what makes MC-Dropout uncertainty work."""
+    stays in eval mode. This is what makes MC-Dropout uncertainty work.
+
+    SCOPE (confirmed directly, E4): the `isinstance(m, nn.Dropout)` check
+    only re-enables the EXPLICIT nn.Dropout submodules (post-fusion and
+    head, in MultiScaleBiLSTMAttention/GRUBaseline). nn.LSTM's own internal
+    inter-layer recurrent dropout (set via the `dropout=` kwarg at
+    construction) is a SEPARATE mechanism tied to the LSTM module's own
+    `.training` flag -- `model.eval()` above puts it in eval mode and this
+    function never touches it. MC-Dropout sampling here therefore reflects
+    uncertainty from the post-fusion/head dropout layers only, not from the
+    LSTM layers' recurrent dropout. State this precisely in the methodology
+    section rather than describing dropout as active "throughout the
+    network" during MC sampling."""
     model.eval()
     for m in model.modules():
         if isinstance(m, nn.Dropout):

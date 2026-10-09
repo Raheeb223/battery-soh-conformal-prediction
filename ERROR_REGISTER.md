@@ -69,7 +69,8 @@ dataset per architecture; write `baseline_conformal_results.json`.
 **Consequence:** Documentation-only; no effect on results. Misleads a reader of the code/paper
 if copied verbatim.
 **Fix:** Correct the docstring to match the implementation.
-**Status:** CONFIRMED. Trivial fix, pending.
+**Status:** RESOLVED. `preprocessing.py:6` now reads "SOH = capacity(cycle) / median(capacity of
+that cell's first 3 cycles)", matching `add_soh()`'s actual implementation.
 
 ### E4 | MODERATE | model.py:152-165 | MC-Dropout scope (K9b)
 **Problem:** `enable_mc_dropout()` only sets `nn.Dropout` submodules to train mode via
@@ -82,7 +83,12 @@ than "full MC-Dropout" might imply. Not necessarily wrong, but must be stated pr
 methodology section rather than described as dropout being active "throughout the network."
 **Fix:** Document the exact scope in the methodology. Optionally (not required) test enabling
 LSTM dropout during MC sampling as a sensitivity check.
-**Status:** CONFIRMED. Documentation fix + optional sensitivity check pending.
+**Status:** RESOLVED (documentation). `model.py`'s `enable_mc_dropout()` docstring now states the
+exact scope precisely (post-fusion/head `nn.Dropout` only, not the LSTM's internal recurrent
+dropout). The optional sensitivity check (enabling LSTM dropout too and comparing MC-Dropout
+uncertainty estimates) was not run -- not required, and would itself require a retrain-equivalent
+re-inference pass; left as a stated option for the manuscript's limitations section, not pursued
+further here.
 
 ### E5 | CRITICAL | hierarchical_calibration_v2.py vs hierarchical_calibration_corrected.py | Divergent, unreconciled branches
 **Problem:** Two separate "final-looking" hierarchical calibration implementations exist, each
