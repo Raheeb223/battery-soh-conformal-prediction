@@ -105,7 +105,16 @@ the pipeline's purposes, matching the brief's intent if not its literal wording)
 **Fix:** Run `verify_calce_v2.py`, check CX2_31's row count directly, read
 `calce_loader_v2.py`'s per-cell format dispatch. Resolve and update K8's assertion precisely
 rather than accept either claim at face value.
-**Status:** INVESTIGATING (verify_calce_v2.py run in progress).
+**Status:** **RESOLVED.** `verify_calce_v2.py`'s output confirms: `[CX2_31] NOT LOADED: No excel
+files found under ...CX2_31 (searched recursively)`. The folder itself is not empty (80 `.txt`
+files), but `calce_loader_v2.py` only looks for `.xlsx`/`.xls`, so CX2_31 contributes exactly 0
+rows -- "empty" is correct in the sense that matters for the pipeline, just imprecise about the
+mechanism. Same root cause as CS2_8/CS2_21 (deliberately excluded elsewhere in `config.py` with
+an explanatory comment); CX2_31 fails the same way but silently (caught, logged, `continue`),
+rather than being excluded up front. Recommend adding CX2_31 to `config.py`'s existing
+CS2_8/CS2_21 exclusion comment for documentation clarity -- not a functional bug, since the
+loader already handles it gracefully and the manuscript's cell count (10 CALCE cells) is
+unaffected either way.
 
 ### E8 | MAJOR | baselines.py (K3 fix) | SVR/XGBoost/plain-LSTM coverage numbers differ from the brief's own stale regression anchors
 **Problem:** Not a code defect -- a confirmed DRIFT finding. Freshly computed baseline conformal
