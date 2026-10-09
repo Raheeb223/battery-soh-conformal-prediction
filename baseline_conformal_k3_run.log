@@ -1,0 +1,53 @@
+﻿.venv\Scripts\python.exe : C:\Users\User\PycharmProjects\baseline_conformal_coverage.py:106: FutureWarning: You are 
+using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module 
+implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See 
+https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the 
+default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during 
+unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly 
+allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` 
+for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues 
+related to this experimental feature.
+At line:2 char:1
++ .venv\Scripts\python.exe baseline_conformal_coverage.py 2>&1 | Tee-Ob ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C:\Users\User\P...mental feature.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  model.load_state_dict(torch.load(ckpt_path, map_location=device))
+[baseline:linear] training on 182710 samples...
+[baseline:linear] overall MAE=0.03399  RMSE=0.13346
+  BIT: MAE=0.30918
+  CALCE: MAE=0.11876
+  MIT: MAE=0.00941
+  NASA: MAE=0.17546
+  Oxford: MAE=0.09114
+  RWTH: MAE=0.01088
+  XJTU: MAE=0.14359
+[baseline:svr] subsampled training set to 20000 samples (was 182710) for tractability
+[baseline:svr] training on 20000 samples...
+[baseline:svr] overall MAE=0.02356  RMSE=0.12189
+  BIT: MAE=0.23587
+  CALCE: MAE=0.10778
+  MIT: MAE=0.00479
+  NASA: MAE=0.76198
+  Oxford: MAE=0.02633
+  RWTH: MAE=0.00599
+  XJTU: MAE=0.08587
+[baseline:xgboost] training on 182710 samples...
+[baseline:xgboost] overall MAE=0.02405  RMSE=0.10845
+  BIT: MAE=0.20800
+  CALCE: MAE=0.08645
+  MIT: MAE=0.00996
+  NASA: MAE=0.19294
+  Oxford: MAE=0.03805
+  RWTH: MAE=0.00814
+  XJTU: MAE=0.07833
+
+=== Summary: pooled vs groupwise coverage ===
+linear: pooled=88.32%  groupwise=90.45%
+svr: pooled=89.12%  groupwise=90.65%
+xgboost: pooled=88.14%  groupwise=90.04%
+plain_lstm: pooled=89.96%  groupwise=90.14%
+gru: pooled=89.13%  groupwise=89.99%
+
+saved C:\Users\User\PycharmProjects\outputs\baseline_conformal_results.json

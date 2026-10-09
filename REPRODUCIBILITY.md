@@ -132,8 +132,7 @@ regenerated after a fix that should have changed it, `make_results_registry.py` 
 `UNVERIFIED` rather than guessing or reusing a stale number (see `ERROR_REGISTER.md` E16 for a
 concrete case of this safeguard catching a real staleness bug before it reached any output).
 
-Open items as of this writing (see `TEST_REPORT.md` for current status of each): K6 repeated-split
-experiment in progress; dataset source/license citations for the manuscript's Data Availability
-section still need a human pass (do not assume this file's dataset-folder names imply any
-particular citation or license — verify against each dataset's own published source before citing
-it in `main.tex`).
+K6 repeated-split experiment completed 2026-10-10 (`outputs/repeated_split_summary.json`); results
+folded into `paper/main.tex` Section 5.9 and the Discussion. Dataset source/license citations for
+the manuscript's Data Availability section were verified via live search against each dataset's own
+published source (see `paper/main.tex`, Data and code availability).

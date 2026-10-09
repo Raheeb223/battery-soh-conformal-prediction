@@ -116,6 +116,9 @@ def main():
     registry["sections"]["xjtu_bridging_sensitivity"] = load("xjtu_bridging_sensitivity.json") or UNVERIFIED
     registry["sections"]["rwth_verification"] = load("rwth_verification_v2.json") or UNVERIFIED
 
+    # ---- K6: repeated cell-level splits (between-split variability) ----
+    registry["sections"]["repeated_splits"] = load("repeated_split_summary.json") or UNVERIFIED
+
     # ---- Stage 2 data-layer verification (cell reconciliation, window counts) ----
     stage2_path = "stage2_report.json"
     stage2 = None
@@ -235,6 +238,40 @@ def main():
         else:
             macro(f"Lodo{d}MAE", None)
             macro(f"Lodo{d}Coverage", None)
+
+    repeated = registry["sections"]["repeated_splits"]
+    if repeated != UNVERIFIED:
+        var = repeated["groupwise_coverage_variability_across_splits"]
+        for d, v in var.items():
+            macro(f"RepeatedSplit{d}CovMean", v["mean"] * 100, "{:.1f}")
+            macro(f"RepeatedSplit{d}CovMin", v["min"] * 100, "{:.1f}")
+            macro(f"RepeatedSplit{d}CovMax", v["max"] * 100, "{:.1f}")
+            macro(f"RepeatedSplit{d}CovRange", v["range"] * 100, "{:.1f}")
+        macro("RepeatedSplitNSplits", len(repeated["split_seeds"]), "{:d}")
+
+        # Persistence robustness across all 5 splits tried so far (seed 42, the
+        # original anchor, from persistence_baselines.json, plus seeds 43-46 from K6).
+        if persistence != UNVERIFIED:
+            for d in repeated["persistence"]["43"].keys():
+                losses = 0
+                total = 0
+                anchor = persistence["per_dataset"].get(d)
+                if anchor is not None:
+                    total += 1
+                    if not (anchor["model"]["mae_real"] < anchor["persistence"]["mae_real"]):
+                        losses += 1
+                for seed in repeated["split_seeds"]:
+                    if seed == 42:
+                        continue
+                    entry = repeated["persistence"].get(str(seed), {}).get(d)
+                    if entry is not None:
+                        total += 1
+                        if not entry["model_beats_persistence"]:
+                            losses += 1
+                macro(f"PersistenceLossCount{d}", losses, "{:d}")
+                macro(f"PersistenceSplitCount{d}", total, "{:d}")
+    else:
+        macro("RepeatedSplitNSplits", None)
 
     if stage2:
         recon_detail = stage2["checks"]["cell_reconciliation_339_vs_337"]["detail"]

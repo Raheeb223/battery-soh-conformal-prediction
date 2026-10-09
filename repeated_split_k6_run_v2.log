@@ -1,0 +1,2733 @@
+﻿Repeated-split experiment: 4 new splits ([43, 44, 45, 46]) + existing seed-42 baseline, 3 conformal modes each -- 12 new training runs.
+Loading and SOH-processing raw data once for all new splits...
+[preprocessing] NASA: 7 cells, 707 rows
+Channel_1-006
+Info
+Channel_1-006
+Info
+Channel_1-006
+Info
+Channel_1-006
+Info
+Channel_1-006
+Info
+Channel_1-006
+Info
+Channel_1-006
+Info
+Channel_1-006
+Info
+  [CALCE] CS2_33_8_30_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Channel_1-006
+Info
+  [CALCE] CS2_33_9_7_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Channel_1-006
+Info
+  [CALCE] CS2_33_9_17_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Channel_1-006
+Info
+  [CALCE] CS2_33_9_27_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Channel_1-006
+Info
+  [CALCE] CS2_33_10_04_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Channel_1-006
+Info
+  [CALCE] CS2_33_10_05_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Channel_1-006
+Info
+  [CALCE] CS2_33_10_15_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Channel_1-006
+Info
+  [CALCE] CS2_33_10_26_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CS2_33_11_01_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CS2_33_11_10_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CS2_33_11_19_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CS2_33_11_24_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CS2_33_12_08_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CS2_33_12_16_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CS2_33_12_23_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CS2_33_1_10_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CS2_33_1_18_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CS2_33_1_24_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CS2_33_1_28_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CS2_33_2_2_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-007
+Info
+Channel_1-007
+Info
+Channel_1-007
+Info
+Channel_1-007
+Info
+Channel_1-007
+Info
+Channel_1-007
+Info
+Channel_1-007
+Info
+Channel_1-007
+Info
+  [CALCE] CS2_34_8_30_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-007
+Info
+Channel_1-007
+Info
+  [CALCE] CS2_34_9_7_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-007
+Info
+Channel_1-007
+Info
+  [CALCE] CS2_34_9_8_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-007
+Info
+Channel_1-007
+Info
+  [CALCE] CS2_34_9_24_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-007
+Info
+Channel_1-007
+Info
+  [CALCE] CS2_34_10_04_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-007
+Info
+Channel_1-007
+Info
+  [CALCE] CS2_34_10_18_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-007
+Info
+Statistics_1-007
+Channel_1-007
+Info
+Statistics_1-007
+  [CALCE] CS2_34_10_28_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-007
+Info
+Statistics_1-007
+Channel_1-007
+Info
+Statistics_1-007
+  [CALCE] CS2_34_11_01_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-007
+Info
+Statistics_1-007
+Channel_1-007
+Info
+Statistics_1-007
+  [CALCE] CS2_34_11_11_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-007
+Info
+Statistics_1-007
+Channel_1-007
+Info
+Statistics_1-007
+  [CALCE] CS2_34_11_22_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-007
+Info
+Statistics_1-007
+Channel_1-007
+Info
+Statistics_1-007
+  [CALCE] CS2_34_11_24_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-007
+Info
+Statistics_1-007
+Channel_1-007
+Info
+Statistics_1-007
+  [CALCE] CS2_34_12_08_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-007
+Info
+Statistics_1-007
+Channel_1-007
+Info
+Statistics_1-007
+  [CALCE] CS2_34_12_23_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-007
+Info
+Statistics_1-007
+Channel_1-007
+Info
+Statistics_1-007
+  [CALCE] CS2_34_1_12_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-007
+Info
+Statistics_1-007
+Channel_1-007
+Info
+Statistics_1-007
+  [CALCE] CS2_34_1_24_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-007
+Info
+Statistics_1-007
+Channel_1-007
+Info
+Statistics_1-007
+  [CALCE] CS2_34_1_28_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-007
+Info
+Statistics_1-007
+Channel_1-007
+Info
+Statistics_1-007
+  [CALCE] CS2_34_2_10_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-007
+Info
+Statistics_1-007
+Channel_1-007
+Info
+Statistics_1-007
+  [CALCE] CS2_34_2_18_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-007
+Info
+Statistics_1-007
+Channel_1-007
+Info
+Statistics_1-007
+  [CALCE] CS2_34_2_25_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-007
+Info
+Statistics_1-007
+Channel_1-007
+Info
+Statistics_1-007
+  [CALCE] CS2_34_3_7_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-008
+Info
+Channel_1-008
+Info
+Channel_1-008
+Info
+Channel_1-008
+Info
+Channel_1-008
+Info
+Channel_1-008
+Info
+Channel_1-008
+Info
+Channel_1-008
+Info
+  [CALCE] CS2_35_8_30_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-008
+Info
+Channel_1-008
+Info
+  [CALCE] CS2_35_9_7_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-008
+Info
+Channel_1-008
+Info
+  [CALCE] CS2_35_9_8_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-008
+Info
+Channel_1-008
+Info
+  [CALCE] CS2_35_9_21_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-008
+Info
+Channel_1-008
+Info
+  [CALCE] CS2_35_9_30_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-008
+Info
+Channel_1-008
+Info
+  [CALCE] CS2_35_10_15_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-008
+Info
+Channel_1-008
+Info
+  [CALCE] CS2_35_10_22_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-008
+Info
+Statistics_1-008
+Channel_1-008
+Info
+Statistics_1-008
+  [CALCE] CS2_35_10_29_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-008
+Info
+Statistics_1-008
+Channel_1-008
+Info
+Statistics_1-008
+  [CALCE] CS2_35_11_01_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-008
+Info
+Statistics_1-008
+Channel_1-008
+Info
+Statistics_1-008
+  [CALCE] CS2_35_11_08_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-008
+Info
+Statistics_1-008
+Channel_1-008
+Info
+Statistics_1-008
+  [CALCE] CS2_35_11_23_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-008
+Info
+Statistics_1-008
+Channel_1-008
+Info
+Statistics_1-008
+  [CALCE] CS2_35_11_24_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-008
+Info
+Statistics_1-008
+Channel_1-008
+Info
+Statistics_1-008
+  [CALCE] CS2_35_12_06_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-008
+Info
+Statistics_1-008
+Channel_1-008
+Info
+Statistics_1-008
+  [CALCE] CS2_35_12_13_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-008
+Info
+Statistics_1-008
+Channel_1-008
+Info
+Statistics_1-008
+  [CALCE] CS2_35_12_20_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-008
+Info
+Statistics_1-008
+Channel_1-008
+Info
+Statistics_1-008
+  [CALCE] CS2_35_12_23_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-008
+Info
+Statistics_1-008
+Channel_1-008
+Info
+Statistics_1-008
+  [CALCE] CS2_35_1_10_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-008
+Info
+Statistics_1-008
+Channel_1-008
+Info
+Statistics_1-008
+  [CALCE] CS2_35_1_18_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-008
+Info
+Statistics_1-008
+Channel_1-008
+Info
+Statistics_1-008
+  [CALCE] CS2_35_1_24_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-008
+Info
+Statistics_1-008
+Channel_1-008
+Info
+Statistics_1-008
+  [CALCE] CS2_35_1_28_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-008
+Info
+Statistics_1-008
+Channel_1-008
+Info
+Statistics_1-008
+  [CALCE] CS2_35_2_4_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-008
+Info
+Statistics_1-008
+Channel_1-008
+Info
+Statistics_1-008
+  [CALCE] CS2_35_2_10_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Channel_1-011
+Info
+Channel_1-011
+Info
+Channel_1-011
+Info
+Channel_1-011
+Info
+Channel_1-011
+Info
+Channel_1-011
+Info
+Channel_1-011
+Info
+  [CALCE] CS2_38_8_30_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Channel_1-011
+Info
+  [CALCE] CS2_38_9_7_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Channel_1-011
+Info
+  [CALCE] CS2_38_9_14_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Channel_1-011
+Info
+  [CALCE] CS2_38_9_21_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Channel_1-011
+Info
+  [CALCE] CS2_38_9_28_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Channel_1-011
+Info
+  [CALCE] CS2_38_10_04_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Channel_1-011
+Info
+  [CALCE] CS2_38_10_05_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Channel_1-011
+Info
+  [CALCE] CS2_38_10_14_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Channel_1-011
+Info
+  [CALCE] CS2_38_10_21_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Statistics_1-011
+Channel_1-011
+Info
+Statistics_1-011
+  [CALCE] CS2_38_10_28_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Statistics_1-011
+Channel_1-011
+Info
+Statistics_1-011
+  [CALCE] CS2_38_11_01_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Statistics_1-011
+Channel_1-011
+Info
+Statistics_1-011
+  [CALCE] CS2_38_11_08_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Statistics_1-011
+Channel_1-011
+Info
+Statistics_1-011
+  [CALCE] CS2_38_11_15_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Statistics_1-011
+Channel_1-011
+Info
+Statistics_1-011
+  [CALCE] CS2_38_11_22_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Statistics_1-011
+Channel_1-011
+Info
+Statistics_1-011
+  [CALCE] CS2_38_11_24_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Statistics_1-011
+Channel_1-011
+Info
+Statistics_1-011
+  [CALCE] CS2_38_12_06_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Statistics_1-011
+Channel_1-011
+Info
+Statistics_1-011
+  [CALCE] CS2_38_12_13_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Statistics_1-011
+Channel_1-011
+Info
+Statistics_1-011
+  [CALCE] CS2_38_12_20_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Statistics_1-011
+Channel_1-011
+Info
+Statistics_1-011
+  [CALCE] CS2_38_12_23_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Statistics_1-011
+Channel_1-011
+Info
+Statistics_1-011
+  [CALCE] CS2_38_1_10_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Statistics_1-011
+Channel_1-011
+Info
+Statistics_1-011
+  [CALCE] CS2_38_1_18_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Statistics_1-011
+Channel_1-011
+Info
+Statistics_1-011
+  [CALCE] CS2_38_1_24_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Statistics_1-011
+Channel_1-011
+Info
+Statistics_1-011
+  [CALCE] CS2_38_1_28_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Statistics_1-011
+Channel_1-011
+Info
+Statistics_1-011
+  [CALCE] CS2_38_2_4_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Statistics_1-011
+Channel_1-011
+Info
+Statistics_1-011
+  [CALCE] CS2_38_2_10_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+  [CALCE] CX2_16: excluding 1 non-cycling file(s): ['CX2_16_2_13_12_self discharge test.xlsx']
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_2_15_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_2_25_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_3_7_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_3_21_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_4_1_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_4_12_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_4_18_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_4_29_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_5_9_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_5_13_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_5_23_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_6_7_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_6_10_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_6_13_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_6_20_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_6_30_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_7_11_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_7_21_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_8_1_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_8_9_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_8_19_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_8_29_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_9_6_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_9_16_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_9_20_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_10_4_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_10_14_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_10_18_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_10_28_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_12_16_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_1_30_12.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Channel_1-006
+Info
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_3_2_12.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_3_19_12.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_3_27_12.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_4_5_12.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_4_17_12.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_4_23_12.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_5_07_12.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_5_16_12.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_5_22_12.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_6_01_12.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_6_19_12.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_6_28_12.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_7_03_12.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_7_12_12.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_7_23_12.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_8_10_12.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_8_20_12.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_8_30_12.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-006
+Info
+Statistics_1-006
+Channel_1-006
+Info
+Statistics_1-006
+  [CALCE] CX2_16_9_10_12.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+  [CALCE] skipped CX2_31: No excel files found under C:\Users\User\PycharmProjects\CX2_31 (searched recursively)
+Channel_1-012
+Info
+Channel_1-012
+Info
+  [CALCE] CX2_33_9_7_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Channel_1-012
+Info
+  [CALCE] CX2_33_9_17_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Channel_1-012
+Info
+  [CALCE] CX2_33_9_27_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Channel_1-012
+Info
+  [CALCE] CX2_33_10_04_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Channel_1-012
+Info
+  [CALCE] CX2_33_10_05_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_11_11_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_11_22_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_11_24_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_12_8_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_12_23_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_1_12_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_1_24_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_1_28_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_2_10_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_2_21_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_2_25_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_3_7_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_3_17_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_3_31_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_4_14_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_4_18_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_4_26_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_5_5_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_5_13_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_5_20_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_5_31_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_6_7_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_6_10_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_6_13_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_6_20_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_6_30_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_7_11_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_7_20_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_8_1_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_8_9_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_8_17_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_9_6_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_9_13_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_9_20_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_10_4_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_10_14_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_10_18_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_10_28_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_11_28_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-012
+Info
+Statistics_1-012
+Channel_1-012
+Info
+Statistics_1-012
+  [CALCE] CX2_33_12_16_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-011
+Info
+Channel_1-011
+Info
+Channel_1-001
+Info
+Channel_1-001
+Info
+  [CALCE] CX2_34_8_30_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Channel_1-001
+Info
+  [CALCE] CX2_34_9_7_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Channel_1-001
+Info
+  [CALCE] CX2_34_9_8_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Channel_1-001
+Info
+  [CALCE] CX2_34_9_23_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Channel_1-001
+Info
+  [CALCE] CX2_34_9_30_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Channel_1-001
+Info
+  [CALCE] CX2_34_10_15_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Channel_1-001
+Info
+  [CALCE] CX2_34_10_26_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_11_22_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_11_24_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_12_06_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_12_13_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_12_20_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_12_23_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_1_10_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_1_18_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_1_25_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_1_28_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_2_10_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_2_17_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_2_25_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_3_7_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_3_14_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_3_21_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_3_29_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_4_12_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_4_18_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_4_26_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_5_13_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_5_20_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_5_26_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_6_2_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_6_7_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_6_10_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_6_13_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_6_20_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_6_27_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_7_5_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_7_11_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_7_20_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_7_27_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-001
+Info
+Statistics_1-001
+Channel_1-001
+Info
+Statistics_1-001
+  [CALCE] CX2_34_8_1_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Channel_1-002
+Info
+  [CALCE] CX2_35_8_17_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Channel_1-002
+Info
+  [CALCE] CX2_35_8_30_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Channel_1-002
+Info
+  [CALCE] CX2_35_9_7_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Channel_1-002
+Info
+  [CALCE] CX2_35_9_8_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Channel_1-002
+Info
+  [CALCE] CX2_35_9_24_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Channel_1-002
+Info
+  [CALCE] CX2_35_10_04_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Channel_1-002
+Info
+  [CALCE] CX2_35_10_18_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_10_28_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_11_01_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_11_10_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_11_22_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_11_24_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_12_08_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_12_17_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_12_23_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_1_12_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_1_24_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_1_28_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_2_10_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_2_21_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_2_25_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_3_7_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_3_17_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_3_31_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_4_14_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_4_18_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_4_29_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_5_9_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_5_13_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_5_23_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_5_31_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_6_7_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_6_10_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_6_13_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_6_20_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_6_30_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_7_11_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_7_20_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_8_1_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_8_9_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_8_17_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_9_6_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_9_14_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_9_20_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_10_4_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_10_14_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_10_28_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-002
+Info
+Statistics_1-002
+Channel_1-002
+Info
+Statistics_1-002
+  [CALCE] CX2_35_12_16_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Channel_1-003
+Info
+  [CALCE] CX2_36_8_17_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Channel_1-003
+Info
+  [CALCE] CX2_36_8_30_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Channel_1-003
+Info
+  [CALCE] CX2_36_9_7_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Channel_1-003
+Info
+  [CALCE] CX2_36_9_15_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Channel_1-003
+Info
+  [CALCE] CX2_36_9_23_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Channel_1-003
+Info
+  [CALCE] CX2_36_10_01_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Channel_1-003
+Info
+Channel_1-003
+Info
+Channel_1-003
+Info
+  [CALCE] CX2_36_10_05_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Channel_1-003
+Info
+  [CALCE] CX2_36_10_14_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Channel_1-003
+Info
+  [CALCE] CX2_36_10_21_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_10_28_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_11_01_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_11_08_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_11_15_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_11_22_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_11_24_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_12_06_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_12_13_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_12_20_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_12_23_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_1_10_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_1_18_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_1_25_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_1_28_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_2_10_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_2_17_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_2_25_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_3_7_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_3_14_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_3_21_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_3_29_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_4_12_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_4_18_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_4_26_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_5_13_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_5_20_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_5_26_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_6_2_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_6_7_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_6_10_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_6_13_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_6_20_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_6_27_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_7_5_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_7_11_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_7_20_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_7_27_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-003
+Info
+Statistics_1-003
+Channel_1-003
+Info
+Statistics_1-003
+  [CALCE] CX2_36_8_2_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Channel_1-004
+Info
+  [CALCE] CX2_37_8_17_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Channel_1-004
+Info
+  [CALCE] CX2_37_8_30_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Channel_1-004
+Info
+  [CALCE] CX2_37_9_7_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Channel_1-004
+Info
+  [CALCE] CX2_37_9_15_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Channel_1-004
+Info
+  [CALCE] CX2_37_9_23_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Channel_1-004
+Info
+  [CALCE] CX2_37_10_01_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Channel_1-004
+Info
+Channel_1-004
+Info
+Channel_1-004
+Info
+  [CALCE] CX2_37_10_05_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Channel_1-004
+Info
+  [CALCE] CX2_37_10_14_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Channel_1-004
+Info
+  [CALCE] CX2_37_10_21_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Statistics_1-004
+Channel_1-004
+Info
+Statistics_1-004
+  [CALCE] CX2_37_10_28_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Statistics_1-004
+Channel_1-004
+Info
+Statistics_1-004
+  [CALCE] CX2_37_11_01_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Statistics_1-004
+Channel_1-004
+Info
+Statistics_1-004
+  [CALCE] CX2_37_11_08_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Statistics_1-004
+Channel_1-004
+Info
+Statistics_1-004
+  [CALCE] CX2_37_11_15_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Statistics_1-004
+Channel_1-004
+Info
+Statistics_1-004
+  [CALCE] CX2_37_11_22_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Statistics_1-004
+Channel_1-004
+Info
+Statistics_1-004
+  [CALCE] CX2_37_11_24_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Statistics_1-004
+Channel_1-004
+Info
+Statistics_1-004
+  [CALCE] CX2_37_12_6_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Statistics_1-004
+Channel_1-004
+Info
+Statistics_1-004
+  [CALCE] CX2_37_12_13_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Statistics_1-004
+Channel_1-004
+Info
+Statistics_1-004
+  [CALCE] CX2_37_12_20_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Statistics_1-004
+Channel_1-004
+Info
+Statistics_1-004
+  [CALCE] CX2_37_12_23_10.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Statistics_1-004
+Channel_1-004
+Info
+Statistics_1-004
+  [CALCE] CX2_37_1_10_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Statistics_1-004
+Channel_1-004
+Info
+Statistics_1-004
+  [CALCE] CX2_37_1_18_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Statistics_1-004
+Channel_1-004
+Info
+Statistics_1-004
+  [CALCE] CX2_37_1_25_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Statistics_1-004
+Channel_1-004
+Info
+Statistics_1-004
+  [CALCE] CX2_37_1_28_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Statistics_1-004
+Channel_1-004
+Info
+Statistics_1-004
+  [CALCE] CX2_37_2_10_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Statistics_1-004
+Channel_1-004
+Info
+Statistics_1-004
+  [CALCE] CX2_37_2_17_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Statistics_1-004
+Channel_1-004
+Info
+Statistics_1-004
+  [CALCE] CX2_37_2_25_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Statistics_1-004
+Channel_1-004
+Info
+Statistics_1-004
+  [CALCE] CX2_37_3_7_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Statistics_1-004
+Channel_1-004
+Info
+Statistics_1-004
+  [CALCE] CX2_37_3_14_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Statistics_1-004
+Channel_1-004
+Info
+Statistics_1-004
+  [CALCE] CX2_37_3_21_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+Channel_1-004
+Info
+Statistics_1-004
+Channel_1-004
+Info
+Statistics_1-004
+  [CALCE] CX2_37_3_28_11.xlsx: Discharge_Capacity behaves as a cumulative counter within the file; differencing
+[preprocessing] CALCE: 10 cells, 14188 rows
+[preprocessing] Oxford: 8 cells, 519 rows
+[preprocessing] MIT: 139 cells, 114313 rows
+  [BIT] arbitrary: found 55 cell folders, starting parse...
+  [BIT] (1/55) parsing #1 ...
+  [BIT] (2/55) parsing #11 ...
+  [BIT] (3/55) parsing #12 ...
+  [BIT] (4/55) parsing #14 ...
+  [BIT] (5/55) parsing #15 ...
+  [BIT] (6/55) parsing #17 ...
+  [BIT] (7/55) parsing #18 ...
+  [BIT] (8/55) parsing #20 ...
+  [BIT] (9/55) parsing #21 ...
+  [BIT] (10/55) parsing #24 ...
+  [BIT] (11/55) parsing #25 ...
+  [BIT] (12/55) parsing #27 ...
+  [BIT] (13/55) parsing #28 ...
+  [BIT] (14/55) parsing #3 ...
+  [BIT] (15/55) parsing #30 ...
+  [BIT] (16/55) parsing #31 ...
+  [BIT] (17/55) parsing #33 ...
+  [BIT] (18/55) parsing #34 ...
+  [BIT] (19/55) parsing #36 ...
+  [BIT] (20/55) parsing #37 ...
+  [BIT] (21/55) parsing #39 ...
+  [BIT] (22/55) parsing #4 ...
+  [BIT] (23/55) parsing #40 ...
+  [BIT] (24/55) parsing #42 ...
+  [BIT] (25/55) parsing #43 ...
+  [BIT] (26/55) parsing #46 ...
+  [BIT] (27/55) parsing #47 ...
+  [BIT] (28/55) parsing #5 ...
+  [BIT] (29/55) parsing #50 ...
+  [BIT] (30/55) parsing #51 ...
+  [BIT] (31/55) parsing #54 ...
+  [BIT] (32/55) parsing #55 ...
+  [BIT] (33/55) parsing #56 ...
+  [BIT] (34/55) parsing #59 ...
+  [BIT] (35/55) parsing #60 ...
+  [BIT] (36/55) parsing #61 ...
+  [BIT] (37/55) parsing #62 ...
+  [BIT] (38/55) parsing #63 ...
+  [BIT] (39/55) parsing #64 ...
+  [BIT] (40/55) parsing #65 ...
+  [BIT] (41/55) parsing #66 ...
+  [BIT] (42/55) parsing #67 ...
+  [BIT] (43/55) parsing #68 ...
+  [BIT] (44/55) parsing #69 ...
+  [BIT] (45/55) parsing #7 ...
+  [BIT] (46/55) parsing #70 ...
+  [BIT] (47/55) parsing #71 ...
+  [BIT] (48/55) parsing #72 ...
+  [BIT] (49/55) parsing #73 ...
+  [BIT] (50/55) parsing #74 ...
+  [BIT] (51/55) parsing #75 ...
+  [BIT] (52/55) parsing #76 ...
+  [BIT] (53/55) parsing #77 ...
+  [BIT] (54/55) parsing #8 ...
+  [BIT] (55/55) parsing #9 ...
+  [BIT] fixed: found 18 cell folders, starting parse...
+  [BIT] (1/18) parsing #2 ...
+  [BIT] skipped #2: No main '*_cycles*.xlsx' file found in C:\Users\User\PycharmProjects\kw34hhw7xg-3\Cycled with Fixed Current Profiles\#2
+  [BIT] (2/18) parsing #22 ...
+  [BIT] (3/18) parsing #23 ...
+  [BIT] (4/18) parsing #26 ...
+  [BIT] (5/18) parsing #29 ...
+  [BIT] (6/18) parsing #32 ...
+  [BIT] (7/18) parsing #35 ...
+  [BIT] (8/18) parsing #38 ...
+  [BIT] (9/18) parsing #41 ...
+  [BIT] (10/18) parsing #44 ...
+  [BIT] (11/18) parsing #45 ...
+  [BIT] (12/18) parsing #48 ...
+  [BIT] (13/18) parsing #49 ...
+  [BIT] (14/18) parsing #52 ...
+  [BIT] (15/18) parsing #53 ...
+  [BIT] (16/18) parsing #57 ...
+  [BIT] (17/18) parsing #58 ...
+  [BIT] (18/18) parsing #6 ...
+  [BIT] done — 72 cells parsed successfully
+[preprocessing] BIT: 72 cells, 7272 rows
+  [XJTU] sentinel-value fix: APPLIED
+  [XJTU] Batch-1: found 8 cell files
+  [XJTU] Batch-2: found 15 cell files
+  [XJTU] Batch-3: found 8 cell files
+  [XJTU] Batch-4: found 8 cell files
+  [XJTU] Batch-5: found 8 cell files
+  [XJTU] Batch-6: found 8 cell files
+  [XJTU] XJTU_Batch-6_Sim_satellite_1: removed 812 sentinel/calibration rows -- values [0.111 (x37), 0.445 (x37), 0.756 (x37), 0.912 (x37), 1.023 (x37), 1.112 (x37), 1.201 (x37), 1.245 (x37), 1.29 (x37), 1.334 (x37), 1.378 (x36), 1.423 (x36), 1.512 (x36), 1.534 (x36), 1.556 (x36), 1.579 (x36), 1.601 (x198), 1.902 (x4), 1.92 (x4), 1.926 (x4), 1.93 (x4), 1.989 (x4), 1.991 (x4), 1.992 (x4)] each recur >= 4 times and are not real per-cycle degradation readings
+  [XJTU] XJTU_Batch-6_Sim_satellite_2: removed 1034 sentinel/calibration rows -- values [0.111 (x47), 0.445 (x47), 0.756 (x47), 0.911 (x47), 1.023 (x47), 1.111 (x31), 1.112 (x16), 1.2 (x47), 1.245 (x47), 1.289 (x47), 1.334 (x47), 1.378 (x47), 1.423 (x47), 1.512 (x47), 1.534 (x47), 1.556 (x47), 1.578 (x47), 1.601 (x256), 1.866 (x4), 1.874 (x4), 1.927 (x8), 1.934 (x5), 1.99 (x5)] each recur >= 4 times and are not real per-cycle degradation readings
+  [XJTU] XJTU_Batch-6_Sim_satellite_3: removed 759 sentinel/calibration rows -- values [0.111 (x35), 0.445 (x35), 0.756 (x35), 0.912 (x35), 1.023 (x35), 1.112 (x35), 1.201 (x35), 1.245 (x35), 1.29 (x35), 1.334 (x35), 1.379 (x35), 1.423 (x35), 1.512 (x35), 1.534 (x35), 1.557 (x35), 1.579 (x35), 1.601 (x187), 1.984 (x5), 1.985 (x7)] each recur >= 4 times and are not real per-cycle degradation readings
+  [XJTU] XJTU_Batch-6_Sim_satellite_4: removed 794 sentinel/calibration rows -- values [0.111 (x37), 0.445 (x37), 0.756 (x37), 0.912 (x37), 1.023 (x37), 1.112 (x36), 1.201 (x36), 1.245 (x36), 1.29 (x36), 1.334 (x36), 1.378 (x35), 1.423 (x36), 1.512 (x36), 1.534 (x36), 1.556 (x36), 1.579 (x36), 1.601 (x198), 1.912 (x4), 1.984 (x6), 1.985 (x6)] each recur >= 4 times and are not real per-cycle degradation readings
+  [XJTU] XJTU_Batch-6_Sim_satellite_5: removed 1099 sentinel/calibration rows -- values [0.111 (x50), 0.445 (x50), 0.756 (x50), 0.912 (x50), 1.023 (x50), 1.112 (x50), 1.201 (x50), 1.245 (x50), 1.29 (x50), 1.334 (x50), 1.379 (x49), 1.423 (x50), 1.512 (x50), 1.534 (x50), 1.557 (x50), 1.579 (x50), 1.601 (x275), 1.784 (x4), 1.786 (x4), 1.792 (x4), 1.97 (x8), 1.971 (x5)] each recur >= 4 times and are not real per-cycle degradation readings
+  [XJTU] XJTU_Batch-6_Sim_satellite_6: removed 894 sentinel/calibration rows -- values [0.111 (x41), 0.445 (x41), 0.756 (x41), 0.912 (x41), 1.023 (x41), 1.112 (x41), 1.201 (x41), 1.245 (x41), 1.29 (x41), 1.334 (x41), 1.379 (x41), 1.423 (x41), 1.512 (x41), 1.534 (x41), 1.557 (x41), 1.579 (x42), 1.601 (x221), 1.904 (x4), 1.921 (x4), 2.01 (x4), 2.013 (x4)] each recur >= 4 times and are not real per-cycle degradation readings
+  [XJTU] XJTU_Batch-6_Sim_satellite_7: removed 799 sentinel/calibration rows -- values [0.111 (x37), 0.445 (x37), 0.756 (x37), 0.912 (x36), 1.023 (x37), 1.112 (x37), 1.201 (x37), 1.245 (x37), 1.29 (x37), 1.334 (x37), 1.379 (x36), 1.423 (x36), 1.512 (x36), 1.534 (x36), 1.556 (x36), 1.579 (x36), 1.601 (x198), 1.843 (x4), 1.977 (x8), 1.978 (x4)] each recur >= 4 times and are not real per-cycle degradation readings
+  [XJTU] XJTU_Batch-6_Sim_satellite_8: removed 885 sentinel/calibration rows -- values [0.111 (x41), 0.445 (x41), 0.756 (x41), 0.912 (x41), 1.023 (x41), 1.112 (x41), 1.201 (x41), 1.245 (x41), 1.29 (x41), 1.334 (x41), 1.379 (x39), 1.423 (x40), 1.512 (x40), 1.534 (x40), 1.556 (x40), 1.579 (x40), 1.601 (x220), 1.863 (x4), 1.978 (x4), 1.979 (x8)] each recur >= 4 times and are not real per-cycle degradation readings
+[preprocessing] XJTU: 55 cells, 20566 rows
+  [RWTH] found 48 physical cells (1642 session files total)
+  [RWTH] (1/48) parsing RWTH_ep_sanyo_002 (38 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_002: removed 1 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 1 rows across 1 cells (0.039% of all RWTH rows)
+  [RWTH] (2/48) parsing RWTH_ep_sanyo_003 (41 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_003: removed 2 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 2 rows across 1 cells (0.077% of all RWTH rows)
+  [RWTH] (3/48) parsing RWTH_ep_sanyo_004 (37 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_004: removed 2 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 2 rows across 1 cells (0.076% of all RWTH rows)
+  [RWTH] (4/48) parsing RWTH_ep_sanyo_005 (37 sessions)...
+    [RWTH] skipped session file for RWTH_ep_sanyo_005: No columns to parse from file (e production=ep sanyo 005=ZYK=Massenalterung=2013-05-10 102848=TBA_Zyk=TS017069  Format01=Kreis 5-070.csv)
+    [RWTH] skipped session file for RWTH_ep_sanyo_005: No columns to parse from file (e production=ep sanyo 005=ZYK=Massenalterung=2013-05-17 194205=TBA_CUv2=TS017505  Format01=Kreis 5-070.csv)
+    [RWTH] skipped session file for RWTH_ep_sanyo_005: No columns to parse from file (e production=ep sanyo 005=ZYK=Massenalterung=2013-05-19 212250=TBA_Zyk=TS017582  Format01=Kreis 5-070.csv)
+    [RWTH] skipped session file for RWTH_ep_sanyo_005: No columns to parse from file (e production=ep sanyo 005=ZYK=Massenalterung=2013-05-28 011239=TBA_CUv2=TS017945  Format01=Kreis 5-070.csv)
+    [RWTH] skipped session file for RWTH_ep_sanyo_005: No columns to parse from file (e production=ep sanyo 005=ZYK=Massenalterung=2013-05-30 013316=TBA_Zyk=TS018176  Format01=Kreis 5-070.csv)
+    [RWTH] skipped session file for RWTH_ep_sanyo_005: No columns to parse from file (e production=ep sanyo 005=ZYK=Massenalterung=2013-06-06 082934=TBA_CUv2=TS018466  Format01=Kreis 5-070.csv)
+    [RWTH] skipped session file for RWTH_ep_sanyo_005: No columns to parse from file (e production=ep sanyo 005=ZYK=Massenalterung=2013-06-08 090835=TBA_Zyk=TS018693  Format01=Kreis 5-070.csv)
+    [RWTH] skipped session file for RWTH_ep_sanyo_005: No columns to parse from file (e production=ep sanyo 005=ZYK=Massenalterung=2013-06-13 195829=TBA_CUv2=TS018897  Format01=Kreis 5-070.csv)
+    [RWTH] skipped session file for RWTH_ep_sanyo_005: No columns to parse from file (e production=ep sanyo 005=ZYK=Massenalterung=2013-06-15 203119=TBA_CHA=TS019019  Format01=Kreis 5-070.csv)
+  [RWTH-fix] RWTH_ep_sanyo_005: removed 1 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 1 rows across 1 cells (0.048% of all RWTH rows)
+  [RWTH] (5/48) parsing RWTH_ep_sanyo_006 (37 sessions)...
+    [RWTH] skipped session file for RWTH_ep_sanyo_006: No columns to parse from file (e production=ep sanyo 006=BOL Part 1=Massenalterung=2013-01-09 150918=TBA_BOL_P1=TS010628  Format01=Kreis 5-002.csv)
+  [RWTH-fix] RWTH_ep_sanyo_006: removed 2 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 2 rows across 1 cells (0.076% of all RWTH rows)
+  [RWTH] (6/48) parsing RWTH_ep_sanyo_007 (38 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_007: removed 1 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 1 rows across 1 cells (0.039% of all RWTH rows)
+  [RWTH] (7/48) parsing RWTH_ep_sanyo_008 (40 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_008: removed 2 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 2 rows across 1 cells (0.077% of all RWTH rows)
+  [RWTH] (8/48) parsing RWTH_ep_sanyo_009 (37 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_009: removed 2 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 2 rows across 1 cells (0.076% of all RWTH rows)
+  [RWTH] (9/48) parsing RWTH_ep_sanyo_010 (36 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_010: removed 2 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 2 rows across 1 cells (0.076% of all RWTH rows)
+  [RWTH] (10/48) parsing RWTH_ep_sanyo_011 (36 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_011: removed 2 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 2 rows across 1 cells (0.076% of all RWTH rows)
+  [RWTH] (11/48) parsing RWTH_ep_sanyo_012 (36 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_012: removed 1 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 1 rows across 1 cells (0.038% of all RWTH rows)
+  [RWTH] (12/48) parsing RWTH_ep_sanyo_013 (36 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_013: removed 2 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 2 rows across 1 cells (0.076% of all RWTH rows)
+  [RWTH] (13/48) parsing RWTH_ep_sanyo_014 (34 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_014: removed 2 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 2 rows across 1 cells (0.081% of all RWTH rows)
+  [RWTH] (14/48) parsing RWTH_ep_sanyo_015 (34 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_015: removed 3 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 3 rows across 1 cells (0.122% of all RWTH rows)
+  [RWTH] (15/48) parsing RWTH_ep_sanyo_016 (34 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_016: removed 1 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 1 rows across 1 cells (0.041% of all RWTH rows)
+  [RWTH] (16/48) parsing RWTH_ep_sanyo_017 (34 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_017: removed 1 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 1 rows across 1 cells (0.041% of all RWTH rows)
+  [RWTH] (17/48) parsing RWTH_ep_sanyo_018 (34 sessions)...
+  [RWTH-fix] TOTAL: removed 0 rows across 1 cells (0.000% of all RWTH rows)
+  [RWTH] (18/48) parsing RWTH_ep_sanyo_019 (35 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_019: removed 52 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 52 rows across 1 cells (2.041% of all RWTH rows)
+  [RWTH] (19/48) parsing RWTH_ep_sanyo_020 (36 sessions)...
+  [RWTH-fix] TOTAL: removed 0 rows across 1 cells (0.000% of all RWTH rows)
+  [RWTH] (20/48) parsing RWTH_ep_sanyo_021 (34 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_021: removed 1 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 1 rows across 1 cells (0.041% of all RWTH rows)
+  [RWTH] (21/48) parsing RWTH_ep_sanyo_022 (34 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_022: removed 1 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 1 rows across 1 cells (0.041% of all RWTH rows)
+  [RWTH] (22/48) parsing RWTH_ep_sanyo_023 (35 sessions)...
+  [RWTH-fix] TOTAL: removed 0 rows across 1 cells (0.000% of all RWTH rows)
+  [RWTH] (23/48) parsing RWTH_ep_sanyo_024 (35 sessions)...
+  [RWTH-fix] TOTAL: removed 0 rows across 1 cells (0.000% of all RWTH rows)
+  [RWTH] (24/48) parsing RWTH_ep_sanyo_025 (34 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_025: removed 2 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 2 rows across 1 cells (0.080% of all RWTH rows)
+  [RWTH] (25/48) parsing RWTH_ep_sanyo_026 (34 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_026: removed 1 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 1 rows across 1 cells (0.045% of all RWTH rows)
+  [RWTH] (26/48) parsing RWTH_ep_sanyo_027 (34 sessions)...
+  [RWTH-fix] TOTAL: removed 0 rows across 1 cells (0.000% of all RWTH rows)
+  [RWTH] (27/48) parsing RWTH_ep_sanyo_028 (36 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_028: removed 3 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 3 rows across 1 cells (0.135% of all RWTH rows)
+  [RWTH] (28/48) parsing RWTH_ep_sanyo_029 (34 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_029: removed 1 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 1 rows across 1 cells (0.045% of all RWTH rows)
+  [RWTH] (29/48) parsing RWTH_ep_sanyo_030 (24 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_030: removed 8 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 8 rows across 1 cells (0.473% of all RWTH rows)
+  [RWTH] (30/48) parsing RWTH_ep_sanyo_031 (40 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_031: removed 1 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 1 rows across 1 cells (0.041% of all RWTH rows)
+  [RWTH] (31/48) parsing RWTH_ep_sanyo_032 (35 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_032: removed 1 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 1 rows across 1 cells (0.040% of all RWTH rows)
+  [RWTH] (32/48) parsing RWTH_ep_sanyo_033 (35 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_033: removed 1 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 1 rows across 1 cells (0.041% of all RWTH rows)
+  [RWTH] (33/48) parsing RWTH_ep_sanyo_034 (34 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_034: removed 2 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 2 rows across 1 cells (0.087% of all RWTH rows)
+  [RWTH] (34/48) parsing RWTH_ep_sanyo_035 (34 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_035: removed 1 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 1 rows across 1 cells (0.043% of all RWTH rows)
+  [RWTH] (35/48) parsing RWTH_ep_sanyo_036 (33 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_036: removed 1 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 1 rows across 1 cells (0.042% of all RWTH rows)
+  [RWTH] (36/48) parsing RWTH_ep_sanyo_037 (33 sessions)...
+  [RWTH-fix] TOTAL: removed 0 rows across 1 cells (0.000% of all RWTH rows)
+  [RWTH] (37/48) parsing RWTH_ep_sanyo_038 (31 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_038: removed 1 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 1 rows across 1 cells (0.046% of all RWTH rows)
+  [RWTH] (38/48) parsing RWTH_ep_sanyo_039 (31 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_039: removed 2 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 2 rows across 1 cells (0.093% of all RWTH rows)
+  [RWTH] (39/48) parsing RWTH_ep_sanyo_040 (31 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_040: removed 1 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 1 rows across 1 cells (0.047% of all RWTH rows)
+  [RWTH] (40/48) parsing RWTH_ep_sanyo_041 (31 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_041: removed 1 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 1 rows across 1 cells (0.047% of all RWTH rows)
+  [RWTH] (41/48) parsing RWTH_ep_sanyo_042 (29 sessions)...
+  [RWTH-fix] TOTAL: removed 0 rows across 1 cells (0.000% of all RWTH rows)
+  [RWTH] (42/48) parsing RWTH_ep_sanyo_043 (29 sessions)...
+  [RWTH-fix] TOTAL: removed 0 rows across 1 cells (0.000% of all RWTH rows)
+  [RWTH] (43/48) parsing RWTH_ep_sanyo_044 (29 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_044: removed 1 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 1 rows across 1 cells (0.048% of all RWTH rows)
+  [RWTH] (44/48) parsing RWTH_ep_sanyo_045 (29 sessions)...
+  [RWTH-fix] TOTAL: removed 0 rows across 1 cells (0.000% of all RWTH rows)
+  [RWTH] (45/48) parsing RWTH_ep_sanyo_046 (34 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_046: removed 1 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 1 rows across 1 cells (0.043% of all RWTH rows)
+  [RWTH] (46/48) parsing RWTH_ep_sanyo_047 (33 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_047: removed 1 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 1 rows across 1 cells (0.043% of all RWTH rows)
+  [RWTH] (47/48) parsing RWTH_ep_sanyo_048 (33 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_048: removed 2 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 2 rows across 1 cells (0.087% of all RWTH rows)
+  [RWTH] (48/48) parsing RWTH_ep_sanyo_049 (34 sessions)...
+  [RWTH-fix] RWTH_ep_sanyo_049: removed 1 local outlier row(s) (session-boundary transients / zero-capacity glitches, not real degradation)
+  [RWTH-fix] TOTAL: removed 1 rows across 1 cells (0.043% of all RWTH rows)
+[preprocessing] RWTH: 48 cells, 113868 rows
+
+======================================================================
+Split seed 43
+======================================================================
+[split] BIT: 72 cells -> train=50, val=11, test=11
+[split] CALCE: 10 cells -> train=6, val=2, test=2
+[split] MIT: 139 cells -> train=97, val=21, test=21
+[split] NASA: 7 cells -> train=5, val=1, test=1
+[split] Oxford: 8 cells -> train=6, val=1, test=1
+[split] RWTH: 48 cells -> train=34, val=7, test=7
+[split] XJTU: 55 cells -> train=39, val=8, test=8
+[split] train cells: 237, val cells: 51, test cells: 51
+[windows] window=20  train: (183663, 20, 1), val: (38553, 20, 1), test: (39405, 20, 1)
+  [windows:train] BIT=3860, CALCE=8400, MIT=76572, NASA=450, Oxford=245, RWTH=79913, XJTU=14223
+  [windows:val] BIT=855, CALCE=2786, MIT=18405, Oxford=58, RWTH=13796, XJTU=2653
+  [windows:test] BIT=828, CALCE=2726, MIT=16372, NASA=112, Oxford=56, RWTH=16723, XJTU=2588
+[preprocessing] cached to C:\Users\User\PycharmProjects\cache\processed_split43.npz
+  cache: C:\Users\User\PycharmProjects\cache\processed_split43.npz
+  training model_variant=full, conformal_mode=groupwise, run_name=split43_groupwise (model-init seed=42, unchanged)...
+[conformal] WARNING: no calibration data for ['NASA'] — this means that group had 0 validation cells (a split bug, not expected behavior). Falling back to a pooled qhat across all calibrated groups so results aren't silently wrong, but you should fix the split so every dataset gets validation cells.
+[conformal] WARNING: no calibration data for ['NASA'] — this means that group had 0 validation cells (a split bug, not expected behavior). Falling back to a pooled qhat across all calibrated groups so results aren't silently wrong, but you should fix the split so every dataset gets validation cells.
+    overall_coverage=0.8839  test_mae=0.02530
+  training model_variant=full, conformal_mode=pooled, run_name=split43_pooled (model-init seed=42, unchanged)...
+    overall_coverage=0.8760  test_mae=0.02530
+  training model_variant=full, conformal_mode=normalized_groupwise, run_name=split43_normalized_groupwise (model-init seed=42, unchanged)...
+[normalized conformal] WARNING: no calibration data for ['NASA'] — falling back to a pooled qhat across all calibrated groups.
+[normalized conformal] WARNING: no calibration data for ['NASA'] — falling back to a pooled qhat across all calibrated groups.
+    overall_coverage=0.8830  test_mae=0.02530
+
+======================================================================
+Split seed 44
+======================================================================
+[split] BIT: 72 cells -> train=50, val=11, test=11
+[split] CALCE: 10 cells -> train=6, val=2, test=2
+[split] MIT: 139 cells -> train=97, val=21, test=21
+[split] NASA: 7 cells -> train=5, val=1, test=1
+[split] Oxford: 8 cells -> train=6, val=1, test=1
+[split] RWTH: 48 cells -> train=34, val=7, test=7
+[split] XJTU: 55 cells -> train=39, val=8, test=8
+[split] train cells: 237, val cells: 51, test cells: 51
+[windows] window=20  train: (183639, 20, 1), val: (36602, 20, 1), test: (41380, 20, 1)
+  [windows:train] BIT=3893, CALCE=9458, MIT=76952, NASA=414, Oxford=275, RWTH=77991, XJTU=14656
+  [windows:val] BIT=871, CALCE=1758, MIT=16190, Oxford=26, RWTH=15519, XJTU=2238
+  [windows:test] BIT=779, CALCE=2696, MIT=18207, NASA=148, Oxford=58, RWTH=16922, XJTU=2570
+[preprocessing] cached to C:\Users\User\PycharmProjects\cache\processed_split44.npz
+  cache: C:\Users\User\PycharmProjects\cache\processed_split44.npz
+  training model_variant=full, conformal_mode=groupwise, run_name=split44_groupwise (model-init seed=42, unchanged)...
+[conformal] WARNING: no calibration data for ['NASA'] — this means that group had 0 validation cells (a split bug, not expected behavior). Falling back to a pooled qhat across all calibrated groups so results aren't silently wrong, but you should fix the split so every dataset gets validation cells.
+[conformal] WARNING: no calibration data for ['NASA'] — this means that group had 0 validation cells (a split bug, not expected behavior). Falling back to a pooled qhat across all calibrated groups so results aren't silently wrong, but you should fix the split so every dataset gets validation cells.
+    overall_coverage=0.8777  test_mae=0.02438
+  training model_variant=full, conformal_mode=pooled, run_name=split44_pooled (model-init seed=42, unchanged)...
+    overall_coverage=0.8680  test_mae=0.02438
+  training model_variant=full, conformal_mode=normalized_groupwise, run_name=split44_normalized_groupwise (model-init seed=42, unchanged)...
+[normalized conformal] WARNING: no calibration data for ['NASA'] — falling back to a pooled qhat across all calibrated groups.
+[normalized conformal] WARNING: no calibration data for ['NASA'] — falling back to a pooled qhat across all calibrated groups.
+    overall_coverage=0.8720  test_mae=0.02438
+
+======================================================================
+Split seed 45
+======================================================================
+[split] BIT: 72 cells -> train=50, val=11, test=11
+[split] CALCE: 10 cells -> train=6, val=2, test=2
+[split] MIT: 139 cells -> train=97, val=21, test=21
+[split] NASA: 7 cells -> train=5, val=1, test=1
+[split] Oxford: 8 cells -> train=6, val=1, test=1
+[split] RWTH: 48 cells -> train=34, val=7, test=7
+[split] XJTU: 55 cells -> train=39, val=8, test=8
+[split] train cells: 237, val cells: 51, test cells: 51
+[windows] window=20  train: (183077, 20, 1), val: (40034, 20, 1), test: (38510, 20, 1)
+  [windows:train] BIT=3838, CALCE=8130, MIT=78893, NASA=302, Oxford=244, RWTH=77066, XJTU=14604
+  [windows:val] BIT=845, CALCE=2743, MIT=16591, NASA=148, Oxford=58, RWTH=16867, XJTU=2782
+  [windows:test] BIT=860, CALCE=3039, MIT=15865, NASA=112, Oxford=57, RWTH=16499, XJTU=2078
+[preprocessing] cached to C:\Users\User\PycharmProjects\cache\processed_split45.npz
+  cache: C:\Users\User\PycharmProjects\cache\processed_split45.npz
+  training model_variant=full, conformal_mode=groupwise, run_name=split45_groupwise (model-init seed=42, unchanged)...
+    overall_coverage=0.8996  test_mae=0.02729
+  training model_variant=full, conformal_mode=pooled, run_name=split45_pooled (model-init seed=42, unchanged)...
+    overall_coverage=0.9007  test_mae=0.02729
+  training model_variant=full, conformal_mode=normalized_groupwise, run_name=split45_normalized_groupwise (model-init seed=42, unchanged)...
+    overall_coverage=0.8938  test_mae=0.02729
+
+======================================================================
+Split seed 46
+======================================================================
+[split] BIT: 72 cells -> train=50, val=11, test=11
+[split] CALCE: 10 cells -> train=6, val=2, test=2
+[split] MIT: 139 cells -> train=97, val=21, test=21
+[split] NASA: 7 cells -> train=5, val=1, test=1
+[split] Oxford: 8 cells -> train=6, val=1, test=1
+[split] RWTH: 48 cells -> train=34, val=7, test=7
+[split] XJTU: 55 cells -> train=39, val=8, test=8
+[split] train cells: 237, val cells: 51, test cells: 51
+[windows] window=20  train: (182337, 20, 1), val: (38569, 20, 1), test: (40715, 20, 1)
+  [windows:train] BIT=3821, CALCE=9232, MIT=77543, NASA=411, Oxford=276, RWTH=76345, XJTU=14709
+  [windows:val] BIT=852, CALCE=2580, MIT=15718, NASA=3, Oxford=27, RWTH=17114, XJTU=2275
+  [windows:test] BIT=870, CALCE=2100, MIT=18088, NASA=148, Oxford=56, RWTH=16973, XJTU=2480
+[preprocessing] cached to C:\Users\User\PycharmProjects\cache\processed_split46.npz
+  cache: C:\Users\User\PycharmProjects\cache\processed_split46.npz
+  training model_variant=full, conformal_mode=groupwise, run_name=split46_groupwise (model-init seed=42, unchanged)...
+    overall_coverage=0.9061  test_mae=0.02526
+  training model_variant=full, conformal_mode=pooled, run_name=split46_pooled (model-init seed=42, unchanged)...
+    overall_coverage=0.9046  test_mae=0.02526
+  training model_variant=full, conformal_mode=normalized_groupwise, run_name=split46_normalized_groupwise (model-init seed=42, unchanged)...
+    overall_coverage=0.9085  test_mae=0.02526
+
+======================================================================
+Between-split coverage variability (groupwise, 5 splits)
+======================================================================
+Dataset     mean     min     max   range
+MIT       0.9034  0.8799  0.9238  0.0438
+RWTH      0.8963  0.8836  0.9074  0.0238
+XJTU      0.8168  0.6955  0.9301  0.2346
+BIT       0.8869  0.8768  0.9023  0.0255
+CALCE     0.8970  0.7568  0.9599  0.2030
+Oxford    0.9715  0.8750  1.0000  0.1250
+NASA      0.8533  0.6667  0.9932  0.3266
+
+saved C:\Users\User\PycharmProjects\outputs\repeated_split_summary.json

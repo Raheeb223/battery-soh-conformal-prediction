@@ -1,0 +1,20 @@
+﻿24 architecture-x-dataset pairs (NOT independent):
+  groupwise closer to 90% in 23/24; mean |dev| pooled=26.2 pp, groupwise=5.4 pp
+  Wilcoxon W+=299.0, exact one-sided p=1.19e-07
+
+Collapsed to the 6 datasets (architectures averaged within dataset):
+  MIT     |dev| pooled=  6.3  groupwise=  2.4  groupwise closer
+  BIT     |dev| pooled= 56.8  groupwise=  3.1  groupwise closer
+  XJTU    |dev| pooled= 34.6  groupwise=  3.9  groupwise closer
+  RWTH    |dev| pooled=  6.5  groupwise=  0.9  groupwise closer
+  CALCE   |dev| pooled= 31.7  groupwise= 12.1  groupwise closer
+  Oxford  |dev| pooled= 21.2  groupwise= 10.0  groupwise closer
+  groupwise closer in 6/6; Wilcoxon W+=21.0, exact one-sided p=0.0156 (minimum attainable with n=6: 0.0156)
+
+Per dataset: number of the 4 architectures in which groupwise is closer to 90% than pooled:
+  MIT     groupwise closer in 4/4 architectures
+  BIT     groupwise closer in 4/4 architectures
+  XJTU    groupwise closer in 4/4 architectures
+  RWTH    groupwise closer in 4/4 architectures
+  CALCE   groupwise closer in 4/4 architectures
+  Oxford  groupwise closer in 3/4 architectures

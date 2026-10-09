@@ -457,10 +457,17 @@ roughly 1-in-7 seeds it will be NASA's unwindowable cell, zeroing out NASA's val
 that seed specifically. The existing pooled-qhat fallback already handles this safely and visibly
 (a loud warning, not a silent wrong number). This is exactly the kind of between-split fragility K6
 is designed to surface for very small datasets, not a code defect to fix.
-**Status:** RESOLVED (understood, not a bug). Report this explicitly in the manuscript's K6 results
-subsection once all 4 new split seeds complete: state how many of the 4 trigger this fallback for
-NASA (and check Oxford, the other very-small dataset, for the same pattern) rather than silently
-averaging over it.
+**Status:** RESOLVED (understood, not a bug). Final outcome across all 4 additional split seeds (K6
+complete, 2026-10-10): the NASA fallback fired for split seeds 43 and 44, and did NOT fire for 45 or
+46 -- i.e. 2 of 4 additional seeds (plus seed 42 itself, which did not trigger it, for 2 of 5 overall).
+Oxford never triggered the equivalent fallback in any of the 5 seeds, despite also being very small
+(8 cells) -- its single validation cell never happened to land on an unwindowable one across the
+seeds tried, where NASA's did twice. This is reported in the manuscript's K6 results subsection
+(Section 5.9, "Repeated cell-level splits") alongside the between-split coverage-variability figure,
+exactly as planned. The broader K6 finding this fed into: groupwise coverage for the three
+largest-$n$ datasets (MIT, RWTH, BIT) is stable within a few points across all 5 splits, while the
+four smallest (XJTU, CALCE, Oxford, NASA) swing by 12-33 coverage points depending on which cells
+land in test -- see `outputs/repeated_split_summary.json` and `paper/figures/repeated_split_variability.pdf`.
 
 ---
 

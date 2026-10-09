@@ -1,0 +1,302 @@
+﻿K4: nested hyperparameter search for all 7 datasets as real target (['MIT', 'RWTH', 'XJTU', 'BIT', 'CALCE', 'Oxford', 'NASA'])
+
+======================================================================
+real_target = MIT
+======================================================================
+Selecting (lam, beta) for evaluating 'MIT', using ONLY the other 6 datasets (RWTH, XJTU, BIT, CALCE, Oxford, NASA) as pseudo-targets. 'MIT' is not touched during this selection.
+
+  Precomputed distances for pseudo-target 'RWTH'.
+  Precomputed distances for pseudo-target 'XJTU'.
+  Precomputed distances for pseudo-target 'BIT'.
+  Precomputed distances for pseudo-target 'CALCE'.
+  Precomputed distances for pseudo-target 'Oxford'.
+  Precomputed distances for pseudo-target 'NASA'.
+
+Sweeping 5x4 grid across 6 pseudo-target rotations...
+  lam=1.0    beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1545
+  lam=1.0    beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1543
+  lam=1.0    beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1537
+  lam=1.0    beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1522
+  lam=3.0    beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1540
+  lam=3.0    beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1536
+  lam=3.0    beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1532
+  lam=3.0    beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1515
+  lam=5.0    beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1531
+  lam=5.0    beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1528
+  lam=5.0    beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1519
+  lam=5.0    beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1514
+  lam=10.0   beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1741
+  lam=10.0   beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1737
+  lam=10.0   beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1731
+  lam=10.0   beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1727
+  lam=20.0   beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1725
+  lam=20.0   beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1719
+  lam=20.0   beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1713
+  lam=20.0   beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1696
+
+Best setting by nested search: lam=5.0, beta=1.0 (mean deviation 0.1514)
+
+Applying this setting to the REAL target 'MIT' (its test set was never used to choose lam/beta above)...
+
+MIT coverage under nested-selected (lam=5.0, beta=1.0): 1.000 (target: 90%)
+MIT MPIW: 0.0222
+
+======================================================================
+real_target = RWTH
+======================================================================
+Selecting (lam, beta) for evaluating 'RWTH', using ONLY the other 6 datasets (MIT, XJTU, BIT, CALCE, Oxford, NASA) as pseudo-targets. 'RWTH' is not touched during this selection.
+
+  Precomputed distances for pseudo-target 'MIT'.
+  Precomputed distances for pseudo-target 'XJTU'.
+  Precomputed distances for pseudo-target 'BIT'.
+  Precomputed distances for pseudo-target 'CALCE'.
+  Precomputed distances for pseudo-target 'Oxford'.
+  Precomputed distances for pseudo-target 'NASA'.
+
+Sweeping 5x4 grid across 6 pseudo-target rotations...
+  lam=1.0    beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1553
+  lam=1.0    beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1550
+  lam=1.0    beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1537
+  lam=1.0    beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1529
+  lam=3.0    beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1390
+  lam=3.0    beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1385
+  lam=3.0    beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1378
+  lam=3.0    beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1360
+  lam=5.0    beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1606
+  lam=5.0    beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1588
+  lam=5.0    beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1566
+  lam=5.0    beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1523
+  lam=10.0   beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.2236
+  lam=10.0   beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.2223
+  lam=10.0   beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.2197
+  lam=10.0   beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.2162
+  lam=20.0   beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.2306
+  lam=20.0   beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.2291
+  lam=20.0   beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.2270
+  lam=20.0   beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.2241
+
+Best setting by nested search: lam=3.0, beta=1.0 (mean deviation 0.1360)
+
+Applying this setting to the REAL target 'RWTH' (its test set was never used to choose lam/beta above)...
+
+RWTH coverage under nested-selected (lam=3.0, beta=1.0): 0.996 (target: 90%)
+RWTH MPIW: 0.0512
+
+======================================================================
+real_target = XJTU
+======================================================================
+Selecting (lam, beta) for evaluating 'XJTU', using ONLY the other 6 datasets (MIT, RWTH, BIT, CALCE, Oxford, NASA) as pseudo-targets. 'XJTU' is not touched during this selection.
+
+  Precomputed distances for pseudo-target 'MIT'.
+  Precomputed distances for pseudo-target 'RWTH'.
+  Precomputed distances for pseudo-target 'BIT'.
+  Precomputed distances for pseudo-target 'CALCE'.
+  Precomputed distances for pseudo-target 'Oxford'.
+  Precomputed distances for pseudo-target 'NASA'.
+
+Sweeping 5x4 grid across 6 pseudo-target rotations...
+  lam=1.0    beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1478
+  lam=1.0    beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1469
+  lam=1.0    beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1459
+  lam=1.0    beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1445
+  lam=3.0    beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1440
+  lam=3.0    beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1431
+  lam=3.0    beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1422
+  lam=3.0    beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1407
+  lam=5.0    beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1461
+  lam=5.0    beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1452
+  lam=5.0    beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1449
+  lam=5.0    beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1431
+  lam=10.0   beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1477
+  lam=10.0   beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1467
+  lam=10.0   beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1460
+  lam=10.0   beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1447
+  lam=20.0   beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1518
+  lam=20.0   beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1515
+  lam=20.0   beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1510
+  lam=20.0   beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1498
+
+Best setting by nested search: lam=3.0, beta=1.0 (mean deviation 0.1407)
+
+Applying this setting to the REAL target 'XJTU' (its test set was never used to choose lam/beta above)...
+
+XJTU coverage under nested-selected (lam=3.0, beta=1.0): 0.967 (target: 90%)
+XJTU MPIW: 0.0205
+
+======================================================================
+real_target = BIT
+======================================================================
+Selecting (lam, beta) for evaluating 'BIT', using ONLY the other 6 datasets (MIT, RWTH, XJTU, CALCE, Oxford, NASA) as pseudo-targets. 'BIT' is not touched during this selection.
+
+  Precomputed distances for pseudo-target 'MIT'.
+  Precomputed distances for pseudo-target 'RWTH'.
+  Precomputed distances for pseudo-target 'XJTU'.
+  Precomputed distances for pseudo-target 'CALCE'.
+  Precomputed distances for pseudo-target 'Oxford'.
+  Precomputed distances for pseudo-target 'NASA'.
+
+Sweeping 5x4 grid across 6 pseudo-target rotations...
+  lam=1.0    beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1206
+  lam=1.0    beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1211
+  lam=1.0    beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1214
+  lam=1.0    beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1222
+  lam=3.0    beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1160
+  lam=3.0    beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1156
+  lam=3.0    beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1150
+  lam=3.0    beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1143
+  lam=5.0    beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1381
+  lam=5.0    beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1373
+  lam=5.0    beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1371
+  lam=5.0    beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1351
+  lam=10.0   beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1777
+  lam=10.0   beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1770
+  lam=10.0   beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1763
+  lam=10.0   beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1752
+  lam=20.0   beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1789
+  lam=20.0   beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1782
+  lam=20.0   beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1774
+  lam=20.0   beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1762
+
+Best setting by nested search: lam=3.0, beta=1.0 (mean deviation 0.1143)
+
+Applying this setting to the REAL target 'BIT' (its test set was never used to choose lam/beta above)...
+
+BIT coverage under nested-selected (lam=3.0, beta=1.0): 0.482 (target: 90%)
+BIT MPIW: 0.0236
+
+======================================================================
+real_target = CALCE
+======================================================================
+Selecting (lam, beta) for evaluating 'CALCE', using ONLY the other 6 datasets (MIT, RWTH, XJTU, BIT, Oxford, NASA) as pseudo-targets. 'CALCE' is not touched during this selection.
+
+  Precomputed distances for pseudo-target 'MIT'.
+  Precomputed distances for pseudo-target 'RWTH'.
+  Precomputed distances for pseudo-target 'XJTU'.
+  Precomputed distances for pseudo-target 'BIT'.
+  Precomputed distances for pseudo-target 'Oxford'.
+  Precomputed distances for pseudo-target 'NASA'.
+
+Sweeping 5x4 grid across 6 pseudo-target rotations...
+  lam=1.0    beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1613
+  lam=1.0    beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1607
+  lam=1.0    beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1607
+  lam=1.0    beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1596
+  lam=3.0    beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1548
+  lam=3.0    beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1547
+  lam=3.0    beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1540
+  lam=3.0    beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1540
+  lam=5.0    beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1769
+  lam=5.0    beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1763
+  lam=5.0    beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1756
+  lam=5.0    beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1742
+  lam=10.0   beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.2271
+  lam=10.0   beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.2259
+  lam=10.0   beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.2250
+  lam=10.0   beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.2236
+  lam=20.0   beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.2291
+  lam=20.0   beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.2284
+  lam=20.0   beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.2276
+  lam=20.0   beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.2257
+
+Best setting by nested search: lam=3.0, beta=0.5 (mean deviation 0.1540)
+
+Applying this setting to the REAL target 'CALCE' (its test set was never used to choose lam/beta above)...
+
+CALCE coverage under nested-selected (lam=3.0, beta=0.5): 0.851 (target: 90%)
+CALCE MPIW: 0.0364
+
+======================================================================
+real_target = Oxford
+======================================================================
+Selecting (lam, beta) for evaluating 'Oxford', using ONLY the other 6 datasets (MIT, RWTH, XJTU, BIT, CALCE, NASA) as pseudo-targets. 'Oxford' is not touched during this selection.
+
+  Precomputed distances for pseudo-target 'MIT'.
+  Precomputed distances for pseudo-target 'RWTH'.
+  Precomputed distances for pseudo-target 'XJTU'.
+  Precomputed distances for pseudo-target 'BIT'.
+  Precomputed distances for pseudo-target 'CALCE'.
+  Precomputed distances for pseudo-target 'NASA'.
+
+Sweeping 5x4 grid across 6 pseudo-target rotations...
+  lam=1.0    beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1660
+  lam=1.0    beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1653
+  lam=1.0    beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1653
+  lam=1.0    beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1642
+  lam=3.0    beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1532
+  lam=3.0    beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1528
+  lam=3.0    beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1521
+  lam=3.0    beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1520
+  lam=5.0    beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1626
+  lam=5.0    beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1618
+  lam=5.0    beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1604
+  lam=5.0    beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1585
+  lam=10.0   beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.2421
+  lam=10.0   beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.2412
+  lam=10.0   beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.2394
+  lam=10.0   beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.2352
+  lam=20.0   beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.2434
+  lam=20.0   beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.2425
+  lam=20.0   beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.2412
+  lam=20.0   beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.2376
+
+Best setting by nested search: lam=3.0, beta=1.0 (mean deviation 0.1520)
+
+Applying this setting to the REAL target 'Oxford' (its test set was never used to choose lam/beta above)...
+
+Oxford coverage under nested-selected (lam=3.0, beta=1.0): 1.000 (target: 90%)
+Oxford MPIW: 0.0313
+
+======================================================================
+real_target = NASA
+======================================================================
+Selecting (lam, beta) for evaluating 'NASA', using ONLY the other 6 datasets (MIT, RWTH, XJTU, BIT, CALCE, Oxford) as pseudo-targets. 'NASA' is not touched during this selection.
+
+  Precomputed distances for pseudo-target 'MIT'.
+  Precomputed distances for pseudo-target 'RWTH'.
+  Precomputed distances for pseudo-target 'XJTU'.
+  Precomputed distances for pseudo-target 'BIT'.
+  Precomputed distances for pseudo-target 'CALCE'.
+  Precomputed distances for pseudo-target 'Oxford'.
+
+Sweeping 5x4 grid across 6 pseudo-target rotations...
+  lam=1.0    beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1517
+  lam=1.0    beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1506
+  lam=1.0    beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1501
+  lam=1.0    beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1493
+  lam=3.0    beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1353
+  lam=3.0    beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1343
+  lam=3.0    beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1340
+  lam=3.0    beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1344
+  lam=5.0    beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.1613
+  lam=5.0    beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.1601
+  lam=5.0    beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.1599
+  lam=5.0    beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.1579
+  lam=10.0   beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.2085
+  lam=10.0   beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.2078
+  lam=10.0   beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.2065
+  lam=10.0   beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.2053
+  lam=20.0   beta=0.0    mean |coverage-90%| across 6 pseudo-targets: 0.2174
+  lam=20.0   beta=0.25   mean |coverage-90%| across 6 pseudo-targets: 0.2166
+  lam=20.0   beta=0.5    mean |coverage-90%| across 6 pseudo-targets: 0.2154
+  lam=20.0   beta=1.0    mean |coverage-90%| across 6 pseudo-targets: 0.2142
+
+Best setting by nested search: lam=3.0, beta=0.5 (mean deviation 0.1340)
+
+Applying this setting to the REAL target 'NASA' (its test set was never used to choose lam/beta above)...
+
+NASA coverage under nested-selected (lam=3.0, beta=0.5): 1.000 (target: 90%)
+NASA MPIW: 0.0347
+
+
+======================================================================
+Summary: selected (lam, beta) per real target
+======================================================================
+  MIT     : lam=5.0    beta=1.0    -> test coverage=1.000
+  RWTH    : lam=3.0    beta=1.0    -> test coverage=0.996
+  XJTU    : lam=3.0    beta=1.0    -> test coverage=0.967
+  BIT     : lam=3.0    beta=1.0    -> test coverage=0.482
+  CALCE   : lam=3.0    beta=0.5    -> test coverage=0.851
+  Oxford  : lam=3.0    beta=1.0    -> test coverage=1.000
+  NASA    : lam=3.0    beta=0.5    -> test coverage=1.000
+
+saved C:\Users\User\PycharmProjects\outputs\nested_hp_search_results.json
