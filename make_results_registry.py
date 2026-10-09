@@ -18,6 +18,8 @@ import json
 import os
 import re
 
+import numpy as np
+
 import config
 
 OUT_DIR = config.OUTPUT_DIR
@@ -109,9 +111,18 @@ def main():
     registry["sections"]["predictor_consistent_coverage"] = load("predictor_consistent_recalibration.json") or UNVERIFIED
 
     # ---- Cell-clustered bootstrap / XJTU bridging / RWTH verification ----
-    registry["sections"]["xjtu_bridging_isolation"] = load("xjtu_bridging_isolation.json") or UNVERIFIED
+    xjtu_bridge = load("xjtu_bridging_isolation.json")
+    registry["sections"]["xjtu_bridging_isolation"] = xjtu_bridge or UNVERIFIED
     registry["sections"]["xjtu_bridging_sensitivity"] = load("xjtu_bridging_sensitivity.json") or UNVERIFIED
     registry["sections"]["rwth_verification"] = load("rwth_verification_v2.json") or UNVERIFIED
+
+    # ---- Stage 2 data-layer verification (cell reconciliation, window counts) ----
+    stage2_path = "stage2_report.json"
+    stage2 = None
+    if os.path.exists(stage2_path):
+        with open(stage2_path) as fh:
+            stage2 = json.load(fh)
+    registry["sections"]["stage2_data_layer"] = stage2 or UNVERIFIED
 
     # ---- Write registry ----
     with open("results_registry.json", "w") as fh:
@@ -160,6 +171,39 @@ def main():
         else:
             macro(f"Lodo{d}MAE", None)
             macro(f"Lodo{d}Coverage", None)
+
+    if stage2:
+        recon_detail = stage2["checks"]["cell_reconciliation_339_vs_337"]["detail"]
+        nums = [int(n) for n in re.findall(r"=(\d+)", recon_detail)]
+        # nums = [cells_loaded, cells_assigned_to_split, cells_with_windows], in that order
+        macro("TotalCellsLoaded", nums[0], "{:d}")
+        macro("CellsWithWindows", nums[2], "{:d}")
+        ascending_detail = stage2["checks"]["windows_cycle_ascending_within_window"]["detail"]
+        total_test_windows = int(re.search(r"of (\d+) test windows", ascending_detail).group(1))
+        macro("TotalTestWindows", total_test_windows, "{:d}")
+    else:
+        macro("TotalCellsLoaded", None)
+        macro("CellsWithWindows", None)
+        macro("TotalTestWindows", None)
+
+    cache_path = os.path.join(config.CACHE_DIR, "processed.npz")
+    if os.path.exists(cache_path):
+        cache = np.load(cache_path, allow_pickle=True)
+        macro("TrainWindows", cache["X_train"].shape[0], "{:d}")
+        macro("ValWindows", cache["X_val"].shape[0], "{:d}")
+    else:
+        macro("TrainWindows", None)
+        macro("ValWindows", None)
+
+    if xjtu_bridge:
+        n_sat, n_other = xjtu_bridge["n_sim_satellite"], xjtu_bridge["n_other_47_cells"]
+        n_bridging_total = (n_sat * xjtu_bridge["frac_bridging_sim_satellite"]
+                             + n_other * xjtu_bridge["frac_bridging_other_47_cells"])
+        macro("XjtuBridgingFraction", 100 * n_bridging_total / (n_sat + n_other), "{:.1f}")
+        macro("XjtuBridgingWindowCount", int(round(n_bridging_total)), "{:d}")
+    else:
+        macro("XjtuBridgingFraction", None)
+        macro("XjtuBridgingWindowCount", None)
 
     with open(os.path.join("paper", "numbers.tex"), "w") as fh:
         fh.write("\n".join(lines) + "\n")

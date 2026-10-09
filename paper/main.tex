@@ -29,8 +29,8 @@
 We predict the state of health (SOH) of lithium-ion cells from short windows of historical
 capacity-fade data using a multi-scale bidirectional LSTM with self-attention, trained and
 evaluated across seven public datasets spanning different institutions, cell chemistries, and
-testing protocols (\num{MainModelCoverage}\% pooled groupwise conformal coverage at a nominal 90\%
-target, MAE \num{MainModelMAE}, RMSE \num{MainModelRMSE}, $N=339$ cells, 337 contributing
+testing protocols (\MainModelCoverage\% pooled groupwise conformal coverage at a nominal 90\%
+target, MAE \MainModelMAE, RMSE \MainModelRMSE, $N=339$ cells, 337 contributing
 windowed samples). Unlike prior work that either validates distribution-free uncertainty
 quantification on a single data source or fuses multiple heterogeneous sources without any
 coverage guarantee, we apply groupwise (Mondrian) split-conformal calibration, an empirical-Bayes
@@ -40,7 +40,7 @@ quantity from machine-generated artifacts rather than hand-typed values. We find
 calibration-level generalization (held-out calibration data, model trained on all sources) differs
 sharply from model-level generalization (the entire source dataset withheld from training,
 leave-one-dataset-out): coverage for genuinely unseen sources ranges from
-\num{LodoBITCoverage}\% (BIT) to \num{LodoRWTHCoverage}\% (RWTH), well below what calibration-level
+\LodoBITCoverage\% (BIT) to \LodoRWTHCoverage\% (RWTH), well below what calibration-level
 partial pooling achieves on the same splits. We additionally show, via independent re-verification
 against the raw source files, that two of the seven datasets (XJTU, RWTH) carry previously
 undocumented or mischaracterized data-quality artifacts that materially affect a non-trivial
@@ -204,16 +204,161 @@ time series with high persistence \citep{beck2025naiveforecast}. We follow this 
 directly: Section~\ref{sec:persistence} reports where our trained model does, and does not, beat a
 persistence baseline, including cases where it does not.
 
+\section{Datasets and preprocessing}
+\label{sec:data-quality}
+
+We use seven public datasets: MIT/Stanford/Toyota Research Institute's fast-charging cell set
+(``MIT''), RWTH Aachen's commercial-cell aging set (``RWTH''), XJTU's battery degradation set
+(``XJTU''), a Beijing Institute of Technology fast-charging set (``BIT''), CALCE's CS2/CX2
+Arbin-cycled cells (``CALCE''), the Oxford Battery Degradation Dataset (``Oxford''), and NASA's
+PCoE battery aging set (``NASA''). SOH is computed as capacity at a given cycle divided by the
+median of that cell's first three cycles' capacity (not capacity at cycle 1 alone, which is
+noisier). Cells are split train/validation/test (70/15/15) at the \emph{cell} level, never the
+window level, so no cell contributes windows to more than one split. Across all seven datasets
+this yields \TotalCellsLoaded{} loaded cells, of which \CellsWithWindows{} contribute at least one
+windowed sample (one NASA cell and one RWTH cell have too few cycles for even one window at the
+input length used); \TrainWindows{} / \ValWindows{} / \TotalTestWindows{} windows in train/
+validation/test respectively.
+
+\subsection{Independent re-verification of data-quality corrections}
+Three of the seven datasets required non-trivial data-quality correction before use, and we
+re-verified each correction against the \emph{current} raw files during this work (not merely
+inherited the correction's original justification):
+
+\textbf{CALCE.} Four defects were found and corrected: (i) 331 of 366 raw Excel files record
+\texttt{Discharge\_Capacity} as a cumulative counter within the file rather than a per-cycle value,
+requiring differencing; (ii) short cumulative-counter files can tie at their last row, requiring an
+explicit tie-breaking rule; (iii) one file
+(\texttt{CX2\_16\_..\_self discharge test.xlsx}) is a non-cycling self-discharge test and is
+excluded; (iv) a final-cycle truncation flag is computed \emph{after} differencing, since the
+truncation signature only becomes visible post-differencing. After correction, the loader produces
+14{,}188 rows across 10 cells, a per-cell SOH-filter pass rate of 99.46\%, and a median absolute
+first-difference of 0.00168 (within the 0.001--0.003 range expected for genuine degradation rather
+than noise or alternation). An \texttt{INCOMPLETE\_POLICY=drop} sensitivity check (dropping rather
+than merely flagging incompletely-captured cycles) removes 0.63\% of rows; central CALCE
+conclusions are unaffected by this choice.
+
+\textbf{XJTU.} Eight \texttt{Sim\_satellite\_*} cells required removal of periodic sentinel/
+calibration readings that are not real degradation measurements (detected by frequency: a
+handful of distinct capacity values recur far more often than any real degradation trajectory
+would produce). We found, independently of this correction's original design intent, that the
+surviving rows' cycle numbers are \emph{not} renumbered after the sentinel rows are removed --
+only the row index is reset. Consequently every one of the \XjtuBridgingWindowCount{} test windows
+drawn from these 8 cells (\XjtuBridgingFraction\% of XJTU's test set) spans a point where sentinel
+rows were removed, joining the capacity reading just before a removed block to the one just after
+it as though they were consecutive cycles. We quantify rather than dismiss this: these windows show
+substantially elevated point-prediction error relative to XJTU's other test windows (see
+Section~\ref{sec:xjtu-sensitivity}), while split-conformal coverage validity is not broken by their
+presence.
+
+\textbf{RWTH.} Two corrections were independently re-verified against the raw session CSVs:
+(i) a session-boundary structural correction -- the raw \texttt{AhEla} (cumulative discharged Ah)
+resets at the start of each new session log file, not at the true start of whichever cycle happens
+to be in progress, so the first cycle recorded in a session systematically under-reports capacity;
+dropping each session's first recorded cycle removes 734 of 114{,}716 rows (0.64\%); (ii) a
+statistical local-outlier safety net for isolated single-row artifacts not explained by the
+structural correction (e.g.\ a multi-row near-zero stretch in one cell's trace), removing a further
+787 rows (0.69\%) when applied alone, or 848 rows (0.74\%) combined with (i) -- less than the sum of
+the two because the corrections overlap on a subset of rows.
+
+\section{Methods}
+\label{sec:methods}
+
+\subsection{Architecture}
+The forecaster is a multi-scale bidirectional LSTM with self-attention: a raw-resolution branch and
+a coarser, pooled-resolution branch each process the same input window, are concatenated, and fed
+through a self-attention pooling layer before a regression head. Ablation variants remove the
+coarse branch (\texttt{no\_multiscale}), replace attention pooling with mean pooling
+(\texttt{no\_attention}), collapse to a single plain BiLSTM (\texttt{plain\_lstm}), or substitute a
+GRU (\texttt{gru}); all variants are compared under identical training/calibration protocol
+(Section~\ref{sec:ablations}). Epistemic uncertainty at inference is estimated via MC-Dropout,
+which in this architecture activates only the explicit post-fusion and regression-head dropout
+layers -- the LSTM branches' own internal recurrent dropout is a separate mechanism tied to the
+LSTM module's training-mode flag and is not re-activated during MC sampling; we state this scope
+precisely rather than describing dropout as active ``throughout the network'' during MC sampling.
+
+\subsection{Conformal calibration variants}
+We compare four split-conformal variants, all under a nominal $1-\alpha=90\%$ target: \emph{pooled}
+(one calibration quantile across all seven datasets), \emph{groupwise/Mondrian} (a separate
+quantile per dataset, correcting for the small-group coverage failure a single pooled quantile
+produces when group sizes differ by orders of magnitude), \emph{normalized groupwise} (groupwise
+calibration additionally scaled per-sample by that sample's own MC-Dropout uncertainty estimate,
+giving genuinely sample-varying interval widths rather than one fixed width per dataset), and the
+\emph{hierarchical (empirical-Bayes)} partial-pooling calibration described below. All four require
+calibration and test nonconformity scores to come from the \emph{same} predictor (MC-Dropout mean
+vs.\ a deterministic forward pass) to satisfy the exchangeability assumption split-conformal
+prediction relies on; we found and fixed one script (leave-one-dataset-out evaluation) that
+violated this requirement (Section~\ref{sec:lodo}).
+
+\subsection{Hierarchical (empirical-Bayes) calibration}
+\label{sec:hierarchical}
+Rather than treating each dataset's calibration quantile as independent (groupwise) or identical
+(pooled), we estimate a DerSimonian-Laird random-effects model across the seven per-dataset
+quantiles: a between-dataset variance $\hat\tau^2$ and a shrinkage weight
+$w_g=\hat\tau^2/(\hat\tau^2+\hat\sigma_g^2)$ pulling each dataset's quantile toward a common mean in
+proportion to how much of the observed between-dataset spread is attributable to genuine
+heterogeneity versus sampling noise in that dataset's own calibration set. (A plausible alternative
+formula, $w_g=n_g/(n_g+\hat\tau^2/\hat\sigma_g^2)$, does not have this interpretation and was
+confirmed, during this audit, to be present in a superseded implementation that is not used for any
+reported result; the correct formula above is validated independently against hand-calculated cases
+and a from-scratch reimplementation, Appendix~\ref{app:verification}.) Per-dataset calibration
+variance $\hat\sigma_g^2$ is estimated via a cell-clustered bootstrap (resampling whole cells, not
+windows, since windows from one cell are correlated draws, not independent trials).
+
+\subsection{Heterogeneity-guided conformal prediction (HGC-CP)}
+\label{sec:hgccp}
+HGC-CP assigns each calibration point a weight via a softmax over negative maximum mean discrepancy
+(MMD, RBF-kernel, median-heuristic bandwidth) between the target dataset's representation and each
+source dataset's representation, computes the Tibshirani et al.\ corrected weighted-conformal
+quantile (normalizing over calibration points \emph{and} the test point's own implicit weight,
+rather than over calibration points alone, which under-covers in the small-$n$ regime this method
+targets), and applies a bounded heterogeneity-inflation term scaled by the distance to the nearest
+source. We select $(\lambda,\beta)$ -- the MMD temperature and inflation strength -- via a nested
+search that rotates the six non-target datasets as pseudo-targets, never touching the real target's
+test set during selection (Section~\ref{sec:hgccp-results}); as the validity analysis in
+\citet{barber2023beyond} makes explicit, a heuristic (non-likelihood-ratio) weight does not inherit
+an exact finite-sample coverage guarantee merely by using the corrected quantile formula, so we
+report HGC-CP results as an empirical, exploratory calibration method validated the same way as our
+hierarchical calibration -- by measured coverage under a held-out protocol -- not as a proven
+guarantee.
+
+\subsection{Leave-one-dataset-out (model-level) generalization}
+\label{sec:lodo}
+We distinguish explicitly between \emph{calibration-level} generalization (the model is trained on
+all seven datasets; only the calibration data for a given dataset is withheld and the calibration
+quantile for that dataset is estimated, e.g.\ via partial pooling, from the other six) and
+\emph{model-level} generalization (the entire dataset, including its contribution to model
+training, is withheld -- leave-one-dataset-out, LODO). These measure fundamentally different
+things and must not be conflated: a dataset with excellent calibration-level coverage under
+hierarchical pooling can still show poor LODO coverage, because the model itself has never learned
+that dataset's degradation distribution at all. We report both throughout and never describe a LODO
+result as reflecting calibration-level generalization or vice versa.
+
+\subsection{Statistical comparison protocol}
+Where we compare architectures or calibration strategies across datasets with a formal test, we use
+a one-sided Wilcoxon signed-rank test at the \emph{dataset} level ($n=6$ paired comparisons across
+the six datasets with enough cells for both arms to be defined), not at the level of individual
+architecture$\times$dataset cells, because windows -- and indeed whole cells -- are shared across
+every architecture compared on the same dataset, violating the independence assumption a
+per-cell-pair test would require. We report the resulting test's exact minimum attainable
+one-sided $p$-value ($1/2^6=0.0156$) alongside the result, rather than only the $p$-value, so a
+reader can judge how much evidential weight six paired comparisons can actually carry. Confidence
+intervals for per-dataset coverage are reported both at the window level (a naive binomial/
+Clopper-Pearson interval, which we found and corrected one script for silently treating windows as
+independent trials; Section~\ref{sec:coverage-ci}) and via a cell-clustered bootstrap (resampling
+whole cells with replacement), since the two can differ by several-fold for datasets with few
+distinct test cells.
+
 % ------------------------------------------------------------------------------------------------
-% TODO (continuing sections, drafted after Related Work since they depend on stable, already-
-% verified code/data facts rather than literature): Section 3 Datasets and Preprocessing (including
-% the K7/K8 "how found and fixed" CALCE/RWTH/XJTU narrative), Section 4 Methods (architecture,
-% conformal variants, hierarchical calibration, HGC-CP), Section 5 Results (BLOCKED on K6 for the
-% repeated-split subsection; everything else already has a machine-verified number), Section 6
-% Discussion/Limitations, Section 7 Conclusion, Data/Code Availability, Appendices.
+% TODO: Section 5 Results (BLOCKED on K6 for the repeated-split subsection; every other number
+% already machine-verified in results_registry.json / numbers.tex), Section 6 Discussion/
+% Limitations (claim-discipline pass against FINAL_REVIEW.md once Results is complete), Section 7
+% Conclusion, Data/Code Availability, Appendices (hand-calculated hierarchical-calibration cases,
+% HGC-CP property tests, conformal.py unit tests -- all already run, see TEST_REPORT.md, just need
+% transcribing into appendix form).
 % ------------------------------------------------------------------------------------------------
 
-\bibliographystyle{elsarticle-num}
+\bibliographystyle{elsarticle-harv}
 \bibliography{references}
 
 \end{document}
