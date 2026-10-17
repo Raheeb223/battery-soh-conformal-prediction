@@ -91,6 +91,9 @@ def main():
     # ---- MWHC: MMD-weighted hierarchical calibration (new method) ----
     registry["sections"]["mwhc"] = load("mwhc_results.json") or UNVERIFIED
 
+    # ---- Calibration-cell-budget sensitivity (new experiment) ----
+    registry["sections"]["calibration_size_sensitivity"] = load("calibration_size_sensitivity.json") or UNVERIFIED
+
     # ---- LODO (K1-fixed) -- tolerant of partial completion ----
     # IMPORTANT: lodo_*_results.json files from the OLD (pre-K1-fix) run are
     # still on disk for configs run_all_lodo() hasn't reached yet in the
@@ -282,6 +285,19 @@ def main():
         macro("MwhcXjtuFlooredLamTwenty", xjtu_lam20["floored"]["cov_eb_shrunk"] * 100, "{:.1f}")
         macro("MwhcXjtuEssLamTwenty", xjtu_lam20["ess"], "{:.2f}")
         macro("MwhcXjtuEssFlooredLamTwenty", xjtu_lam20["floored"]["ess"], "{:.2f}")
+
+    calsize = registry["sections"]["calibration_size_sensitivity"]
+    if calsize != UNVERIFIED:
+        for d, v in calsize["per_dataset"].items():
+            pb = v["per_budget"]
+            n_full = v["n_cells_available"]
+            macro(f"CalSize{d}FullCells", n_full, "{:d}")
+            macro(f"CalSize{d}FullMean", pb[str(n_full)]["coverage_mean"] * 100, "{:.1f}")
+            if "1" in pb:
+                b1 = pb["1"]
+                macro(f"CalSize{d}OneMean", b1["coverage_mean"] * 100, "{:.1f}")
+                macro(f"CalSize{d}OnePLow", b1["coverage_p05"] * 100, "{:.1f}")
+                macro(f"CalSize{d}OnePHigh", b1["coverage_p95"] * 100, "{:.1f}")
 
     if registry["sections"]["multiseed_summary"] != UNVERIFIED:
         s = registry["sections"]["multiseed_summary"]

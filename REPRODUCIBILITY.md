@@ -93,6 +93,10 @@ python mwhc_calibration.py              # MWHC: MMD-weighted hierarchical calibr
                                          # hierarchical_calibration_v2.py, plus a lambda-
                                          # sensitivity sweep and an effective-sample-size
                                          # diagnostic; no retraining, pure post-hoc statistics
+python calibration_size_sensitivity.py  # new experiment (see main.tex sec:calsize/
+                                         # sec:calsize-results): groupwise coverage vs. number of
+                                         # calibration CELLS actually used, 500 repeated random
+                                         # cell subsamples per budget; no retraining
 python predictor_consistent_recalibration.py   # per-dataset coverage with BOTH a window-level
                                                 # and a cell-clustered-bootstrap CI (E13-fixed)
 python xjtu_bridging_isolation.py       # E9: isolates bridging to the 8 Sim_satellite cells

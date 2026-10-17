@@ -530,4 +530,39 @@ problem (Section 5.3.7 / E14).
 
 ---
 
+### E20 | MAJOR (finding, not a code defect) | calibration_size_sensitivity.py | Calibration-cell-budget sweep separates two previously-conflated failure modes
+**Problem/finding:** Built a new experiment (`calibration_size_sensitivity.py`) to answer directly
+what K6 (E18) and the hierarchical/MWHC calibration-level LODO experiments only answered
+indirectly: holding the test set fixed, how does groupwise coverage behave as the number of
+calibration CELLS actually used shrinks? For each of the 5 datasets with >1 validation cell (MIT,
+RWTH, XJTU, BIT, CALCE -- Oxford and NASA have exactly 1 validation cell each, nothing to
+subsample), repeatedly subsample `b` cells without replacement (500 repeats per budget), recompute
+the finite-sample conformal quantile, evaluate test coverage.
+**Evidence:** `outputs/calibration_size_sensitivity.json`. Results split cleanly into two groups:
+(1) MIT (90.9% at 1 cell -> 92.2% at 21 cells) and RWTH (90.6% -> 90.7% over 1-7 cells) are already
+near-stable at a single calibration cell -- calibration-set size was never their binding
+constraint. (2) XJTU rises steadily and monotonically from 84.5% (1 cell, 5th-95th percentile range
+[69.4, 99.3]%) to 93.0% at its full 8 cells -- a genuine small-sample effect that more calibration
+data resolves. (3) BIT (80.4% at 1 cell -> only 88.1% at its full 11 cells) and CALCE (75.0% -> only
+75.6% at its full 2 cells) PLATEAU below the 90% target even at full calibration budget -- more
+calibration data from the same distribution does not close the gap, pointing to the own-quantile
+estimate itself being a biased stand-in for these datasets' true residual distribution, not merely
+an imprecisely estimated one. This cross-checks exactly against each dataset's own-quantile
+coverage already reported in `hierarchical_calibration_v2.json` (BIT 88.1%, CALCE 75.6%, identical
+to this script's full-budget values computed independently from the same underlying residuals via
+a different code path -- a consistency check, not a coincidence).
+**Consequence:** Resolves an ambiguity left open by this paper's earlier qualitative framing ("small
+datasets are less stable") -- that framing conflated two mechanistically different problems (too
+little calibration data vs. a biased calibration target) that call for different fixes (collect
+more data vs. something else entirely, e.g. a different nonconformity score or per-dataset model
+head). Collecting more BIT or CALCE validation cells, on this evidence, would not be expected to fix
+their coverage shortfall on its own.
+**Status:** RESOLVED as a new, honestly-reported finding. Folded into the manuscript: new Methods
+subsection (`sec:calsize`), new Results subsection (`sec:calsize-results`) with the real per-dataset
+numbers, and a new figure (`calibration_size_sensitivity.pdf`, the 8th figure in the manuscript) --
+mean coverage with a 5th-95th-percentile band vs. calibration-cell budget, one line per dataset.
+Also referenced from the Abstract and Highlights.
+
+---
+
 *(IDs continue as Stage 1 proceeds. Severity: CRITICAL/MAJOR/MODERATE/MINOR.)*
