@@ -42,7 +42,8 @@ class MultiScaleBiLSTMAttention(nn.Module):
                  dropout=config.DROPOUT,
                  attn_dim=config.ATTENTION_DIM,
                  use_multiscale=True,
-                 use_attention=True):
+                 use_attention=True,
+                 n_outputs=1):
         super().__init__()
         self.use_multiscale = use_multiscale
         self.use_attention = use_attention
@@ -67,11 +68,12 @@ class MultiScaleBiLSTMAttention(nn.Module):
         # else: mean-pool over the sequence dimension, no learned pooling
 
         self.dropout = nn.Dropout(dropout)
+        self.n_outputs = n_outputs
         self.head = nn.Sequential(
             nn.Linear(fused_dim, hidden_size),
             nn.ReLU(),
             nn.Dropout(dropout),
-            nn.Linear(hidden_size, 1),
+            nn.Linear(hidden_size, n_outputs),
         )
 
     def forward(self, x):

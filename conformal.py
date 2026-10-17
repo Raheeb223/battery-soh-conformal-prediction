@@ -223,3 +223,83 @@ class GroupwiseConformal:
             mask = labels == group
             results[group] = float(np.mean((y_true[mask] >= lower[mask]) & (y_true[mask] <= upper[mask])))
         return results
+
+
+class CQRSplitConformal:
+    """
+    Conformalized Quantile Regression (Romano, Patterson & Candes, 2019,
+    "Conformalized Quantile Regression", NeurIPS). Unlike SplitConformal
+    above, which widens a SINGLE point prediction by a fixed half-width, CQR
+    starts from a model that already outputs two quantile predictions
+    (q_lo, q_hi, typically at alpha/2 and 1-alpha/2) and conformalizes
+    THOSE, so the interval can be asymmetric and can already vary in width
+    per sample from the quantile regression itself, before any conformal
+    correction is applied.
+
+    Nonconformity score: E_i = max(q_lo(x_i) - y_i, y_i - q_hi(x_i)) -- how
+    far y_i falls outside the predicted quantile band on whichever side it
+    falls outside on (negative if y_i is inside the band). Calibrating the
+    (1-alpha) quantile of E on held-out data and widening both ends by that
+    same amount gives a marginal coverage guarantee by the same split-
+    conformal exchangeability argument as SplitConformal -- this is not a
+    heuristic, it is the quantile-regression analogue of the same proof.
+    """
+
+    def __init__(self, alpha=0.10):
+        self.alpha = alpha
+        self.qhat = None
+
+    def calibrate(self, y_true_cal: np.ndarray, q_lo_cal: np.ndarray, q_hi_cal: np.ndarray):
+        scores = np.maximum(q_lo_cal - y_true_cal, y_true_cal - q_hi_cal)
+        n = len(scores)
+        q_level = min(1.0, np.ceil((n + 1) * (1 - self.alpha)) / n)
+        self.qhat = float(np.quantile(scores, q_level))
+        return self.qhat
+
+    def predict_interval(self, q_lo: np.ndarray, q_hi: np.ndarray):
+        if self.qhat is None:
+            raise RuntimeError("Call calibrate() before predict_interval().")
+        return q_lo - self.qhat, q_hi + self.qhat
+
+
+class CQRGroupwiseConformal:
+    """Per-group version of CQRSplitConformal -- same group-level
+    calibration logic as GroupwiseConformal, adapted to CQR's two-sided
+    nonconformity score instead of a symmetric point-prediction residual."""
+
+    def __init__(self, alpha=0.10):
+        self.alpha = alpha
+        self.group_conformals = {}
+
+    def calibrate(self, y_true_cal, q_lo_cal, q_hi_cal, labels_cal):
+        for group in np.unique(labels_cal):
+            mask = labels_cal == group
+            c = CQRSplitConformal(alpha=self.alpha)
+            c.calibrate(y_true_cal[mask], q_lo_cal[mask], q_hi_cal[mask])
+            self.group_conformals[group] = c
+        return {g: c.qhat for g, c in self.group_conformals.items()}
+
+    def predict_interval(self, q_lo, q_hi, labels):
+        lower = np.full_like(q_lo, np.nan)
+        upper = np.full_like(q_hi, np.nan)
+        for group, c in self.group_conformals.items():
+            mask = labels == group
+            if not mask.any():
+                continue
+            lo, hi = c.predict_interval(q_lo[mask], q_hi[mask])
+            lower[mask] = lo
+            upper[mask] = hi
+        missing_mask = np.isnan(lower)
+        if missing_mask.any():
+            pooled_qhat = np.mean([c.qhat for c in self.group_conformals.values()])
+            lower[missing_mask] = q_lo[missing_mask] - pooled_qhat
+            upper[missing_mask] = q_hi[missing_mask] + pooled_qhat
+        return lower, upper
+
+    def coverage_by_group(self, y_true, q_lo, q_hi, labels):
+        lower, upper = self.predict_interval(q_lo, q_hi, labels)
+        results = {}
+        for group in np.unique(labels):
+            mask = labels == group
+            results[group] = float(np.mean((y_true[mask] >= lower[mask]) & (y_true[mask] <= upper[mask])))
+        return results

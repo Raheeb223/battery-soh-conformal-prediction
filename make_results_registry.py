@@ -41,6 +41,17 @@ def main():
     r = load("conformal_groupwise_results.json")
     registry["sections"]["main_model"] = r if r else UNVERIFIED
 
+    # MPIW (mean prediction interval width) isn't saved by train_one()'s
+    # results JSON -- compute it directly from the saved predictions file so
+    # it can be compared fairly against CQR's MPIW (same z-units, same test
+    # set) without needing a model re-run.
+    gw_pred_path = os.path.join(OUT_DIR, "conformal_groupwise_predictions.npz")
+    if os.path.exists(gw_pred_path):
+        gw_pred = np.load(gw_pred_path, allow_pickle=True)
+        registry["sections"]["main_model_mpiw"] = float(np.mean(gw_pred["upper"] - gw_pred["lower"]))
+    else:
+        registry["sections"]["main_model_mpiw"] = UNVERIFIED
+
     r_pooled = load("conformal_pooled_results.json")
     r_normgw = load("conformal_normalized_groupwise_results.json")
     registry["sections"]["conformal_mode_comparison"] = {
@@ -93,6 +104,10 @@ def main():
 
     # ---- Calibration-cell-budget sensitivity (new experiment) ----
     registry["sections"]["calibration_size_sensitivity"] = load("calibration_size_sensitivity.json") or UNVERIFIED
+
+    # ---- CQR: Conformalized Quantile Regression baseline (new comparison) ----
+    registry["sections"]["cqr_pooled"] = load("cqr_pooled_results.json") or UNVERIFIED
+    registry["sections"]["cqr_groupwise"] = load("cqr_groupwise_results.json") or UNVERIFIED
 
     # ---- LODO (K1-fixed) -- tolerant of partial completion ----
     # IMPORTANT: lodo_*_results.json files from the OLD (pre-K1-fix) run are
@@ -174,6 +189,7 @@ def main():
         macro("MainModelMAE", None)
         macro("MainModelRMSE", None)
         macro("MainModelCoverage", None)
+    macro("MainModelMPIW", registry["sections"]["main_model_mpiw"], "{:.5f}")
 
     if r and r_pooled:
         pooled_pd = r_pooled["per_dataset_coverage"]
@@ -298,6 +314,26 @@ def main():
                 macro(f"CalSize{d}OneMean", b1["coverage_mean"] * 100, "{:.1f}")
                 macro(f"CalSize{d}OnePLow", b1["coverage_p05"] * 100, "{:.1f}")
                 macro(f"CalSize{d}OnePHigh", b1["coverage_p95"] * 100, "{:.1f}")
+
+    cqr_pooled = registry["sections"]["cqr_pooled"]
+    cqr_gw = registry["sections"]["cqr_groupwise"]
+    if cqr_pooled != UNVERIFIED and cqr_gw != UNVERIFIED:
+        macro("CqrMAE", cqr_gw["test_mae"], "{:.5f}")
+        macro("CqrRMSE", cqr_gw["test_rmse"], "{:.5f}")
+        macro("CqrPooledCoverage", cqr_pooled["overall_coverage"] * 100, "{:.1f}")
+        macro("CqrGroupwiseCoverage", cqr_gw["overall_coverage"] * 100, "{:.1f}")
+        macro("CqrPooledMPIW", cqr_pooled["mpiw"], "{:.5f}")
+        macro("CqrGroupwiseMPIW", cqr_gw["mpiw"], "{:.5f}")
+        main_mpiw = registry["sections"]["main_model_mpiw"]
+        main_model = registry["sections"]["main_model"]
+        if main_mpiw != UNVERIFIED and main_model != UNVERIFIED:
+            macro("CqrMPIWRatio", cqr_gw["mpiw"] / main_mpiw, "{:.2f}")
+            macro("CqrMAEIncreasePercent", (cqr_gw["test_mae"] / main_model["test_mae"] - 1) * 100, "{:.1f}")
+            macro("CqrRMSEIncreasePercent", (cqr_gw["test_rmse"] / main_model["test_rmse"] - 1) * 100, "{:.1f}")
+        for d, v in cqr_gw["per_dataset_coverage"].items():
+            macro(f"CqrGroupwiseCoverage{d}", v * 100, "{:.1f}")
+        for d, v in cqr_pooled["per_dataset_coverage"].items():
+            macro(f"CqrPooledCoverage{d}", v * 100, "{:.1f}")
 
     if registry["sections"]["multiseed_summary"] != UNVERIFIED:
         s = registry["sections"]["multiseed_summary"]

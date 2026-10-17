@@ -97,6 +97,14 @@ python calibration_size_sensitivity.py  # new experiment (see main.tex sec:calsi
                                          # sec:calsize-results): groupwise coverage vs. number of
                                          # calibration CELLS actually used, 500 repeated random
                                          # cell subsamples per budget; no retraining
+python train_cqr.py                     # CQR baseline (see main.tex sec:cqr/sec:cqr-results):
+                                         # retrains the same backbone with a 2-output pinball-loss
+                                         # head (quantile regression) instead of MSE, then applies
+                                         # split-conformal correction (pooled and groupwise) on the
+                                         # two-sided CQR nonconformity score; saves
+                                         # outputs/cqr_pooled_results.json,
+                                         # outputs/cqr_groupwise_results.json,
+                                         # outputs/cqr_predictions.npz -- full retraining, ~60 epochs
 python predictor_consistent_recalibration.py   # per-dataset coverage with BOTH a window-level
                                                 # and a cell-clustered-bootstrap CI (E13-fixed)
 python xjtu_bridging_isolation.py       # E9: isolates bridging to the 8 Sim_satellite cells

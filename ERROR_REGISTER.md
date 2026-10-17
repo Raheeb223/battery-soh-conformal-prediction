@@ -565,4 +565,49 @@ Also referenced from the Abstract and Highlights.
 
 ---
 
+### E21 | MAJOR (finding, not a code defect) | train_cqr.py | CQR benchmark: matches coverage, improves it on the two worst-undercovering sources, but at ~2.2x the interval width
+**Problem/finding:** Benchmarked against Conformalized Quantile Regression (Romano, Patterson &
+Candes 2019), the single most-cited specific conformal method this paper's residual-based
+calibration variants (pooled/groupwise/normalized-groupwise/hierarchical/HGC-CP/MWHC) had not yet
+been compared against. Unlike every other method in this paper, CQR trains the model to predict two
+quantiles directly via pinball loss rather than training for a point estimate and calibrating a
+separate residual-based score. Implementation: widened `MultiScaleBiLSTMAttention`'s head from 1 to
+2 outputs via a new `n_outputs` constructor arg (backward-compatible default `n_outputs=1`, confirms
+`forward()`'s existing `.squeeze(-1)` is a no-op for 2 outputs); added `CQRSplitConformal` and
+`CQRGroupwiseConformal` to `conformal.py` using the two-sided nonconformity score
+`max(q_lo-y, y-q_hi)`; new script `train_cqr.py` retrains the identical backbone (same architecture,
+optimizer, data split, early-stopping convention as `train.py`) with summed pinball loss at
+tau=0.05/0.95, resolves the small fraction of quantile crossings by per-sample sorting (matching the
+original CQR paper's reference implementation), then evaluates both pooled and groupwise conformal
+correction.
+**Evidence:** `outputs/cqr_pooled_results.json`, `outputs/cqr_groupwise_results.json`. CQR groupwise
+reaches 90.25% overall coverage (90.0% pooled) against the 90% target, statistically indistinguishable
+from the main model's 90.47% groupwise coverage. Mean prediction interval width (MPIW), computed
+directly from each method's saved predictions, is 0.21179 z-units for CQR groupwise vs. 0.09683
+z-units for the main model's groupwise calibration -- a 2.19x ratio for essentially matched overall
+coverage. Point-prediction accuracy from CQR's quantile midpoint is also slightly worse: MAE 0.02768
+vs. 0.02479 (+11.6%), RMSE 0.10392 vs. 0.10174 (+2.1%). Per-dataset coverage is not uniformly worse,
+though: CQR reaches 85.3% (CALCE) and 100.0% (NASA) vs. the main model's 75.7% (CALCE) and 66.7%
+(NASA) -- the two datasets where groupwise calibration's own-quantile estimate was already diagnosed
+as biased, not merely imprecise (E20) -- while being comparable or slightly worse on MIT, RWTH, XJTU,
+and BIT, where the main model was already near nominal.
+**Consequence:** Training for quantiles directly is a genuine, architecturally different way to
+attack the specific bias E20 diagnosed for BIT and CALCE's persistent sub-90% plateau, and it works
+for CALCE and (less informatively, given NASA's n=3 test windows) NASA -- but the cost is real, not
+negligible: roughly double the interval width paper-wide, including on the four datasets that did not
+need the help. This is a genuine trade-off, not a strictly dominant alternative to this paper's
+residual-based groupwise/hierarchical calibration.
+**Fix attempted:** N/A -- this is a benchmark comparison, not a defect to fix. Reported exactly as
+measured, including the datasets where CQR does better and the datasets and metrics where it does
+worse.
+**Status:** RESOLVED as a new, honestly-reported finding. Folded into the manuscript: new Methods
+subsection (`sec:cqr`), new Results subsection (`sec:cqr-results`) with the real numbers and a new
+two-panel figure (`cqr_comparison.pdf` -- per-dataset coverage bar chart, and MPIW bar chart across
+main/CQR-groupwise/CQR-pooled), a new `MainModelMPIW` macro added so the main model's own interval
+width has a citable number for the first time, and explicit mentions in the Abstract, Highlights,
+Introduction, Discussion, and Conclusion that CQR is this paper's seventh calibration method, with
+its genuinely mixed (not uniformly better or worse) result stated plainly.
+
+---
+
 *(IDs continue as Stage 1 proceeds. Severity: CRITICAL/MAJOR/MODERATE/MINOR.)*
