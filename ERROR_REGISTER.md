@@ -486,4 +486,48 @@ land in test -- see `outputs/repeated_split_summary.json` and `paper/figures/rep
 
 ---
 
+### E19 | MAJOR (finding, not a code defect) | mwhc_calibration.py | MWHC (new method): naive similarity weighting degrades with weight concentration; flooring fixes the degradation but not the net accuracy
+**Problem/finding:** Designed and implemented MWHC (MMD-Weighted Hierarchical Calibration), a new
+method combining hierarchical calibration's empirical-Bayes shrinkage with HGC-CP's MMD-based
+similarity weighting (replace hierarchical calibration's flat `1/sigma2_d` random-effects weight
+with `sim_d/sigma2_d`, where `sim_d` is HGC-CP's own softmax similarity weight -- see
+`mwhc_calibration.py`'s `weighted_dersimonian_laird()`). Evaluated under the exact same
+calibration-level leave-one-dataset-out protocol as `hierarchical_calibration_v2.py`, swept across
+the same lambda grid HGC-CP's nested search uses (1, 3, 5, 10, 20).
+**Evidence:** `outputs/mwhc_results.json`. Self-check confirms `weighted_dersimonian_laird` with
+uniform similarity weights reproduces `dersimonian_laird` exactly (asserted in `__main__`, not just
+claimed) -- the new method is a genuine generalization of the existing one, not a different
+calculation. Across the 5 datasets with an EB value defined (MIT, RWTH, XJTU, BIT, CALCE), flat
+hierarchical calibration's mean `|coverage-90%|` is 13.97 points; MWHC is marginally better at
+lambda=1 (13.61) but WORSE at every sharper setting (14.25, 14.59, 22.47, 22.47, 23.20 points for
+lambda=3,5,10,20) -- i.e. adding the similarity signal this way does not help on average and can
+hurt badly. Diagnosed directly (not guessed) via Kish's effective sample size of the similarity
+weights: mean ESS falls from 3.72 (of 4 other datasets) at lambda=1 to 1.18 at lambda=20, i.e. the
+method increasingly relies on a single MMD-closest-looking source regardless of whether that
+source's residual magnitude actually resembles the target's. XJTU is the clearest single-dataset
+case: at lambda=20, ESS=1.00 and coverage collapses to 52.6% (vs. 92.9% under ordinary groupwise
+calibration).
+**Consequence:** Naive MMD-similarity weighting inside a random-effects fit is not a free
+improvement over flat pooling in this project's 5-6-source regime -- it introduces a new fragility
+(weight concentration) on top of removing HGC-CP's separate beta-tuning requirement, and the net
+effect across the lambda range tested is negative on average.
+**Fix attempted:** floored the similarity weights at half their equal-weighting share before
+feeding them to the random-effects fit (`compute_floored_group_weights`, grounded in importance-
+weight truncation, Ionides 2008) -- this directly targets the diagnosed ESS-collapse mechanism, not
+a blind parameter sweep. Floored MWHC's mean deviation stays in a tight 13.61-14.54-point band
+across the ENTIRE lambda range (vs. unfloored's 13.61-23.20-point range), and XJTU's lambda=20
+coverage recovers from 52.6% to 90.2% (floored ESS=1.81 vs. unfloored ESS=1.00). The fix removes the
+lambda-sensitivity/fragility but does NOT produce a net accuracy gain over flat hierarchical
+calibration (floored deviations are still slightly above the 13.97-point flat baseline at lambda>=3).
+**Status:** RESOLVED as a reported, diagnosed negative/mixed result -- not presented as an
+improvement it did not turn out to be. Folded into the manuscript honestly: new Methods subsection
+(`sec:mwhc`) describing the method and the failure mode it was checked for deliberately, new Results
+subsection (`sec:mwhc-results`) with the real numbers and the new `mwhc_sensitivity.pdf` two-panel
+figure (coverage deviation and ESS vs. lambda, floored vs. unfloored), and explicit mentions in the
+Abstract/Highlights/Introduction that this new method does not improve average coverage but does
+explain and fix a concrete instability mechanism shared conceptually with HGC-CP's own tuning
+problem (Section 5.3.7 / E14).
+
+---
+
 *(IDs continue as Stage 1 proceeds. Severity: CRITICAL/MAJOR/MODERATE/MINOR.)*

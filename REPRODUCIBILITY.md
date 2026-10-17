@@ -87,6 +87,12 @@ python dataset_level_wilcoxon.py # K2-fixed: reads real coverage numbers from th
                                   # (n=6) and the invalid-but-shown-for-contrast 24-pair comparison
 python run_nested_hp_search_all.py      # K4: HGC-CP (lambda,beta) nested held-out search, all
                                          # 7 datasets as real target in turn
+python mwhc_calibration.py              # MWHC: MMD-weighted hierarchical calibration (new
+                                         # method, see main.tex sec:mwhc/sec:mwhc-results) --
+                                         # same calibration-level LODO protocol as
+                                         # hierarchical_calibration_v2.py, plus a lambda-
+                                         # sensitivity sweep and an effective-sample-size
+                                         # diagnostic; no retraining, pure post-hoc statistics
 python predictor_consistent_recalibration.py   # per-dataset coverage with BOTH a window-level
                                                 # and a cell-clustered-bootstrap CI (E13-fixed)
 python xjtu_bridging_isolation.py       # E9: isolates bridging to the 8 Sim_satellite cells

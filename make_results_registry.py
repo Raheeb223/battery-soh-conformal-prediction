@@ -88,6 +88,9 @@ def main():
     # ---- HGC-CP nested hyperparameter search (K4) ----
     registry["sections"]["hgc_cp_nested_search"] = load("nested_hp_search_results.json") or UNVERIFIED
 
+    # ---- MWHC: MMD-weighted hierarchical calibration (new method) ----
+    registry["sections"]["mwhc"] = load("mwhc_results.json") or UNVERIFIED
+
     # ---- LODO (K1-fixed) -- tolerant of partial completion ----
     # IMPORTANT: lodo_*_results.json files from the OLD (pre-K1-fix) run are
     # still on disk for configs run_all_lodo() hasn't reached yet in the
@@ -259,6 +262,26 @@ def main():
             macro(f"HgcCp{d}Lam", v["selected_lam"], "{:.1f}")
             macro(f"HgcCp{d}Beta", v["selected_beta"], "{:.2f}")
             macro(f"HgcCp{d}Coverage", v["real_target_test_coverage"] * 100, "{:.1f}")
+
+    mwhc = registry["sections"]["mwhc"]
+    if mwhc != UNVERIFIED:
+        lam_words = {1.0: "One", 3.0: "Three", 5.0: "Five", 10.0: "Ten", 20.0: "Twenty"}
+        s = mwhc["summary"]
+        macro("MwhcFlatDev", s["mean_abs_dev_flat"] * 100, "{:.2f}")
+        for lam in mwhc["lam_grid"]:
+            word = lam_words.get(lam)
+            if word is None:
+                raise ValueError(f"mwhc lam {lam!r} has no word mapping -- add one")
+            macro(f"MwhcDevLam{word}", s["mean_abs_dev_by_lam"][str(lam)] * 100, "{:.2f}")
+            macro(f"MwhcDevFlooredLam{word}", s["mean_abs_dev_by_lam_floored"][str(lam)] * 100, "{:.2f}")
+            macro(f"MwhcEssLam{word}", s["mean_ess_by_lam"][str(lam)], "{:.2f}")
+        # XJTU is the clearest single-dataset illustration of the weight-concentration
+        # failure mode and the floor fix -- see Section~\ref{sec:mwhc}.
+        xjtu_lam20 = mwhc["per_target"]["XJTU"]["per_lam"]["20.0"]
+        macro("MwhcXjtuUnflooredLamTwenty", xjtu_lam20["cov_eb_shrunk_sim"] * 100, "{:.1f}")
+        macro("MwhcXjtuFlooredLamTwenty", xjtu_lam20["floored"]["cov_eb_shrunk"] * 100, "{:.1f}")
+        macro("MwhcXjtuEssLamTwenty", xjtu_lam20["ess"], "{:.2f}")
+        macro("MwhcXjtuEssFlooredLamTwenty", xjtu_lam20["floored"]["ess"], "{:.2f}")
 
     if registry["sections"]["multiseed_summary"] != UNVERIFIED:
         s = registry["sections"]["multiseed_summary"]
