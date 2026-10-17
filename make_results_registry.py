@@ -169,6 +169,24 @@ def main():
         macro("MainModelRMSE", None)
         macro("MainModelCoverage", None)
 
+    if r and r_pooled:
+        pooled_pd = r_pooled["per_dataset_coverage"]
+        groupwise_pd = r["per_dataset_coverage"]
+        for d, v in pooled_pd.items():
+            macro(f"PooledCoverage{d}", v * 100, "{:.1f}")
+        pooled_vals_pd = [v * 100 for v in pooled_pd.values()]
+        macro("PooledCoverageMin", min(pooled_vals_pd), "{:.1f}")
+        macro("PooledCoverageMax", max(pooled_vals_pd), "{:.1f}")
+        # worst-case groupwise deviation from the 90% nominal target, excluding NASA
+        # (NASA's n=3 test windows make its coverage estimate too noisy to be meaningful --
+        # see the per-dataset coverage discussion -- so it is excluded from this "how far off
+        # does groupwise get, at worst" claim rather than silently dominating it)
+        devs_excl_nasa = {d: abs(v * 100 - 90) for d, v in groupwise_pd.items() if d != "NASA"}
+        worst_d = max(devs_excl_nasa, key=devs_excl_nasa.get)
+        macro("GroupwiseMaxDevExclNASA", devs_excl_nasa[worst_d], "{:.1f}")
+        print(f"groupwise max deviation from 90% nominal (excl. NASA): {worst_d} "
+              f"({devs_excl_nasa[worst_d]:.1f} points)")
+
     for name, v in registry["sections"]["baselines_point_prediction"].items():
         if v != UNVERIFIED:
             macro(f"Baseline{name.capitalize()}MAE", v["test_mae"], "{:.5f}")
@@ -180,6 +198,27 @@ def main():
             macro(f"Ablation{tag}MAE", v["test_mae"], "{:.5f}")
             macro(f"Ablation{tag}RMSE", v["test_rmse"], "{:.5f}")
             macro(f"Ablation{tag}Coverage", v["overall_coverage"] * 100, "{:.1f}")
+
+    baseline_conformal = registry["sections"]["baseline_conformal_coverage"]
+    if baseline_conformal != UNVERIFIED:
+        for name, v in baseline_conformal.items():
+            tag = "".join(p.capitalize() for p in name.split("_"))
+            macro(f"BaselineConformal{tag}Pooled", v["pooled_overall_coverage"] * 100, "{:.1f}")
+            macro(f"BaselineConformal{tag}Groupwise", v["groupwise_overall_coverage"] * 100, "{:.1f}")
+            macro(f"BaselineConformal{tag}BitPooled", v["pooled_per_dataset_coverage"]["BIT"] * 100, "{:.1f}")
+            macro(f"BaselineConformal{tag}BitGroupwise", v["groupwise_per_dataset_coverage"]["BIT"] * 100, "{:.1f}")
+        gw_vals = [v["groupwise_overall_coverage"] * 100 for v in baseline_conformal.values()]
+        pooled_vals = [v["pooled_overall_coverage"] * 100 for v in baseline_conformal.values()]
+        bit_pooled_vals = [v["pooled_per_dataset_coverage"]["BIT"] * 100 for v in baseline_conformal.values()]
+        bit_gw_vals = [v["groupwise_per_dataset_coverage"]["BIT"] * 100 for v in baseline_conformal.values()]
+        macro("BaselineConformalGroupwiseMin", min(gw_vals), "{:.1f}")
+        macro("BaselineConformalGroupwiseMax", max(gw_vals), "{:.1f}")
+        macro("BaselineConformalPooledMin", min(pooled_vals), "{:.1f}")
+        macro("BaselineConformalPooledMax", max(pooled_vals), "{:.1f}")
+        macro("BaselineConformalBitPooledMin", min(bit_pooled_vals), "{:.1f}")
+        macro("BaselineConformalBitPooledMax", max(bit_pooled_vals), "{:.1f}")
+        macro("BaselineConformalBitGroupwiseMin", min(bit_gw_vals), "{:.1f}")
+        macro("BaselineConformalBitGroupwiseMax", max(bit_gw_vals), "{:.1f}")
 
     # NOTE: macro() strips all non-letter characters from the name, so a
     # purely-numeric differentiator (e.g. "Window10MAE" vs "Window20MAE")
@@ -305,6 +344,27 @@ def main():
     else:
         macro("XjtuBridgingFraction", None)
         macro("XjtuBridgingWindowCount", None)
+
+    pred_ci = registry["sections"]["predictor_consistent_coverage"]
+    if pred_ci != UNVERIFIED:
+        for d in ("XJTU", "CALCE"):
+            v = pred_ci["per_dataset"][d]
+            wlo, whi = v["cp95_window_level_see_docstring_caveat"]
+            clo, chi = v["cell_bootstrap_95ci"]
+            macro(f"PredCI{d}WindowLow", wlo * 100, "{:.1f}")
+            macro(f"PredCI{d}WindowHigh", whi * 100, "{:.1f}")
+            macro(f"PredCI{d}CellLow", clo * 100, "{:.1f}")
+            macro(f"PredCI{d}CellHigh", chi * 100, "{:.1f}")
+            macro(f"PredCI{d}WidthRatio", (chi - clo) / (whi - wlo), "{:.1f}")
+
+    xjtu_sens = registry["sections"]["xjtu_bridging_sensitivity"]
+    if xjtu_sens != UNVERIFIED:
+        bridge, clean, allx = (xjtu_sens["bridging_windows_only"], xjtu_sens["clean_windows_only"],
+                                xjtu_sens["all_xjtu"])
+        macro("XjtuBridgingRMSERatio", bridge["rmse_z"] / clean["rmse_z"], "{:.1f}")
+        macro("XjtuBridgingMAEShiftPercent", 100 * (allx["mae_z"] - clean["mae_z"]) / clean["mae_z"], "{:.1f}")
+        macro("XjtuBridgingCoverage", bridge["coverage"] * 100, "{:.1f}")
+        macro("XjtuCleanCoverage", clean["coverage"] * 100, "{:.1f}")
 
     with open(os.path.join("paper", "numbers.tex"), "w") as fh:
         fh.write("\n".join(lines) + "\n")

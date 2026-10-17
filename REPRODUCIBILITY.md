@@ -136,3 +136,16 @@ K6 repeated-split experiment completed 2026-10-10 (`outputs/repeated_split_summa
 folded into `paper/main.tex` Section 5.9 and the Discussion. Dataset source/license citations for
 the manuscript's Data Availability section were verified via live search against each dataset's own
 published source (see `paper/main.tex`, Data and code availability).
+
+2026-10-17 audit pass: every pipeline script listed in Section 3 above was confirmed to have a
+corresponding file in `outputs/`, and every figure `main.tex` references was confirmed to exist in
+`paper/figures/`. This surfaced one real gap and corrected it (see `ERROR_REGISTER.md` E2): the K3
+cross-architecture conformal coverage result (`outputs/baseline_conformal_results.json`) had been
+computed but never wired into `make_results_registry.py` or `main.tex` -- the "Baseline conformal
+coverage" subsection was asserting hand-typed numbers with no macro behind them. Fixed by adding a
+macro-emission block and a new table (Table~\ref{tab:baseline-conformal}). The same sweep also
+found and corrected several other hand-typed/approximate numbers elsewhere in Results and
+Discussion (pooled-vs-groupwise per-dataset deviations, the window-level-vs-cell-clustered CI width
+ratio for XJTU/CALCE -- which was stated as "roughly 4--5x" but is actually
+7.4x/6.4x -- and the XJTU bridging-window MAE shift, restated from "roughly 8%" to the exact 9.0%)
+by adding the missing macros rather than leaving the imprecise prose in place.

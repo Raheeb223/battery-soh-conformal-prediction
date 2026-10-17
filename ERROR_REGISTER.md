@@ -60,7 +60,22 @@ reproduced from existing files.
 **Fix:** Extend `baselines.py` to also predict and save validation-set predictions + `cell_val`/
 `cell_test`; add a plain-LSTM/GRU baseline-conformal path; compute pooled+groupwise coverage per
 dataset per architecture; write `baseline_conformal_results.json`.
-**Status:** CONFIRMED. Fix pending.
+**Status:** RESOLVED. `baseline_conformal_coverage.py` ran (K3) and produced
+`outputs/baseline_conformal_results.json` (pooled + groupwise coverage, overall and per-dataset,
+for linear/SVR/XGBoost plus the plain-LSTM/GRU ablations reused without retraining). This status
+line itself was stale -- the output file already existed on disk when re-checked 2026-10-17, but
+the result had never been wired into `make_results_registry.py` or `main.tex`, so the "Baseline
+conformal coverage" subsection was asserting hand-typed numbers ("89--91\% overall", "markedly
+worse and more variable") with no macro behind them, violating this project's own numerical-truth
+discipline. Fixed by adding a `baseline_conformal_coverage` macro-emission block to
+`make_results_registry.py` (per-architecture overall + BIT-specific pooled/groupwise coverage, plus
+cross-architecture min/max) and rewriting the subsection to cite those macros, with a new table
+(Table~\ref{tab:baseline-conformal} in `main.tex`). The corrected finding is more precise than the
+original prose: overall pooled and groupwise coverage are actually close for every architecture
+(88.1--90.7\% across both modes) because MIT dominates the pooled quantile; the real,
+architecture-independent failure is visible only at the small-dataset level -- BIT alone collapses
+to 16.7--43.1\% under pooled calibration and recovers to 86.1--89.1\% under groupwise calibration,
+in every one of the five architectures tested.
 
 ### E3 | MODERATE | preprocessing.py:6 | Stale docstring (K9a)
 **Problem:** Module docstring states `SOH = capacity(cycle)/capacity(cycle=1)`; actual code
