@@ -157,7 +157,7 @@ published source (see `paper/main.tex`, Data and code availability).
 
 2026-10-17 audit pass: every pipeline script listed in Section 3 above was confirmed to have a
 corresponding file in `outputs/`, and every figure `main.tex` references was confirmed to exist in
-`paper/figures/`. This surfaced one real gap and corrected it (see `ERROR_REGISTER.md` E2): the K3
+`paper/`. This surfaced one real gap and corrected it (see `ERROR_REGISTER.md` E2): the K3
 cross-architecture conformal coverage result (`outputs/baseline_conformal_results.json`) had been
 computed but never wired into `make_results_registry.py` or `main.tex` -- the "Baseline conformal
 coverage" subsection was asserting hand-typed numbers with no macro behind them. Fixed by adding a

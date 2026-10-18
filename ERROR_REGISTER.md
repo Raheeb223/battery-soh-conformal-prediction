@@ -482,7 +482,7 @@ seeds tried, where NASA's did twice. This is reported in the manuscript's K6 res
 exactly as planned. The broader K6 finding this fed into: groupwise coverage for the three
 largest-$n$ datasets (MIT, RWTH, BIT) is stable within a few points across all 5 splits, while the
 four smallest (XJTU, CALCE, Oxford, NASA) swing by 12-33 coverage points depending on which cells
-land in test -- see `outputs/repeated_split_summary.json` and `paper/figures/repeated_split_variability.pdf`.
+land in test -- see `outputs/repeated_split_summary.json` and `paper/repeated_split_variability.pdf`.
 
 ---
 
