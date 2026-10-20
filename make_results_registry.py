@@ -444,7 +444,10 @@ def main():
         macro("HierMuHat", hier["global"]["mu_hat"], "{:.5f}")
         macro("HierTau2Hat", hier["global"]["tau2_hat"], "{:.2e}")
         for d, v in hier["per_target"].items():
-            macro(f"Hier{d}CovEBShrunk", v["cov_eb_shrunk"] * 100 if v["cov_eb_shrunk"] is not None else None, "{:.1f}")
+            # A dataset outside the hierarchical fit (too few cells for the cell bootstrap) has no
+            # shrunk quantile by design; only its prior-only and cross-pooled values exist.
+            if v["cov_eb_shrunk"] is not None:
+                macro(f"Hier{d}CovEBShrunk", v["cov_eb_shrunk"] * 100, "{:.1f}")
             macro(f"Hier{d}CovOwn", v["cov_own_quantile"] * 100, "{:.1f}")
             macro(f"Hier{d}CovPriorOnly", v["cov_prior_only"] * 100, "{:.1f}")
             macro(f"Hier{d}CovCrossPooled", v["cov_cross_source_pooled"] * 100, "{:.1f}")
