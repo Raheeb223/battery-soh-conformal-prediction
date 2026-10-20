@@ -91,8 +91,9 @@ Timings from `deployability_benchmark.py` depend on the hardware; rerun it on yo
 - **Registry.** `make_results_registry.py` reads those files and writes `results_registry.json`:
   the raw results by section, plus a `values` table with every number exactly as printed in the
   paper. It writes `UNVERIFIED` instead of a number whenever an input is missing, and refuses to
-  give two different numbers the same name. Without the raw data and `cache/`, the cell and window
-  counts read from those sources show as `UNVERIFIED`; every result value is still reproduced.
+  give two different numbers the same name. Window and cell counts need `cache/` and the raw CALCE
+  files; when those are present the registry saves the counts to `outputs/data_counts.json`, and
+  without them it reads that file, so a clone without the data rebuilds every value.
 - **Figures.** `python figures/make_results_figures.py` (and the other `figures/make_*.py`) redraw the
   paper's figures from `outputs/` and `results_registry.json` into `figures/out/`.
 - **Checks.** `python tests/run_checks.py` runs the verification checks described in

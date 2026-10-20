@@ -34,6 +34,31 @@ def load(name):
         return json.load(fh)
 
 
+def data_counts(calce_cells):
+    """Window and cell counts per split, and the number of raw CALCE workbooks.
+
+    These need cache/processed.npz and the raw CALCE folders. When both are present the counts are
+    computed and saved to outputs/data_counts.json; otherwise (e.g. a clone without the data) the
+    saved file is read, so the registry can still be rebuilt."""
+    cache_path = os.path.join(config.CACHE_DIR, "processed.npz")
+    cell_dirs = [os.path.join(config.ROOT_DIR, c) for c in calce_cells]
+    if not (os.path.exists(cache_path) and cell_dirs and all(os.path.isdir(d) for d in cell_dirs)):
+        return load("data_counts.json")
+    cache = np.load(cache_path, allow_pickle=True)
+    datasets = ("MIT", "RWTH", "XJTU", "BIT", "CALCE", "Oxford", "NASA")
+    counts = {
+        "train_windows": int(cache["X_train"].shape[0]),
+        "val_windows": int(cache["X_val"].shape[0]),
+        "test_cells": {d: len(set(cache["cell_test"][cache["lab_test"] == d])) for d in datasets},
+        "test_windows": {d: int((cache["lab_test"] == d).sum()) for d in datasets},
+        "calce_raw_files": sum(f.lower().endswith(".xlsx")
+                               for d in cell_dirs for _, _, files in os.walk(d) for f in files),
+    }
+    with open(os.path.join(OUT_DIR, "data_counts.json"), "w") as fh:
+        json.dump(counts, fh, indent=2)
+    return counts
+
+
 def main():
     registry = {"generated_from": "make_results_registry.py", "sections": {}}
 
@@ -172,17 +197,15 @@ def main():
             "median_step_min": min(float(r[3]) for r in rows),
             "median_step_max": max(float(r[3]) for r in rows),
             "cumulative_files": txt.count("behaves as a cumulative counter") // 2,
+            "cells": [r[0] for r in rows],
         }
-        raw_counts = []
-        for calce_row in rows:
-            cell_dir = os.path.join(config.ROOT_DIR, calce_row[0])
-            if os.path.isdir(cell_dir):
-                raw_counts.append(sum(f.lower().endswith(".xlsx")
-                                      for _, _, files in os.walk(cell_dir) for f in files))
-        registry["sections"]["calce_corrections"]["raw_files"] = (
-            sum(raw_counts) if len(raw_counts) == len(rows) else None)
     else:
         registry["sections"]["calce_corrections"] = UNVERIFIED
+
+    # ---- Dataset counts that need the cache or the raw files ----
+    calce_cells = (registry["sections"]["calce_corrections"]["cells"]
+                   if registry["sections"]["calce_corrections"] != UNVERIFIED else [])
+    registry["sections"]["data_counts"] = data_counts(calce_cells) or UNVERIFIED
 
     # ---- Deterministic pass vs MC-Dropout mean as interval centre (deterministic_predictor_comparison.py) ----
     registry["sections"]["deterministic_predictor"] = load("deterministic_predictor_results.json") or UNVERIFIED
@@ -507,18 +530,13 @@ def main():
         macro("CellsWithWindows", None)
         macro("TotalTestWindows", None)
 
-    cache_path = os.path.join(config.CACHE_DIR, "processed.npz")
-    if os.path.exists(cache_path):
-        cache = np.load(cache_path, allow_pickle=True)
-        macro("TrainWindows", cache["X_train"].shape[0], "{:d}")
-        macro("ValWindows", cache["X_val"].shape[0], "{:d}")
-        for d in ("MIT", "RWTH", "XJTU", "BIT", "CALCE", "Oxford", "NASA"):
-            m = cache["lab_test"] == d
-            macro(f"TestCells{d}", len(set(cache["cell_test"][m])), "{:d}")
-            macro(f"TestWindows{d}", int(m.sum()), "{:,}")
-    else:
-        macro("TrainWindows", None)
-        macro("ValWindows", None)
+    dc = registry["sections"]["data_counts"]
+    have = dc != UNVERIFIED
+    macro("TrainWindows", dc["train_windows"] if have else None, "{:d}")
+    macro("ValWindows", dc["val_windows"] if have else None, "{:d}")
+    for d in ("MIT", "RWTH", "XJTU", "BIT", "CALCE", "Oxford", "NASA"):
+        macro(f"TestCells{d}", dc["test_cells"][d] if have else None, "{:d}")
+        macro(f"TestWindows{d}", dc["test_windows"][d] if have else None, "{:,}")
 
     if xjtu_bridge:
         n_sat, n_other = xjtu_bridge["n_sim_satellite"], xjtu_bridge["n_other_47_cells"]
@@ -575,7 +593,7 @@ def main():
         macro("CalceCells", cc["n_cells"], "{:d}")
         macro("CalceRows", cc["total_rows"], "{:,}")
         macro("CalceCumulativeFiles", cc["cumulative_files"], "{:d}")
-        macro("CalceRawFiles", cc["raw_files"], "{:d}")
+        macro("CalceRawFiles", dc["calce_raw_files"] if dc != UNVERIFIED else None, "{:d}")
         macro("CalceDropPct", 100 * (cc["total_rows"] - cc["rows_after_drop"]) / cc["total_rows"], "{:.2f}")
         macro("CalceSohKeepMin", cc["soh_keep_pct_min"], "{:.1f}")
         macro("CalceSohKeepMax", cc["soh_keep_pct_max"], "{:.1f}")

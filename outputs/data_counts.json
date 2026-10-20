@@ -1,0 +1,23 @@
+{
+  "train_windows": 182710,
+  "val_windows": 41747,
+  "test_cells": {
+    "MIT": 21,
+    "RWTH": 6,
+    "XJTU": 8,
+    "BIT": 11,
+    "CALCE": 2,
+    "Oxford": 1,
+    "NASA": 1
+  },
+  "test_windows": {
+    "MIT": 17513,
+    "RWTH": 13446,
+    "XJTU": 2605,
+    "BIT": 798,
+    "CALCE": 2743,
+    "Oxford": 56,
+    "NASA": 3
+  },
+  "calce_raw_files": 366
+}

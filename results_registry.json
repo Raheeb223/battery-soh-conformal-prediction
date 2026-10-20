@@ -3926,7 +3926,41 @@
       "median_step_min": 0.0012,
       "median_step_max": 0.0024,
       "cumulative_files": 348,
-      "raw_files": 366
+      "cells": [
+        "CS2_33",
+        "CS2_34",
+        "CS2_35",
+        "CS2_38",
+        "CX2_16",
+        "CX2_33",
+        "CX2_34",
+        "CX2_35",
+        "CX2_36",
+        "CX2_37"
+      ]
+    },
+    "data_counts": {
+      "train_windows": 182710,
+      "val_windows": 41747,
+      "test_cells": {
+        "MIT": 21,
+        "RWTH": 6,
+        "XJTU": 8,
+        "BIT": 11,
+        "CALCE": 2,
+        "Oxford": 1,
+        "NASA": 1
+      },
+      "test_windows": {
+        "MIT": 17513,
+        "RWTH": 13446,
+        "XJTU": 2605,
+        "BIT": 798,
+        "CALCE": 2743,
+        "Oxford": 56,
+        "NASA": 3
+      },
+      "calce_raw_files": 366
     },
     "deterministic_predictor": {
       "per_split": {
