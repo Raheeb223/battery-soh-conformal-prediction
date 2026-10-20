@@ -54,7 +54,7 @@ for (x, y), c, lab in zip(positions, colors, labels):
                                    connectionstyle="arc3,rad=0.08", zorder=2))
 ax1.add_patch(FancyBboxPatch((3.6, 1.4), 2.8, 1.1, boxstyle="round,pad=0.1",
                               facecolor="white", edgecolor="black", linewidth=1.3, zorder=4))
-ax1.text(5.0, 1.95, f"{V['TotalCellsLoaded']} cells\n7 institutions", ha="center", va="center",
+ax1.text(5.0, 1.95, f"{V['TotalCellsLoaded']} cells\n7 research groups", ha="center", va="center",
          fontsize=7, zorder=5)
 
 # ------------------------------------------------------------------

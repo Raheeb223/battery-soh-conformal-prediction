@@ -5,7 +5,7 @@ Datasets? An Empirical Study of Conformal Calibration for State-of-Health Predic
 Datasets* (R. Sadman, submitted to the *Journal of Energy Storage*).
 
 The study trains one state-of-health (SOH) predictor across seven public lithium-ion battery
-datasets (339 cells from seven institutions) and compares seven ways of calibrating its prediction
+datasets (339 cells from seven research groups) and compares seven ways of calibrating its prediction
 intervals, reporting coverage per dataset rather than only in aggregate:
 
 | Strategy | Calibrates each dataset on | Code |

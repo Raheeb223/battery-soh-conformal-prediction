@@ -14,6 +14,7 @@ registry says so, and never fabricates or quietly omits a value.
 Run:  python make_results_registry.py
 Out:  results_registry.json, paper/numbers.tex
 """
+import glob
 import json
 import os
 import re
@@ -202,6 +203,23 @@ def main():
     else:
         registry["sections"]["calce_corrections"] = UNVERIFIED
 
+    # ---- Splits whose NASA validation cell yields no window (repeated_split_experiment.py logs) ----
+    # conformal.py prints a warning and falls back to a pooled quantile when a dataset has no
+    # validation residuals; count the splits whose groupwise run printed it for NASA.
+    split_logs = sorted(glob.glob(os.path.join("logs", "repeated_split_run*.log")))
+    if split_logs:
+        fallback_splits = set()
+        for path in split_logs:
+            with open(path, encoding="utf-8", errors="ignore") as fh:
+                txt = fh.read()
+            runs = re.split(r"run_name=split(\d+)_", txt)
+            for seed, chunk in zip(runs[1::2], runs[2::2]):
+                if chunk.startswith("groupwise") and "no calibration data for ['NASA']" in chunk:
+                    fallback_splits.add(int(seed))
+        registry["sections"]["nasa_fallback_splits"] = sorted(fallback_splits)
+    else:
+        registry["sections"]["nasa_fallback_splits"] = UNVERIFIED
+
     # ---- Dataset counts that need the cache or the raw files ----
     calce_cells = (registry["sections"]["calce_corrections"]["cells"]
                    if registry["sections"]["calce_corrections"] != UNVERIFIED else [])
@@ -294,6 +312,19 @@ def main():
         macro("GroupwiseMaxDevExclNASA", devs_excl_nasa[worst_d], "{:.1f}")
         print(f"groupwise max deviation from 90% nominal (excl. NASA): {worst_d} "
               f"({devs_excl_nasa[worst_d]:.1f} points)")
+
+    # Width cost of groupwise over pooled calibration: same predictor and test windows, so the
+    # mean interval widths are directly comparable.
+    pooled_pred_path = os.path.join(OUT_DIR, "conformal_pooled_predictions.npz")
+    if os.path.exists(pooled_pred_path) and registry["sections"]["main_model_mpiw"] != UNVERIFIED:
+        pooled_pred = np.load(pooled_pred_path, allow_pickle=True)
+        pooled_mpiw = float(np.mean(pooled_pred["upper"] - pooled_pred["lower"]))
+        macro("PooledMPIW", pooled_mpiw, "{:.5f}")
+        macro("GroupwiseWidthOverPooledPercent",
+              100 * (registry["sections"]["main_model_mpiw"] / pooled_mpiw - 1), "{:.0f}")
+    else:
+        macro("PooledMPIW", None)
+        macro("GroupwiseWidthOverPooledPercent", None)
 
     for name, v in registry["sections"]["baselines_point_prediction"].items():
         if v != UNVERIFIED:
@@ -491,8 +522,8 @@ def main():
         macro("RepeatedSplitUnstableRangeMin", min(var[d]["range"] for d in unstable) * 100, "{:.1f}")
         macro("RepeatedSplitUnstableRangeMax", max(var[d]["range"] for d in unstable) * 100, "{:.1f}")
 
-        # Persistence robustness across all 5 splits tried so far (seed 42, the
-        # original anchor, from persistence_baselines.json, plus seeds 43-46 from K6).
+        # Persistence robustness across all splits: the main split (seed 42) from
+        # persistence_baselines.json, plus seeds 43-46 from repeated_split_experiment.py.
         if persistence != UNVERIFIED:
             for d in repeated["persistence"]["43"].keys():
                 losses = 0
@@ -514,6 +545,9 @@ def main():
                 macro(f"PersistenceSplitCount{d}", total, "{:d}")
     else:
         macro("RepeatedSplitNSplits", None)
+
+    fallback = registry["sections"]["nasa_fallback_splits"]
+    macro("NasaFallbackSplits", len(fallback) if fallback != UNVERIFIED else None, "{:d}")
 
     if data_layer:
         recon_detail = data_layer["checks"]["cell_reconciliation_339_vs_337"]["detail"]

@@ -3939,6 +3939,10 @@
         "CX2_37"
       ]
     },
+    "nasa_fallback_splits": [
+      43,
+      44
+    ],
     "data_counts": {
       "train_windows": 182710,
       "val_windows": 41747,
@@ -4594,6 +4598,8 @@
     "PooledCoverageMin": "44.2",
     "PooledCoverageMax": "94.9",
     "GroupwiseMaxDevExclNASA": "14.3",
+    "PooledMPIW": "0.08452",
+    "GroupwiseWidthOverPooledPercent": "15",
     "BaselineLinearMAE": "0.03399",
     "BaselineLinearRMSE": "0.13346",
     "BaselineSvrMAE": "0.02356",
@@ -4883,6 +4889,7 @@
     "PersistenceSplitCountOxford": "5",
     "PersistenceLossCountNASA": "4",
     "PersistenceSplitCountNASA": "5",
+    "NasaFallbackSplits": "2",
     "TotalCellsLoaded": "339",
     "CellsWithWindows": "337",
     "TotalTestWindows": "37164",

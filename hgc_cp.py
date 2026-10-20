@@ -9,9 +9,9 @@ implementation that implies a coverage guarantee it cannot actually deliver.
 
 STAGE 1 -- Heterogeneity detection via MMD:
     d_k = MMD^2(Z_t, Z_k)   for each source group k, using an RBF kernel on
-    learned representations Z (e.g. the trained model's penultimate-layer
-    features, or summary statistics of each cell's degradation trajectory
-    if representation features are not convenient to extract).
+    window representations Z. The paper uses five summary statistics of each
+    input SOH window (hgc_cp_evaluation_harness.load_representations); a
+    model's penultimate-layer features would also work.
 
 STAGE 2 -- Heterogeneity-weighted conformal quantile:
     w_k = softmax(-lambda * d_k) over source groups
@@ -92,7 +92,7 @@ VALIDITY ANALYSIS -- read this before reporting any coverage claim
 Tibshirani et al.'s validity result holds when w_i are the TRUE likelihood
 ratio dQ/dP(x_i) between the target distribution Q and calibration
 distribution P. HGC-CP's weights are a heuristic proxy -- softmax of negative
-MMD between learned representations -- not an estimated likelihood ratio.
+MMD between window representations -- not an estimated likelihood ratio.
 This means HGC-CP does NOT inherit an exact finite-sample coverage guarantee
 merely by using the corrected quantile formula. What CAN honestly be said:
   - Barber et al. (2023, "Conformal prediction beyond exchangeability",

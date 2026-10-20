@@ -75,7 +75,7 @@ top = 126.5
 h = 10.0
 y = top - h
 rect(LEFT, y, WIDTH, h, fill=SHADE)
-text(CX, y + 6.6, f"Seven public datasets: {count('TotalCellsLoaded')} cells, seven institutions",
+text(CX, y + 6.6, f"Seven public datasets: {count('TotalCellsLoaded')} cells, seven research groups",
      size=FS_TITLE, weight="bold")
 text(CX, y + 2.8, "MIT  ·  RWTH  ·  XJTU  ·  BIT  ·  CALCE  ·  Oxford  ·  NASA")
 stage_label(top, y, "a", "Data")
