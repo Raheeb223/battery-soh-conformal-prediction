@@ -9,11 +9,10 @@ zero-training baselines are:
   linear extrapolation: yhat = 2*x[-1] - x[-2]
 None of these was included in the baseline comparison of the manuscript.
 
-UNITS. The pipeline z-scores SOH per dataset. The manuscript's Table 5 values
-(MAE 0.0246, RMSE 0.0836) are pooled over all test windows in those z-scored
-units, NOT in physical SOH units. This script reports both so the two can be
-reconciled: `z` (per-dataset z-scored units, pooled over windows, as in
-Table 5) and `real` (physical SOH units).
+UNITS. The pipeline z-scores SOH per dataset, and the manuscript's pooled MAE
+and RMSE are in those z-units, not in physical SOH units. This script reports
+both: `z` (per-dataset z-units, pooled over windows) and `real` (physical SOH
+units, used for the per-dataset persistence comparison).
 
 Model predictions are the MC-Dropout means stored in
 outputs/conformal_groupwise_predictions.npz (the same predictions used for

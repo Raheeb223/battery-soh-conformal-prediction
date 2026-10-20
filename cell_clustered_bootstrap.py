@@ -62,9 +62,8 @@ def cell_clustered_bootstrap_coverage(y_true, lower, upper, cell_ids, n_bootstra
 
 
 def clopper_pearson(k, n, alpha=ALPHA):
-    """Exact per-window interval, for direct comparison -- same formula
-    already used for Table 7, reimplemented here only for side-by-side
-    printing rather than re-deriving anything new."""
+    """Exact per-window (Clopper-Pearson) interval, printed beside the
+    cell-clustered one for direct comparison."""
     from scipy.stats import beta
     if k == 0:
         lo = 0.0

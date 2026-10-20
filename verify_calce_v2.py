@@ -75,7 +75,7 @@ def main():
     print("\n" + pd.DataFrame(summary).to_string(index=False))
     os.makedirs(config.OUTPUT_DIR, exist_ok=True)
     pd.DataFrame(outlier_rows).to_csv(os.path.join(config.OUTPUT_DIR, "calce_v2_verification.csv"), index=False)
-    print(f"\ntotal rows {sum(r['rows'] for r in summary)} (Table 2: 14,189); outliers saved to outputs/calce_v2_verification.csv")
+    print(f"\ntotal rows {sum(r['rows'] for r in summary)}; outliers saved to outputs/calce_v2_verification.csv")
 
 
 if __name__ == "__main__":
