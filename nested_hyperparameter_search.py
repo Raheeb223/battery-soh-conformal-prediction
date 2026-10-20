@@ -39,7 +39,7 @@ from hgc_cp_evaluation_harness import (
     load_representations, load_calibration_residuals,
     load_test_predictions_and_truth, DATASETS,
 )
-from hgc_cp import mmd_squared, hgc_cp_interval, evaluate_coverage
+from hgc_cp import mmd_squared, compute_hgc_cp_qstar, apply_hgc_cp_interval, evaluate_coverage
 
 MMD_SAMPLE_SIZE = 300
 LAM_GRID = [1.0, 3.0, 5.0, 10.0, 20.0]
@@ -53,12 +53,18 @@ def evaluate_one_setting(pseudo_target: str, sources: list, distances: dict,
                           lam: float, beta: float, rng) -> float:
     """Returns |coverage - (1-alpha)| for one pseudo-target under one (lam, beta)."""
     target_test_yhat, y_true = load_test_predictions_and_truth(pseudo_target)
-    intervals = []
-    for yhat in target_test_yhat:
-        lo, hi, _, _ = hgc_cp_interval(yhat, calib_scores, calib_group_ids, distances, lam, ALPHA, beta)
-        intervals.append((lo, hi))
+    intervals = hgc_cp_intervals(target_test_yhat, calib_scores, calib_group_ids, distances, lam, beta)
     result = evaluate_coverage(intervals, y_true)
     return abs(result["coverage"] - (1 - ALPHA))
+
+
+def hgc_cp_intervals(y_hats, calib_scores, calib_group_ids, distances, lam, beta):
+    """HGC-CP intervals for many test points against one calibration set. The quantile does not
+    depend on the test point, so it is computed once (compute_hgc_cp_qstar) and applied to each
+    point; tests/check_hgc_cp_split_equivalence.py shows this is bit-identical to calling
+    hgc_cp_interval per point."""
+    q_star, q_t, weights = compute_hgc_cp_qstar(calib_scores, calib_group_ids, distances, lam, ALPHA, beta)
+    return [apply_hgc_cp_interval(y, q_star, q_t, weights)[:2] for y in y_hats]
 
 
 def nested_search(real_target: str, seed: int = 0):
@@ -137,11 +143,8 @@ def nested_search(real_target: str, seed: int = 0):
     calib_group_ids = np.array(source_ids)
 
     target_test_yhat, y_true = load_test_predictions_and_truth(real_target)
-    intervals = []
-    for yhat in target_test_yhat:
-        lo, hi, _, _ = hgc_cp_interval(yhat, calib_scores, calib_group_ids, distances,
-                                        best_setting[0], ALPHA, best_setting[1])
-        intervals.append((lo, hi))
+    intervals = hgc_cp_intervals(target_test_yhat, calib_scores, calib_group_ids, distances,
+                                 best_setting[0], best_setting[1])
     result = evaluate_coverage(intervals, y_true)
     print(f"\n{real_target} coverage under nested-selected (lam={best_setting[0]}, "
           f"beta={best_setting[1]}): {result['coverage']:.3f} (target: {1-ALPHA:.0%})")

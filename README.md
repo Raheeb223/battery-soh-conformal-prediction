@@ -89,6 +89,7 @@ listed there.
 | `calibration_size_sensitivity.py` | coverage vs. number of calibration cells |
 | `leave_one_out.py` | each dataset withheld from training |
 | `repeated_split_experiment.py` | further cell-level splits with the model seed fixed |
+| `split_replication.py` | the calibration-strategy comparison re-run on those splits with every design frozen; a held-out check of HGC-CP |
 | `cell_clustered_bootstrap.py`, `predictor_consistent_recalibration.py` | window-level and cell-clustered coverage intervals |
 | `baseline_conformal_coverage.py` | pooled vs. groupwise coverage for every point predictor |
 | `dataset_level_wilcoxon.py` | pooled vs. groupwise significance test at dataset level |

@@ -604,6 +604,52 @@ def main():
     else:
         macro("RepeatedSplitNSplits", None)
 
+    # Pooled vs groupwise over all splits (main + four repeats): does the main comparison hold
+    # beyond one split? NASA is left out, as in the Wilcoxon test (3 test windows on the main split).
+    if repeated != UNVERIFIED:
+        pm = repeated["per_mode"]
+        six = ["MIT", "RWTH", "XJTU", "BIT", "CALCE", "Oxford"]
+        dev = lambda mode, s, d: abs(pm[mode][s]["per_dataset_coverage"][d] - 0.9) * 100  # noqa: E731
+        pairs = [(s, d) for s in pm["groupwise"] for d in six]
+        macro("SplitPairsGroupwiseCloser", sum(dev("groupwise", s, d) < dev("pooled", s, d) for s, d in pairs), "{:d}")
+        macro("SplitPairsTotal", len(pairs), "{:d}")
+        for d in six:
+            macro(f"SplitMeanDevPooled{d}", np.mean([dev("pooled", s, d) for s in pm["pooled"]]), "{:.1f}")
+            macro(f"SplitMeanDevGroupwise{d}", np.mean([dev("groupwise", s, d) for s in pm["groupwise"]]), "{:.1f}")
+        macro("SplitPooledBITMax", max(pm["pooled"][s]["per_dataset_coverage"]["BIT"] for s in pm["pooled"]) * 100, "{:.1f}")
+
+    # Strategy comparison replicated on splits 43-46 with every design frozen (split_replication.py).
+    rep = load("split_replication.json")
+    registry["sections"]["split_replication"] = rep or UNVERIFIED
+    methods = {"Own": "own", "Hier": "hierarchical", "Prior": "prior_only",
+               "OthersPooled": "others_pooled", "HgcCp": "hgc_cp"}
+    if rep:
+        per = rep["per_split"]
+        splits = [str(s) for s in rep["splits"]]
+        macro("ReplicationNSplits", len(splits), "{:d}")
+        devs = {k: [per[s]["mean_abs_dev_five"][m] * 100 for s in splits] for k, m in methods.items()}
+        for k, v in devs.items():
+            macro(f"ReplicationMeanDev{k}", np.mean(v), "{:.2f}")
+            macro(f"ReplicationMaxDev{k}", max(v), "{:.2f}")
+            macro(f"ReplicationMinDev{k}", min(v), "{:.2f}")
+        macro("ReplicationOwnBestSplits",
+              sum(all(devs["Own"][i] <= devs[k][i] for k in methods) for i in range(len(splits))), "{:d}")
+        macro("ReplicationHgcCpBeatsOwnSplits",
+              sum(devs["HgcCp"][i] < devs["Own"][i] for i in range(len(splits))), "{:d}")
+        for k, m in (("Own", "own"), ("Hier", "hierarchical"), ("HgcCp", "hgc_cp")):
+            bit = [per[s]["per_dataset"]["BIT"][m] * 100 for s in splits]
+            macro(f"ReplicationBIT{k}Min", min(bit), "{:.1f}")
+            macro(f"ReplicationBIT{k}Max", max(bit), "{:.1f}")
+        w_bit = [per[s]["per_dataset"]["BIT"]["w_eb"] for s in splits]
+        macro("ReplicationBITWeightMin", min(w_bit), "{:.3f}")
+        macro("ReplicationBITWeightMax", max(w_bit), "{:.3f}")
+        overlap = sum(per[s]["test_cells_also_in_main_split_test"] for s in splits)
+        total = sum(per[s]["test_cells"] for s in splits)
+        macro("ReplicationTestCellOverlapPercent", 100 * overlap / total, "{:.0f}")
+    else:
+        for k in methods:
+            macro(f"ReplicationMeanDev{k}", None)
+
     fallback = registry["sections"]["nasa_fallback_splits"]
     macro("NasaFallbackSplits", len(fallback) if fallback != UNVERIFIED else None, "{:d}")
 

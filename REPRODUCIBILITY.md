@@ -76,6 +76,8 @@ python xjtu_bridging_sensitivity.py        # their effect on error and coverage
 python verify_rwth_v2.py                   # re-checks the RWTH corrections against the raw files
 python verify_calce_v2.py > logs/verify_calce_v2.log   # re-checks the CALCE corrections
 python repeated_split_experiment.py        # four further cell-level splits, model seed fixed
+python split_replication.py                # strategy comparison (hierarchical, HGC-CP, ...) re-run
+                                           # on those splits with every design frozen (no retraining)
 python deterministic_predictor_comparison.py   # single pass vs. MC-Dropout mean as interval centre
 python deployability_benchmark.py          # model size, latency, calibration overhead
 python make_results_registry.py            # every result -> results_registry.json (+ the paper's

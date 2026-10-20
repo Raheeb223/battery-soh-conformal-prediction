@@ -65,6 +65,8 @@ STEPS = [
      os.path.join("logs", "verify_calce_v2.log"), os.path.join("logs", "verify_calce_v2.log")),
     ("repeated_split", [sys.executable, "repeated_split_experiment.py"],
      os.path.join(config.OUTPUT_DIR, "repeated_split_summary.json")),
+    ("split_replication", [sys.executable, "split_replication.py"],
+     os.path.join(config.OUTPUT_DIR, "split_replication.json")),
     ("deterministic_predictor", [sys.executable, "deterministic_predictor_comparison.py"],
      os.path.join(config.OUTPUT_DIR, "deterministic_predictor_results.json")),
     ("deployability", [sys.executable, "deployability_benchmark.py"],

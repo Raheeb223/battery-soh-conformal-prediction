@@ -4562,6 +4562,400 @@
         "calibration_time_ms": 4.320300000017596,
         "interval_time_per_sample_us": 0.017476590248859898
       }
+    },
+    "split_replication": {
+      "splits": [
+        43,
+        44,
+        45,
+        46
+      ],
+      "per_split": {
+        "43": {
+          "per_dataset": {
+            "MIT": {
+              "own": 0.8970193012460298,
+              "hierarchical": 0.8975690202785243,
+              "prior_only": 0.9994502809675055,
+              "others_pooled": 0.9989616418275103,
+              "w_eb": 0.9996607980802392,
+              "hgc_cp": 0.9995724407525043
+            },
+            "RWTH": {
+              "own": 0.8980446092208336,
+              "hierarchical": 0.8980446092208336,
+              "prior_only": 0.9296776894097949,
+              "others_pooled": 0.701369371524248,
+              "w_eb": 0.9987384171600485,
+              "hgc_cp": 0.9950367756981403
+            },
+            "XJTU": {
+              "own": 0.705177743431221,
+              "hierarchical": 0.7268160741885626,
+              "prior_only": 0.8829211746522411,
+              "others_pooled": 0.8203245749613601,
+              "w_eb": 0.9438011743921929,
+              "hgc_cp": 0.9331530139103554
+            },
+            "BIT": {
+              "own": 0.8768115942028986,
+              "hierarchical": 0.4577294685990338,
+              "prior_only": 0.3466183574879227,
+              "others_pooled": 0.29589371980676327,
+              "w_eb": 0.0549484861913141,
+              "hgc_cp": 0.3864734299516908
+            },
+            "CALCE": {
+              "own": 0.8870139398385913,
+              "hierarchical": 0.8749082905355833,
+              "prior_only": 0.528980190755686,
+              "others_pooled": 0.5396184886280264,
+              "w_eb": 0.9121094714527708,
+              "hgc_cp": 0.8734409391049156
+            }
+          },
+          "hgc_cp_selected": {
+            "MIT": {
+              "lam": 1.0,
+              "beta": 0.0,
+              "coverage": 0.9995724407525043
+            },
+            "RWTH": {
+              "lam": 3.0,
+              "beta": 1.0,
+              "coverage": 0.9950367756981403
+            },
+            "XJTU": {
+              "lam": 1.0,
+              "beta": 1.0,
+              "coverage": 0.9331530139103554
+            },
+            "BIT": {
+              "lam": 1.0,
+              "beta": 1.0,
+              "coverage": 0.3864734299516908
+            },
+            "CALCE": {
+              "lam": 1.0,
+              "beta": 1.0,
+              "coverage": 0.8734409391049156
+            },
+            "Oxford": {
+              "lam": 1.0,
+              "beta": 1.0,
+              "coverage": 1.0
+            }
+          },
+          "hgc_cp_datasets_used": [
+            "MIT",
+            "RWTH",
+            "XJTU",
+            "BIT",
+            "CALCE",
+            "Oxford"
+          ],
+          "test_cells": 51,
+          "test_cells_also_in_main_split_test": 10,
+          "mean_abs_dev_five": {
+            "own": 0.047186562412085166,
+            "hierarchical": 0.1289865074354925,
+            "prior_only": 0.21412164949629015,
+            "others_pooled": 0.2683510973814225,
+            "hgc_cp": 0.1535695722608787
+          }
+        },
+        "44": {
+          "per_dataset": {
+            "MIT": {
+              "own": 0.8826275608282529,
+              "hierarchical": 0.8827374086889658,
+              "prior_only": 0.9971439556214643,
+              "others_pooled": 0.9946723787554237,
+              "w_eb": 0.9999443096064871,
+              "hgc_cp": 0.999285988905366
+            },
+            "RWTH": {
+              "own": 0.8789150218650278,
+              "hierarchical": 0.8790332112043494,
+              "prior_only": 0.9529606429500059,
+              "others_pooled": 0.6011700744592837,
+              "w_eb": 0.9994990398976246,
+              "hgc_cp": 0.9991135799550881
+            },
+            "XJTU": {
+              "own": 0.733852140077821,
+              "hierarchical": 0.7879377431906615,
+              "prior_only": 0.9766536964980544,
+              "others_pooled": 0.9334630350194553,
+              "w_eb": 0.9140591429707353,
+              "hgc_cp": 0.9568093385214008
+            },
+            "BIT": {
+              "own": 0.8947368421052632,
+              "hierarchical": 0.521181001283697,
+              "prior_only": 0.3594351732991014,
+              "others_pooled": 0.31065468549422337,
+              "w_eb": 0.052377759685914314,
+              "hgc_cp": 0.5455712451861361
+            },
+            "CALCE": {
+              "own": 0.9473293768545994,
+              "hierarchical": 0.9161721068249258,
+              "prior_only": 0.6428041543026706,
+              "others_pooled": 0.668026706231454,
+              "w_eb": 0.6898396507939746,
+              "hgc_cp": 0.9506676557863502
+            }
+          },
+          "hgc_cp_selected": {
+            "MIT": {
+              "lam": 1.0,
+              "beta": 1.0,
+              "coverage": 0.999285988905366
+            },
+            "RWTH": {
+              "lam": 3.0,
+              "beta": 1.0,
+              "coverage": 0.9991135799550881
+            },
+            "XJTU": {
+              "lam": 3.0,
+              "beta": 1.0,
+              "coverage": 0.9568093385214008
+            },
+            "BIT": {
+              "lam": 3.0,
+              "beta": 1.0,
+              "coverage": 0.5455712451861361
+            },
+            "CALCE": {
+              "lam": 3.0,
+              "beta": 1.0,
+              "coverage": 0.9506676557863502
+            },
+            "Oxford": {
+              "lam": 3.0,
+              "beta": 1.0,
+              "coverage": 1.0
+            }
+          },
+          "hgc_cp_datasets_used": [
+            "MIT",
+            "RWTH",
+            "XJTU",
+            "BIT",
+            "CALCE",
+            "Oxford"
+          ],
+          "test_cells": 51,
+          "test_cells_also_in_main_split_test": 11,
+          "mean_abs_dev_five": {
+            "own": 0.05143956239564693,
+            "hierarchical": 0.10905654849145044,
+            "prior_only": 0.20490379349355053,
+            "others_pooled": 0.2496567895179836,
+            "hgc_cp": 0.13206106359641379
+          }
+        },
+        "45": {
+          "per_dataset": {
+            "MIT": {
+              "own": 0.8884966908288686,
+              "hierarchical": 0.8884966908288686,
+              "prior_only": 0.9997478726757012,
+              "others_pooled": 0.9997478726757012,
+              "w_eb": 0.9999805523623323,
+              "hgc_cp": 0.9999369681689253
+            },
+            "RWTH": {
+              "own": 0.8970846717982908,
+              "hierarchical": 0.8970846717982908,
+              "prior_only": 0.8994484514212983,
+              "others_pooled": 0.7085883992969271,
+              "w_eb": 0.99924619902069,
+              "hgc_cp": 0.9978180495787623
+            },
+            "XJTU": {
+              "own": 0.8796920115495669,
+              "hierarchical": 0.9100096246390761,
+              "prior_only": 0.9764196342637151,
+              "others_pooled": 0.9667949951876804,
+              "w_eb": 0.901885317696595,
+              "hgc_cp": 0.9793070259865255
+            },
+            "BIT": {
+              "own": 0.8848837209302326,
+              "hierarchical": 0.4686046511627907,
+              "prior_only": 0.35930232558139535,
+              "others_pooled": 0.3697674418604651,
+              "w_eb": 0.045507632653781396,
+              "hgc_cp": 0.5662790697674419
+            },
+            "CALCE": {
+              "own": 0.9608423823626193,
+              "hierarchical": 0.8845014807502468,
+              "prior_only": 0.5432708127673577,
+              "others_pooled": 0.6248766041461007,
+              "w_eb": 0.4080495311244346,
+              "hgc_cp": 0.9262915432708128
+            }
+          },
+          "hgc_cp_selected": {
+            "MIT": {
+              "lam": 1.0,
+              "beta": 0.25,
+              "coverage": 0.9999369681689253
+            },
+            "RWTH": {
+              "lam": 5.0,
+              "beta": 1.0,
+              "coverage": 0.9978180495787623
+            },
+            "XJTU": {
+              "lam": 3.0,
+              "beta": 1.0,
+              "coverage": 0.9793070259865255
+            },
+            "BIT": {
+              "lam": 3.0,
+              "beta": 1.0,
+              "coverage": 0.5662790697674419
+            },
+            "CALCE": {
+              "lam": 1.0,
+              "beta": 1.0,
+              "coverage": 0.9262915432708128
+            },
+            "Oxford": {
+              "lam": 5.0,
+              "beta": 1.0,
+              "coverage": 1.0
+            },
+            "NASA": {
+              "lam": 3.0,
+              "beta": 0.5,
+              "coverage": 0.8660714285714286
+            }
+          },
+          "hgc_cp_datasets_used": [
+            "MIT",
+            "RWTH",
+            "XJTU",
+            "BIT",
+            "CALCE",
+            "Oxford",
+            "NASA"
+          ],
+          "test_cells": 51,
+          "test_cells_also_in_main_split_test": 8,
+          "mean_abs_dev_five": {
+            "own": 0.022137057451132102,
+            "hierarchical": 0.09426442601977585,
+            "prior_only": 0.214829183433873,
+            "others_pooled": 0.23266208451197773,
+            "hgc_cp": 0.12741490344751677
+          }
+        },
+        "46": {
+          "per_dataset": {
+            "MIT": {
+              "own": 0.9230981866430783,
+              "hierarchical": 0.9237616099071208,
+              "prior_only": 0.9998894294559929,
+              "others_pooled": 0.9998341441839894,
+              "w_eb": 0.9996457239757205,
+              "hgc_cp": 0.9998894294559929
+            },
+            "RWTH": {
+              "own": 0.8941848818712073,
+              "hierarchical": 0.8941848818712073,
+              "prior_only": 0.9673010074824722,
+              "others_pooled": 0.769810876097331,
+              "w_eb": 0.9997972068021397,
+              "hgc_cp": 0.9992929947563778
+            },
+            "XJTU": {
+              "own": 0.8375,
+              "hierarchical": 0.8278225806451613,
+              "prior_only": 0.8153225806451613,
+              "others_pooled": 0.7737903225806452,
+              "w_eb": 0.46624112564186937,
+              "hgc_cp": 0.9879032258064516
+            },
+            "BIT": {
+              "own": 0.9022988505747126,
+              "hierarchical": 0.5586206896551724,
+              "prior_only": 0.4632183908045977,
+              "others_pooled": 0.37471264367816093,
+              "w_eb": 0.042137050515408114,
+              "hgc_cp": 0.8540229885057471
+            },
+            "CALCE": {
+              "own": 0.9228571428571428,
+              "hierarchical": 0.9214285714285714,
+              "prior_only": 0.7638095238095238,
+              "others_pooled": 0.7452380952380953,
+              "w_eb": 0.9921290921472617,
+              "hgc_cp": 0.9976190476190476
+            }
+          },
+          "hgc_cp_selected": {
+            "MIT": {
+              "lam": 1.0,
+              "beta": 1.0,
+              "coverage": 0.9998894294559929
+            },
+            "RWTH": {
+              "lam": 3.0,
+              "beta": 0.0,
+              "coverage": 0.9992929947563778
+            },
+            "XJTU": {
+              "lam": 1.0,
+              "beta": 1.0,
+              "coverage": 0.9879032258064516
+            },
+            "BIT": {
+              "lam": 1.0,
+              "beta": 0.0,
+              "coverage": 0.8540229885057471
+            },
+            "CALCE": {
+              "lam": 3.0,
+              "beta": 1.0,
+              "coverage": 0.9976190476190476
+            },
+            "Oxford": {
+              "lam": 3.0,
+              "beta": 1.0,
+              "coverage": 1.0
+            },
+            "NASA": {
+              "lam": 1.0,
+              "beta": 1.0,
+              "coverage": 0.9864864864864865
+            }
+          },
+          "hgc_cp_datasets_used": [
+            "MIT",
+            "RWTH",
+            "XJTU",
+            "BIT",
+            "CALCE",
+            "Oxford",
+            "NASA"
+          ],
+          "test_cells": 51,
+          "test_cells_also_in_main_split_test": 11,
+          "mean_abs_dev_five": {
+            "own": 0.023313859640745282,
+            "hierarchical": 0.09291240583283022,
+            "prior_only": 0.16496798833583645,
+            "others_pooled": 0.20725644131795146,
+            "hgc_cp": 0.08613634182642456
+          }
+        }
+      }
     }
   },
   "values": {
@@ -4910,6 +5304,48 @@
     "PersistenceSplitCountOxford": "5",
     "PersistenceLossCountNASA": "4",
     "PersistenceSplitCountNASA": "5",
+    "SplitPairsGroupwiseCloser": "26",
+    "SplitPairsTotal": "30",
+    "SplitMeanDevPooledMIT": "4.6",
+    "SplitMeanDevGroupwiseMIT": "1.5",
+    "SplitMeanDevPooledRWTH": "3.6",
+    "SplitMeanDevGroupwiseRWTH": "0.7",
+    "SplitMeanDevPooledXJTU": "27.7",
+    "SplitMeanDevGroupwiseXJTU": "9.5",
+    "SplitMeanDevPooledBIT": "42.6",
+    "SplitMeanDevGroupwiseBIT": "1.4",
+    "SplitMeanDevPooledCALCE": "25.8",
+    "SplitMeanDevGroupwiseCALCE": "5.7",
+    "SplitMeanDevPooledOxford": "10.8",
+    "SplitMeanDevGroupwiseOxford": "8.1",
+    "SplitPooledBITMax": "53.9",
+    "ReplicationNSplits": "4",
+    "ReplicationMeanDevOwn": "3.60",
+    "ReplicationMaxDevOwn": "5.14",
+    "ReplicationMinDevOwn": "2.21",
+    "ReplicationMeanDevHier": "10.63",
+    "ReplicationMaxDevHier": "12.90",
+    "ReplicationMinDevHier": "9.29",
+    "ReplicationMeanDevPrior": "19.97",
+    "ReplicationMaxDevPrior": "21.48",
+    "ReplicationMinDevPrior": "16.50",
+    "ReplicationMeanDevOthersPooled": "23.95",
+    "ReplicationMaxDevOthersPooled": "26.84",
+    "ReplicationMinDevOthersPooled": "20.73",
+    "ReplicationMeanDevHgcCp": "12.48",
+    "ReplicationMaxDevHgcCp": "15.36",
+    "ReplicationMinDevHgcCp": "8.61",
+    "ReplicationOwnBestSplits": "4",
+    "ReplicationHgcCpBeatsOwnSplits": "0",
+    "ReplicationBITOwnMin": "87.7",
+    "ReplicationBITOwnMax": "90.2",
+    "ReplicationBITHierMin": "45.8",
+    "ReplicationBITHierMax": "55.9",
+    "ReplicationBITHgcCpMin": "38.6",
+    "ReplicationBITHgcCpMax": "85.4",
+    "ReplicationBITWeightMin": "0.042",
+    "ReplicationBITWeightMax": "0.055",
+    "ReplicationTestCellOverlapPercent": "20",
     "NasaFallbackSplits": "2",
     "TotalCellsLoaded": "339",
     "CellsWithWindows": "337",

@@ -103,16 +103,21 @@ def group_bootstrap_tau2(q, s2, rng):
     return [float(np.percentile(vals, 2.5)), float(np.percentile(vals, 97.5))]
 
 
-def main():
+def analyse(cache_path, val_path, test_path):
+    """Run the whole analysis on one split's files and return the result dict. A dataset with no
+    validation windows in this split (NASA under some repeated splits) is left out of the fit and
+    of the cross-source pool; a target with no validation or test windows is not evaluated."""
     rng = np.random.default_rng(SEED)
-    cache = np.load(os.path.join(config.CACHE_DIR, "processed.npz"), allow_pickle=True)
-    val = np.load(os.path.join(config.OUTPUT_DIR, "conformal_groupwise_predictions_val.npz"), allow_pickle=True)
-    test = np.load(os.path.join(config.OUTPUT_DIR, "conformal_groupwise_predictions.npz"), allow_pickle=True)
+    cache = np.load(cache_path, allow_pickle=True)
+    val = np.load(val_path, allow_pickle=True)
+    test = np.load(test_path, allow_pickle=True)
     std = cache["soh_std"].item()
+    present = [d for d in ALL if (val["lab_val"] == d).any()]
+    targets = [t for t in TARGETS if t in present and (test["lab_test"] == t).any()]
 
     rv = {}
     cells = {}
-    for d in ALL:
+    for d in present:
         m = val["lab_val"] == d
         rv[d] = np.abs(val["y_val"][m] - val["mean_pred"][m]) * std[d]
         cells[d] = val["cell_val"][m]
@@ -122,15 +127,15 @@ def main():
         rt[d] = np.abs(test["y_test"][m] - test["mean_pred"][m]) * std[d]
 
     q, s2, n_cells = {}, {}, {}
-    for d in ALL:
+    for d in present:
         q[d] = fsq(rv[d])
         n_cells[d] = int(len(np.unique(cells[d])))
         s2[d] = cell_bootstrap_variance(rv[d], cells[d], rng)
-    fit = [d for d in ALL if s2[d] is not None]
+    fit = [d for d in present if s2[d] is not None]
 
     print("Inputs (real SOH units)")
     print(f"{'Dataset':8s}{'val cells':>10s}{'q_g':>10s}{'sigma2_g (cell bootstrap)':>28s}  in RE fit")
-    for d in ALL:
+    for d in present:
         s = "undefined" if s2[d] is None else f"{s2[d]:.3e}"
         print(f"{d:8s}{n_cells[d]:10d}{q[d]:10.5f}{s:>28s}  {'yes' if d in fit else 'no'}")
 
@@ -148,13 +153,13 @@ def main():
 
     print("\nCalibration-level leave-one-dataset-out, coverage on the target's test set (90% nominal)")
     print(f"{'Target':8s}{'mu_-t':>9s}{'tau2_-t':>10s}{'w_EB':>7s}{'prior-only':>12s}{'EB-shrunk':>11s}{'own q':>8s}{'x-src pooled':>14s}{'width p/o':>11s}")
-    for t in TARGETS:
+    for t in targets:
         others_fit = [d for d in fit if d != t]
         mu_t, tau2_t = dersimonian_laird([q[d] for d in others_fit], [s2[d] for d in others_fit])
         cov = lambda h: float(np.mean(rt[t] <= h))
         prior = cov(mu_t)
         own = cov(q[t])
-        pooled_other = fsq(np.concatenate([rv[d] for d in ALL if d != t]))
+        pooled_other = fsq(np.concatenate([rv[d] for d in present if d != t]))
         xpool = cov(pooled_other)
         if s2[t] is not None:
             w = tau2_t / (tau2_t + s2[t]) if tau2_t > 0 else 0.0
@@ -168,7 +173,13 @@ def main():
                                 "cov_own_quantile": own, "cov_cross_source_pooled": xpool,
                                 "prior_only_width_over_own_width": width_ratio}
         print(f"{t:8s}{mu_t:9.5f}{tau2_t:10.2e}{ws}{100*prior:11.1f}%{ss}{100*own:7.1f}%{100*xpool:13.1f}%{width_ratio:11.2f}x")
+    return out
 
+
+def main():
+    out = analyse(os.path.join(config.CACHE_DIR, "processed.npz"),
+                  os.path.join(config.OUTPUT_DIR, "conformal_groupwise_predictions_val.npz"),
+                  os.path.join(config.OUTPUT_DIR, "conformal_groupwise_predictions.npz"))
     path = os.path.join(config.OUTPUT_DIR, "hierarchical_calibration_v2.json")
     with open(path, "w") as fh:
         json.dump(out, fh, indent=2)
