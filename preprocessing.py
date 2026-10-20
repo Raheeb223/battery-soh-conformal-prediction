@@ -39,10 +39,8 @@ Key design choices (match what your project already established):
    same as any other loader failure, rather than crashing the whole run.
 2. make_windows() now also returns a cell_id array (cell_train/cell_val/
    cell_test), saved into the cache alongside lab_train/lab_val/lab_test.
-   This fills the gap flagged earlier: per_cell_curves.png and
-   remaining_analysis.py's XJTU anomaly cell-lookup both wanted a per-window
-   cell-ID field that didn't exist before ("No cell-ID field available"
-   in xjtu_anomaly_report.txt). Old code reading only X/y/lab still works
+   Downstream analyses (per-cell figures, the XJTU bridging analysis, the
+   cell-clustered bootstrap) need to know which cell each window came from. Old code reading only X/y/lab still works
    unchanged — this is a pure addition, no existing keys removed or renamed.
 3. run() now prints a per-dataset, per-split row-count summary AFTER
    windowing (not just cell counts), so a silent zero-window dataset

@@ -1,6 +1,6 @@
 """
-K3 fix (ERROR_REGISTER E2): pooled and groupwise conformal coverage for the
-non-BiLSTM baselines (linear, SVR, XGBoost, plain LSTM), computed under the
+Pooled and groupwise conformal coverage for the point predictors other than the
+main model (see ERROR_REGISTER.md, E2): the baselines (linear, SVR, XGBoost, plain LSTM), computed under the
 same predictor-consistency requirement as train.py (calibration and test
 nonconformity scores from the same predictor).
 

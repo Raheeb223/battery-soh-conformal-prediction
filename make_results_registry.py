@@ -1,15 +1,15 @@
 """
-Stage 11: single machine-generated source of numerical truth for the
-manuscript. Reads every verified outputs/*.json produced by this audit and
-compiles them into results_registry.json, then emits paper/numbers.tex
+Single machine-generated source of every number in the manuscript.
+Reads the per-experiment result files in outputs/ and compiles them into
+results_registry.json, then emits paper/numbers.tex
 (one \\newcommand per number, so main.tex NEVER has a hand-typed number --
 every value in the manuscript must come from \\num{...} macros defined here).
 
 Tolerant of missing files (some LODO configs may still be training, or a
 later-stage script may not have been run yet) -- each section is wrapped so
 a missing input produces an explicit "UNVERIFIED" placeholder rather than a
-crash or a silently wrong number, per the brief's rule: write UNVERIFIED
-when something can't be verified, never fabricate or quietly omit.
+crash or a silently wrong number: when something can't be verified the
+registry says so, and never fabricates or quietly omits a value.
 
 Run:  python make_results_registry.py
 Out:  results_registry.json, paper/numbers.tex
@@ -116,7 +116,7 @@ def main():
     # fixed train_one()-mirroring code path writes that field) and must be
     # treated as UNVERIFIED/stale here, NOT silently accepted as current.
     # Confirmed concretely: lodo_MIT_results.json (10/1/2026, no
-    # calibration_predictor field) matches the brief's stale "as-run" anchor
+    # calibration_predictor field) matches the stale pre-fix "as-run" value
     # (MAE 0.00089/coverage 92.16%) exactly -- this is the pre-fix file.
     lodo = {}
     for d in ("NASA", "CALCE", "Oxford", "MIT", "BIT", "XJTU", "RWTH"):
@@ -140,25 +140,64 @@ def main():
     # ---- K6: repeated cell-level splits (between-split variability) ----
     registry["sections"]["repeated_splits"] = load("repeated_split_summary.json") or UNVERIFIED
 
-    # ---- Stage 2 data-layer verification (cell reconciliation, window counts) ----
-    stage2_path = "stage2_report.json"
-    stage2 = None
-    if os.path.exists(stage2_path):
-        with open(stage2_path) as fh:
-            stage2 = json.load(fh)
-    registry["sections"]["stage2_data_layer"] = stage2 or UNVERIFIED
+    # ---- Data-layer verification (tests/check_data_layer.py): cell and window counts ----
+    data_layer_path = "data_layer_report.json"
+    data_layer = None
+    if os.path.exists(data_layer_path):
+        with open(data_layer_path) as fh:
+            data_layer = json.load(fh)
+    registry["sections"]["data_layer"] = data_layer or UNVERIFIED
 
-    # ---- Write registry ----
-    with open("results_registry.json", "w") as fh:
-        json.dump(registry, fh, indent=2, default=str)
-    print(f"saved results_registry.json ({len(registry['sections'])} sections)")
+    # ---- Dataset-level Wilcoxon, pooled vs groupwise (dataset_level_wilcoxon.py) ----
+    registry["sections"]["wilcoxon"] = load("dataset_level_wilcoxon.json") or UNVERIFIED
 
-    # ---- Emit paper/numbers.tex ----
+    # ---- Data-quality corrections (verify_rwth_v2.py -> JSON; verify_calce_v2.py -> log) ----
+    rwth_v = load("rwth_verification_v2.json")
+    registry["sections"]["rwth_corrections"] = rwth_v["summary"] | {
+        "rows_raw": rwth_v["neither correction (F, F)"]["n_rows"]} if rwth_v else UNVERIFIED
+    calce_log = os.path.join("logs", "verify_calce_v2.log")
+    if os.path.exists(calce_log):
+        with open(calce_log, encoding="utf-8", errors="ignore") as fh:
+            txt = fh.read()
+        table = txt[txt.rindex("  cell  rows"):].splitlines()[1:]
+        rows = [ln.split() for ln in table if re.match(r"^C[SX]2_\d+\s", ln)]
+        # The log loads every cell twice (flag and drop policies), so each cumulative-counter
+        # message appears twice per file.
+        registry["sections"]["calce_corrections"] = {
+            "n_cells": len(rows),
+            "total_rows": int(re.search(r"total rows (\d+)", txt).group(1)),
+            "rows_after_drop": sum(int(r[7]) for r in rows),
+            "soh_keep_pct_min": min(float(r[2].rstrip("%")) for r in rows),
+            "soh_keep_pct_max": max(float(r[2].rstrip("%")) for r in rows),
+            "median_step_min": min(float(r[3]) for r in rows),
+            "median_step_max": max(float(r[3]) for r in rows),
+            "cumulative_files": txt.count("behaves as a cumulative counter") // 2,
+        }
+        raw_counts = []
+        for calce_row in rows:
+            cell_dir = os.path.join(config.ROOT_DIR, calce_row[0])
+            if os.path.isdir(cell_dir):
+                raw_counts.append(sum(f.lower().endswith(".xlsx")
+                                      for _, _, files in os.walk(cell_dir) for f in files))
+        registry["sections"]["calce_corrections"]["raw_files"] = (
+            sum(raw_counts) if len(raw_counts) == len(rows) else None)
+    else:
+        registry["sections"]["calce_corrections"] = UNVERIFIED
+
+    # ---- Deterministic pass vs MC-Dropout mean as interval centre (deterministic_predictor_comparison.py) ----
+    registry["sections"]["deterministic_predictor"] = load("deterministic_predictor_results.json") or UNVERIFIED
+
+    # ---- Deployment cost (deployability_benchmark.py) ----
+    registry["sections"]["deployability"] = load("deployability_results.json") or UNVERIFIED
+
+    # ---- Emit paper/numbers.tex (and the same values into results_registry.json) ----
     os.makedirs("paper", exist_ok=True)
     lines = ["% AUTO-GENERATED by make_results_registry.py -- do not hand-edit.",
              "% Every number in main.tex must come from a \\NUM{...} macro defined here.", ""]
 
     seen_macro_names = set()
+    # Formatted exactly as printed in the manuscript; the public figure scripts read these.
+    registry["values"] = {}
 
     def macro(name, value, fmt="{:.4f}"):
         safe_name = re.sub(r"[^A-Za-z]", "", name)  # LaTeX macro names: letters only
@@ -173,11 +212,13 @@ def main():
                               f"characters are stripped.")
         seen_macro_names.add(safe_name)
         if value is None or value == UNVERIFIED:
-            lines.append(f"\\newcommand{{\\{safe_name}}}{{UNVERIFIED}}")
+            text = UNVERIFIED
         elif isinstance(value, (int, float)):
-            lines.append(f"\\newcommand{{\\{safe_name}}}{{{fmt.format(value)}}}")
+            text = fmt.format(value)
         else:
-            lines.append(f"\\newcommand{{\\{safe_name}}}{{{value}}}")
+            text = str(value)
+        lines.append(f"\\newcommand{{\\{safe_name}}}{{{text}}}")
+        registry["values"][safe_name] = text
 
     if r:
         macro("MainModelMAE", r["test_mae"], "{:.5f}")
@@ -190,6 +231,28 @@ def main():
         macro("MainModelRMSE", None)
         macro("MainModelCoverage", None)
     macro("MainModelMPIW", registry["sections"]["main_model_mpiw"], "{:.5f}")
+
+    # Normalized-groupwise vs groupwise: same model and test set, so coverage and width are
+    # directly comparable. "Five" = the datasets where every calibration strategy is defined.
+    five = ("MIT", "RWTH", "XJTU", "BIT", "CALCE")
+    ng_pred_path = os.path.join(OUT_DIR, "conformal_normalized_groupwise_predictions.npz")
+    if r and r_normgw and os.path.exists(ng_pred_path) and registry["sections"]["main_model_mpiw"] != UNVERIFIED:
+        ng_pred = np.load(ng_pred_path, allow_pickle=True)
+        ng_mpiw = float(np.mean(ng_pred["upper"] - ng_pred["lower"]))
+        macro("NormGroupwiseCoverage", r_normgw["overall_coverage"] * 100, "{:.1f}")
+        for d, v in r_normgw["per_dataset_coverage"].items():
+            macro(f"NormGroupwiseCoverage{d}", v * 100, "{:.1f}")
+        macro("NormGroupwiseMPIW", ng_mpiw, "{:.5f}")
+        macro("NormGroupwiseWidthIncreasePercent",
+              100 * (ng_mpiw / registry["sections"]["main_model_mpiw"] - 1), "{:.0f}")
+        macro("NormGroupwiseMeanDevFive",
+              float(np.mean([abs(r_normgw["per_dataset_coverage"][d] - 0.90) for d in five])) * 100, "{:.2f}")
+        macro("GroupwiseMeanDevFive",
+              float(np.mean([abs(r["per_dataset_coverage"][d] - 0.90) for d in five])) * 100, "{:.2f}")
+    else:
+        for name in ("NormGroupwiseCoverage", "NormGroupwiseMPIW", "NormGroupwiseWidthIncreasePercent",
+                     "NormGroupwiseMeanDevFive", "GroupwiseMeanDevFive"):
+            macro(name, None)
 
     if r and r_pooled:
         pooled_pd = r_pooled["per_dataset_coverage"]
@@ -274,6 +337,30 @@ def main():
         for d, v in hier["per_target"].items():
             macro(f"Hier{d}CovEBShrunk", v["cov_eb_shrunk"] * 100 if v["cov_eb_shrunk"] is not None else None, "{:.1f}")
             macro(f"Hier{d}CovOwn", v["cov_own_quantile"] * 100, "{:.1f}")
+            macro(f"Hier{d}CovPriorOnly", v["cov_prior_only"] * 100, "{:.1f}")
+            macro(f"Hier{d}CovCrossPooled", v["cov_cross_source_pooled"] * 100, "{:.1f}")
+        # Like-for-like comparison on the datasets where an empirical-Bayes value exists.
+        fit = [d for d in hier["fit_groups"] if hier["per_target"][d]["cov_eb_shrunk"] is not None]
+        macro("HierNumFitDatasets", len(fit), "{:d}")
+        macro("HierMeanDevOwn",
+              float(np.mean([abs(hier["per_target"][d]["cov_own_quantile"] - 0.90) for d in fit])) * 100, "{:.2f}")
+        macro("HierMeanDevEB",
+              float(np.mean([abs(hier["per_target"][d]["cov_eb_shrunk"] - 0.90) for d in fit])) * 100, "{:.2f}")
+        macro("HierMeanDevOwnExclBIT",
+              float(np.mean([abs(hier["per_target"][d]["cov_own_quantile"] - 0.90) for d in fit if d != "BIT"])) * 100, "{:.2f}")
+        macro("HierMeanDevEBExclBIT",
+              float(np.mean([abs(hier["per_target"][d]["cov_eb_shrunk"] - 0.90) for d in fit if d != "BIT"])) * 100, "{:.2f}")
+        macro("HierMeanDevPriorOnly",
+              float(np.mean([abs(hier["per_target"][d]["cov_prior_only"] - 0.90) for d in fit])) * 100, "{:.2f}")
+        macro("HierMeanDevCrossPooled",
+              float(np.mean([abs(hier["per_target"][d]["cov_cross_source_pooled"] - 0.90) for d in fit])) * 100, "{:.2f}")
+        hgc_sec = registry["sections"]["hgc_cp_nested_search"]
+        if hgc_sec != UNVERIFIED:
+            macro("HgcCpMeanDevFit",
+                  float(np.mean([abs(hgc_sec[d]["real_target_test_coverage"] - 0.90) for d in fit])) * 100, "{:.2f}")
+        macro("HierBITWeight", hier["per_target"]["BIT"]["w_eb"], "{:.3f}")
+        others_q = [hier["q_g"][d] for d in fit if d != "BIT"]
+        macro("HierBITQuantileRatio", hier["q_g"]["BIT"] / float(np.mean(others_q)), "{:.0f}")
 
     hgc = registry["sections"]["hgc_cp_nested_search"]
     if hgc != UNVERIFIED:
@@ -314,6 +401,18 @@ def main():
                 macro(f"CalSize{d}OneMean", b1["coverage_mean"] * 100, "{:.1f}")
                 macro(f"CalSize{d}OnePLow", b1["coverage_p05"] * 100, "{:.1f}")
                 macro(f"CalSize{d}OnePHigh", b1["coverage_p95"] * 100, "{:.1f}")
+        # Practical budget rule: smallest strict sub-budget whose 5th-percentile coverage is
+        # within 5 points of the 90% target. The full budget is excluded because a "subsample"
+        # of every cell has zero spread by construction.
+        rule_floor = 0.85
+        macro("CalSizeRuleFloor", rule_floor * 100, "{:.0f}")
+        for d, v in calsize["per_dataset"].items():
+            n_full = v["n_cells_available"]
+            ok = sorted(int(b) for b, r in v["per_budget"].items()
+                        if int(b) < n_full and r["coverage_p05"] >= rule_floor)
+            if ok:
+                macro(f"CalSize{d}MinBudget", ok[0], "{:d}")
+                macro(f"CalSize{d}MinBudgetPLow", v["per_budget"][str(ok[0])]["coverage_p05"] * 100, "{:.1f}")
 
     cqr_pooled = registry["sections"]["cqr_pooled"]
     cqr_gw = registry["sections"]["cqr_groupwise"]
@@ -332,6 +431,8 @@ def main():
             macro("CqrRMSEIncreasePercent", (cqr_gw["test_rmse"] / main_model["test_rmse"] - 1) * 100, "{:.1f}")
         for d, v in cqr_gw["per_dataset_coverage"].items():
             macro(f"CqrGroupwiseCoverage{d}", v * 100, "{:.1f}")
+        macro("CqrMeanDevFive",
+              float(np.mean([abs(cqr_gw["per_dataset_coverage"][d] - 0.90) for d in five])) * 100, "{:.2f}")
         for d, v in cqr_pooled["per_dataset_coverage"].items():
             macro(f"CqrPooledCoverage{d}", v * 100, "{:.1f}")
 
@@ -362,6 +463,10 @@ def main():
             macro(f"RepeatedSplit{d}CovMax", v["max"] * 100, "{:.1f}")
             macro(f"RepeatedSplit{d}CovRange", v["range"] * 100, "{:.1f}")
         macro("RepeatedSplitNSplits", len(repeated["split_seeds"]), "{:d}")
+        stable, unstable = ("MIT", "RWTH", "BIT"), ("XJTU", "CALCE", "Oxford", "NASA")
+        macro("RepeatedSplitStableRangeMax", max(var[d]["range"] for d in stable) * 100, "{:.1f}")
+        macro("RepeatedSplitUnstableRangeMin", min(var[d]["range"] for d in unstable) * 100, "{:.1f}")
+        macro("RepeatedSplitUnstableRangeMax", max(var[d]["range"] for d in unstable) * 100, "{:.1f}")
 
         # Persistence robustness across all 5 splits tried so far (seed 42, the
         # original anchor, from persistence_baselines.json, plus seeds 43-46 from K6).
@@ -387,13 +492,14 @@ def main():
     else:
         macro("RepeatedSplitNSplits", None)
 
-    if stage2:
-        recon_detail = stage2["checks"]["cell_reconciliation_339_vs_337"]["detail"]
-        nums = [int(n) for n in re.findall(r"=(\d+)", recon_detail)]
-        # nums = [cells_loaded, cells_assigned_to_split, cells_with_windows], in that order
-        macro("TotalCellsLoaded", nums[0], "{:d}")
-        macro("CellsWithWindows", nums[2], "{:d}")
-        ascending_detail = stage2["checks"]["windows_cycle_ascending_within_window"]["detail"]
+    if data_layer:
+        recon_detail = data_layer["checks"]["cell_reconciliation_339_vs_337"]["detail"]
+        # Match each count by its label: a bare r"=(\d+)" also matches the "1" in ">=1 window".
+        cells_loaded = int(re.search(r"cells loaded[^=]*=(\d+)", recon_detail).group(1))
+        cells_with_windows = int(re.search(r"cells contributing >=1 window=(\d+)", recon_detail).group(1))
+        macro("TotalCellsLoaded", cells_loaded, "{:d}")
+        macro("CellsWithWindows", cells_with_windows, "{:d}")
+        ascending_detail = data_layer["checks"]["windows_cycle_ascending_within_window"]["detail"]
         total_test_windows = int(re.search(r"of (\d+) test windows", ascending_detail).group(1))
         macro("TotalTestWindows", total_test_windows, "{:d}")
     else:
@@ -406,6 +512,10 @@ def main():
         cache = np.load(cache_path, allow_pickle=True)
         macro("TrainWindows", cache["X_train"].shape[0], "{:d}")
         macro("ValWindows", cache["X_val"].shape[0], "{:d}")
+        for d in ("MIT", "RWTH", "XJTU", "BIT", "CALCE", "Oxford", "NASA"):
+            m = cache["lab_test"] == d
+            macro(f"TestCells{d}", len(set(cache["cell_test"][m])), "{:d}")
+            macro(f"TestWindows{d}", int(m.sum()), "{:,}")
     else:
         macro("TrainWindows", None)
         macro("ValWindows", None)
@@ -441,12 +551,104 @@ def main():
         macro("XjtuBridgingCoverage", bridge["coverage"] * 100, "{:.1f}")
         macro("XjtuCleanCoverage", clean["coverage"] * 100, "{:.1f}")
 
+    wx = registry["sections"]["wilcoxon"]
+    if wx != UNVERIFIED:
+        dl = wx["dataset_level"]
+        macro("WilcoxonN", dl["n"], "{:d}")
+        macro("WilcoxonGroupwiseCloser", dl["groupwise_closer"], "{:d}")
+        macro("WilcoxonP", dl["p_one_sided_exact"], "{:.4f}")
+        macro("WilcoxonPMin", dl["p_min_attainable"], "{:.4f}")
+        macro("WilcoxonNArch", len(wx["architectures"]), "{:d}")
+        macro("WilcoxonPairN", wx["pair_level_not_independent"]["n"], "{:d}")
+
+    rw = registry["sections"]["rwth_corrections"]
+    if rw != UNVERIFIED:
+        macro("RwthRowsRaw", rw["rows_raw"], "{:,}")
+        macro("RwthDropFirstRows", rw["rows_removed_by_drop_first_alone"], "{:,}")
+        macro("RwthDropFirstPct", 100 * rw["rows_removed_by_drop_first_alone"] / rw["rows_raw"], "{:.2f}")
+        macro("RwthOutlierRows", rw["rows_removed_by_outlier_fix_alone"], "{:,}")
+        macro("RwthOutlierPct", 100 * rw["rows_removed_by_outlier_fix_alone"] / rw["rows_raw"], "{:.2f}")
+        macro("RwthBothRows", rw["rows_removed_by_both_combined"], "{:,}")
+        macro("RwthBothPct", rw["pct_removed_by_both_combined"], "{:.2f}")
+    cc = registry["sections"]["calce_corrections"]
+    if cc != UNVERIFIED:
+        macro("CalceCells", cc["n_cells"], "{:d}")
+        macro("CalceRows", cc["total_rows"], "{:,}")
+        macro("CalceCumulativeFiles", cc["cumulative_files"], "{:d}")
+        macro("CalceRawFiles", cc["raw_files"], "{:d}")
+        macro("CalceDropPct", 100 * (cc["total_rows"] - cc["rows_after_drop"]) / cc["total_rows"], "{:.2f}")
+        macro("CalceSohKeepMin", cc["soh_keep_pct_min"], "{:.1f}")
+        macro("CalceSohKeepMax", cc["soh_keep_pct_max"], "{:.1f}")
+        macro("CalceMedianStepMin", cc["median_step_min"], "{:.4f}")
+        macro("CalceMedianStepMax", cc["median_step_max"], "{:.4f}")
+
+    det = registry["sections"]["deterministic_predictor"]
+    if det != UNVERIFIED:
+        main_split = det["per_split"][str(config.RANDOM_SEED)]
+        d, m = main_split["deterministic"], main_split["mc_mean"]
+        macro("DetMAE", d["mae_z"], "{:.5f}")
+        macro("DetRMSE", d["rmse_z"], "{:.5f}")
+        macro("DetCoverage", d["coverage"] * 100, "{:.1f}")
+        macro("DetMPIW", d["mpiw"], "{:.5f}")
+        macro("DetWidthReductionMainPercent", 100 * (1 - d["mpiw"] / m["mpiw"]), "{:.0f}")
+        macro("DetMAEReductionMainPercent", 100 * (1 - d["mae_z"] / m["mae_z"]), "{:.0f}")
+        s = det["summary"]
+        macro("DetNSplits", s["n_splits"], "{:d}")
+        macro("DetLowerMAESplits", s["det_lower_mae_count"], "{:d}")
+        macro("DetNarrowerSplits", s["det_narrower_count"], "{:d}")
+        macro("DetMAEReductionMeanPercent", s["mae_reduction_pct_mean"], "{:.0f}")
+        macro("DetMAEReductionMinPercent", s["mae_reduction_pct_min"], "{:.0f}")
+        macro("DetWidthReductionMeanPercent", s["width_reduction_pct_mean"], "{:.0f}")
+        macro("DetWidthReductionMinPercent", s["width_reduction_pct_min"], "{:.0f}")
+        macro("DetCoverageMin", s["det_coverage_min"] * 100, "{:.1f}")
+        macro("DetCoverageMax", s["det_coverage_max"] * 100, "{:.1f}")
+        macro("McCoverageMin", s["mc_coverage_min"] * 100, "{:.1f}")
+        macro("McCoverageMax", s["mc_coverage_max"] * 100, "{:.1f}")
+        macro("DetMeanDevFiveAvg", s["det_mean_dev_five_mean"] * 100, "{:.2f}")
+        macro("McMeanDevFiveAvg", s["mc_mean_dev_five_mean"] * 100, "{:.2f}")
+        macro("DetBeatsPersistenceMITSplits", s["det_beats_persistence_count"]["MIT"], "{:d}")
+        macro("DetBeatsPersistenceRWTHSplits", s["det_beats_persistence_count"]["RWTH"], "{:d}")
+
+    deploy = registry["sections"]["deployability"]
+    deploy_labels = {"full": "Full", "no_attention": "NoAttention", "no_multiscale": "NoMultiscale",
+                     "plain_lstm": "PlainLstm", "gru": "Gru"}
+    if deploy != UNVERIFIED:
+        for variant, label in deploy_labels.items():
+            v = deploy["variants"][variant]
+            macro(f"Deploy{label}Params", v["n_params"], "{:,}")
+            macro(f"Deploy{label}CheckpointKB", v["checkpoint_kb"], "{:.0f}")
+            macro(f"Deploy{label}DetMs", v["cpu_batch1_deterministic_median_ms"], "{:.2f}")
+            macro(f"Deploy{label}McMs", v["cpu_batch1_mc_mean_as_evaluated_median_ms"], "{:.1f}")
+            macro(f"Deploy{label}McPNinetyFiveMs", v["cpu_batch1_mc_mean_as_evaluated_p95_ms"], "{:.1f}")
+            macro(f"Deploy{label}McBatchedMs", v["cpu_batch1_mc_mean_batched_replicas_median_ms"], "{:.2f}")
+            macro(f"Deploy{label}GpuThroughputK", v["gpu_throughput_deterministic_samples_per_s"] / 1e3, "{:.0f}")
+        full = deploy["variants"]["full"]
+        macro("DeployMcBatchedSpeedup", full["cpu_batch1_mc_mean_as_evaluated_median_ms"]
+              / full["cpu_batch1_mc_mean_batched_replicas_median_ms"], "{:.1f}")
+        co = deploy["conformal_overhead_full_model"]
+        macro("DeployCalibrationMs", co["calibration_time_ms"], "{:.1f}")
+        macro("DeployCalibrationSamples", co["n_calibration_samples"], "{:,}")
+        macro("DeployIntervalNs", co["interval_time_per_sample_us"] * 1e3, "{:.0f}")
+        macro("DeployIntervalOverheadPercent",
+              100 * co["interval_time_per_sample_us"] / (full["cpu_batch1_mc_mean_batched_replicas_median_ms"] * 1e3),
+              "{:.4f}")
+        macro("DeployMcDropoutSamples", deploy["mc_samples"], "{:d}")
+        cpu = re.sub(r"\(R\)|\(TM\)|CPU|@.*$", "", deploy["hardware"]["cpu"])
+        macro("DeployCpuName", " ".join(cpu.split()))
+        macro("DeployGpuName", deploy["hardware"]["gpu"])
+
     with open(os.path.join("paper", "numbers.tex"), "w") as fh:
         fh.write("\n".join(lines) + "\n")
     print(f"saved paper/numbers.tex ({len(lines)-3} macros)")
 
-    n_unverified = sum(1 for line in lines if "UNVERIFIED" in line)
-    print(f"\n{n_unverified} macros still UNVERIFIED (expected while LODO/other background jobs finish).")
+    with open("results_registry.json", "w") as fh:
+        json.dump(registry, fh, indent=2, default=str)
+    print(f"saved results_registry.json ({len(registry['sections'])} sections, "
+          f"{len(registry['values'])} values)")
+
+    unverified = sorted(k for k, v in registry["values"].items() if v == UNVERIFIED)
+    print(f"\n{len(unverified)} value(s) UNVERIFIED (input missing or not defined): "
+          f"{', '.join(unverified) if unverified else 'none'}")
 
 
 if __name__ == "__main__":

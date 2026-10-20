@@ -1,0 +1,32 @@
+{
+  "run_name": "cqr_pooled",
+  "model_variant": "cqr",
+  "conformal_mode": "pooled",
+  "seed": 42,
+  "best_epoch": 45,
+  "best_val_loss": 0.015027103608489824,
+  "tau_lo": 0.05,
+  "tau_hi": 0.95,
+  "test_mae": 0.02767607942223549,
+  "test_rmse": 0.10392383486032486,
+  "overall_coverage": 0.8996878699817027,
+  "mpiw": 0.2141808569431305,
+  "per_dataset_coverage": {
+    "BIT": 0.8859649122807017,
+    "CALCE": 0.8173532628508932,
+    "MIT": 0.8847142122994347,
+    "NASA": 1.0,
+    "Oxford": 1.0,
+    "RWTH": 0.9425851554365611,
+    "XJTU": 0.8675623800383877
+  },
+  "dataset_signature": [
+    "BIT",
+    "CALCE",
+    "MIT",
+    "NASA",
+    "Oxford",
+    "RWTH",
+    "XJTU"
+  ]
+}

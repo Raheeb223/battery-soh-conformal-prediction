@@ -1,7 +1,7 @@
 """
 CALCE CS2 / CX2 loader, version 2.
 
-DEFECTS IN calce_loader.py THIS VERSION ADDRESSES
+DEFECTS IN THE ORIGINAL LOADER (calce_loader.py, since removed) THAT THIS VERSION ADDRESSES
   1. Session order. v1 sorted workbooks by file NAME and assumed that was
      chronological. CALCE names use unpadded month_day_year (for example
      CS2_35_10_4_10.xlsx sorts before CS2_35_8_17_10.xlsx), so sessions could

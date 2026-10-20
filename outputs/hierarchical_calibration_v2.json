@@ -1,0 +1,108 @@
+{
+  "alpha": 0.1,
+  "fit_groups": [
+    "MIT",
+    "RWTH",
+    "XJTU",
+    "BIT",
+    "CALCE"
+  ],
+  "global": {
+    "mu_hat": 0.007781289206096804,
+    "tau2_hat": 2.1102893957315697e-05,
+    "tau2_group_bootstrap_ci95": [
+      3.501677013324257e-08,
+      9.219039113141767e-05
+    ]
+  },
+  "global_excluding_calce": {
+    "mu_hat": 0.006506254388325213,
+    "tau2_hat": 2.1751232074502603e-05
+  },
+  "q_g": {
+    "MIT": 0.0015175881070926896,
+    "RWTH": 0.008102529325815018,
+    "XJTU": 0.007971393053573885,
+    "BIT": 0.06869575651626009,
+    "CALCE": 0.011381067149970373,
+    "Oxford": 0.013539716566227503,
+    "NASA": 0.011546285111910186
+  },
+  "sigma2_g": {
+    "MIT": 6.964101203829865e-08,
+    "RWTH": 2.4336101764103088e-08,
+    "XJTU": 1.2057672176786945e-05,
+    "BIT": 0.0005336245125973724,
+    "CALCE": 7.016153435576105e-07,
+    "Oxford": null,
+    "NASA": null
+  },
+  "per_target": {
+    "MIT": {
+      "n_test": 17513,
+      "mu_hat_loo": 0.009710213067626093,
+      "tau2_loo": 6.3952723721194915e-06,
+      "w_eb": 0.9892278507228026,
+      "cov_prior_only": 0.999714497801633,
+      "cov_eb_shrunk": 0.9297664592017358,
+      "cov_own_quantile": 0.9218294980871353,
+      "cov_cross_source_pooled": 0.9996002969222862,
+      "prior_only_width_over_own_width": 6.398450951377298
+    },
+    "RWTH": {
+      "n_test": 13446,
+      "mu_hat_loo": 0.008667730904579505,
+      "tau2_loo": 4.873356742237273e-05,
+      "w_eb": 0.9995008788318379,
+      "cov_prior_only": 0.9209430313847985,
+      "cov_eb_shrunk": 0.9071842927264614,
+      "cov_own_quantile": 0.9071842927264614,
+      "cov_cross_source_pooled": 0.7479547820913283,
+      "prior_only_width_over_own_width": 1.0697561904483
+    },
+    "XJTU": {
+      "n_test": 2605,
+      "mu_hat_loo": 0.007746589549998768,
+      "tau2_loo": 2.1255835520958452e-05,
+      "w_eb": 0.63805456074495,
+      "cov_prior_only": 0.927063339731286,
+      "cov_eb_shrunk": 0.9293666026871401,
+      "cov_own_quantile": 0.9301343570057582,
+      "cov_cross_source_pooled": 0.909021113243762,
+      "prior_only_width_over_own_width": 0.9717987179826331
+    },
+    "BIT": {
+      "n_test": 798,
+      "mu_hat_loo": 0.007136482690545757,
+      "tau2_loo": 2.0841658568331253e-05,
+      "w_eb": 0.03758869278627761,
+      "cov_prior_only": 0.3258145363408521,
+      "cov_eb_shrunk": 0.41478696741854637,
+      "cov_own_quantile": 0.8809523809523809,
+      "cov_cross_source_pooled": 0.2982456140350877,
+      "prior_only_width_over_own_width": 0.10388534972835728
+    },
+    "CALCE": {
+      "n_test": 2743,
+      "mu_hat_loo": 0.006506254388325213,
+      "tau2_loo": 2.1751232074502603e-05,
+      "w_eb": 0.968751609517764,
+      "cov_prior_only": 0.5946044476850164,
+      "cov_eb_shrunk": 0.7531899380240612,
+      "cov_own_quantile": 0.7564710171345242,
+      "cov_cross_source_pooled": 0.5891359825009114,
+      "prior_only_width_over_own_width": 0.5716734909469495
+    },
+    "Oxford": {
+      "n_test": 56,
+      "mu_hat_loo": 0.007781289206096804,
+      "tau2_loo": 2.1102893957315697e-05,
+      "w_eb": null,
+      "cov_prior_only": 0.9821428571428571,
+      "cov_eb_shrunk": null,
+      "cov_own_quantile": 1.0,
+      "cov_cross_source_pooled": 0.9821428571428571,
+      "prior_only_width_over_own_width": 0.5747010410473358
+    }
+  }
+}

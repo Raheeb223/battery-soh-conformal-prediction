@@ -1,0 +1,21 @@
+{
+  "run_name": "lodo_XJTU",
+  "held_out_dataset": "XJTU",
+  "model_variant": "full",
+  "test_mae": 0.012092888879843295,
+  "test_rmse": 0.019233271491658096,
+  "test_mae_normalized_space": 0.2021961510181427,
+  "test_rmse_normalized_space": 0.32158514857292175,
+  "held_out_soh_std": 0.05980771057683596,
+  "calibration_predictor": "mc_mean",
+  "coverage": 0.29721537196876285,
+  "n_test_samples": 19464,
+  "training_dataset_signature": [
+    "BIT",
+    "CALCE",
+    "MIT",
+    "NASA",
+    "Oxford",
+    "RWTH"
+  ]
+}

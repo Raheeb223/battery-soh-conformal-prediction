@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this code, please cite it as below."
-title: "Dataset-Aware Conformal Calibration for Cross-Dataset Lithium-Ion Battery State-of-Health Prediction"
+title: "How Far Does Calibrated Uncertainty Transfer Across Battery Datasets? An Empirical Study of Conformal Calibration for State-of-Health Prediction on Seven Public Datasets"
 type: software
 authors:
   - given-names: "Raheeb"

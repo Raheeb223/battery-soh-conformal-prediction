@@ -1,169 +1,110 @@
-# Reproducibility
+# Reproducing the results
 
-This file did not exist on disk at the start of this audit (the mission brief's claim that it
-existed was wrong — see `TEST_REPORT.md`, Stage 0). It is written from scratch here, describing
-the pipeline as independently verified during this audit (see `TEST_REPORT.md` / `ERROR_REGISTER.md`
-for what was checked and what was found).
+This guide covers the software environment, where the raw data goes, the order in which the
+scripts produce every result, and how those results become the numbers and figures in the paper.
 
 ## 1. Environment
 
-- OS: Windows 11 Pro, PyCharm project layout.
-- Python environment: `.venv/` (not committed). Frozen package list: `requirements_frozen.txt`
-  (77 packages, captured via `pip freeze` during this audit). Key versions: numpy 1.26.4,
-  pandas 2.0.0, scipy 1.10.0, scikit-learn 1.3.0, torch 2.5.1+cu121, xgboost 3.2.0,
-  matplotlib 3.7.0, openpyxl 3.1.0.
-- GPU: NVIDIA RTX 3060 (12GB), driver 572.83, CUDA available via torch 2.5.1+cu121. Training
-  falls back to CPU automatically (`torch.device("cuda" if torch.cuda.is_available() else "cpu")`)
-  but will be impractically slow for the full model-training steps below.
+- Python 3.10, packages pinned in `requirements.txt` (`pip install -r requirements.txt`).
+- The results in the paper were produced on Windows 11 with an NVIDIA RTX 3060 (12 GB) and
+  PyTorch 2.5.1 built for CUDA 12.1. Training uses the GPU when one is available and falls back to
+  the CPU otherwise; the training steps below are impractically slow on a CPU.
 
-To recreate the environment:
-```
-pip install -r requirements_frozen.txt
-```
+## 2. Raw data
 
-## 2. Raw datasets (not committed — must be downloaded separately)
+The raw datasets are not redistributed; download them from their original sources (each has its own
+license). Extract them under the repository folder using the names below, or put them elsewhere and
+set the environment variable `SOH_DATA_DIR` to that folder (`config.py` reads it).
 
-All raw dataset folders/files are excluded from version control (`.gitignore`) because of their
-size. Place them directly under the project root (`config.ROOT_DIR`) using these exact names, or
-edit the corresponding path in `config.py`:
-
-| Dataset | Expected path (relative to project root) | Loader | Source |
+| Dataset | Expected location | Loader | Source |
 |---|---|---|---|
-| NASA | `5. Battery Data Set/` (contains `B0005.mat`, `B0006.mat`, ...) | `nasa_loader.py` | [NASA PCoE Prognostics Data Repository](https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/) |
-| CALCE (CS2) | `CS2_33/`, `CS2_34/`, `CS2_35/`, `CS2_38/` | `calce_loader_v2.py` | [CALCE Battery Research Group, University of Maryland](https://calce.umd.edu/battery-data) |
-| CALCE (CX2) | `CX2_16/`, `CX2_31/`, `CX2_33/`, `CX2_34/`, `CX2_35/`, `CX2_36/`, `CX2_37/` | `calce_loader_v2.py` | [CALCE Battery Research Group, University of Maryland](https://calce.umd.edu/battery-data) |
-| Oxford | `Oxford_Battery_Degradation_Dataset_1.mat` | `oxford_loader.py` | [Oxford University Research Archive, DOI: 10.5287/bodleian:KO2kdmYGg](https://ora.ox.ac.uk/objects/uuid:03ba4b01-cfed-46d3-9b1a-7d4a7bdf6fac) |
-| MIT/Severson (FastCharge) | loose `*_structure.json` files directly under project root, or a `FastCharge/` subfolder (loader searches recursively) | `mit_loader.py` | [data.matr.io (MIT/Stanford/Toyota Research Institute)](https://data.matr.io/1/projects/5c48dd2bc625d700019f3204) — cite Severson et al., *Nature Energy* 4:383–391 (2019) |
-| BIT | `kw34hhw7xg-3/` | `bit_loader.py` | [Mendeley Data, DOI: 10.17632/kw34hhw7xg.3](https://data.mendeley.com/datasets/kw34hhw7xg/3) (Beijing Institute of Technology, Advanced Energy Storage and Application Group) |
-| XJTU | `Battery Dataset/` | `xjtu_loader.py` | [Zenodo, DOI: 10.5281/zenodo.10963339](https://doi.org/10.5281/zenodo.10963339) (Xi'an Jiaotong University) |
-| RWTH | `RWTH-2021-04545_818642/Rawdata/Rohdaten/` | `rwth_loader.py` | [RWTH Aachen Publications, DOI: 10.18154/RWTH-2021-04545](https://publications.rwth-aachen.de/record/818642) |
+| NASA | `5. Battery Data Set/` (`B0005.mat`, `B0006.mat`, ...) | `nasa_loader.py` | [NASA PCoE Data Set Repository](https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/) |
+| CALCE (CS2) | `CS2_33/`, `CS2_34/`, `CS2_35/`, `CS2_38/` | `calce_loader_v2.py` | [CALCE Battery Research Group](https://calce.umd.edu/battery-data) |
+| CALCE (CX2) | `CX2_16/`, `CX2_31/`, `CX2_33/` to `CX2_37/` | `calce_loader_v2.py` | [CALCE Battery Research Group](https://calce.umd.edu/battery-data) |
+| Oxford | `Oxford_Battery_Degradation_Dataset_1.mat` | `oxford_loader.py` | [Oxford University Research Archive, DOI 10.5287/bodleian:KO2kdmYGg](https://ora.ox.ac.uk/objects/uuid:03ba4b01-cfed-46d3-9b1a-7d4a7bdf6fac) |
+| MIT / Stanford / TRI | `*_structure.json` files in the repository folder or a `FastCharge/` subfolder | `mit_loader.py` | [data.matr.io](https://data.matr.io/1/projects/5c48dd2bc625d700019f3204) (Severson et al., *Nature Energy* 2019) |
+| BIT | `kw34hhw7xg-3/` | `bit_loader.py` | [Mendeley Data, DOI 10.17632/kw34hhw7xg.3](https://data.mendeley.com/datasets/kw34hhw7xg/3) |
+| XJTU | `Battery Dataset/` | `xjtu_loader.py` | [Zenodo, DOI 10.5281/zenodo.10963339](https://doi.org/10.5281/zenodo.10963339) |
+| RWTH | `RWTH-2021-04545_818642/Rawdata/Rohdaten/` | `rwth_loader.py` | [RWTH Publications, DOI 10.18154/RWTH-2021-04545](https://publications.rwth-aachen.de/record/818642) |
 
-Each dataset's own license/usage terms govern redistribution; consult the source page above before
-redistributing raw files. This project does not commit any raw dataset file to version control
-(see `.gitignore`) -- only the processing code.
+CS2_8, CS2_21 and CX2_31 contribute no rows: CALCE recorded them on a different instrument
+(`.txt` files), and the loader reads the Arbin `.xlsx`/`.xls` format only.
 
-**Known, independently-confirmed data-quality caveats** (see `ERROR_REGISTER.md` for the full
-evidence trail on each):
-- CALCE: 4 defects corrected in `calce_loader_v2.py` (cumulative discharge-capacity counters in
-  331/366 files, a tie at the last row of short cumulative files, one non-cycling file excluded,
-  truncated final cycles flagged). `INCOMPLETE_POLICY="flag"` (default) vs `"drop"` sensitivity:
-  dropping removes 0.634% of rows, central conclusions unaffected. CX2_31 contributes 0 rows (only
-  `.txt`-format files present; loader only reads `.xlsx`/`.xls`, matching the CS2_8/CS2_21
-  exclusion already documented in `config.py`).
-- XJTU: `detect_and_strip_sentinel_values()` removes periodic calibration/sentinel rows from the 8
-  `Sim_satellite_*` cells but does NOT re-number the `cycle` column afterward (verified directly,
-  see E9) — every one of the 376 Sim_satellite test windows (14.4% of XJTU's 2,605-window test
-  set) therefore bridges a removed block. Bridging windows show 5.6x higher RMSE than clean
-  windows but do not break conformal coverage validity (94.7% vs 92.7%). Report this explicitly;
-  do not claim it is undetectable or negligible.
-- RWTH: two corrections, independently re-verified against the current raw CSVs
-  (`verify_rwth_v2.py`): session-boundary partial-cycle truncation (`drop_first=True`, removes
-  734/114,716 rows = 0.640%) and a statistical local-outlier safety net (787/114,716 = 0.686%).
-  Combined: 848/114,716 = 0.739% (less than the sum because the two corrections overlap on
-  roughly 673 rows).
+### Data-quality corrections
 
-## 3. Pipeline run order
+Three datasets need corrections to raw-file artifacts that would otherwise look like degradation.
+Each was re-verified against the raw files; the paper's Appendix A gives the measured effect.
+
+- **CALCE** (`calce_loader_v2.py`, checked by `verify_calce_v2.py`): 348 of the 366 workbooks for the
+  cells used store discharge capacity as a cumulative counter and are differenced; a final-cycle
+  truncation flag is applied after differencing; one self-discharge test file is excluded.
+  Dropping, rather than flagging, incompletely captured cycles removes 0.63% of rows.
+- **XJTU** (`xjtu_loader.py`, quantified by `xjtu_bridging_isolation.py` and
+  `xjtu_bridging_sensitivity.py`): periodic sentinel readings are removed from the eight
+  `Sim_satellite_*` cells. Cycle numbers are not renumbered afterwards, so test windows from these
+  cells span the removed blocks; the paper reports their effect on error and coverage.
+- **RWTH** (`rwth_loader.py`, `rwth_local_outlier_fix.py`, checked by `verify_rwth_v2.py`): the first
+  cycle of each session file under-reports capacity and is dropped, and a local-outlier filter
+  removes isolated artifacts.
+
+## 3. Run order
+
+`run_all.py` runs the same steps in this order. It prints the plan and does nothing by default;
+`--execute` runs any step whose main output is missing, `--force` reruns steps whose output exists,
+and `--only <step names>` restricts it to particular steps.
 
 ```
-python preprocessing.py          # parses all 7 raw datasets, builds the cell-independent
-                                  # train/val/test split (seed=config.SPLIT_SEED, default
-                                  # config.RANDOM_SEED=42), windows them, caches to
-                                  # cache/processed.npz
-python train.py                  # trains the default "full" model once, saves
-                                  # outputs/best_model.pt + outputs/best_results.json
-python experiments.py            # baselines (linear/SVR/XGBoost), ablations
-                                  # (no_attention/no_multiscale/plain_lstm/gru), window-size
-                                  # sweep (10/20/30/50), multi-seed runs (42/123/2024),
-                                  # conformal-mode comparison (groupwise/pooled/
-                                  # normalized_groupwise) -- all via train_one() with different args
-python baseline_conformal_coverage.py   # K3: pooled+groupwise conformal coverage for
-                                         # SVR/XGBoost/plain_lstm/gru (no retrain for the last two
-                                         # -- reuses existing ablation checkpoints)
-python leave_one_out.py          # K1-fixed LODO: 7 held-out-dataset configs, predictor-consistent
-                                  # (mc_mean for both calibration and test, matching train.py)
-python hierarchical_calibration_v2.py   # canonical hierarchical (empirical-Bayes) calibration
-python dataset_level_wilcoxon.py # K2-fixed: reads real coverage numbers from the JSON files
-                                  # above (NOT hardcoded), reports both the valid dataset-level
-                                  # (n=6) and the invalid-but-shown-for-contrast 24-pair comparison
-python run_nested_hp_search_all.py      # K4: HGC-CP (lambda,beta) nested held-out search, all
-                                         # 7 datasets as real target in turn
-python mwhc_calibration.py              # MWHC: MMD-weighted hierarchical calibration (new
-                                         # method, see main.tex sec:mwhc/sec:mwhc-results) --
-                                         # same calibration-level LODO protocol as
-                                         # hierarchical_calibration_v2.py, plus a lambda-
-                                         # sensitivity sweep and an effective-sample-size
-                                         # diagnostic; no retraining, pure post-hoc statistics
-python calibration_size_sensitivity.py  # new experiment (see main.tex sec:calsize/
-                                         # sec:calsize-results): groupwise coverage vs. number of
-                                         # calibration CELLS actually used, 500 repeated random
-                                         # cell subsamples per budget; no retraining
-python train_cqr.py                     # CQR baseline (see main.tex sec:cqr/sec:cqr-results):
-                                         # retrains the same backbone with a 2-output pinball-loss
-                                         # head (quantile regression) instead of MSE, then applies
-                                         # split-conformal correction (pooled and groupwise) on the
-                                         # two-sided CQR nonconformity score; saves
-                                         # outputs/cqr_pooled_results.json,
-                                         # outputs/cqr_groupwise_results.json,
-                                         # outputs/cqr_predictions.npz -- full retraining, ~60 epochs
-python predictor_consistent_recalibration.py   # per-dataset coverage with BOTH a window-level
-                                                # and a cell-clustered-bootstrap CI (E13-fixed)
-python xjtu_bridging_isolation.py       # E9: isolates bridging to the 8 Sim_satellite cells
-python xjtu_bridging_sensitivity.py     # quantifies the bridging windows' effect on MAE/RMSE/coverage
-python verify_rwth_v2.py                # re-verifies RWTH's two corrections against current raw files
-python verify_calce_v2.py               # re-verifies CALCE's corrections (K8)
-python repeated_split_experiment.py     # K6: 4 additional cell-level split seeds (43-46),
-                                         # groupwise/pooled/normalized_groupwise + persistence +
-                                         # cell-clustered bootstrap, model-init seed held fixed
-python make_results_registry.py         # Stage 11: compiles every verified *.json above into
-                                         # results_registry.json + paper/numbers.tex
+python preprocessing.py                    # SOH, cell-level split, 20-cycle windows -> cache/processed.npz
+python train.py                            # main model (multi-scale BiLSTM + attention)
+python experiments.py                      # baselines (linear, SVR, XGBoost), architecture ablations,
+                                           # window-size sweep, model seeds, pooled / groupwise /
+                                           # normalized-groupwise calibration
+python baseline_conformal_coverage.py      # pooled vs. groupwise coverage for every point predictor
+python persistence_baselines.py            # model vs. one-step persistence, real SOH units
+python leave_one_out.py                    # leave-one-dataset-out: each dataset withheld from training
+python hierarchical_calibration_v2.py      # empirical-Bayes hierarchical calibration
+python dataset_level_wilcoxon.py           # pooled vs. groupwise significance test at dataset level
+python run_nested_hp_search_all.py         # HGC-CP hyperparameters by nested held-out search
+python mwhc_calibration.py                 # MWHC and its temperature sweep (no retraining)
+python calibration_size_sensitivity.py     # coverage vs. number of calibration cells (no retraining)
+python train_cqr.py                        # conformalized quantile regression (retrains the backbone)
+python predictor_consistent_recalibration.py   # window-level and cell-clustered coverage intervals
+python xjtu_bridging_isolation.py          # locates XJTU windows that span removed sentinel blocks
+python xjtu_bridging_sensitivity.py        # their effect on error and coverage
+python verify_rwth_v2.py                   # re-checks the RWTH corrections against the raw files
+python verify_calce_v2.py > logs/verify_calce_v2.log   # re-checks the CALCE corrections
+python repeated_split_experiment.py        # four further cell-level splits, model seed fixed
+python deterministic_predictor_comparison.py   # single pass vs. MC-Dropout mean as interval centre
+python deployability_benchmark.py          # model size, latency, calibration overhead
+python make_results_registry.py            # every result -> results_registry.json (+ the paper's
+                                           # numbers.tex)
 ```
 
-Tests (do not write to `cache/`/`outputs/`, safe to run any time):
-```
-python tests/stage2_data_layer.py              # data-layer checks + determinism (uses a
-                                                # temporary cache dir, never touches the real one)
-python tests/stage3_checkpoint_reproduction.py # confirms the saved checkpoint reproduces its
-                                                # own reported MAE
-python tests/stage4_conformal_unit_tests.py    # conformal.py unit tests, synthetic data only
-python tests/stage6_hgc_cp_properties.py       # HGC-CP property tests, synthetic data only
-python tests/stage6_hierarchical_dl_verification.py  # DerSimonian-Laird hand-calculated +
-                                                      # independent-reimplementation checks
-```
+Timings from `deployability_benchmark.py` depend on the hardware; rerun it on your own machine.
 
-## 4. Caches and outputs
+## 4. From results to the paper
 
-- `cache/processed.npz`: the seed-42 (default) windowed/split arrays. `cache/processed_split{N}.npz`
-  for N in {43,44,45,46}: the K6 repeated-split caches. Never overwritten by a different seed —
-  `preprocessing.cache_path_for()` suffixes the filename by split seed.
-- `outputs/`: every script above writes `{run_name}_results.json` (metrics) and, where
-  applicable, `{run_name}_predictions.npz` (raw per-window predictions + intervals, needed for any
-  downstream reanalysis without retraining) and `{run_name}_model.pt` (checkpoint).
-- `backup_YYYYMMDD_HHMM/`: point-in-time copies of `cache/` and `outputs/` taken before this
-  audit's fixes were applied, per the brief's rule 3. Not regenerated automatically; see git
-  history / `TEST_REPORT.md` Stage 0 for when this was taken.
+- **Results.** Every script above writes its results to `outputs/` (`<run>_results.json`, and for
+  model runs `<run>_predictions.npz` and `<run>_model.pt`). The JSON files and the two prediction
+  arrays that the registry reads are included in this repository, so steps 4–5 below run without
+  retraining; checkpoints and caches are not (they are large and regenerable).
+- **Registry.** `make_results_registry.py` reads those files and writes `results_registry.json`:
+  the raw results by section, plus a `values` table with every number exactly as printed in the
+  paper. It writes `UNVERIFIED` instead of a number whenever an input is missing, and refuses to
+  give two different numbers the same name. Without the raw data and `cache/`, the cell and window
+  counts read from those sources show as `UNVERIFIED`; every result value is still reproduced.
+- **Figures.** `python figures/make_results_figures.py` (and the other `figures/make_*.py`) redraw the
+  paper's figures from `outputs/` and `results_registry.json` into `figures/out/`.
+- **Checks.** `python tests/run_checks.py` runs the verification checks described in
+  `tests/README.md`.
 
-## 5. What is machine-verified vs. what still needs a human decision
+## 5. Determinism and seeds
 
-Every number in `paper/numbers.tex` comes from `results_registry.json`, which comes from the
-`outputs/*.json` files listed above — never hand-typed. If a file is missing or has not yet been
-regenerated after a fix that should have changed it, `make_results_registry.py` writes
-`UNVERIFIED` rather than guessing or reusing a stale number (see `ERROR_REGISTER.md` E16 for a
-concrete case of this safeguard catching a real staleness bug before it reached any output).
-
-K6 repeated-split experiment completed 2026-10-10 (`outputs/repeated_split_summary.json`); results
-folded into `paper/main.tex` Section 5.9 and the Discussion. Dataset source/license citations for
-the manuscript's Data Availability section were verified via live search against each dataset's own
-published source (see `paper/main.tex`, Data and code availability).
-
-2026-10-17 audit pass: every pipeline script listed in Section 3 above was confirmed to have a
-corresponding file in `outputs/`, and every figure `main.tex` references was confirmed to exist in
-`paper/`. This surfaced one real gap and corrected it (see `ERROR_REGISTER.md` E2): the K3
-cross-architecture conformal coverage result (`outputs/baseline_conformal_results.json`) had been
-computed but never wired into `make_results_registry.py` or `main.tex` -- the "Baseline conformal
-coverage" subsection was asserting hand-typed numbers with no macro behind them. Fixed by adding a
-macro-emission block and a new table (Table~\ref{tab:baseline-conformal}). The same sweep also
-found and corrected several other hand-typed/approximate numbers elsewhere in Results and
-Discussion (pooled-vs-groupwise per-dataset deviations, the window-level-vs-cell-clustered CI width
-ratio for XJTU/CALCE -- which was stated as "roughly 4--5x" but is actually
-7.4x/6.4x -- and the XJTU bridging-window MAE shift, restated from "roughly 8%" to the exact 9.0%)
-by adding the missing macros rather than leaving the imprecise prose in place.
+- The cell-level split seed (`config.SPLIT_SEED`) and the model-initialization seed
+  (`config.RANDOM_SEED`) are separate, so split-to-split and seed-to-seed variability can be
+  measured independently. Caches for other split seeds are written to `cache/processed_split<N>.npz`
+  and never overwrite the default.
+- `tests/check_data_layer.py` runs the full preprocessing twice and confirms the two outputs are
+  byte-identical.
+- MC-Dropout inference is stochastic, so reruns reproduce MC-mean metrics closely but not
+  bit-exactly (`tests/check_checkpoint_reproduction.py` shows the size of the difference).

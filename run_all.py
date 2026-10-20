@@ -1,12 +1,11 @@
 """
-Stage 12: reference end-to-end driver, documenting the exact run order from
-REPRODUCIBILITY.md as executable code rather than prose alone.
+End-to-end pipeline driver: the run order in REPRODUCIBILITY.md as executable code.
 
 SAFE BY DEFAULT: running this with no arguments only PRINTS the plan (what
 would run, and whether its output already exists) -- it does not retrain or
-overwrite anything. Per this audit's rule 3/4 (never silently overwrite a
-verified artifact; never retrain without a stated reason), every step is
-skipped by default if its primary output file already exists. Use --execute
+overwrite anything. To avoid silently overwriting a verified result or retraining without a
+reason, every step is skipped by default if its primary output file already
+exists. Use --execute
 to actually run, and --force to rerun steps whose output already exists
 (use deliberately, not as a default habit -- a forced rerun of a GPU
 training step takes real time and will overwrite a result someone may be
@@ -35,13 +34,22 @@ STEPS = [
      os.path.join(config.OUTPUT_DIR, "experiment_summary.json")),
     ("baseline_conformal_coverage", [sys.executable, "baseline_conformal_coverage.py"],
      os.path.join(config.OUTPUT_DIR, "baseline_conformal_results.json")),
+    ("persistence_baselines", [sys.executable, "persistence_baselines.py"],
+     os.path.join(config.OUTPUT_DIR, "persistence_baselines.json")),
     ("leave_one_out", [sys.executable, "leave_one_out.py"],
      os.path.join(config.OUTPUT_DIR, "lodo_RWTH_results.json")),
     ("hierarchical_calibration", [sys.executable, "hierarchical_calibration_v2.py"],
      os.path.join(config.OUTPUT_DIR, "hierarchical_calibration_v2.json")),
-    ("dataset_level_wilcoxon", [sys.executable, "dataset_level_wilcoxon.py"], None),
+    ("dataset_level_wilcoxon", [sys.executable, "dataset_level_wilcoxon.py"],
+     os.path.join(config.OUTPUT_DIR, "dataset_level_wilcoxon.json")),
     ("nested_hp_search", [sys.executable, "run_nested_hp_search_all.py"],
      os.path.join(config.OUTPUT_DIR, "nested_hp_search_results.json")),
+    ("mwhc", [sys.executable, "mwhc_calibration.py"],
+     os.path.join(config.OUTPUT_DIR, "mwhc_results.json")),
+    ("calibration_size_sensitivity", [sys.executable, "calibration_size_sensitivity.py"],
+     os.path.join(config.OUTPUT_DIR, "calibration_size_sensitivity.json")),
+    ("train_cqr", [sys.executable, "train_cqr.py"],
+     os.path.join(config.OUTPUT_DIR, "cqr_groupwise_results.json")),
     ("predictor_consistent_recalibration", [sys.executable, "predictor_consistent_recalibration.py"],
      os.path.join(config.OUTPUT_DIR, "predictor_consistent_recalibration.json")),
     ("xjtu_bridging_isolation", [sys.executable, "xjtu_bridging_isolation.py"],
@@ -50,8 +58,15 @@ STEPS = [
      os.path.join(config.OUTPUT_DIR, "xjtu_bridging_sensitivity.json")),
     ("verify_rwth", [sys.executable, "verify_rwth_v2.py"],
      os.path.join(config.OUTPUT_DIR, "rwth_verification_v2.json")),
+    # The registry parses this log's summary table, so the step writes it explicitly.
+    ("verify_calce", [sys.executable, "verify_calce_v2.py"],
+     os.path.join("logs", "verify_calce_v2.log"), os.path.join("logs", "verify_calce_v2.log")),
     ("repeated_split", [sys.executable, "repeated_split_experiment.py"],
      os.path.join(config.OUTPUT_DIR, "repeated_split_summary.json")),
+    ("deterministic_predictor", [sys.executable, "deterministic_predictor_comparison.py"],
+     os.path.join(config.OUTPUT_DIR, "deterministic_predictor_results.json")),
+    ("deployability", [sys.executable, "deployability_benchmark.py"],
+     os.path.join(config.OUTPUT_DIR, "deployability_results.json")),
     ("results_registry", [sys.executable, "make_results_registry.py"],
      None),  # always safe/cheap to rerun -- just aggregates existing JSON
 ]
@@ -59,7 +74,7 @@ STEPS = [
 # Steps that train a model on the GPU and take non-trivial wall-clock time --
 # flagged so --execute without --only prints a warning before launching all
 # of them back to back.
-GPU_HEAVY = {"train", "experiments", "leave_one_out", "repeated_split"}
+GPU_HEAVY = {"train", "experiments", "leave_one_out", "repeated_split", "train_cqr"}
 
 
 def main():
@@ -82,13 +97,17 @@ def main():
               f"{gpu_heavy_in_plan}. This can take many hours. Re-run with --only to run one at "
               f"a time if that's not what you want.")
 
-    for name, cmd, output_check in steps:
+    for name, cmd, output_check, *stdout_log in steps:
         exists = output_check is not None and os.path.exists(output_check)
         skip = exists and not args.force
         status = "SKIP (output exists)" if skip else ("RUN" if args.execute else "WOULD RUN")
-        print(f"[{status}] {name:40s} -> {' '.join(cmd)}")
+        print(f"[{status}] {name:40s} -> {' '.join(cmd)}" + (f" > {stdout_log[0]}" if stdout_log else ""))
         if args.execute and not skip:
-            result = subprocess.run(cmd)
+            if stdout_log:
+                with open(stdout_log[0], "w", encoding="utf-8") as fh:
+                    result = subprocess.run(cmd, stdout=fh, stderr=subprocess.STDOUT)
+            else:
+                result = subprocess.run(cmd)
             if result.returncode != 0:
                 print(f"[!] {name} exited with code {result.returncode} -- stopping (fix before continuing).")
                 return

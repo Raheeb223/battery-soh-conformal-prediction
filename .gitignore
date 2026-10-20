@@ -18,13 +18,27 @@ FastCharge/
 *.csv
 tmp_determinism_check/
 
-# Pipeline cache and model outputs (large, regenerable)
+# Pipeline cache and model outputs. Model checkpoints and most prediction arrays are large and
+# regenerable; the small per-experiment result files and the two prediction arrays that
+# make_results_registry.py reads are tracked so the registry and figures can be rebuilt without
+# retraining.
 cache/
-outputs/
+outputs/*
+!outputs/*.json
+!outputs/conformal_groupwise_predictions.npz
+!outputs/conformal_normalized_groupwise_predictions.npz
 cache_WITHOUT_fix/
 outputs_WITHOUT_fix/
 *.npz
+!outputs/conformal_groupwise_predictions.npz
+!outputs/conformal_normalized_groupwise_predictions.npz
 *.pt
+
+# Generated figures (python figures/make_*.py writes here by default)
+figures/out/
+
+# Stray run logs in the repository root (curated logs live in logs/)
+/*.log
 
 # IDE
 .idea/

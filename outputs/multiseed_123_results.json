@@ -1,0 +1,39 @@
+{
+  "run_name": "multiseed_123",
+  "model_variant": "full",
+  "seed": 123,
+  "conformal_mode": "groupwise",
+  "calibration_predictor": "mc_mean",
+  "best_epoch": 78,
+  "best_val_loss": 0.004893397730715343,
+  "test_mae": 0.02613239735364914,
+  "test_rmse": 0.10148081928491592,
+  "overall_coverage": 0.9074642126789366,
+  "per_dataset_mae": {
+    "BIT": 0.14499811828136444,
+    "CALCE": 0.082093246281147,
+    "MIT": 0.015729790553450584,
+    "NASA": 0.12099790573120117,
+    "Oxford": 0.030475258827209473,
+    "RWTH": 0.016583643853664398,
+    "XJTU": 0.049813803285360336
+  },
+  "per_dataset_coverage": {
+    "BIT": 0.8609022556390977,
+    "CALCE": 0.7703244622675902,
+    "MIT": 0.9274253411751271,
+    "NASA": 0.6666666666666666,
+    "Oxford": 1.0,
+    "RWTH": 0.9025732559869106,
+    "XJTU": 0.9554702495201536
+  },
+  "dataset_signature": [
+    "BIT",
+    "CALCE",
+    "MIT",
+    "NASA",
+    "Oxford",
+    "RWTH",
+    "XJTU"
+  ]
+}

@@ -1,5 +1,5 @@
 """
-Priority 1: Cell-clustered bootstrap confidence intervals for coverage.
+Cell-clustered bootstrap confidence intervals for coverage.
 
 WHY THIS MATTERS: Table 7's existing Clopper-Pearson intervals treat every
 TEST WINDOW as an independent Bernoulli trial. But windows from the same

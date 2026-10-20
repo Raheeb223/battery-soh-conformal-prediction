@@ -1,0 +1,113 @@
+{
+  "alpha": 0.1,
+  "q_pooled_z": 0.042349916655286236,
+  "q_pooled_real": 0.006818663981953112,
+  "per_dataset": {
+    "MIT": {
+      "n_test": 17513,
+      "n_val": 17814,
+      "q_groupwise_z": 0.03313441092924891,
+      "cov_groupwise": 0.9218294980871353,
+      "cp95_window_level_see_docstring_caveat": [
+        0.917754784621472,
+        0.9257634712498396
+      ],
+      "cell_bootstrap_95ci": [
+        0.9091459822671865,
+        0.9321508469331189
+      ],
+      "cov_pooled_z": 0.9490664078113401,
+      "cov_pooled_real": 0.9984582881288185
+    },
+    "RWTH": {
+      "n_test": 13446,
+      "n_val": 16784,
+      "q_groupwise_z": 0.03396184334053779,
+      "cov_groupwise": 0.9071842927264614,
+      "cp95_window_level_see_docstring_caveat": [
+        0.9021539007358792,
+        0.912037651011319
+      ],
+      "cell_bootstrap_95ci": [
+        0.8921241252821285,
+        0.9225054400878313
+      ],
+      "cov_pooled_z": 0.9486092518221032,
+      "cov_pooled_real": 0.8644206455451435
+    },
+    "XJTU": {
+      "n_test": 2605,
+      "n_val": 3175,
+      "q_groupwise_z": 0.13438214925330452,
+      "cov_groupwise": 0.9301343570057582,
+      "cp95_window_level_see_docstring_caveat": [
+        0.919661081167336,
+        0.9396277817165255
+      ],
+      "cell_bootstrap_95ci": [
+        0.8449577965348734,
+        0.9925925925925926
+      ],
+      "cov_pooled_z": 0.7309021113243762,
+      "cov_pooled_real": 0.910940499040307
+    },
+    "BIT": {
+      "n_test": 798,
+      "n_val": 813,
+      "q_groupwise_z": 0.2761609742708897,
+      "cov_groupwise": 0.8809523809523809,
+      "cp95_window_level_see_docstring_caveat": [
+        0.8564385957900419,
+        0.9026074232124971
+      ],
+      "cell_bootstrap_95ci": [
+        0.8432642487046632,
+        0.9163786636605862
+      ],
+      "cov_pooled_z": 0.4423558897243108,
+      "cov_pooled_real": 0.31203007518796994
+    },
+    "CALCE": {
+      "n_test": 2743,
+      "n_val": 2960,
+      "q_groupwise_z": 0.06562242636809475,
+      "cov_groupwise": 0.7564710171345242,
+      "cp95_window_level_see_docstring_caveat": [
+        0.7399578724798657,
+        0.7724351134211219
+      ],
+      "cell_bootstrap_95ci": [
+        0.6995470558631102,
+        0.906084656084656
+      ],
+      "cov_pooled_z": 0.6321545752825374,
+      "cov_pooled_real": 0.6088224571636894
+    },
+    "Oxford": {
+      "n_test": 56,
+      "n_val": 53,
+      "q_groupwise_z": 0.2061200681722387,
+      "cov_groupwise": 1.0,
+      "cp95_window_level_see_docstring_caveat": [
+        0.9362499033376378,
+        1.0
+      ],
+      "cell_bootstrap_95ci": null,
+      "cov_pooled_z": 0.8214285714285714,
+      "cov_pooled_real": 0.9821428571428571
+    },
+    "NASA": {
+      "n_test": 3,
+      "n_val": 148,
+      "q_groupwise_z": 0.0803949791636016,
+      "cov_groupwise": 0.6666666666666666,
+      "cp95_window_level_see_docstring_caveat": [
+        0.09429932405024612,
+        0.9915962413403874
+      ],
+      "cell_bootstrap_95ci": null,
+      "cov_pooled_z": 0.6666666666666666,
+      "cov_pooled_real": 0.6666666666666666
+    }
+  }
+}

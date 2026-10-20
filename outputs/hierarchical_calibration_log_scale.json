@@ -1,0 +1,44 @@
+{
+  "alpha": 0.1,
+  "additive": {
+    "mu_hat": 0.007781289206096804,
+    "tau2_hat": 2.1102893957315697e-05
+  },
+  "log_scale": {
+    "mu_hat_log": -4.7237364822005965,
+    "mu_hat_exp": 0.008881929298776492,
+    "tau2_hat_log": 0.34688864232966726
+  },
+  "per_target": {
+    "MIT": {
+      "cov_eb_shrunk_additive": 0.9297664592017358,
+      "cov_eb_shrunk_log_scale": 0.958373779478102,
+      "cov_own_quantile": 0.9218294980871353
+    },
+    "RWTH": {
+      "cov_eb_shrunk_additive": 0.9071842927264614,
+      "cov_eb_shrunk_log_scale": 0.9071842927264614,
+      "cov_own_quantile": 0.9071842927264614
+    },
+    "XJTU": {
+      "cov_eb_shrunk_additive": 0.9293666026871401,
+      "cov_eb_shrunk_log_scale": 0.9351247600767755,
+      "cov_own_quantile": 0.9301343570057582
+    },
+    "BIT": {
+      "cov_eb_shrunk_additive": 0.41478696741854637,
+      "cov_eb_shrunk_log_scale": 0.8095238095238095,
+      "cov_own_quantile": 0.8809523809523809
+    },
+    "CALCE": {
+      "cov_eb_shrunk_additive": 0.7531899380240612,
+      "cov_eb_shrunk_log_scale": 0.7561064527889172,
+      "cov_own_quantile": 0.7564710171345242
+    },
+    "Oxford": {
+      "cov_eb_shrunk_additive": null,
+      "cov_eb_shrunk_log_scale": null,
+      "cov_own_quantile": 1.0
+    }
+  }
+}

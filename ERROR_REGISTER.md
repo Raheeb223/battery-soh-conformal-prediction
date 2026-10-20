@@ -1,5 +1,20 @@
 # Error Register
 
+This is the audit log of the pipeline: every defect found while independently re-verifying the
+code, data, and results before submission, with the evidence, its consequence, the fix, and its
+status. It is kept as a record of what was checked and what changed; it is not where results are
+reported.
+
+How to read it:
+
+- **E1, E2, ...** number the defects. **K1, K2, ...** refer to the verification tasks of the
+  original project specification under which a defect was found (for example, K6 is the
+  repeated-split experiment).
+- Numbers quoted here are the values at the time of each fix. The current, authoritative values are
+  in `results_registry.json`, which is what the paper uses.
+- Some entries name diagnostic or superseded scripts that have since been removed from the
+  repository; they remain in its git history.
+
 Format: ID | Severity | Location | Problem | Evidence | Consequence | Fix | Status
 
 ---
@@ -16,7 +31,7 @@ test nonconformity scores come from different predictors, breaking exchangeabili
 No saved LODO checkpoints exist, so this requires a full retrain of all 7 held-out
 configurations.
 **Status:** RESOLVED, all 7 configs complete, all with `calibration_predictor: "mc_mean"`
-confirming the fix is active everywhere. Full comparison against the brief's as-run (pre-fix,
+confirming the fix is active everywhere. Full comparison against the original specification's as-run (pre-fix,
 mismatched-predictor) anchors:
 ```
 Dataset   MAE (real)  RMSE (real)  coverage   as-run MAE/RMSE/coverage      coverage delta
@@ -116,7 +131,7 @@ Five further variants are unimported by anything: `hierarchical_calibration (1).
 **Evidence:** `grep` import chain across all `*.py`; file listing with mtimes.
 **Consequence:** Cannot determine which branch produces the paper's reported hierarchical
 calibration numbers without reading both in full and checking the weight formula against the
-brief's explicit criterion (`tau2/(tau2+sigma2_g)`, not the withdrawn `n/(n+tau2/sigma2)`).
+specification's explicit criterion (`tau2/(tau2+sigma2_g)`, not the withdrawn `n/(n+tau2/sigma2)`).
 **Fix:** Read both files in full, compare against the correct formula, pick the correct/more
 recent one as canonical, note the decision here, archive (not delete) the others.
 **Status:** **RESOLVED.** `hierarchical_calibration_v2.py` is canonical — confirmed by direct
@@ -139,14 +154,14 @@ between the two files (the function/variable names differ), rerun.
 `sigma2_g` to be the cell-clustered bootstrap variance of whichever n-window subsample is being
 evaluated, so the script now bootstraps that variance per draw). Output (`prior_plus_n_e6_fixed.log`):
 coverage rises from 0.639 (n=5) to 0.743 (n=100) toward the true-groupwise ceiling of 0.756, from
-a prior-only baseline of 0.595 -- the qualitative pattern the brief expects. The shrinkage weight
+a prior-only baseline of 0.595 -- the qualitative pattern the original specification expects. The shrinkage weight
 is NOT smoothly monotonic in n (0.685/0.590/0.500/0.680/0.860 for n=5/10/25/50/100), because it
 now genuinely depends on each random subsample's own bootstrapped variance rather than n alone --
 this is the correct, honest behavior (the withdrawn formula would have been artificially smooth
 in n by construction). At n=5, 41/500 draws (8.2%) were skipped because the subsample landed in
 only 1 of CALCE's 2 cells -- direct, independent confirmation of CALCE's small-cell-count problem.
 
-### E7 | MINOR (pending) | config.py CALCE_DIRS / brief K8 | CX2_31 is not actually empty
+### E7 | MINOR (pending) | config.py CALCE_DIRS / specification task K8 | CX2_31 is not actually empty
 **Problem:** K8 asserts "CX2_31 folder is empty." Direct check: `CX2_31/` contains 80 `.txt`
 files (same Arbin-.txt format as CS2_8 and CS2_21, which `config.py`'s own comment says were
 deliberately EXCLUDED from `CALCE_DIRS` specifically because their `.txt` format "doesn't match
@@ -154,7 +169,7 @@ the parser used for every other CS2/CX2 cell"). CX2_31 is still listed in `CALCE
 **Evidence:** `ls CX2_31/` → 80 files; `config.py` CS2_8/CS2_21 exclusion comment.
 **Consequence:** Unclear whether `calce_loader_v2.py` has a working `.txt` path for CX2_31
 specifically (producing real rows) or silently loads 0 rows for it (functionally "empty" for
-the pipeline's purposes, matching the brief's intent if not its literal wording).
+the pipeline's purposes, matching the original specification's intent if not its literal wording).
 **Fix:** Run `verify_calce_v2.py`, check CX2_31's row count directly, read
 `calce_loader_v2.py`'s per-cell format dispatch. Resolve and update K8's assertion precisely
 rather than accept either claim at face value.
@@ -169,13 +184,13 @@ CS2_8/CS2_21 exclusion comment for documentation clarity -- not a functional bug
 loader already handles it gracefully and the manuscript's cell count (10 CALCE cells) is
 unaffected either way.
 
-### E8 | MAJOR | baselines.py (K3 fix) | SVR/XGBoost/plain-LSTM coverage numbers differ from the brief's own stale regression anchors
+### E8 | MAJOR | baselines.py (K3 fix) | SVR/XGBoost/plain-LSTM coverage numbers differ from the original specification's own stale regression anchors
 **Problem:** Not a code defect -- a confirmed DRIFT finding. Freshly computed baseline conformal
-coverage (e.g. SVR BIT pooled/groupwise = 21.3%/87.3%) differs from the brief's Section 3
+coverage (e.g. SVR BIT pooled/groupwise = 21.3%/87.3%) differs from the original specification's Section 3
 anchors (SVR BIT = 28.3%/86.6%) and from `dataset_level_wilcoxon.py`'s old hardcoded literals,
 by amounts too large to be rounding. Point-prediction MAE/RMSE for linear/SVR/XGBoost (K3's
-fresh run), by contrast, match the brief's anchors EXACTLY (e.g. XGBoost 0.02405/0.10845).
-**Evidence:** `outputs/baseline_conformal_results.json` vs brief Section 3 vs the old
+fresh run), by contrast, match the original specification's anchors EXACTLY (e.g. XGBoost 0.02405/0.10845).
+**Evidence:** `outputs/baseline_conformal_results.json` vs specification Section 3 vs the old
 `dataset_level_wilcoxon.py` literals.
 **Consequence:** Point-prediction numbers are stable (same cache, same models); coverage numbers
 are not. Since MAE/RMSE match exactly, this rules out a different train/test split or a
@@ -184,12 +199,12 @@ retrained model as the cause -- the drift is specific to the CONFORMAL CALIBRATI
 unchanged, so the split itself did not move; the most likely explanation is that conformal
 calibration draws from `cache/processed.npz`'s *validation* split, and something about how
 validation predictions were generated for this K3 run (fresh MC-Dropout/model.predict() calls)
-differs stochastically from whatever produced the brief's anchor numbers. SVR/XGBoost use fixed
+differs stochastically from whatever produced the original specification's anchor numbers. SVR/XGBoost use fixed
 seeds and are deterministic given the same inputs, so a differing result points to the
 underlying cache or checkpoint having already changed before this session began, not to
 something introduced by my fix.
 **Fix:** None needed in code; this is reported as a verified, current, correct result. Logged
-so a reader comparing against the brief's own stated anchors is not confused by the mismatch.
+so a reader comparing against the original specification's own stated anchors is not confused by the mismatch.
 **Status:** CONFIRMED (informational, not a bug to fix) -- new numbers are real and verified.
 
 ### E9 | MODERATE | xjtu_loader.py vs preprocessing.py docstring | "Known limitation" may be stale
@@ -290,9 +305,9 @@ LODO finishing, to avoid GPU contention between two simultaneous training jobs).
 ### E13 | MAJOR | predictor_consistent_recalibration.py:50-54,81 | Per-dataset coverage CI treated windows as independent trials (Stage 9)
 **Problem:** `clopper_pearson(k, n)` computed a window-level binomial CI for each dataset's
 groupwise coverage, treating all n test WINDOWS as independent Bernoulli trials. This is exactly
-the violation the brief's own rules warn against ("windows from the same cell are not
+the violation the original specification's own rules warn against ("windows from the same cell are not
 independent") -- for datasets with few test cells (XJTU, CALCE, and especially Oxford/NASA with
-1-2 test cells per the brief's own anchors), a window-level CI is overconfident because it treats
+1-2 test cells per the original specification's own anchors), a window-level CI is overconfident because it treats
 hundreds of correlated within-cell windows as if they were hundreds of independent draws.
 **Evidence:** Direct read, confirmed no other script consumed this field (so the bug was
 self-contained, not yet propagated), then ran both CIs side by side after the fix:
@@ -320,7 +335,7 @@ post-hoc recomputation from already-saved predictions).
 ### E14 | MAJOR (finding, not a code defect) | K4 nested hyperparameter search | HGC-CP has no single (lam, beta) that generalizes across targets
 **Problem:** K4 required re-selecting HGC-CP's (lambda, beta) via a genuine nested/held-out
 protocol (`run_nested_hp_search_all.py`, rotating the other 6 datasets as pseudo-targets, never
-touching the real target's test set during selection) rather than the brief's anchor (lambda=3.0,
+touching the real target's test set during selection) rather than the original specification's anchor (lambda=3.0,
 beta=0.0), which was selected on the pre-fix pipeline using direct test-set feedback.
 **Result (all 7 datasets as real target, in turn):**
 ```
@@ -333,7 +348,7 @@ CALCE     lam=3.0, beta=0.5       85.1%   (close to target)
 Oxford    lam=3.0, beta=1.0      100.0%   (massively over-covers)
 NASA      lam=3.0, beta=0.5      100.0%   (massively over-covers, n=3 test windows)
 ```
-**Consequence:** (1) NONE of the 7 nested-selected settings match the brief's anchor beta=0.0 --
+**Consequence:** (1) NONE of the 7 nested-selected settings match the original specification's anchor beta=0.0 --
 every single one prefers beta>=0.5, confirming the anchor was indeed chosen via test-set feedback
 on the pre-fix pipeline, not a held-out procedure (as K4 already suspected). (2) No single (lam,
 beta) compromise generalizes well: optimizing "mean |coverage-90%| across 6 pseudo-target
@@ -395,7 +410,7 @@ EXISTENCE, not freshness/validity, and would have silently compiled a results_re
 2 valid fixed numbers with 5 invalid pre-fix ones -- exactly the "silently overwriting/conflating
 results" failure mode rule 3 warns against, just in the read direction rather than the write
 direction.
-**Evidence:** Direct comparison: the loaded `lodo_MIT_results.json` matched the brief's own stale
+**Evidence:** Direct comparison: the loaded `lodo_MIT_results.json` matched the original specification's own stale
 "as-run" anchor (MAE 0.00089, coverage 92.16%) exactly and lacked `calibration_predictor` entirely,
 while the 2 genuinely fixed files (NASA, CALCE) both have that field set to `"mc_mean"`.
 **Consequence:** Caught before any commit or manuscript number was generated from it -- no
@@ -419,7 +434,7 @@ alpha, beta, inflation_scale)` (everything y_hat-independent, call once per cali
 `apply_hgc_cp_interval(y_hat, q_star, q_t, weights_by_group)` (the trivial per-point step).
 `hgc_cp_interval()` itself is unchanged in signature/behavior -- it now just calls both internally
 -- so no existing caller needed to change.
-**Equivalence proof:** `tests/stage6_k10_equivalence.py` -- 250 (test-point, random-config)
+**Equivalence proof:** `tests/check_hgc_cp_split_equivalence.py` -- 250 (test-point, random-config)
 combinations (including the inf-width edge case, deliberately triggered) show the split path is
 bit-identical to the original monolithic path. Module's own built-in `__main__` self-test and the
 Stage 6 property-test suite (13/13) both re-run clean after this change.

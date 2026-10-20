@@ -29,7 +29,7 @@ class SplitConformal:
         # the (1-alpha) empirical quantile, with the standard finite-sample correction
         q_level = np.ceil((n + 1) * (1 - self.alpha)) / n
         q_level = min(q_level, 1.0)
-        # NOTE (confirmed by direct test, tests/stage4_conformal_unit_tests.py):
+        # NOTE (confirmed by direct test, tests/check_conformal.py):
         # np.quantile's default linear interpolation does not land exactly on
         # the textbook discrete order statistic residuals_sorted[ceil((n+1)
         # (1-alpha))-1] -- it linearly blends that order statistic with the

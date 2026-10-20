@@ -1,0 +1,805 @@
+{
+  "baselines": [
+    {
+      "run_name": "baseline_linear",
+      "model_variant": "baseline_linear",
+      "test_mae": 0.03399040177464485,
+      "test_rmse": 0.1334550380706787,
+      "per_dataset_mae": {
+        "BIT": 0.3091830313205719,
+        "CALCE": 0.11876223236322403,
+        "MIT": 0.009409022517502308,
+        "NASA": 0.17545831203460693,
+        "Oxford": 0.09113894402980804,
+        "RWTH": 0.01087773684412241,
+        "XJTU": 0.14359086751937866
+      },
+      "dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "NASA",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    },
+    {
+      "run_name": "baseline_svr",
+      "model_variant": "baseline_svr",
+      "test_mae": 0.023564682638626176,
+      "test_rmse": 0.12188604027599374,
+      "per_dataset_mae": {
+        "BIT": 0.23587300643309964,
+        "CALCE": 0.10778231971993753,
+        "MIT": 0.004790498437347924,
+        "NASA": 0.761980554742795,
+        "Oxford": 0.026333608557354192,
+        "RWTH": 0.005990382980011536,
+        "XJTU": 0.08586602342823474
+      },
+      "dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "NASA",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    },
+    {
+      "run_name": "baseline_xgboost",
+      "model_variant": "baseline_xgboost",
+      "test_mae": 0.02404698170721531,
+      "test_rmse": 0.10844731330871582,
+      "per_dataset_mae": {
+        "BIT": 0.2079988270998001,
+        "CALCE": 0.08645279705524445,
+        "MIT": 0.009959413670003414,
+        "NASA": 0.19294404983520508,
+        "Oxford": 0.03805169463157654,
+        "RWTH": 0.00813550129532814,
+        "XJTU": 0.07832631468772888
+      },
+      "dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "NASA",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    }
+  ],
+  "ablations": [
+    {
+      "run_name": "ablation_full",
+      "model_variant": "full",
+      "seed": 42,
+      "conformal_mode": "groupwise",
+      "calibration_predictor": "mc_mean",
+      "best_epoch": 97,
+      "best_val_loss": 0.004746637342734083,
+      "test_mae": 0.024789657443761826,
+      "test_rmse": 0.10174031555652618,
+      "overall_coverage": 0.9046658056183403,
+      "per_dataset_mae": {
+        "BIT": 0.1415572464466095,
+        "CALCE": 0.08280643075704575,
+        "MIT": 0.014270326122641563,
+        "NASA": 0.05493752285838127,
+        "Oxford": 0.026076747104525566,
+        "RWTH": 0.015627646818757057,
+        "XJTU": 0.045877695083618164
+      },
+      "per_dataset_coverage": {
+        "BIT": 0.8796992481203008,
+        "CALCE": 0.7568355814801312,
+        "MIT": 0.9228002055615828,
+        "NASA": 0.6666666666666666,
+        "Oxford": 1.0,
+        "RWTH": 0.9074074074074074,
+        "XJTU": 0.9301343570057582
+      },
+      "dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "NASA",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    },
+    {
+      "run_name": "ablation_no_attention",
+      "model_variant": "no_attention",
+      "seed": 42,
+      "conformal_mode": "groupwise",
+      "calibration_predictor": "mc_mean",
+      "best_epoch": 74,
+      "best_val_loss": 0.0051259528647785765,
+      "test_mae": 0.02679341472685337,
+      "test_rmse": 0.10054898262023926,
+      "overall_coverage": 0.8983693897319988,
+      "per_dataset_mae": {
+        "BIT": 0.14366520941257477,
+        "CALCE": 0.08295883238315582,
+        "MIT": 0.015321864746510983,
+        "NASA": 0.1591140776872635,
+        "Oxford": 0.035595569759607315,
+        "RWTH": 0.017951229587197304,
+        "XJTU": 0.054270561784505844
+      },
+      "per_dataset_coverage": {
+        "BIT": 0.8634085213032582,
+        "CALCE": 0.7400656215822092,
+        "MIT": 0.923999314794724,
+        "NASA": 0.3333333333333333,
+        "Oxford": 1.0,
+        "RWTH": 0.8961773017997917,
+        "XJTU": 0.9132437619961612
+      },
+      "dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "NASA",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    },
+    {
+      "run_name": "ablation_no_multiscale",
+      "model_variant": "no_multiscale",
+      "seed": 42,
+      "conformal_mode": "groupwise",
+      "calibration_predictor": "mc_mean",
+      "best_epoch": 83,
+      "best_val_loss": 0.005260218843133679,
+      "test_mae": 0.02523637004196644,
+      "test_rmse": 0.10352665185928345,
+      "overall_coverage": 0.9056613927456678,
+      "per_dataset_mae": {
+        "BIT": 0.15039095282554626,
+        "CALCE": 0.08513281494379044,
+        "MIT": 0.014396874234080315,
+        "NASA": 0.07003172487020493,
+        "Oxford": 0.02872697450220585,
+        "RWTH": 0.0150124691426754,
+        "XJTU": 0.049345191568136215
+      },
+      "per_dataset_coverage": {
+        "BIT": 0.8784461152882206,
+        "CALCE": 0.7513671162960263,
+        "MIT": 0.9231428081996231,
+        "NASA": 0.6666666666666666,
+        "Oxford": 1.0,
+        "RWTH": 0.9065893202439387,
+        "XJTU": 0.9523992322456813
+      },
+      "dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "NASA",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    },
+    {
+      "run_name": "ablation_plain_lstm",
+      "model_variant": "plain_lstm",
+      "seed": 42,
+      "conformal_mode": "groupwise",
+      "calibration_predictor": "mc_mean",
+      "best_epoch": 84,
+      "best_val_loss": 0.004920763873877074,
+      "test_mae": 0.025318900123238564,
+      "test_rmse": 0.10267552733421326,
+      "overall_coverage": 0.9013830588741794,
+      "per_dataset_mae": {
+        "BIT": 0.1428295373916626,
+        "CALCE": 0.08248792588710785,
+        "MIT": 0.015162738971412182,
+        "NASA": 0.09693995863199234,
+        "Oxford": 0.030488504096865654,
+        "RWTH": 0.015246884897351265,
+        "XJTU": 0.049196310341358185
+      },
+      "per_dataset_coverage": {
+        "BIT": 0.8609022556390977,
+        "CALCE": 0.7531899380240612,
+        "MIT": 0.922514703363216,
+        "NASA": 0.3333333333333333,
+        "Oxford": 1.0,
+        "RWTH": 0.9036888293916406,
+        "XJTU": 0.9143953934740883
+      },
+      "dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "NASA",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    },
+    {
+      "run_name": "ablation_gru",
+      "model_variant": "gru",
+      "seed": 42,
+      "conformal_mode": "groupwise",
+      "calibration_predictor": "mc_mean",
+      "best_epoch": 63,
+      "best_val_loss": 0.00529502362561932,
+      "test_mae": 0.027866916730999947,
+      "test_rmse": 0.1018964871764183,
+      "overall_coverage": 0.8999031320632871,
+      "per_dataset_mae": {
+        "BIT": 0.1578376591205597,
+        "CALCE": 0.08617907017469406,
+        "MIT": 0.015910163521766663,
+        "NASA": 0.34599682688713074,
+        "Oxford": 0.041563730686903,
+        "RWTH": 0.017393283545970917,
+        "XJTU": 0.060434598475694656
+      },
+      "per_dataset_coverage": {
+        "BIT": 0.87468671679198,
+        "CALCE": 0.7353262850893183,
+        "MIT": 0.9206303888539942,
+        "NASA": 0.3333333333333333,
+        "Oxford": 1.0,
+        "RWTH": 0.9003421091774505,
+        "XJTU": 0.9378119001919386
+      },
+      "dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "NASA",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    }
+  ],
+  "conformal_ablation": [
+    {
+      "run_name": "conformal_groupwise",
+      "model_variant": "full",
+      "seed": 42,
+      "conformal_mode": "groupwise",
+      "calibration_predictor": "mc_mean",
+      "best_epoch": 97,
+      "best_val_loss": 0.004746637342734083,
+      "test_mae": 0.024789657443761826,
+      "test_rmse": 0.10174031555652618,
+      "overall_coverage": 0.9046658056183403,
+      "per_dataset_mae": {
+        "BIT": 0.1415572464466095,
+        "CALCE": 0.08280643075704575,
+        "MIT": 0.014270326122641563,
+        "NASA": 0.05493752285838127,
+        "Oxford": 0.026076747104525566,
+        "RWTH": 0.015627646818757057,
+        "XJTU": 0.045877695083618164
+      },
+      "per_dataset_coverage": {
+        "BIT": 0.8796992481203008,
+        "CALCE": 0.7568355814801312,
+        "MIT": 0.9228002055615828,
+        "NASA": 0.6666666666666666,
+        "Oxford": 1.0,
+        "RWTH": 0.9074074074074074,
+        "XJTU": 0.9301343570057582
+      },
+      "dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "NASA",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    },
+    {
+      "run_name": "conformal_pooled",
+      "model_variant": "full",
+      "seed": 42,
+      "conformal_mode": "pooled",
+      "calibration_predictor": "mc_mean",
+      "best_epoch": 97,
+      "best_val_loss": 0.004746637342734083,
+      "test_mae": 0.024789657443761826,
+      "test_rmse": 0.10174031555652618,
+      "overall_coverage": 0.8988268216553654,
+      "per_dataset_mae": {
+        "BIT": 0.1415572464466095,
+        "CALCE": 0.08280643075704575,
+        "MIT": 0.014270326122641563,
+        "NASA": 0.05493752285838127,
+        "Oxford": 0.026076747104525566,
+        "RWTH": 0.015627646818757057,
+        "XJTU": 0.045877695083618164
+      },
+      "per_dataset_coverage": {
+        "BIT": 0.4423558897243108,
+        "CALCE": 0.6310608822457163,
+        "MIT": 0.9489522069319933,
+        "NASA": 0.6666666666666666,
+        "Oxford": 0.8214285714285714,
+        "RWTH": 0.9483117655808418,
+        "XJTU": 0.7301343570057581
+      },
+      "dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "NASA",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    },
+    {
+      "run_name": "conformal_normalized_groupwise",
+      "model_variant": "full",
+      "seed": 42,
+      "conformal_mode": "normalized_groupwise",
+      "calibration_predictor": "mc_mean",
+      "best_epoch": 97,
+      "best_val_loss": 0.004746637342734083,
+      "test_mae": 0.024789657443761826,
+      "test_rmse": 0.10174031555652618,
+      "overall_coverage": 0.8969701862017005,
+      "per_dataset_mae": {
+        "BIT": 0.1415572464466095,
+        "CALCE": 0.08280643075704575,
+        "MIT": 0.014270326122641563,
+        "NASA": 0.05493752285838127,
+        "Oxford": 0.026076747104525566,
+        "RWTH": 0.015627646818757057,
+        "XJTU": 0.045877695083618164
+      },
+      "per_dataset_coverage": {
+        "BIT": 0.8696741854636592,
+        "CALCE": 0.7641268683922713,
+        "MIT": 0.9204590875349741,
+        "NASA": 1.0,
+        "Oxford": 0.9821428571428571,
+        "RWTH": 0.8942436412315931,
+        "XJTU": 0.8994241842610364
+      },
+      "dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "NASA",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    }
+  ],
+  "window_size": [
+    {
+      "run_name": "window_10",
+      "model_variant": "full",
+      "seed": 42,
+      "conformal_mode": "groupwise",
+      "calibration_predictor": "mc_mean",
+      "best_epoch": 96,
+      "best_val_loss": 0.0062771728413223244,
+      "test_mae": 0.02607196755707264,
+      "test_rmse": 0.10927167534828186,
+      "overall_coverage": 0.9053383239096388,
+      "per_dataset_mae": {
+        "BIT": 0.16706350445747375,
+        "CALCE": 0.08611488342285156,
+        "MIT": 0.013762716203927994,
+        "NASA": 0.078134685754776,
+        "Oxford": 0.02931199036538601,
+        "RWTH": 0.016602082177996635,
+        "XJTU": 0.045183274894952774
+      },
+      "per_dataset_coverage": {
+        "BIT": 0.8788546255506607,
+        "CALCE": 0.7810351067680058,
+        "MIT": 0.9236585228234497,
+        "NASA": 0.5384615384615384,
+        "Oxford": 1.0,
+        "RWTH": 0.9013542514615556,
+        "XJTU": 0.9407821229050279
+      },
+      "dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "NASA",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    },
+    {
+      "run_name": "window_20",
+      "model_variant": "full",
+      "seed": 42,
+      "conformal_mode": "groupwise",
+      "calibration_predictor": "mc_mean",
+      "best_epoch": 97,
+      "best_val_loss": 0.004746637342734083,
+      "test_mae": 0.024789657443761826,
+      "test_rmse": 0.10174031555652618,
+      "overall_coverage": 0.9046658056183403,
+      "per_dataset_mae": {
+        "BIT": 0.1415572464466095,
+        "CALCE": 0.08280643075704575,
+        "MIT": 0.014270326122641563,
+        "NASA": 0.05493752285838127,
+        "Oxford": 0.026076747104525566,
+        "RWTH": 0.015627646818757057,
+        "XJTU": 0.045877695083618164
+      },
+      "per_dataset_coverage": {
+        "BIT": 0.8796992481203008,
+        "CALCE": 0.7568355814801312,
+        "MIT": 0.9228002055615828,
+        "NASA": 0.6666666666666666,
+        "Oxford": 1.0,
+        "RWTH": 0.9074074074074074,
+        "XJTU": 0.9301343570057582
+      },
+      "dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "NASA",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    },
+    {
+      "run_name": "window_30",
+      "model_variant": "full",
+      "seed": 42,
+      "conformal_mode": "groupwise",
+      "calibration_predictor": "mc_mean",
+      "best_epoch": 98,
+      "best_val_loss": 0.004232989867690258,
+      "test_mae": 0.02405904419720173,
+      "test_rmse": 0.09817791730165482,
+      "overall_coverage": 0.9028660249243271,
+      "per_dataset_mae": {
+        "BIT": 0.12128026783466339,
+        "CALCE": 0.08235786855220795,
+        "MIT": 0.014091912657022476,
+        "Oxford": 0.03158530592918396,
+        "RWTH": 0.015867004171013832,
+        "XJTU": 0.04629184678196907
+      },
+      "per_dataset_coverage": {
+        "BIT": 0.8590116279069767,
+        "CALCE": 0.7249357326478149,
+        "MIT": 0.9223834017222446,
+        "Oxford": 1.0,
+        "RWTH": 0.9089347079037801,
+        "XJTU": 0.939009900990099
+      },
+      "dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    },
+    {
+      "run_name": "window_50",
+      "model_variant": "full",
+      "seed": 42,
+      "conformal_mode": "groupwise",
+      "calibration_predictor": "mc_mean",
+      "best_epoch": 85,
+      "best_val_loss": 0.0038596832125262982,
+      "test_mae": 0.022346612066030502,
+      "test_rmse": 0.09549952298402786,
+      "overall_coverage": 0.9045697794962315,
+      "per_dataset_mae": {
+        "BIT": 0.1274377703666687,
+        "CALCE": 0.08339761197566986,
+        "MIT": 0.013440952636301517,
+        "Oxford": 0.02514401264488697,
+        "RWTH": 0.014027075842022896,
+        "XJTU": 0.04250138998031616
+      },
+      "per_dataset_coverage": {
+        "BIT": 0.8782051282051282,
+        "CALCE": 0.742079761461051,
+        "MIT": 0.9237694722501925,
+        "Oxford": 1.0,
+        "RWTH": 0.905171114126338,
+        "XJTU": 0.9526427061310783
+      },
+      "dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    }
+  ],
+  "multiseed": [
+    {
+      "run_name": "multiseed_42",
+      "model_variant": "full",
+      "seed": 42,
+      "conformal_mode": "groupwise",
+      "calibration_predictor": "mc_mean",
+      "best_epoch": 97,
+      "best_val_loss": 0.004746637342734083,
+      "test_mae": 0.024789657443761826,
+      "test_rmse": 0.10174031555652618,
+      "overall_coverage": 0.9046658056183403,
+      "per_dataset_mae": {
+        "BIT": 0.1415572464466095,
+        "CALCE": 0.08280643075704575,
+        "MIT": 0.014270326122641563,
+        "NASA": 0.05493752285838127,
+        "Oxford": 0.026076747104525566,
+        "RWTH": 0.015627646818757057,
+        "XJTU": 0.045877695083618164
+      },
+      "per_dataset_coverage": {
+        "BIT": 0.8796992481203008,
+        "CALCE": 0.7568355814801312,
+        "MIT": 0.9228002055615828,
+        "NASA": 0.6666666666666666,
+        "Oxford": 1.0,
+        "RWTH": 0.9074074074074074,
+        "XJTU": 0.9301343570057582
+      },
+      "dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "NASA",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    },
+    {
+      "run_name": "multiseed_123",
+      "model_variant": "full",
+      "seed": 123,
+      "conformal_mode": "groupwise",
+      "calibration_predictor": "mc_mean",
+      "best_epoch": 78,
+      "best_val_loss": 0.004893397730715343,
+      "test_mae": 0.02613239735364914,
+      "test_rmse": 0.10148081928491592,
+      "overall_coverage": 0.9074642126789366,
+      "per_dataset_mae": {
+        "BIT": 0.14499811828136444,
+        "CALCE": 0.082093246281147,
+        "MIT": 0.015729790553450584,
+        "NASA": 0.12099790573120117,
+        "Oxford": 0.030475258827209473,
+        "RWTH": 0.016583643853664398,
+        "XJTU": 0.049813803285360336
+      },
+      "per_dataset_coverage": {
+        "BIT": 0.8609022556390977,
+        "CALCE": 0.7703244622675902,
+        "MIT": 0.9274253411751271,
+        "NASA": 0.6666666666666666,
+        "Oxford": 1.0,
+        "RWTH": 0.9025732559869106,
+        "XJTU": 0.9554702495201536
+      },
+      "dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "NASA",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    },
+    {
+      "run_name": "multiseed_2024",
+      "model_variant": "full",
+      "seed": 2024,
+      "conformal_mode": "groupwise",
+      "calibration_predictor": "mc_mean",
+      "best_epoch": 84,
+      "best_val_loss": 0.004691607423832651,
+      "test_mae": 0.02550564333796501,
+      "test_rmse": 0.10082897543907166,
+      "overall_coverage": 0.8978312345280379,
+      "per_dataset_mae": {
+        "BIT": 0.14656740427017212,
+        "CALCE": 0.08046842366456985,
+        "MIT": 0.014363092370331287,
+        "NASA": 0.37304770946502686,
+        "Oxford": 0.02899538166821003,
+        "RWTH": 0.015838101506233215,
+        "XJTU": 0.054880306124687195
+      },
+      "per_dataset_coverage": {
+        "BIT": 0.8521303258145363,
+        "CALCE": 0.7411593146190303,
+        "MIT": 0.9208016901730144,
+        "NASA": 0.3333333333333333,
+        "Oxford": 1.0,
+        "RWTH": 0.8981853339283058,
+        "XJTU": 0.9190019193857966
+      },
+      "dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "NASA",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    }
+  ],
+  "lodo": [
+    {
+      "run_name": "lodo_NASA",
+      "held_out_dataset": "NASA",
+      "model_variant": "full",
+      "test_mae": 0.00644100573441491,
+      "test_rmse": 0.010903822917806555,
+      "test_mae_normalized_space": 0.04636028781533241,
+      "test_rmse_normalized_space": 0.07848221063613892,
+      "held_out_soh_std": 0.13893368738501924,
+      "coverage": 0.5729537366548043,
+      "n_test_samples": 562,
+      "training_dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    },
+    {
+      "run_name": "lodo_CALCE",
+      "held_out_dataset": "CALCE",
+      "model_variant": "full",
+      "test_mae": 0.01344075383254395,
+      "test_rmse": 0.039679948176534405,
+      "test_mae_normalized_space": 0.08439986407756805,
+      "test_rmse_normalized_space": 0.24916625022888184,
+      "held_out_soh_std": 0.1592508942928056,
+      "coverage": 0.46650373778033355,
+      "n_test_samples": 13912,
+      "training_dataset_signature": [
+        "BIT",
+        "MIT",
+        "NASA",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    },
+    {
+      "run_name": "lodo_Oxford",
+      "held_out_dataset": "Oxford",
+      "model_variant": "full",
+      "test_mae": 0.0038490189258329867,
+      "test_rmse": 0.013087650749240965,
+      "test_mae_normalized_space": 0.056267447769641876,
+      "test_rmse_normalized_space": 0.19132374227046967,
+      "held_out_soh_std": 0.06840578484367756,
+      "coverage": 0.5376044568245125,
+      "n_test_samples": 359,
+      "training_dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "NASA",
+        "RWTH",
+        "XJTU"
+      ]
+    },
+    {
+      "run_name": "lodo_MIT",
+      "held_out_dataset": "MIT",
+      "model_variant": "full",
+      "test_mae": 0.000886437509480745,
+      "test_rmse": 0.0018223520650667104,
+      "test_mae_normalized_space": 0.019458932802081108,
+      "test_rmse_normalized_space": 0.040003977715969086,
+      "held_out_soh_std": 0.04555427157782988,
+      "coverage": 0.9215709166674151,
+      "n_test_samples": 111349,
+      "training_dataset_signature": [
+        "BIT",
+        "CALCE",
+        "NASA",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    },
+    {
+      "run_name": "lodo_BIT",
+      "held_out_dataset": "BIT",
+      "model_variant": "full",
+      "test_mae": 0.09619465024756532,
+      "test_rmse": 0.14491016430681258,
+      "test_mae_normalized_space": 0.39255601167678833,
+      "test_rmse_normalized_space": 0.5913567543029785,
+      "held_out_soh_std": 0.24504694205719452,
+      "coverage": 0.15948042576222263,
+      "n_test_samples": 5543,
+      "training_dataset_signature": [
+        "CALCE",
+        "MIT",
+        "NASA",
+        "Oxford",
+        "RWTH",
+        "XJTU"
+      ]
+    },
+    {
+      "run_name": "lodo_XJTU",
+      "held_out_dataset": "XJTU",
+      "model_variant": "full",
+      "test_mae": 0.012265824407619525,
+      "test_rmse": 0.0218596007622317,
+      "test_mae_normalized_space": 0.20508767664432526,
+      "test_rmse_normalized_space": 0.36549803614616394,
+      "held_out_soh_std": 0.05980771057683596,
+      "coverage": 0.21568023016851623,
+      "n_test_samples": 19464,
+      "training_dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "NASA",
+        "Oxford",
+        "RWTH"
+      ]
+    },
+    {
+      "run_name": "lodo_RWTH",
+      "held_out_dataset": "RWTH",
+      "model_variant": "full",
+      "test_mae": 0.0044607340899760865,
+      "test_rmse": 0.007561375494775918,
+      "test_mae_normalized_space": 0.01879727467894554,
+      "test_rmse_normalized_space": 0.031863197684288025,
+      "held_out_soh_std": 0.23730749090837444,
+      "coverage": 0.8808950304259635,
+      "n_test_samples": 110432,
+      "training_dataset_signature": [
+        "BIT",
+        "CALCE",
+        "MIT",
+        "NASA",
+        "Oxford",
+        "XJTU"
+      ]
+    }
+  ]
+}

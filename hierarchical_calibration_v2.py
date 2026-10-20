@@ -1,8 +1,10 @@
 """
-Hierarchical partial-pooling calibration (v2) -- replaces
-hierarchical_calibration.py / hierarchical_calibration_corrected.py.
+Hierarchical partial-pooling (empirical-Bayes) calibration across datasets.
 
-WHAT WAS WRONG WITH THE PREVIOUS VERSION (see audit register E1, E3, E6, E13):
+This is version 2; earlier versions (hierarchical_calibration.py,
+hierarchical_calibration_corrected.py) were removed from the repository.
+
+WHAT WAS WRONG WITH THE PREVIOUS VERSION (see ERROR_REGISTER.md, E1, E3, E6, E13):
   * Shrinkage weight. It used w = n_g / (n_g + tau2/sigma2_g). With sigma2_g
     the sampling variance of the group quantile estimate (the quantity the
     DerSimonian-Laird step requires), the empirical-Bayes weight on the group's

@@ -1,5 +1,5 @@
 """
-K7: independent re-verification of RWTH's two documented data-quality
+Independent re-verification of RWTH's two documented data-quality
 corrections, against the CURRENT raw CSV files on disk --
 session-boundary partial-cycle truncation (drop_first) and the
 statistical local-outlier safety net (strip_local_outliers).

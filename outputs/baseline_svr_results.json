@@ -1,0 +1,24 @@
+{
+  "run_name": "baseline_svr",
+  "model_variant": "baseline_svr",
+  "test_mae": 0.023564682638626176,
+  "test_rmse": 0.12188604027599374,
+  "per_dataset_mae": {
+    "BIT": 0.23587300643309964,
+    "CALCE": 0.10778231971993753,
+    "MIT": 0.004790498437347924,
+    "NASA": 0.761980554742795,
+    "Oxford": 0.026333608557354192,
+    "RWTH": 0.005990382980011536,
+    "XJTU": 0.08586602342823474
+  },
+  "dataset_signature": [
+    "BIT",
+    "CALCE",
+    "MIT",
+    "NASA",
+    "Oxford",
+    "RWTH",
+    "XJTU"
+  ]
+}

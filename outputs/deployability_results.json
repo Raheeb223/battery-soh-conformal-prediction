@@ -1,0 +1,74 @@
+{
+  "hardware": {
+    "cpu": "Intel(R) Core(TM) i5-10400 CPU @ 2.90GHz",
+    "gpu": "NVIDIA GeForce RTX 3060",
+    "torch": "2.5.1+cu121",
+    "cpu_threads_for_single_sample": 1
+  },
+  "input_window": 20,
+  "mc_samples": 30,
+  "variants": {
+    "full": {
+      "n_params": 292033,
+      "checkpoint_kb": 1147.7109375,
+      "cpu_batch1_deterministic_median_ms": 1.5392999998766754,
+      "cpu_batch1_deterministic_p95_ms": 1.6838600002756718,
+      "cpu_batch1_mc_mean_as_evaluated_median_ms": 48.883449999948425,
+      "cpu_batch1_mc_mean_as_evaluated_p95_ms": 50.13091000023451,
+      "cpu_batch1_mc_mean_batched_replicas_median_ms": 5.942400000094494,
+      "cpu_batch1_mc_mean_batched_replicas_p95_ms": 6.445179999946049,
+      "gpu_throughput_deterministic_samples_per_s": 202324.00935453366
+    },
+    "no_attention": {
+      "n_params": 283777,
+      "checkpoint_kb": 1114.578125,
+      "cpu_batch1_deterministic_median_ms": 1.4580500001102337,
+      "cpu_batch1_deterministic_p95_ms": 1.6019049999613342,
+      "cpu_batch1_mc_mean_as_evaluated_median_ms": 46.11984999996821,
+      "cpu_batch1_mc_mean_as_evaluated_p95_ms": 47.41289500007042,
+      "cpu_batch1_mc_mean_batched_replicas_median_ms": 5.76325000020006,
+      "cpu_batch1_mc_mean_batched_replicas_p95_ms": 6.344815000352355,
+      "gpu_throughput_deterministic_samples_per_s": 209994.04521288932
+    },
+    "no_multiscale": {
+      "n_params": 146113,
+      "checkpoint_kb": 575.80859375,
+      "cpu_batch1_deterministic_median_ms": 0.8803000000625616,
+      "cpu_batch1_deterministic_p95_ms": 0.9909500000276239,
+      "cpu_batch1_mc_mean_as_evaluated_median_ms": 28.88000000007196,
+      "cpu_batch1_mc_mean_as_evaluated_p95_ms": 29.595414999926106,
+      "cpu_batch1_mc_mean_batched_replicas_median_ms": 3.7801499997840438,
+      "cpu_batch1_mc_mean_batched_replicas_p95_ms": 4.045124999925065,
+      "gpu_throughput_deterministic_samples_per_s": 339005.07473089395
+    },
+    "plain_lstm": {
+      "n_params": 141953,
+      "checkpoint_kb": 558.544921875,
+      "cpu_batch1_deterministic_median_ms": 0.84500000002663,
+      "cpu_batch1_deterministic_p95_ms": 0.9337299999742752,
+      "cpu_batch1_mc_mean_as_evaluated_median_ms": 26.59504999996898,
+      "cpu_batch1_mc_mean_as_evaluated_p95_ms": 27.19296999994185,
+      "cpu_batch1_mc_mean_batched_replicas_median_ms": 3.5670999998274056,
+      "cpu_batch1_mc_mean_batched_replicas_p95_ms": 3.9501600003859494,
+      "gpu_throughput_deterministic_samples_per_s": 366614.9473454335
+    },
+    "gru": {
+      "n_params": 42049,
+      "checkpoint_kb": 167.3583984375,
+      "cpu_batch1_deterministic_median_ms": 1.3801499999317457,
+      "cpu_batch1_deterministic_p95_ms": 1.4825149999978748,
+      "cpu_batch1_mc_mean_as_evaluated_median_ms": 43.56400000006033,
+      "cpu_batch1_mc_mean_as_evaluated_p95_ms": 44.89595000013651,
+      "cpu_batch1_mc_mean_batched_replicas_median_ms": 2.639199999975972,
+      "cpu_batch1_mc_mean_batched_replicas_p95_ms": 2.9110099998888463,
+      "gpu_throughput_deterministic_samples_per_s": 840540.4823039891
+    }
+  },
+  "conformal_overhead_full_model": {
+    "n_calibration_samples": 41747,
+    "n_test_samples": 37164,
+    "n_groups": 7,
+    "calibration_time_ms": 4.320300000017596,
+    "interval_time_per_sample_us": 0.017476590248859898
+  }
+}

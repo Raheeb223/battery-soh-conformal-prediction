@@ -1,0 +1,39 @@
+{
+  "run_name": "split46_pooled",
+  "model_variant": "full",
+  "seed": 42,
+  "conformal_mode": "pooled",
+  "calibration_predictor": "mc_mean",
+  "best_epoch": 45,
+  "best_val_loss": 0.00770055636664753,
+  "test_mae": 0.025256523862481117,
+  "test_rmse": 0.0884641632437706,
+  "overall_coverage": 0.9045806213926072,
+  "per_dataset_mae": {
+    "BIT": 0.11840140074491501,
+    "CALCE": 0.06660489737987518,
+    "MIT": 0.013614160008728504,
+    "NASA": 0.03603213652968407,
+    "Oxford": 0.029469501227140427,
+    "RWTH": 0.016778547316789627,
+    "XJTU": 0.09976672381162643
+  },
+  "per_dataset_coverage": {
+    "BIT": 0.539080459770115,
+    "CALCE": 0.7414285714285714,
+    "MIT": 0.9600287483414418,
+    "NASA": 0.7364864864864865,
+    "Oxford": 0.8035714285714286,
+    "RWTH": 0.9387262122194073,
+    "XJTU": 0.5451612903225806
+  },
+  "dataset_signature": [
+    "BIT",
+    "CALCE",
+    "MIT",
+    "NASA",
+    "Oxford",
+    "RWTH",
+    "XJTU"
+  ]
+}

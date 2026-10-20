@@ -51,8 +51,8 @@ def finite_sample_quantile(residuals, alpha=ALPHA):
 def clopper_pearson(k, n, conf=0.95):
     """WINDOW-LEVEL binomial CI: treats each of the n test WINDOWS as an
     independent Bernoulli trial. This is WRONG whenever windows come from a
-    small number of distinct cells (the brief's own rule: "windows from the
-    same cell are not independent") -- for CALCE (2 test cells), Oxford (1),
+    small number of distinct cells (windows from the
+    same cell are not independent) -- for CALCE (2 test cells), Oxford (1),
     NASA (1), this CI is overconfident, sometimes drastically (a dataset with
     1 test cell has an effective cell-level sample size of 1, not n_windows).
     Reported here ONLY for reference/comparison against the cell-clustered CI

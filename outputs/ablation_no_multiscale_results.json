@@ -1,0 +1,39 @@
+{
+  "run_name": "ablation_no_multiscale",
+  "model_variant": "no_multiscale",
+  "seed": 42,
+  "conformal_mode": "groupwise",
+  "calibration_predictor": "mc_mean",
+  "best_epoch": 83,
+  "best_val_loss": 0.005260218843133679,
+  "test_mae": 0.02523637004196644,
+  "test_rmse": 0.10352665185928345,
+  "overall_coverage": 0.9056613927456678,
+  "per_dataset_mae": {
+    "BIT": 0.15039095282554626,
+    "CALCE": 0.08513281494379044,
+    "MIT": 0.014396874234080315,
+    "NASA": 0.07003172487020493,
+    "Oxford": 0.02872697450220585,
+    "RWTH": 0.0150124691426754,
+    "XJTU": 0.049345191568136215
+  },
+  "per_dataset_coverage": {
+    "BIT": 0.8784461152882206,
+    "CALCE": 0.7513671162960263,
+    "MIT": 0.9231428081996231,
+    "NASA": 0.6666666666666666,
+    "Oxford": 1.0,
+    "RWTH": 0.9065893202439387,
+    "XJTU": 0.9523992322456813
+  },
+  "dataset_signature": [
+    "BIT",
+    "CALCE",
+    "MIT",
+    "NASA",
+    "Oxford",
+    "RWTH",
+    "XJTU"
+  ]
+}

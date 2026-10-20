@@ -232,7 +232,7 @@ def compute_hgc_cp_qstar(calib_scores: np.ndarray, calib_group_ids: np.ndarray,
     SAME calibration set, as every caller in this project does,
     hgc_cp_interval() recomputed this entire pipeline from scratch on every
     single call. This split changes nothing numerically -- see
-    tests/stage6_k10_equivalence.py for a direct equivalence proof against
+    tests/check_hgc_cp_split_equivalence.py for a direct equivalence proof against
     the original monolithic code path.
 
     Returns (q_star, q_t, weights_by_group). q_star is NaN when q_t is inf
@@ -313,7 +313,7 @@ def hgc_cp_interval(y_hat: float, calib_scores: np.ndarray, calib_group_ids: np.
     which is wasteful when only y_hat changes between calls. Kept as-is
     (not removed) since several existing scripts call it directly per
     point; behavior is identical either way (see
-    tests/stage6_k10_equivalence.py)."""
+    tests/check_hgc_cp_split_equivalence.py)."""
     q_star, q_t, weights_by_group = compute_hgc_cp_qstar(
         calib_scores, calib_group_ids, group_distances, lam, alpha, beta, inflation_scale)
     return apply_hgc_cp_interval(y_hat, q_star, q_t, weights_by_group)

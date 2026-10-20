@@ -71,9 +71,8 @@ def train_one(cache_path=None, model_variant="full", seed=config.RANDOM_SEED,
     X_test, y_test = data["X_test"], data["y_test"]
     lab_test = data["lab_test"]
     # Per-window cell IDs, added in preprocessing.py's make_windows() so
-    # per_cell_curves.png and remaining_analysis.py's anomaly cell-lookup
-    # can name the specific cell a test window belongs to, instead of only
-    # the index range ("No cell-ID field available" in the old
+    # downstream analyses can name the specific cell a test window belongs
+    # to, instead of only the index range ("No cell-ID field available" in the old
     # xjtu_anomaly_report.txt). Older cache files won't have this key —
     # fall back to None so this still runs against a stale cache rather
     # than crashing, but flag it loudly since it silently loses that

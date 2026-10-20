@@ -1,9 +1,0 @@
-﻿CALCE: 2960 calibration windows from 2 cells (leave-one-dataset-out prior: mu_hat=0.00651, tau2_hat=2.175e-05)
-Reference points -- true groupwise (full-set quantile): 0.756   Prior-only: 0.595
-
- n windows  draws used   draws skipped (1 cell)  w (mean)  coverage mean      sd
-         5         459                       41     0.685          0.639   0.105
-        10         498                        2     0.590          0.702   0.080
-        25         500                        0     0.500          0.712   0.096
-        50         500                        0     0.680          0.719   0.065
-       100         500                        0     0.860          0.743   0.044

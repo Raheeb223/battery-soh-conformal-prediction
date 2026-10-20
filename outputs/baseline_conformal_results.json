@@ -1,0 +1,131 @@
+{
+  "linear": {
+    "architecture": "linear",
+    "test_mae": 0.03399040177464485,
+    "test_rmse": 0.1334550380706787,
+    "pooled_overall_coverage": 0.8831934129803035,
+    "pooled_per_dataset_coverage": {
+      "BIT": 0.16666666666666666,
+      "CALCE": 0.5854903390448414,
+      "MIT": 0.9752184091817507,
+      "NASA": 0.6666666666666666,
+      "Oxford": 0.26785714285714285,
+      "RWTH": 0.9829689126877882,
+      "XJTU": 0.2959692898272553
+    },
+    "groupwise_overall_coverage": 0.9045312668173501,
+    "groupwise_per_dataset_coverage": {
+      "BIT": 0.8909774436090225,
+      "CALCE": 0.8337586584032082,
+      "MIT": 0.9082395934448695,
+      "NASA": 0.6666666666666666,
+      "Oxford": 0.9821428571428571,
+      "RWTH": 0.9090435817343447,
+      "XJTU": 0.9335892514395393
+    }
+  },
+  "svr": {
+    "architecture": "svr",
+    "test_mae": 0.023564682638626176,
+    "test_rmse": 0.12188604027599374,
+    "pooled_overall_coverage": 0.8912119255193198,
+    "pooled_per_dataset_coverage": {
+      "BIT": 0.21303258145363407,
+      "CALCE": 0.5027342325920525,
+      "MIT": 0.9894935191000971,
+      "NASA": 0.0,
+      "Oxford": 0.6428571428571429,
+      "RWTH": 0.9763498438197233,
+      "XJTU": 0.4142034548944338
+    },
+    "groupwise_overall_coverage": 0.9065493488322032,
+    "groupwise_per_dataset_coverage": {
+      "BIT": 0.8734335839598998,
+      "CALCE": 0.8308421436383522,
+      "MIT": 0.9209158910523612,
+      "NASA": 0.0,
+      "Oxford": 1.0,
+      "RWTH": 0.8942436412315931,
+      "XJTU": 0.9623800383877159
+    }
+  },
+  "xgboost": {
+    "architecture": "xgboost",
+    "test_mae": 0.02404698170721531,
+    "test_rmse": 0.10844731330871582,
+    "pooled_overall_coverage": 0.8813905930470347,
+    "pooled_per_dataset_coverage": {
+      "BIT": 0.24060150375939848,
+      "CALCE": 0.5632519139628145,
+      "MIT": 0.9589447838748358,
+      "NASA": 0.3333333333333333,
+      "Oxford": 0.5714285714285714,
+      "RWTH": 0.9747136694927859,
+      "XJTU": 0.4168905950095969
+    },
+    "groupwise_overall_coverage": 0.9004143795070498,
+    "groupwise_per_dataset_coverage": {
+      "BIT": 0.8609022556390977,
+      "CALCE": 0.7743346700692673,
+      "MIT": 0.9283960486495746,
+      "NASA": 0.3333333333333333,
+      "Oxford": 1.0,
+      "RWTH": 0.8825673062620853,
+      "XJTU": 0.9477927063339732
+    }
+  },
+  "plain_lstm": {
+    "architecture": "plain_lstm",
+    "test_mae": 0.025103554129600525,
+    "test_rmse": 0.10236666351556778,
+    "pooled_overall_coverage": 0.8995533311807126,
+    "pooled_per_dataset_coverage": {
+      "BIT": 0.43107769423558895,
+      "CALCE": 0.6336128326649654,
+      "MIT": 0.954091246502598,
+      "NASA": 0.0,
+      "Oxford": 0.7142857142857143,
+      "RWTH": 0.9590956418265655,
+      "XJTU": 0.654126679462572
+    },
+    "groupwise_overall_coverage": 0.9013830588741794,
+    "groupwise_per_dataset_coverage": {
+      "BIT": 0.8609022556390977,
+      "CALCE": 0.7531899380240612,
+      "MIT": 0.922514703363216,
+      "NASA": 0.3333333333333333,
+      "Oxford": 1.0,
+      "RWTH": 0.9036888293916406,
+      "XJTU": 0.9143953934740883
+    },
+    "groupwise_source": "reused from outputs/ablation_plain_lstm_results.json (not recomputed)",
+    "no_retrain": true
+  },
+  "gru": {
+    "architecture": "gru",
+    "test_mae": 0.02798338048160076,
+    "test_rmse": 0.10199239104986191,
+    "pooled_overall_coverage": 0.89134646432031,
+    "pooled_per_dataset_coverage": {
+      "BIT": 0.38345864661654133,
+      "CALCE": 0.6000729128691215,
+      "MIT": 0.9610575001427512,
+      "NASA": 0.3333333333333333,
+      "Oxford": 0.5892857142857143,
+      "RWTH": 0.9504685408299867,
+      "XJTU": 0.5869481765834933
+    },
+    "groupwise_overall_coverage": 0.8999031320632871,
+    "groupwise_per_dataset_coverage": {
+      "BIT": 0.87468671679198,
+      "CALCE": 0.7353262850893183,
+      "MIT": 0.9206303888539942,
+      "NASA": 0.3333333333333333,
+      "Oxford": 1.0,
+      "RWTH": 0.9003421091774505,
+      "XJTU": 0.9378119001919386
+    },
+    "groupwise_source": "reused from outputs/ablation_gru_results.json (not recomputed)",
+    "no_retrain": true
+  }
+}

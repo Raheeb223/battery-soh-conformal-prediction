@@ -1,13 +1,16 @@
 """
-Central configuration for the SOH pipeline.
-Edit ROOT_DIR to point at the folder where you saved all downloaded datasets.
+Central configuration for the SOH pipeline: data paths, split fractions, model and training
+hyperparameters, and the conformal target.
+
+The raw datasets are expected under ROOT_DIR, which defaults to the repository folder. To keep
+them elsewhere, set the environment variable SOH_DATA_DIR to that folder.
 """
 
 import os
 
 # ---- 1. Paths -------------------------------------------------------------
-# Root folder containing all your downloaded dataset folders/zips (already extracted).
-ROOT_DIR = r"C:\Users\User\PycharmProjects"
+# Folder containing the extracted dataset folders (see README.md for the expected layout).
+ROOT_DIR = os.environ.get("SOH_DATA_DIR", os.path.dirname(os.path.abspath(__file__)))
 
 NASA_DIR   = os.path.join(ROOT_DIR, "5. Battery Data Set")     # contains B0005.mat, B0006.mat, ...
 CALCE_DIRS = {

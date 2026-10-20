@@ -1,0 +1,39 @@
+{
+  "run_name": "ablation_no_attention",
+  "model_variant": "no_attention",
+  "seed": 42,
+  "conformal_mode": "groupwise",
+  "calibration_predictor": "mc_mean",
+  "best_epoch": 74,
+  "best_val_loss": 0.0051259528647785765,
+  "test_mae": 0.02679341472685337,
+  "test_rmse": 0.10054898262023926,
+  "overall_coverage": 0.8983693897319988,
+  "per_dataset_mae": {
+    "BIT": 0.14366520941257477,
+    "CALCE": 0.08295883238315582,
+    "MIT": 0.015321864746510983,
+    "NASA": 0.1591140776872635,
+    "Oxford": 0.035595569759607315,
+    "RWTH": 0.017951229587197304,
+    "XJTU": 0.054270561784505844
+  },
+  "per_dataset_coverage": {
+    "BIT": 0.8634085213032582,
+    "CALCE": 0.7400656215822092,
+    "MIT": 0.923999314794724,
+    "NASA": 0.3333333333333333,
+    "Oxford": 1.0,
+    "RWTH": 0.8961773017997917,
+    "XJTU": 0.9132437619961612
+  },
+  "dataset_signature": [
+    "BIT",
+    "CALCE",
+    "MIT",
+    "NASA",
+    "Oxford",
+    "RWTH",
+    "XJTU"
+  ]
+}

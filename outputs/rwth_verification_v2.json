@@ -1,0 +1,28 @@
+{
+  "production (drop_first=T, outlier_fix=T)": {
+    "n_rows": 113868,
+    "n_cells": 48,
+    "median_abs_step": 0.0006212972075392287
+  },
+  "no drop_first (F, outlier_fix=T)": {
+    "n_rows": 113929,
+    "n_cells": 48,
+    "median_abs_step": 0.0006217056361386142
+  },
+  "no outlier_fix (drop_first=T, F)": {
+    "n_rows": 113982,
+    "n_cells": 48,
+    "median_abs_step": 0.0006213402084398467
+  },
+  "neither correction (F, F)": {
+    "n_rows": 114716,
+    "n_cells": 48,
+    "median_abs_step": 0.0006268800570943256
+  },
+  "summary": {
+    "rows_removed_by_drop_first_alone": 734,
+    "rows_removed_by_outlier_fix_alone": 787,
+    "rows_removed_by_both_combined": 848,
+    "pct_removed_by_both_combined": 0.7392168485651522
+  }
+}

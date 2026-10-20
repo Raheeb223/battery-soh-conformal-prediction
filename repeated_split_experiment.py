@@ -1,5 +1,5 @@
 """
-K6: repeated cell-level splits.
+Repeated cell-level splits (verification task K6 in ERROR_REGISTER.md).
 
 The main pipeline uses a single, fixed cell-level split (config.SPLIT_SEED,
 default = config.RANDOM_SEED = 42). This script builds 4 ADDITIONAL splits

@@ -1,0 +1,21 @@
+{
+  "run_name": "lodo_NASA",
+  "held_out_dataset": "NASA",
+  "model_variant": "full",
+  "test_mae": 0.006679353190692909,
+  "test_rmse": 0.010788073939226074,
+  "test_mae_normalized_space": 0.0480758361518383,
+  "test_rmse_normalized_space": 0.0776490867137909,
+  "held_out_soh_std": 0.13893368738501924,
+  "calibration_predictor": "mc_mean",
+  "coverage": 0.6548042704626335,
+  "n_test_samples": 562,
+  "training_dataset_signature": [
+    "BIT",
+    "CALCE",
+    "MIT",
+    "Oxford",
+    "RWTH",
+    "XJTU"
+  ]
+}

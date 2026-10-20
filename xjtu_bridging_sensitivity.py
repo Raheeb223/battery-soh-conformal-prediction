@@ -1,5 +1,6 @@
 """
-K7 follow-up to E9/xjtu_bridging_isolation.py.
+Effect of XJTU's sentinel-bridging windows on error and coverage (follow-up to
+xjtu_bridging_isolation.py; ERROR_REGISTER.md, E9).
 
 xjtu_bridging_isolation.py established that 376 of XJTU's 2,605 test
 windows (all from the 8 Sim_satellite_* cells) bridge a removed

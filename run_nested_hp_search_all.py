@@ -1,15 +1,15 @@
 """
-K4: rerun HGC-CP's nested hyperparameter search on the current pipeline state,
-for all 7 datasets as the real target in turn, and persist the result.
+HGC-CP's nested held-out hyperparameter search, run with each of the seven
+datasets as the real target in turn; saves outputs/nested_hp_search_results.json.
 
 CONTEXT (must be stated wherever HGC-CP numbers are reported): the design of
 HGC-CP itself -- the MMD-based weighting, the heterogeneity inflation term,
 and the specific grid this script sweeps -- was arrived at over earlier
 iterations by looking at how it performed on the real test sets, before this
 nested-search script existed. That means HGC-CP's hyperparameters (lam=3.0,
-beta=0.0, the brief's anchor) were originally selected on the pre-fix
+beta=0.0, the original default) were originally selected on the pre-fix
 pipeline using test-set feedback, not via this held-out protocol. This
-script is the honest held-out re-selection asked for by K4, but it cannot
+script is the honest held-out re-selection (verification task K4 in ERROR_REGISTER.md), but it cannot
 retroactively make HGC-CP's earlier design choices held-out -- only this
 specific (lam, beta) pick, going forward, is. HGC-CP results must be
 reported as exploratory, not held-out validation.

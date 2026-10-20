@@ -10,11 +10,11 @@ reproduces the 24-pair statistic and reports the analysis at the dataset
 level, where the exact one-sided Wilcoxon signed-rank p-value with n=6
 cannot go below 1/64 = 0.0156.
 
-ERROR_REGISTER E-fix (K2): coverage values are now read directly from the
+Coverage values (see ERROR_REGISTER.md, task K2) are now read directly from the
 machine-generated result files below, never hand-copied. BiLSTM comes from
 the main conformal pipeline (outputs/conformal_{groupwise,pooled}_results.json);
 SVR, XGBoost, and plain LSTM come from outputs/baseline_conformal_results.json
-(baseline_conformal_coverage.py, the K3 fix). NASA is excluded from this
+(baseline_conformal_coverage.py). NASA is excluded from this
 table, consistent with its treatment as illustrative-only elsewhere in this
 project (n=3 test windows, 1 test cell).
 
@@ -89,6 +89,20 @@ def main():
     for j, d in enumerate(DATASETS):
         n_better = int((group[:, j] < pooled[:, j]).sum())
         print(f"  {d:7s} groupwise closer in {n_better}/4 architectures")
+
+    out = {
+        "datasets": DATASETS,
+        "architectures": list(COVERAGE.keys()),
+        "dataset_level": {"n": len(DATASETS), "groupwise_closer": int((p6 > g6).sum()),
+                          "statistic": float(r6.statistic), "p_one_sided_exact": float(r6.pvalue),
+                          "p_min_attainable": 1 / 2 ** len(DATASETS)},
+        "pair_level_not_independent": {"n": int(pooled.size), "groupwise_closer": int((pooled > group).sum()),
+                                       "p_one_sided_exact": float(r24.pvalue)},
+    }
+    path = os.path.join(config.OUTPUT_DIR, "dataset_level_wilcoxon.json")
+    with open(path, "w") as fh:
+        json.dump(out, fh, indent=2)
+    print(f"\nsaved {path}")
 
 
 if __name__ == "__main__":

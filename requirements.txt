@@ -1,8 +1,10 @@
-numpy>=1.24
-pandas>=2.0
-scipy>=1.10
-scikit-learn>=1.3
-openpyxl>=3.1
-torch>=2.1
-matplotlib>=3.7
-tqdm>=4.66
+# Python 3.10. Exact versions used for every result in the paper.
+# PyTorch was the CUDA 12.1 build (torch==2.5.1+cu121); the CPU build gives the same code paths.
+numpy==1.26.4
+pandas==2.0.0
+scipy==1.10.0
+scikit-learn==1.3.0
+xgboost==3.2.0
+torch==2.5.1
+matplotlib==3.7.0
+openpyxl==3.1.0
