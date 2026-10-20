@@ -2,15 +2,15 @@
 Predictor-consistent recalibration of pooled and groupwise conformal
 intervals.
 
-WHY THIS EXISTS. In train.py, conformal quantiles are calibrated on
-DETERMINISTIC validation predictions (model.eval(), predict_in_batches), but
-the reported test intervals are centred on the MC-Dropout MEAN prediction
-(mc_dropout_predict). Calibration scores and test scores therefore come from
-different predictors, which departs from the split-conformal assumption that
-calibration and test nonconformity scores are exchangeable. Here both use the
-MC-Dropout-mean predictor: conformal_groupwise_predictions_val.npz (validation,
-MC-Dropout mean) is used to calibrate, and conformal_groupwise_predictions.npz
-(test, MC-Dropout mean) is used to evaluate.
+WHY THIS EXISTS. Split-conformal validity needs calibration and test scores
+from the same predictor. An early version of train.py calibrated on
+deterministic validation predictions while centring test intervals on the
+MC-Dropout mean; train.py now calibrates on the MC-Dropout mean by default
+(config.CALIBRATION_PREDICTOR = "mc_mean", recorded in every result file).
+This script recomputes the intervals from saved predictions with both sides on
+the MC-Dropout mean -- conformal_groupwise_predictions_val.npz (validation) to
+calibrate and conformal_groupwise_predictions.npz (test) to evaluate -- and
+reports per-window and cell-clustered confidence intervals for the coverage.
 
 "POOLED" HAS TWO MEANINGS AND BOTH ARE REPORTED. The pipeline z-scores SOH per
 dataset (training-cell mean/std), so a pooled quantile computed on z-scored

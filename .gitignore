@@ -19,19 +19,25 @@ FastCharge/
 tmp_determinism_check/
 
 # Pipeline cache and model outputs. Model checkpoints and most prediction arrays are large and
-# regenerable; the small per-experiment result files and the two prediction arrays that
-# make_results_registry.py reads are tracked so the registry and figures can be rebuilt without
+# regenerable; the small per-experiment result files and the prediction arrays that
+# make_results_registry.py and the figure scripts read are tracked so the registry and figures can be rebuilt without
 # retraining.
 cache/
 outputs/*
 !outputs/*.json
 !outputs/conformal_groupwise_predictions.npz
 !outputs/conformal_normalized_groupwise_predictions.npz
+!outputs/conformal_pooled_predictions.npz
+!outputs/conformal_groupwise_predictions_val.npz
+!outputs/figure_inputs.npz
 cache_WITHOUT_fix/
 outputs_WITHOUT_fix/
 *.npz
 !outputs/conformal_groupwise_predictions.npz
 !outputs/conformal_normalized_groupwise_predictions.npz
+!outputs/conformal_pooled_predictions.npz
+!outputs/conformal_groupwise_predictions_val.npz
+!outputs/figure_inputs.npz
 *.pt
 
 # Generated figures (python figures/make_*.py writes here by default)

@@ -30,6 +30,8 @@ STEPS = [
      os.path.join(config.CACHE_DIR, "processed.npz")),
     ("train", [sys.executable, "train.py"],
      os.path.join(config.OUTPUT_DIR, "best_results.json")),
+    ("val_predictions", [sys.executable, "generate_val_predictions.py"],
+     os.path.join(config.OUTPUT_DIR, "conformal_groupwise_predictions_val.npz")),
     ("experiments", [sys.executable, "experiments.py"],
      os.path.join(config.OUTPUT_DIR, "experiment_summary.json")),
     ("baseline_conformal_coverage", [sys.executable, "baseline_conformal_coverage.py"],

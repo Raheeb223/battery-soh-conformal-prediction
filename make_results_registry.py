@@ -60,8 +60,27 @@ def data_counts(calce_cells):
     return counts
 
 
+def export_figure_inputs():
+    """Save the two things the prediction figures need from cache/processed.npz: each dataset's
+    SOH normalization (to plot real SOH instead of z-units) and the cycle number at the end of
+    every test window's input. Written to outputs/figure_inputs.npz, which is tracked, so the
+    figures can be redrawn without the cache. Test windows are in the same order as in
+    outputs/conformal_groupwise_predictions.npz."""
+    cache_path = os.path.join(config.CACHE_DIR, "processed.npz")
+    if not os.path.exists(cache_path):
+        return
+    cache = np.load(cache_path, allow_pickle=True)
+    soh_mean, soh_std = cache["soh_mean"].item(), cache["soh_std"].item()
+    datasets = np.array(sorted(soh_mean))
+    np.savez_compressed(os.path.join(OUT_DIR, "figure_inputs.npz"), datasets=datasets,
+                        soh_mean=np.array([soh_mean[d] for d in datasets]),
+                        soh_std=np.array([soh_std[d] for d in datasets]),
+                        test_end_cycle=cache["window_cycle_indices_test"][:, -1].astype(np.float32))
+
+
 def main():
     registry = {"generated_from": "make_results_registry.py", "sections": {}}
+    export_figure_inputs()
 
     # ---- Main model (pooled groupwise conformal, seed 42) ----
     r = load("conformal_groupwise_results.json")
@@ -322,6 +341,42 @@ def main():
         macro("PooledMPIW", pooled_mpiw, "{:.5f}")
         macro("GroupwiseWidthOverPooledPercent",
               100 * (registry["sections"]["main_model_mpiw"] / pooled_mpiw - 1), "{:.0f}")
+        # Per dataset: the groupwise quantile actually used for the test intervals (half the
+        # interval width), relative to the pooled one, and the 90th percentile of the test errors
+        # relative to that groupwise quantile (above 1 means the calibration quantile is too small
+        # for the test errors, i.e. under-coverage). Same predictions as the coverage figures.
+        gw_pred = np.load(os.path.join(OUT_DIR, "conformal_groupwise_predictions.npz"), allow_pickle=True)
+        q_pooled = float(np.mean(pooled_pred["upper"] - pooled_pred["lower"])) / 2
+        for d in sorted(set(gw_pred["lab_test"])):
+            m = gw_pred["lab_test"] == d
+            q_d = float(np.mean(gw_pred["upper"][m] - gw_pred["lower"][m])) / 2
+            test_q90 = float(np.quantile(np.abs(gw_pred["y_test"][m] - gw_pred["mean_pred"][m]), 0.9))
+            macro(f"QuantileOverPooled{d}", q_d / q_pooled, "{:.1f}")
+            macro(f"TestErrorQNinetyOverQuantile{d}", test_q90 / q_d, "{:.2f}")
+
+        # CALCE's under-coverage, cell by cell: its two test cells against its validation cells.
+        # The lower-coverage test cell is named in the text, so its name is a macro too.
+        val_pred = np.load(os.path.join(OUT_DIR, "conformal_groupwise_predictions_val.npz"), allow_pickle=True)
+        # Why the pooled quantile tracks MIT and RWTH: their share of the validation windows.
+        macro("ValWindowShareMitRwth",
+              100 * float(np.isin(val_pred["lab_val"], ["MIT", "RWTH"]).mean()), "{:.0f}")
+        vm = val_pred["lab_val"] == "CALCE"
+        val_q90 = float(np.quantile(np.abs(val_pred["y_val"][vm] - val_pred["mean_pred"][vm]), 0.9))
+        cells = {}
+        for c in sorted(set(gw_pred["cell_test"][gw_pred["lab_test"] == "CALCE"])):
+            m = gw_pred["cell_test"] == c
+            err = np.abs(gw_pred["y_test"][m] - gw_pred["mean_pred"][m])
+            hit = (gw_pred["y_test"][m] >= gw_pred["lower"][m]) & (gw_pred["y_test"][m] <= gw_pred["upper"][m])
+            cells[c] = (float(hit.mean()), float(np.quantile(err, 0.9)) / val_q90)
+        low, high = sorted(cells, key=lambda c: cells[c][0])
+        tex = lambda s: s.replace("_", r"\_")  # noqa: E731
+        macro("CalceLowCell", tex(low))
+        macro("CalceLowCellCoverage", cells[low][0] * 100, "{:.1f}")
+        macro("CalceLowCellErrorRatio", cells[low][1], "{:.1f}")
+        macro("CalceHighCell", tex(high))
+        macro("CalceHighCellCoverage", cells[high][0] * 100, "{:.1f}")
+        macro("CalceHighCellErrorRatio", cells[high][1], "{:.1f}")
+        macro("CalceValCells", ", ".join(tex(c) for c in sorted(set(val_pred["cell_val"][vm]))))
     else:
         macro("PooledMPIW", None)
         macro("GroupwiseWidthOverPooledPercent", None)
@@ -593,6 +648,10 @@ def main():
             macro(f"PredCI{d}CellLow", clo * 100, "{:.1f}")
             macro(f"PredCI{d}CellHigh", chi * 100, "{:.1f}")
             macro(f"PredCI{d}WidthRatio", (chi - clo) / (whi - wlo), "{:.1f}")
+        # Pooling in real SOH units instead of per-dataset z-units: the alternative meaning of
+        # "pooled" (see predictor_consistent_recalibration.py).
+        for d, v in pred_ci["per_dataset"].items():
+            macro(f"PooledRealCoverage{d}", v["cov_pooled_real"] * 100, "{:.1f}")
 
     xjtu_sens = registry["sections"]["xjtu_bridging_sensitivity"]
     if xjtu_sens != UNVERIFIED:

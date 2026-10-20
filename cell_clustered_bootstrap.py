@@ -1,7 +1,7 @@
 """
 Cell-clustered bootstrap confidence intervals for coverage.
 
-WHY THIS MATTERS: Table 7's existing Clopper-Pearson intervals treat every
+WHY THIS MATTERS: per-window Clopper-Pearson intervals treat every
 TEST WINDOW as an independent Bernoulli trial. But windows from the same
 cell are correlated (overlapping input history, shared cell-level noise) --
 if that correlation is real, the existing intervals are narrower than they
@@ -23,14 +23,18 @@ read with that in mind, not treated as equally reliable as MIT's (21 cells).
 USAGE: python cell_clustered_bootstrap.py
 """
 
+import os
+
 import numpy as np
+
+import config
 
 N_BOOTSTRAP = 2000
 ALPHA = 0.1  # matches the paper's 90% nominal coverage target
 SEED = 0
 
 
-def load_data(pred_path=r"C:\Users\User\PycharmProjects\outputs\conformal_groupwise_predictions.npz"):
+def load_data(pred_path=os.path.join(config.OUTPUT_DIR, "conformal_groupwise_predictions.npz")):
     return np.load(pred_path, allow_pickle=True)
 
 

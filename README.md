@@ -27,6 +27,7 @@ in a few minutes with only `pip install -r requirements.txt` (Python 3.10):
 python tests/run_checks.py                  # verification checks (see tests/README.md)
 python make_results_registry.py             # rebuild results_registry.json from outputs/
 python figures/make_results_figures.py      # redraw the results figures into figures/out/
+python figures/make_prediction_figures.py   # example predictions, error spreads, strategy comparison
 python figures/make_block_diagram.py        # the pipeline diagram (Figure 2)
 python figures/make_problem_setting.py      # Figure 1
 ```
@@ -72,6 +73,7 @@ listed there.
 |---|---|
 | `model.py` | multi-scale bidirectional LSTM with self-attention, ablation variants, GRU baseline, MC-Dropout |
 | `train.py` | training loop, MC-Dropout prediction, conformal calibration and evaluation |
+| `generate_val_predictions.py` | the main model's MC-Dropout predictions on the validation set, which every recalibration analysis reads |
 | `experiments.py` | baselines, architecture ablations, window sizes, model seeds, calibration modes |
 | `baselines.py` | linear regression, SVR, XGBoost on the same windows and splits |
 | `train_cqr.py` | conformalized quantile regression |

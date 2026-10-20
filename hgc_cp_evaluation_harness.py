@@ -45,9 +45,12 @@ renamed nearest_source column) can be fully trusted: hgc_cp.py itself,
 which implements the functions this file only calls.
 """
 
+import os
+
 import numpy as np
 import pandas as pd
 
+import config
 from hgc_cp import (
     mmd_squared,
     compute_group_weights,
@@ -61,17 +64,10 @@ from hgc_cp import (
 DATASETS = ["MIT", "RWTH", "XJTU", "BIT", "CALCE", "Oxford", "NASA"]
 CALIB_SIZES_TO_TEST = [10, 25, 50, 100, 250, None]  # None = use all available
 
-# CONFIGURE ONCE: absolute paths. Using absolute paths (not bare filenames)
-# means this no longer depends on which folder you happen to run the script
-# from -- the exact class of bug that caused an earlier FileNotFoundError.
-# CONFIRMED: the window=20 config used throughout this paper is saved on
-# your machine as processed_1.npz (verified identical to the file already
-# tested against this harness) -- NOT processed.npz. processed_w10/w30/w50
-# are the window-size ablation variants (Table 14/Figure 11) -- unrelated
-# to this script.
-PROCESSED_NPZ_PATH = r"C:\Users\User\PycharmProjects\cache\processed.npz"
-PREDICTIONS_NPZ_PATH = r"C:\Users\User\PycharmProjects\outputs\conformal_groupwise_predictions.npz"
-VAL_PREDICTIONS_NPZ_PATH = r"C:\Users\User\PycharmProjects\outputs\conformal_groupwise_predictions_val.npz"
+# Inputs, located through config.py (set SOH_DATA_DIR to move the data folder).
+PROCESSED_NPZ_PATH = os.path.join(config.CACHE_DIR, "processed.npz")
+PREDICTIONS_NPZ_PATH = os.path.join(config.OUTPUT_DIR, "conformal_groupwise_predictions.npz")
+VAL_PREDICTIONS_NPZ_PATH = os.path.join(config.OUTPUT_DIR, "conformal_groupwise_predictions_val.npz")
 
 
 def load_representations(dataset_name: str, npz_path: str = PROCESSED_NPZ_PATH,

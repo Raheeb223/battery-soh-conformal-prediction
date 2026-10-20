@@ -56,6 +56,8 @@ and `--only <step names>` restricts it to particular steps.
 ```
 python preprocessing.py                    # SOH, cell-level split, 20-cycle windows -> cache/processed.npz
 python train.py                            # main model (multi-scale BiLSTM + attention)
+python generate_val_predictions.py         # its MC-Dropout validation predictions, used by every
+                                           # analysis below that recalibrates without retraining
 python experiments.py                      # baselines (linear, SVR, XGBoost), architecture ablations,
                                            # window-size sweep, model seeds, pooled / groupwise /
                                            # normalized-groupwise calibration
