@@ -1,0 +1,53 @@
+
+split main
+  MIT     chose summary5   lam=0.0   beta=0.0   -> coverage 100.0% (own  92.2%), width x8.54 of own
+  RWTH    chose summary5   lam=3.0   beta=2.0   -> coverage  99.6% (own  90.7%), width x2.98 of own
+  XJTU    chose summary5   lam=0.0   beta=0.5   -> coverage  97.8% (own  93.0%), width x1.63 of own
+  BIT     chose window     lam=3.0   beta=2.0   -> coverage  38.3% (own  88.1%), width x0.13 of own
+  CALCE   chose summary5   lam=0.0   beta=0.5   -> coverage  78.4% (own  75.6%), width x1.12 of own
+  Oxford  chose summary5   lam=3.0   beta=1.0   -> coverage 100.0% (own 100.0%), width x1.02 of own
+  NASA    chose mean_slope lam=3.0   beta=1.0   -> coverage  66.7% (own  66.7%), width x1.16 of own
+
+split 43
+  MIT     chose mean_slope lam=3.0   beta=0.0   -> coverage  99.7% (own  89.7%), width x5.09 of own
+  RWTH    chose mean_slope lam=3.0   beta=2.0   -> coverage  99.5% (own  89.8%), width x3.22 of own
+  XJTU    chose mean_slope lam=3.0   beta=0.0   -> coverage  84.1% (own  70.5%), width x1.78 of own
+  BIT     chose window     lam=5.0   beta=2.0   -> coverage  46.1% (own  87.7%), width x0.17 of own
+  CALCE   chose window     lam=5.0   beta=0.0   -> coverage  93.8% (own  88.7%), width x1.44 of own
+  Oxford  chose summary5   lam=5.0   beta=0.0   -> coverage 100.0% (own  92.9%), width x4.84 of own
+
+split 44
+  MIT     chose mean_slope lam=3.0   beta=0.0   -> coverage  99.1% (own  88.3%), width x4.92 of own
+  RWTH    chose mean_slope lam=3.0   beta=0.5   -> coverage  99.8% (own  87.9%), width x4.55 of own
+  XJTU    chose mean_slope lam=1.0   beta=0.0   -> coverage  98.9% (own  73.4%), width x4.28 of own
+  BIT     chose mean_slope lam=3.0   beta=2.0   -> coverage  42.5% (own  89.5%), width x0.10 of own
+  CALCE   chose mean_slope lam=3.0   beta=0.0   -> coverage  96.4% (own  94.7%), width x1.33 of own
+  Oxford  chose mean_slope lam=3.0   beta=0.0   -> coverage 100.0% (own 100.0%), width x2.53 of own
+
+split 45
+  MIT     chose summary5   lam=3.0   beta=2.0   -> coverage 100.0% (own  88.8%), width x8.79 of own
+  RWTH    chose mean_slope lam=5.0   beta=2.0   -> coverage  99.9% (own  89.7%), width x6.35 of own
+  XJTU    chose summary5   lam=3.0   beta=2.0   -> coverage  98.8% (own  88.0%), width x3.30 of own
+  BIT     chose summary5   lam=5.0   beta=2.0   -> coverage  55.9% (own  88.5%), width x0.18 of own
+  CALCE   chose summary5   lam=1.0   beta=2.0   -> coverage  93.3% (own  96.1%), width x0.70 of own
+  Oxford  chose mean_slope lam=5.0   beta=0.0   -> coverage 100.0% (own  98.2%), width x3.83 of own
+  NASA    chose summary5   lam=5.0   beta=2.0   -> coverage  83.9% (own  90.2%), width x0.79 of own
+
+split 46
+  MIT     chose summary5   lam=5.0   beta=2.0   -> coverage 100.0% (own  92.3%), width x14.65 of own
+  RWTH    chose window     lam=3.0   beta=0.0   -> coverage 100.0% (own  89.4%), width x10.37 of own
+  XJTU    chose summary5   lam=3.0   beta=2.0   -> coverage  95.2% (own  83.8%), width x2.20 of own
+  BIT     chose summary5   lam=10.0  beta=2.0   -> coverage  75.7% (own  90.2%), width x0.25 of own
+  CALCE   chose window     lam=5.0   beta=2.0   -> coverage 100.0% (own  92.3%), width xinf of own
+  Oxford  chose summary5   lam=3.0   beta=0.5   -> coverage 100.0% (own 100.0%), width xinf of own
+  NASA    chose summary5   lam=3.0   beta=2.0   -> coverage  98.6% (own  99.3%), width x0.62 of own
+
+Mean |coverage - 90%| (points) on MIT, RWTH, XJTU, BIT, CALCE
+split       own data   HGC-CP (val only)
+main            4.43               18.12
+43              4.72               14.55
+44              5.14               16.34
+45              2.21               13.21
+46              2.33                9.89
+
+saved C:\Users\User\PycharmProjects\outputs\hgc_cp_validation_only.json

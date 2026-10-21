@@ -78,6 +78,8 @@ python verify_calce_v2.py > logs/verify_calce_v2.log   # re-checks the CALCE cor
 python repeated_split_experiment.py        # four further cell-level splits, model seed fixed
 python split_replication.py                # strategy comparison (hierarchical, HGC-CP, ...) re-run
                                            # on those splits with every design frozen (no retraining)
+python hgc_cp_validation_only.py           # HGC-CP with its design chosen on validation data only,
+                                           # all five splits (no retraining)
 python deterministic_predictor_comparison.py   # single pass vs. MC-Dropout mean as interval centre
 python deployability_benchmark.py          # model size, latency, calibration overhead
 python make_results_registry.py            # every result -> results_registry.json (+ the paper's

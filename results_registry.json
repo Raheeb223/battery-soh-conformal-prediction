@@ -4956,6 +4956,471 @@
           }
         }
       }
+    },
+    "hgc_cp_validation_only": {
+      "design_space": {
+        "representations": [
+          "summary5",
+          "mean_slope",
+          "window"
+        ],
+        "lam": [
+          0.0,
+          1.0,
+          3.0,
+          5.0,
+          10.0,
+          20.0,
+          50.0
+        ],
+        "beta": [
+          0.0,
+          0.25,
+          0.5,
+          1.0,
+          2.0
+        ],
+        "calib_size": 100,
+        "mmd_sample_size": 300
+      },
+      "per_split": {
+        "main": {
+          "datasets_used": [
+            "MIT",
+            "RWTH",
+            "XJTU",
+            "BIT",
+            "CALCE",
+            "Oxford",
+            "NASA"
+          ],
+          "per_target": {
+            "MIT": {
+              "representation": "summary5",
+              "lam": 0.0,
+              "beta": 0.0,
+              "validation_mean_abs_dev": 0.09478920835300546,
+              "coverage": 0.9998286986809798,
+              "half_width": 0.012952804565429688,
+              "own_coverage": 0.9218294980871353,
+              "own_half_width": 0.001517581520602107,
+              "n_test": 17513
+            },
+            "RWTH": {
+              "representation": "summary5",
+              "lam": 3.0,
+              "beta": 2.0,
+              "validation_mean_abs_dev": 0.09358979540703638,
+              "coverage": 0.9957608210620259,
+              "half_width": 0.024160964058803868,
+              "own_coverage": 0.9071842927264614,
+              "own_half_width": 0.00810255017131567,
+              "n_test": 13446
+            },
+            "XJTU": {
+              "representation": "summary5",
+              "lam": 0.0,
+              "beta": 0.5,
+              "validation_mean_abs_dev": 0.10577713488357648,
+              "coverage": 0.9781190019193858,
+              "half_width": 0.012996427245470125,
+              "own_coverage": 0.9301343570057582,
+              "own_half_width": 0.007971428334712982,
+              "n_test": 2605
+            },
+            "BIT": {
+              "representation": "window",
+              "lam": 3.0,
+              "beta": 2.0,
+              "validation_mean_abs_dev": 0.04652739830785455,
+              "coverage": 0.38345864661654133,
+              "half_width": 0.008822768926620483,
+              "own_coverage": 0.8809523809523809,
+              "own_half_width": 0.06869572401046753,
+              "n_test": 798
+            },
+            "CALCE": {
+              "representation": "summary5",
+              "lam": 0.0,
+              "beta": 0.5,
+              "validation_mean_abs_dev": 0.11233866972764761,
+              "coverage": 0.7841779074006562,
+              "half_width": 0.012795860073585708,
+              "own_coverage": 0.7564710171345242,
+              "own_half_width": 0.011381061747670174,
+              "n_test": 2743
+            },
+            "Oxford": {
+              "representation": "summary5",
+              "lam": 3.0,
+              "beta": 1.0,
+              "validation_mean_abs_dev": 0.1139938537980546,
+              "coverage": 1.0,
+              "half_width": 0.013818960814418354,
+              "own_coverage": 1.0,
+              "own_half_width": 0.013539682142436504,
+              "n_test": 56
+            },
+            "NASA": {
+              "representation": "mean_slope",
+              "lam": 3.0,
+              "beta": 1.0,
+              "validation_mean_abs_dev": 0.1128360587935835,
+              "coverage": 0.6666666666666666,
+              "half_width": 0.013388856970294287,
+              "own_coverage": 0.6666666666666666,
+              "own_half_width": 0.011546268127858639,
+              "n_test": 3
+            }
+          },
+          "mean_abs_dev_five_validation_only_hgc_cp": 0.1812143935290388,
+          "mean_abs_dev_five_own": 0.044344949946489944
+        },
+        "43": {
+          "datasets_used": [
+            "MIT",
+            "RWTH",
+            "XJTU",
+            "BIT",
+            "CALCE",
+            "Oxford"
+          ],
+          "per_target": {
+            "MIT": {
+              "representation": "mean_slope",
+              "lam": 3.0,
+              "beta": 0.0,
+              "validation_mean_abs_dev": 0.1181907991016135,
+              "coverage": 0.9971292450525288,
+              "half_width": 0.00635981559753418,
+              "own_coverage": 0.8970193012460298,
+              "own_half_width": 0.0012489972868934274,
+              "n_test": 16372
+            },
+            "RWTH": {
+              "representation": "mean_slope",
+              "lam": 3.0,
+              "beta": 2.0,
+              "validation_mean_abs_dev": 0.09952143644484365,
+              "coverage": 0.9950367756981403,
+              "half_width": 0.024258280989981028,
+              "own_coverage": 0.8980446092208336,
+              "own_half_width": 0.007540377322584391,
+              "n_test": 16723
+            },
+            "XJTU": {
+              "representation": "mean_slope",
+              "lam": 3.0,
+              "beta": 0.0,
+              "validation_mean_abs_dev": 0.11914908849285281,
+              "coverage": 0.8408037094281299,
+              "half_width": 0.007116854190826416,
+              "own_coverage": 0.705177743431221,
+              "own_half_width": 0.003988161217421293,
+              "n_test": 2588
+            },
+            "BIT": {
+              "representation": "window",
+              "lam": 5.0,
+              "beta": 2.0,
+              "validation_mean_abs_dev": 0.10592729922917414,
+              "coverage": 0.4613526570048309,
+              "half_width": 0.009991294704377651,
+              "own_coverage": 0.8768115942028986,
+              "own_half_width": 0.05932480841875076,
+              "n_test": 828
+            },
+            "CALCE": {
+              "representation": "window",
+              "lam": 5.0,
+              "beta": 0.0,
+              "validation_mean_abs_dev": 0.13857692863895837,
+              "coverage": 0.9376375641966251,
+              "half_width": 0.022290825843811035,
+              "own_coverage": 0.8870139398385913,
+              "own_half_width": 0.015482502058148384,
+              "n_test": 2726
+            },
+            "Oxford": {
+              "representation": "summary5",
+              "lam": 5.0,
+              "beta": 0.0,
+              "validation_mean_abs_dev": 0.10605544252829743,
+              "coverage": 1.0,
+              "half_width": 0.019728362560272217,
+              "own_coverage": 0.9285714285714286,
+              "own_half_width": 0.004077370744198561,
+              "n_test": 56
+            }
+          },
+          "mean_abs_dev_five_validation_only_hgc_cp": 0.1455294437028667,
+          "mean_abs_dev_five_own": 0.047186562412085166
+        },
+        "44": {
+          "datasets_used": [
+            "MIT",
+            "RWTH",
+            "XJTU",
+            "BIT",
+            "CALCE",
+            "Oxford"
+          ],
+          "per_target": {
+            "MIT": {
+              "representation": "mean_slope",
+              "lam": 3.0,
+              "beta": 0.0,
+              "validation_mean_abs_dev": 0.141444349778663,
+              "coverage": 0.9913220190036799,
+              "half_width": 0.00655972957611084,
+              "own_coverage": 0.8826275608282529,
+              "own_half_width": 0.001332062529399991,
+              "n_test": 18207
+            },
+            "RWTH": {
+              "representation": "mean_slope",
+              "lam": 3.0,
+              "beta": 0.5,
+              "validation_mean_abs_dev": 0.10186998689417988,
+              "coverage": 0.9976953078832289,
+              "half_width": 0.03513521257065396,
+              "own_coverage": 0.8789150218650278,
+              "own_half_width": 0.0077184694819152355,
+              "n_test": 16922
+            },
+            "XJTU": {
+              "representation": "mean_slope",
+              "lam": 1.0,
+              "beta": 0.0,
+              "validation_mean_abs_dev": 0.1435175673603976,
+              "coverage": 0.988715953307393,
+              "half_width": 0.014319121837615967,
+              "own_coverage": 0.733852140077821,
+              "own_half_width": 0.0033477814868092537,
+              "n_test": 2570
+            },
+            "BIT": {
+              "representation": "mean_slope",
+              "lam": 3.0,
+              "beta": 2.0,
+              "validation_mean_abs_dev": 0.09550052691415142,
+              "coverage": 0.4249037227214377,
+              "half_width": 0.008621991371349495,
+              "own_coverage": 0.8947368421052632,
+              "own_half_width": 0.08909076452255249,
+              "n_test": 779
+            },
+            "CALCE": {
+              "representation": "mean_slope",
+              "lam": 3.0,
+              "beta": 0.0,
+              "validation_mean_abs_dev": 0.16452645365547644,
+              "coverage": 0.9643916913946587,
+              "half_width": 0.027189910411834717,
+              "own_coverage": 0.9473293768545994,
+              "own_half_width": 0.020477673038840294,
+              "n_test": 2696
+            },
+            "Oxford": {
+              "representation": "mean_slope",
+              "lam": 3.0,
+              "beta": 0.0,
+              "validation_mean_abs_dev": 0.14394702376102878,
+              "coverage": 1.0,
+              "half_width": 0.01864856481552124,
+              "own_coverage": 1.0,
+              "own_half_width": 0.007381684146821499,
+              "n_test": 58
+            }
+          },
+          "mean_abs_dev_five_validation_only_hgc_cp": 0.16344424977350455,
+          "mean_abs_dev_five_own": 0.05143956239564693
+        },
+        "45": {
+          "datasets_used": [
+            "MIT",
+            "RWTH",
+            "XJTU",
+            "BIT",
+            "CALCE",
+            "Oxford",
+            "NASA"
+          ],
+          "per_target": {
+            "MIT": {
+              "representation": "summary5",
+              "lam": 3.0,
+              "beta": 2.0,
+              "validation_mean_abs_dev": 0.10423265682118422,
+              "coverage": 0.9998739363378506,
+              "half_width": 0.013977741348583267,
+              "own_coverage": 0.8884966908288686,
+              "own_half_width": 0.0015899003483355045,
+              "n_test": 15865
+            },
+            "RWTH": {
+              "representation": "mean_slope",
+              "lam": 5.0,
+              "beta": 2.0,
+              "validation_mean_abs_dev": 0.07607527252461582,
+              "coverage": 0.9991514637250742,
+              "half_width": 0.055485832617380965,
+              "own_coverage": 0.8970846717982908,
+              "own_half_width": 0.00874190591275692,
+              "n_test": 16499
+            },
+            "XJTU": {
+              "representation": "summary5",
+              "lam": 3.0,
+              "beta": 2.0,
+              "validation_mean_abs_dev": 0.10606470566154076,
+              "coverage": 0.9884504331087585,
+              "half_width": 0.013776712009523275,
+              "own_coverage": 0.8796920115495669,
+              "own_half_width": 0.0041747684590518475,
+              "n_test": 2078
+            },
+            "BIT": {
+              "representation": "summary5",
+              "lam": 5.0,
+              "beta": 2.0,
+              "validation_mean_abs_dev": 0.09239140539189944,
+              "coverage": 0.5593023255813954,
+              "half_width": 0.013744390063151736,
+              "own_coverage": 0.8848837209302326,
+              "own_half_width": 0.07738348841667175,
+              "n_test": 860
+            },
+            "CALCE": {
+              "representation": "summary5",
+              "lam": 1.0,
+              "beta": 2.0,
+              "validation_mean_abs_dev": 0.14765809028167348,
+              "coverage": 0.9325435998683778,
+              "half_width": 0.01745973820661524,
+              "own_coverage": 0.9608423823626193,
+              "own_half_width": 0.02504761703312397,
+              "n_test": 3039
+            },
+            "Oxford": {
+              "representation": "mean_slope",
+              "lam": 5.0,
+              "beta": 0.0,
+              "validation_mean_abs_dev": 0.10490129675253963,
+              "coverage": 1.0,
+              "half_width": 0.01890331506729126,
+              "own_coverage": 0.9824561403508771,
+              "own_half_width": 0.004941114224493504,
+              "n_test": 57
+            },
+            "NASA": {
+              "representation": "summary5",
+              "lam": 5.0,
+              "beta": 2.0,
+              "validation_mean_abs_dev": 0.11065349302889164,
+              "coverage": 0.8392857142857143,
+              "half_width": 0.013747963409147268,
+              "own_coverage": 0.9017857142857143,
+              "own_half_width": 0.01748858019709587,
+              "n_test": 112
+            }
+          },
+          "mean_abs_dev_five_validation_only_hgc_cp": 0.13214342149173314,
+          "mean_abs_dev_five_own": 0.022137057451132102
+        },
+        "46": {
+          "datasets_used": [
+            "MIT",
+            "RWTH",
+            "XJTU",
+            "BIT",
+            "CALCE",
+            "Oxford",
+            "NASA"
+          ],
+          "per_target": {
+            "MIT": {
+              "representation": "summary5",
+              "lam": 5.0,
+              "beta": 2.0,
+              "validation_mean_abs_dev": 0.11621699866658693,
+              "coverage": 0.9998894294559929,
+              "half_width": 0.021874393360164654,
+              "own_coverage": 0.9230981866430783,
+              "own_half_width": 0.001493173884227872,
+              "n_test": 18088
+            },
+            "RWTH": {
+              "representation": "window",
+              "lam": 3.0,
+              "beta": 0.0,
+              "validation_mean_abs_dev": 0.09892675416328212,
+              "coverage": 0.9995875802745537,
+              "half_width": 0.08832818269729614,
+              "own_coverage": 0.8941848818712073,
+              "own_half_width": 0.00852112751454115,
+              "n_test": 16973
+            },
+            "XJTU": {
+              "representation": "summary5",
+              "lam": 3.0,
+              "beta": 2.0,
+              "validation_mean_abs_dev": 0.11620639511227553,
+              "coverage": 0.9524193548387097,
+              "half_width": 0.024389679158092228,
+              "own_coverage": 0.8375,
+              "own_half_width": 0.011066198348999023,
+              "n_test": 2480
+            },
+            "BIT": {
+              "representation": "summary5",
+              "lam": 10.0,
+              "beta": 2.0,
+              "validation_mean_abs_dev": 0.1723490116345051,
+              "coverage": 0.7574712643678161,
+              "half_width": 0.023045439236341368,
+              "own_coverage": 0.9022988505747126,
+              "own_half_width": 0.09261739253997803,
+              "n_test": 870
+            },
+            "CALCE": {
+              "representation": "window",
+              "lam": 5.0,
+              "beta": 2.0,
+              "validation_mean_abs_dev": 0.09290693798835035,
+              "coverage": 1.0,
+              "half_width": Infinity,
+              "own_coverage": 0.9228571428571428,
+              "own_half_width": 0.015807144343852997,
+              "n_test": 2100
+            },
+            "Oxford": {
+              "representation": "summary5",
+              "lam": 3.0,
+              "beta": 0.5,
+              "validation_mean_abs_dev": 0.1099445232644423,
+              "coverage": 1.0,
+              "half_width": Infinity,
+              "own_coverage": 1.0,
+              "own_half_width": 0.006814061664044857,
+              "n_test": 56
+            },
+            "NASA": {
+              "representation": "summary5",
+              "lam": 3.0,
+              "beta": 2.0,
+              "validation_mean_abs_dev": 0.11477414591225994,
+              "coverage": 0.9864864864864865,
+              "half_width": 0.024151906190714535,
+              "own_coverage": 0.9932432432432432,
+              "own_half_width": 0.03909456729888916,
+              "n_test": 148
+            }
+          },
+          "mean_abs_dev_five_validation_only_hgc_cp": 0.09888502004028803,
+          "mean_abs_dev_five_own": 0.023313859640745282
+        }
+      }
     }
   },
   "values": {
@@ -5346,6 +5811,61 @@
     "ReplicationBITWeightMin": "0.042",
     "ReplicationBITWeightMax": "0.055",
     "ReplicationTestCellOverlapPercent": "20",
+    "HgcCpValNSplits": "5",
+    "HgcCpValMeanDevMain": "18.12",
+    "HgcCpValMinDev": "9.89",
+    "HgcCpValMaxDev": "18.12",
+    "HgcCpValOwnMinDev": "2.21",
+    "HgcCpValOwnMaxDev": "5.14",
+    "HgcCpValBeatsOwnSplits": "0",
+    "HgcCpValMeanDevAll": "14.42",
+    "HgcCpOrigMeanDevAll": "12.90",
+    "HgcCpValWorseThanOrigSplits": "4",
+    "HgcCpValTargets": "33",
+    "HgcCpValUnbounded": "2",
+    "HgcCpValLamZero": "3",
+    "HgcCpValBITMin": "38.3",
+    "HgcCpValBITMax": "75.7",
+    "HgcCpValMITWidthMin": "4.9",
+    "HgcCpValMITWidthMax": "14.6",
+    "HgcCpValFurtherMeanDev": "13.50",
+    "HgcCpValFurtherMinDev": "9.89",
+    "HgcCpValFurtherMaxDev": "16.34",
+    "HgcCpValMITRep": "5 statistics",
+    "HgcCpValMITLam": "0.0",
+    "HgcCpValMITBeta": "0.00",
+    "HgcCpValMITCoverage": "100.0",
+    "HgcCpValRWTHRep": "5 statistics",
+    "HgcCpValRWTHLam": "3.0",
+    "HgcCpValRWTHBeta": "2.00",
+    "HgcCpValRWTHCoverage": "99.6",
+    "HgcCpValXJTURep": "5 statistics",
+    "HgcCpValXJTULam": "0.0",
+    "HgcCpValXJTUBeta": "0.50",
+    "HgcCpValXJTUCoverage": "97.8",
+    "HgcCpValBITRep": "raw window",
+    "HgcCpValBITLam": "3.0",
+    "HgcCpValBITBeta": "2.00",
+    "HgcCpValBITCoverage": "38.3",
+    "HgcCpValCALCERep": "5 statistics",
+    "HgcCpValCALCELam": "0.0",
+    "HgcCpValCALCEBeta": "0.50",
+    "HgcCpValCALCECoverage": "78.4",
+    "HgcCpValOxfordRep": "5 statistics",
+    "HgcCpValOxfordLam": "3.0",
+    "HgcCpValOxfordBeta": "1.00",
+    "HgcCpValOxfordCoverage": "100.0",
+    "HgcCpValNASARep": "mean, slope",
+    "HgcCpValNASALam": "3.0",
+    "HgcCpValNASABeta": "1.00",
+    "HgcCpValNASACoverage": "66.7",
+    "FourDsOwnMinDev": "1.25",
+    "FourDsOwnMaxDev": "5.57",
+    "FourDsHierMinDev": "11.08",
+    "FourDsHierMaxDev": "15.50",
+    "FourDsHgcCpValMinDev": "9.86",
+    "FourDsHgcCpValMaxDev": "19.76",
+    "FourDsOwnBestSplits": "5",
     "NasaFallbackSplits": "2",
     "TotalCellsLoaded": "339",
     "CellsWithWindows": "337",

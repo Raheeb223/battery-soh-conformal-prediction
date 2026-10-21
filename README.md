@@ -90,6 +90,7 @@ listed there.
 | `leave_one_out.py` | each dataset withheld from training |
 | `repeated_split_experiment.py` | further cell-level splits with the model seed fixed |
 | `split_replication.py` | the calibration-strategy comparison re-run on those splits with every design frozen; a held-out check of HGC-CP |
+| `hgc_cp_validation_only.py` | HGC-CP-val: HGC-CP with its whole design (representation, λ, β) chosen on validation data only, on all five splits |
 | `cell_clustered_bootstrap.py`, `predictor_consistent_recalibration.py` | window-level and cell-clustered coverage intervals |
 | `baseline_conformal_coverage.py` | pooled vs. groupwise coverage for every point predictor |
 | `dataset_level_wilcoxon.py` | pooled vs. groupwise significance test at dataset level |

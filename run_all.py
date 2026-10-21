@@ -67,6 +67,8 @@ STEPS = [
      os.path.join(config.OUTPUT_DIR, "repeated_split_summary.json")),
     ("split_replication", [sys.executable, "split_replication.py"],
      os.path.join(config.OUTPUT_DIR, "split_replication.json")),
+    ("hgc_cp_validation_only", [sys.executable, "hgc_cp_validation_only.py"],
+     os.path.join(config.OUTPUT_DIR, "hgc_cp_validation_only.json")),
     ("deterministic_predictor", [sys.executable, "deterministic_predictor_comparison.py"],
      os.path.join(config.OUTPUT_DIR, "deterministic_predictor_results.json")),
     ("deployability", [sys.executable, "deployability_benchmark.py"],

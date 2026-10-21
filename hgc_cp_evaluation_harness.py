@@ -4,12 +4,11 @@ across shrinking calibration-sample-size budgets, via a calibration-level
 leave-one-dataset-out protocol -- the same validation style already used for
 hierarchical_calibration.py (Section 5.3.6) in this project.
 
-THIS FILE WAS ORIGINALLY A TEMPLATE, NOT A TESTED IMPLEMENTATION. It has now
-been run once against the real project data and lightly corrected (see
-CHANGES below). The underlying hgc_cp.py functions it imports
-(mmd_squared, compute_group_weights, hgc_cp_interval, pooled_quantile,
-groupwise_quantile, evaluate_coverage) have NOT been independently verified
-in this pass -- only this harness file's own logic has.
+The paper's HGC-CP results come from nested_hyperparameter_search.py and
+hgc_cp_validation_only.py, which use this file's three loaders; the
+run_calibration_level_lodo() comparison below is an earlier exploratory
+harness. The hgc_cp.py functions it imports are checked by
+tests/check_hgc_cp.py and tests/check_hgc_cp_split_equivalence.py.
 
 --- CHANGES IN THIS VERSION ---
 1. RENAMED the third comparison arm from "groupwise" to "nearest_source"
@@ -39,10 +38,6 @@ in this pass -- only this harness file's own logic has.
    original per-window version on synthetic data before applying here --
    same coverage, same MPIW, byte-identical. hgc_cp_interval() is NOT
    moved, since it genuinely depends on each window's own yhat.
-
-Still needed before the hgc_coverage/pooled_coverage columns (not just the
-renamed nearest_source column) can be fully trusted: hgc_cp.py itself,
-which implements the functions this file only calls.
 """
 
 import os

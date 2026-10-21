@@ -650,6 +650,76 @@ def main():
         for k in methods:
             macro(f"ReplicationMeanDev{k}", None)
 
+    # HGC-CP with its design chosen on validation data only, on all five splits
+    # (hgc_cp_validation_only.py).
+    val_only = load("hgc_cp_validation_only.json")
+    registry["sections"]["hgc_cp_validation_only"] = val_only or UNVERIFIED
+    hier = registry["sections"]["hierarchical_calibration"]
+    hgc = registry["sections"]["hgc_cp_nested_search"]
+    if val_only and rep and hier != UNVERIFIED and hgc != UNVERIFIED:
+        vs = val_only["per_split"]
+        order = ["main"] + [str(s) for s in rep["splits"]]
+        dev_val = [vs[s]["mean_abs_dev_five_validation_only_hgc_cp"] * 100 for s in order]
+        dev_own = [vs[s]["mean_abs_dev_five_own"] * 100 for s in order]
+        five = ["MIT", "RWTH", "XJTU", "BIT", "CALCE"]
+        dev_orig = ([float(np.mean([abs(hgc[d]["real_target_test_coverage"] - 0.9) for d in five])) * 100]
+                    + [rep["per_split"][s]["mean_abs_dev_five"]["hgc_cp"] * 100 for s in order[1:]])
+        macro("HgcCpValNSplits", len(order), "{:d}")
+        macro("HgcCpValMeanDevMain", dev_val[0], "{:.2f}")
+        macro("HgcCpValMinDev", min(dev_val), "{:.2f}")
+        macro("HgcCpValMaxDev", max(dev_val), "{:.2f}")
+        macro("HgcCpValOwnMinDev", min(dev_own), "{:.2f}")
+        macro("HgcCpValOwnMaxDev", max(dev_own), "{:.2f}")
+        macro("HgcCpValBeatsOwnSplits", sum(v < o for v, o in zip(dev_val, dev_own)), "{:d}")
+        macro("HgcCpValMeanDevAll", np.mean(dev_val), "{:.2f}")
+        macro("HgcCpOrigMeanDevAll", np.mean(dev_orig), "{:.2f}")
+        macro("HgcCpValWorseThanOrigSplits", sum(v > o for v, o in zip(dev_val, dev_orig)), "{:d}")
+        targets = [t for s in order for t in vs[s]["per_target"].values()]
+        macro("HgcCpValTargets", len(targets), "{:d}")
+        macro("HgcCpValUnbounded", sum(not np.isfinite(t["half_width"]) for t in targets), "{:d}")
+        macro("HgcCpValLamZero", sum(t["lam"] == 0.0 for t in targets), "{:d}")
+        bit = [vs[s]["per_target"]["BIT"]["coverage"] * 100 for s in order]
+        macro("HgcCpValBITMin", min(bit), "{:.1f}")
+        macro("HgcCpValBITMax", max(bit), "{:.1f}")
+        mit_ratio = [vs[s]["per_target"]["MIT"]["half_width"] / vs[s]["per_target"]["MIT"]["own_half_width"]
+                     for s in order]
+        macro("HgcCpValMITWidthMin", min(mit_ratio), "{:.1f}")
+        macro("HgcCpValMITWidthMax", max(mit_ratio), "{:.1f}")
+        macro("HgcCpValFurtherMeanDev", np.mean(dev_val[1:]), "{:.2f}")
+        macro("HgcCpValFurtherMinDev", min(dev_val[1:]), "{:.2f}")
+        macro("HgcCpValFurtherMaxDev", max(dev_val[1:]), "{:.2f}")
+        rep_names = {"summary5": "5 statistics", "mean_slope": "mean, slope", "window": "raw window"}
+        for d, t in vs["main"]["per_target"].items():
+            macro(f"HgcCpVal{d}Rep", rep_names[t["representation"]], "{}")
+            macro(f"HgcCpVal{d}Lam", t["lam"], "{:.1f}")
+            macro(f"HgcCpVal{d}Beta", t["beta"], "{:.2f}")
+            macro(f"HgcCpVal{d}Coverage", t["coverage"] * 100, "{:.1f}")
+
+        # The method comparison restricted to the datasets with at least six test cells on the main
+        # split (MIT, RWTH, XJTU, BIT), over all five splits: does any conclusion rest on the
+        # datasets with one or two test cells?
+        four = ["MIT", "RWTH", "XJTU", "BIT"]
+        per_split = []
+        for s in order:
+            if s == "main":
+                cov = {d: {"own": hier["per_target"][d]["cov_own_quantile"],
+                           "hierarchical": hier["per_target"][d]["cov_eb_shrunk"],
+                           "prior_only": hier["per_target"][d]["cov_prior_only"],
+                           "others_pooled": hier["per_target"][d]["cov_cross_source_pooled"],
+                           "hgc_cp": hgc[d]["real_target_test_coverage"]} for d in four}
+            else:
+                cov = {d: rep["per_split"][s]["per_dataset"][d] for d in four}
+            for d in four:
+                cov[d] = dict(cov[d], hgc_cp_val=vs[s]["per_target"][d]["coverage"])
+            per_split.append({m: float(np.mean([abs(cov[d][m] - 0.9) for d in four])) * 100
+                              for m in ("own", "hierarchical", "prior_only", "others_pooled", "hgc_cp", "hgc_cp_val")})
+        for k, m in (("Own", "own"), ("Hier", "hierarchical"), ("HgcCpVal", "hgc_cp_val")):
+            macro(f"FourDs{k}MinDev", min(p[m] for p in per_split), "{:.2f}")
+            macro(f"FourDs{k}MaxDev", max(p[m] for p in per_split), "{:.2f}")
+        macro("FourDsOwnBestSplits", sum(all(p["own"] <= v for v in p.values()) for p in per_split), "{:d}")
+    else:
+        macro("HgcCpValMeanDevMain", None)
+
     fallback = registry["sections"]["nasa_fallback_splits"]
     macro("NasaFallbackSplits", len(fallback) if fallback != UNVERIFIED else None, "{:d}")
 
