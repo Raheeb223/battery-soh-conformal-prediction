@@ -1,0 +1,39 @@
+{
+  "run_name": "ablation_transformer",
+  "model_variant": "transformer",
+  "seed": 42,
+  "conformal_mode": "groupwise",
+  "calibration_predictor": "mc_mean",
+  "best_epoch": 17,
+  "best_val_loss": 0.008980141498120497,
+  "test_mae": 0.041046544909477234,
+  "test_rmse": 0.1233857199549675,
+  "overall_coverage": 0.9068184264341836,
+  "per_dataset_mae": {
+    "BIT": 0.26697838306427,
+    "CALCE": 0.09571618586778641,
+    "MIT": 0.021896976977586746,
+    "NASA": 0.7171330451965332,
+    "Oxford": 0.07021055370569229,
+    "RWTH": 0.024679815396666527,
+    "XJTU": 0.12608279287815094
+  },
+  "per_dataset_coverage": {
+    "BIT": 0.8734335839598998,
+    "CALCE": 0.8512577469923441,
+    "MIT": 0.9223434020441957,
+    "NASA": 0.0,
+    "Oxford": 1.0,
+    "RWTH": 0.8948386137141158,
+    "XJTU": 0.9320537428023032
+  },
+  "dataset_signature": [
+    "BIT",
+    "CALCE",
+    "MIT",
+    "NASA",
+    "Oxford",
+    "RWTH",
+    "XJTU"
+  ]
+}

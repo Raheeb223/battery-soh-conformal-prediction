@@ -1,0 +1,8 @@
+EV1: 629121 snippets, 349741 with a capacity label
+EV2: 472829 snippets, 203207 with a capacity label
+EV3: 176327 snippets, 32974 with a capacity label
+              vehicles  labels
+manufacturer                  
+EV1                100  349741
+EV2                 83  203207
+EV3                  8   32974

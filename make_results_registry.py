@@ -113,7 +113,7 @@ def main():
     # ---- Ablations ----
     registry["sections"]["ablations"] = {
         name: load(f"ablation_{name}_results.json") or UNVERIFIED
-        for name in ("full", "no_attention", "no_multiscale", "plain_lstm", "gru")
+        for name in ("full", "no_attention", "no_multiscale", "plain_lstm", "gru", "transformer")
     }
 
     # ---- Window size ----
@@ -720,6 +720,83 @@ def main():
     else:
         macro("HgcCpValMeanDevMain", None)
 
+    # Field check on the EVBattery fleet data (field_check.py).
+    field = load("field_check.json")
+    registry["sections"]["field_check"] = field or UNVERIFIED
+    ev_name = {"EV1": "EvOne", "EV2": "EvTwo", "EV3": "EvThree"}
+    if field:
+        fd = field["data"]
+        for d, n in fd["vehicles_with_labels"].items():
+            macro(f"Field{ev_name[d]}Vehicles", n, "{:d}")
+            macro(f"Field{ev_name[d]}Events", fd["labelled_events"][d], "{:,d}")
+        macro("FieldVehiclesTotal", sum(fd["vehicles_with_labels"].values()), "{:d}")
+        macro("FieldEventsTotal", sum(fd["labelled_events"].values()), "{:,d}")
+        macro("FieldWindowsTotal", sum(fd["windows"].values()), "{:,d}")
+        macro("FieldNSplits", len(field["splits"]), "{:d}")
+        per = [field["per_split"][str(s)] for s in field["splits"]]
+        main = per[0]
+        # Pooled vs groupwise (z-units), every dataset-split pair with test and validation windows.
+        pairs = [(p["pooled_vs_groupwise"]["pooled"][d], p["pooled_vs_groupwise"]["groupwise"][d])
+                 for p in per for d in p["pooled_vs_groupwise"]["groupwise"]]
+        macro("FieldPairsTotal", len(pairs), "{:d}")
+        macro("FieldPairsGroupwiseCloser", sum(abs(g - 0.9) < abs(q - 0.9) for q, g in pairs), "{:d}")
+        macro("FieldMeanDevPooled", np.mean([abs(q - 0.9) for q, _ in pairs]) * 100, "{:.1f}")
+        macro("FieldMeanDevGroupwise", np.mean([abs(g - 0.9) for _, g in pairs]) * 100, "{:.1f}")
+        for d in ("EV1", "EV2"):
+            macro(f"FieldPooled{ev_name[d]}", main["pooled_vs_groupwise"]["pooled"][d] * 100, "{:.1f}")
+            macro(f"FieldGroupwise{ev_name[d]}", main["pooled_vs_groupwise"]["groupwise"][d] * 100, "{:.1f}")
+            pooled_all = [p["pooled_vs_groupwise"]["pooled"][d] * 100 for p in per]
+            macro(f"FieldPooled{ev_name[d]}Min", min(pooled_all), "{:.1f}")
+            macro(f"FieldPooled{ev_name[d]}Max", max(pooled_all), "{:.1f}")
+            macro(f"FieldXpool{ev_name[d]}Main", main["borrowing"]["per_dataset"][d]["others_pooled"] * 100, "{:.1f}")
+            # Own data against calibrating on the other manufacturer(s), SOH units, all splits.
+            for k, m in (("Own", "own"), ("Xpool", "others_pooled")):
+                v = [p["borrowing"]["per_dataset"][d][m] * 100 for p in per]
+                macro(f"Field{k}{ev_name[d]}Min", min(v), "{:.1f}")
+                macro(f"Field{k}{ev_name[d]}Max", max(v), "{:.1f}")
+        two = ["EV1", "EV2"]
+        dev = lambda p, m: float(np.mean([abs(p["borrowing"]["per_dataset"][d][m] - 0.9) for d in two])) * 100  # noqa: E731
+        own_dev = [dev(p, "own") for p in per]
+        xpool_dev = [dev(p, "others_pooled") for p in per]
+        macro("FieldOwnDevMin", min(own_dev), "{:.1f}")
+        macro("FieldOwnDevMax", max(own_dev), "{:.1f}")
+        macro("FieldXpoolDevMin", min(xpool_dev), "{:.1f}")
+        macro("FieldXpoolDevMax", max(xpool_dev), "{:.1f}")
+        macro("FieldOwnBestSplits", sum(o < x for o, x in zip(own_dev, xpool_dev)), "{:d}")
+        losses = [o - x for o, x in zip(own_dev, xpool_dev) if o >= x]
+        macro("FieldOwnLossGap", max(losses) if losses else 0.0, "{:.1f}")
+        assert all(p["borrowing"]["fit_groups"] == two for p in per), "field hierarchical fit is not EV1+EV2"
+        macro("FieldHierXpoolMaxGap", max(abs(p["borrowing"]["per_dataset"][d]["hierarchical"]
+                                              - p["borrowing"]["per_dataset"][d]["others_pooled"]) * 100
+                                          for p in per for d in two), "{:.1f}")
+        hgc_splits = [p for p in per if p["borrowing"]["hgc_cp_val_run"]]
+        macro("FieldHgcValSplits", len(hgc_splits), "{:d}")
+        if hgc_splits:
+            hdev = [dev(p, "hgc_cp_val") for p in hgc_splits]
+            odev = [dev(p, "own") for p in hgc_splits]
+            macro("FieldHgcValDevMin", min(hdev), "{:.1f}")
+            macro("FieldHgcValDevMax", max(hdev), "{:.1f}")
+            macro("FieldHgcValBeatsOwn", sum(h < o for h, o in zip(hdev, odev)), "{:d}")
+        # The laboratory model, never trained on field data, on the field test vehicles.
+        lab = field["lab_model_on_field"]
+        for d in ("EV1", "EV2"):
+            macro(f"FieldLabPooled{ev_name[d]}", lab["lab_pooled_quantile"][d] * 100, "{:.1f}")
+            macro(f"FieldLabOwn{ev_name[d]}", lab["field_own_quantile"][d] * 100, "{:.1f}")
+        macro("FieldLabModelMAE", lab["test_mae"], "{:.3f}")
+        macro("FieldModelMAE", main["pooled_vs_groupwise"]["test_mae"], "{:.3f}")
+        # Calibration budget in vehicles, with the laboratory rule.
+        for d, v in field["budget"]["per_dataset"].items():
+            n_full = v["n_cells_available"]
+            macro(f"FieldBudget{ev_name[d]}Available", n_full, "{:d}")
+            ok = sorted(int(b) for b, r in v["per_budget"].items() if int(b) < n_full and r["coverage_p05"] >= 0.85)
+            macro(f"FieldBudget{ev_name[d]}", ok[0] if ok else None, "{:d}")
+            macro(f"FieldBudget{ev_name[d]}OnePLow", v["per_budget"]["1"]["coverage_p05"] * 100, "{:.1f}")
+        pers = field["persistence"]
+        macro("FieldPersistenceBetter", sum(v["persistence_mae_soh"] < v["model_mae_soh"] for v in pers.values()), "{:d}")
+        macro("FieldPersistenceN", len(pers), "{:d}")
+    else:
+        macro("FieldVehiclesTotal", None)
+
     fallback = registry["sections"]["nasa_fallback_splits"]
     macro("NasaFallbackSplits", len(fallback) if fallback != UNVERIFIED else None, "{:d}")
 
@@ -841,10 +918,15 @@ def main():
 
     deploy = registry["sections"]["deployability"]
     deploy_labels = {"full": "Full", "no_attention": "NoAttention", "no_multiscale": "NoMultiscale",
-                     "plain_lstm": "PlainLstm", "gru": "Gru"}
+                     "plain_lstm": "PlainLstm", "gru": "Gru", "transformer": "Transformer"}
     if deploy != UNVERIFIED:
         for variant, label in deploy_labels.items():
-            v = deploy["variants"][variant]
+            v = deploy["variants"].get(variant)
+            if v is None:  # variant not benchmarked yet: say so instead of printing a number
+                for field in ("Params", "CheckpointKB", "DetMs", "McMs", "McPNinetyFiveMs",
+                              "McBatchedMs", "GpuThroughputK"):
+                    macro(f"Deploy{label}{field}", None)
+                continue
             macro(f"Deploy{label}Params", v["n_params"], "{:,}")
             macro(f"Deploy{label}CheckpointKB", v["checkpoint_kb"], "{:.0f}")
             macro(f"Deploy{label}DetMs", v["cpu_batch1_deterministic_median_ms"], "{:.2f}")

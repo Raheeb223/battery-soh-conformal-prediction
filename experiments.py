@@ -127,10 +127,10 @@ def run_baselines_section():
 
 def run_ablations_section():
     print("\n" + "=" * 60)
-    print("SECTION 2: Architecture ablations + GRU baseline")
+    print("SECTION 2: Architecture ablations + GRU and Transformer baselines")
     print("=" * 60)
     results = []
-    for variant in ["full", "no_attention", "no_multiscale", "plain_lstm", "gru"]:
+    for variant in ["full", "no_attention", "no_multiscale", "plain_lstm", "gru", "transformer"]:
         r = _train_one_resumable(model_variant=variant, run_name=f"ablation_{variant}")
         results.append(r)
     return results

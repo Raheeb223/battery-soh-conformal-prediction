@@ -1,0 +1,15 @@
+[full] params=292,033 det=1.61ms mc30=48.99ms mc30_batched=5.94ms
+[no_attention] params=283,777 det=1.48ms mc30=45.61ms mc30_batched=5.69ms
+[no_multiscale] params=146,113 det=0.87ms mc30=27.58ms mc30_batched=3.74ms
+[plain_lstm] params=141,953 det=0.81ms mc30=25.64ms mc30_batched=3.56ms
+[gru] params=42,049 det=1.40ms mc30=43.89ms mc30_batched=2.66ms
+[transformer] params=71,425 det=0.74ms mc30=24.14ms mc30_batched=4.08ms
+{
+  "n_calibration_samples": 41747,
+  "n_test_samples": 37164,
+  "n_groups": 7,
+  "calibration_time_ms": 4.321399999753339,
+  "interval_time_per_sample_us": 0.017441610132853332
+}
+wrote C:\Users\User\PycharmProjects\outputs\deployability_results.json
+exit=0

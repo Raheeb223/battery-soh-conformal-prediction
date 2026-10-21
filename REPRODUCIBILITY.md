@@ -5,7 +5,11 @@ scripts produce every result, and how those results become the numbers and figur
 
 ## 1. Environment
 
-- Python 3.10, packages pinned in `requirements.txt` (`pip install -r requirements.txt`).
+- Python 3.10, packages pinned in `requirements.txt` (`pip install -r requirements.txt`). Install
+  them into a fresh virtual environment. With numpy 2 instead of the pinned 1.26.4, every printed
+  result is the same (outputs differ only by about 1e-8, from numpy 2's changed float32 promotion),
+  but `deployability_benchmark.py` measures the interval step several times slower (about 90 ns
+  instead of 17 ns per prediction), because numpy 2 compares the string dataset labels more slowly.
 - The results in the paper were produced on Windows 11 with an NVIDIA RTX 3060 (12 GB) and
   PyTorch 2.5.1 built for CUDA 12.1. Training uses the GPU when one is available and falls back to
   the CPU otherwise; the training steps below are impractically slow on a CPU.
@@ -26,6 +30,12 @@ set the environment variable `SOH_DATA_DIR` to that folder (`config.py` reads it
 | BIT | `kw34hhw7xg-3/` | `bit_loader.py` | [Mendeley Data, DOI 10.17632/kw34hhw7xg.3](https://data.mendeley.com/datasets/kw34hhw7xg/3) |
 | XJTU | `Battery Dataset/` | `xjtu_loader.py` | [Zenodo, DOI 10.5281/zenodo.10963339](https://doi.org/10.5281/zenodo.10963339) |
 | RWTH | `RWTH-2021-04545_818642/Rawdata/Rohdaten/` | `rwth_loader.py` | [RWTH Publications, DOI 10.18154/RWTH-2021-04545](https://publications.rwth-aachen.de/record/818642) |
+
+For the field check, put the three EVBattery archives (`battery_dataset1.tar.gz` to
+`battery_dataset3.tar.gz`, from [figshare, DOI 10.6084/m9.figshare.23301881](https://doi.org/10.6084/m9.figshare.23301881))
+in `EVBattery/`, unextracted. `evbattery_loader.py` reads them member by member. Their snippets are
+Python pickle files, and it unpickles them with a restricted unpickler that allows only the numpy
+and collections types they contain, so a modified archive cannot run code.
 
 CS2_8, CS2_21 and CX2_31 contribute no rows: CALCE recorded them on a different instrument
 (`.txt` files), and the loader reads the Arbin `.xlsx`/`.xls` format only.
@@ -62,6 +72,7 @@ python experiments.py                      # baselines (linear, SVR, XGBoost), a
                                            # window-size sweep, model seeds, pooled / groupwise /
                                            # normalized-groupwise calibration
 python baseline_conformal_coverage.py      # pooled vs. groupwise coverage for every point predictor
+                                           # (--only <names> adds predictors, keeping the others)
 python persistence_baselines.py            # model vs. one-step persistence, real SOH units
 python leave_one_out.py                    # leave-one-dataset-out: each dataset withheld from training
 python hierarchical_calibration_v2.py      # empirical-Bayes hierarchical calibration
@@ -80,6 +91,9 @@ python split_replication.py                # strategy comparison (hierarchical, 
                                            # on those splits with every design frozen (no retraining)
 python hgc_cp_validation_only.py           # HGC-CP with its design chosen on validation data only,
                                            # all five splits (no retraining)
+python field_check.py                      # field check on the EVBattery fleet data: builds the field
+                                           # caches, trains one model per vehicle split, repeats the
+                                           # main analyses, applies the laboratory model to the field
 python deterministic_predictor_comparison.py   # single pass vs. MC-Dropout mean as interval centre
 python deployability_benchmark.py          # model size, latency, calibration overhead
 python make_results_registry.py            # every result -> results_registry.json (+ the paper's

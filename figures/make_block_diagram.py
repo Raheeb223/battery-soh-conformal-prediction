@@ -29,10 +29,10 @@ def count(name):
     return f"{int(N[name].replace(',', '')):,}"
 
 
-fig, ax = plt.subplots(figsize=(TEXT_WIDTH, 6.0))
+fig, ax = plt.subplots(figsize=(TEXT_WIDTH, 6.0 * 132 / 128))
 fig.subplots_adjust(0, 0, 1, 1)
 ax.set_xlim(0, 100)
-ax.set_ylim(0, 128)
+ax.set_ylim(0, 132)
 ax.axis("off")
 
 LEFT, RIGHT = 9.0, 99.5          # content column; 0-9 holds the stage labels
@@ -71,7 +71,7 @@ def stage_label(y_top, y_bot, letter, name):
 
 
 # ---------------------------------------------------------------- (a) Data
-top = 126.5
+top = 130.5
 h = 10.0
 y = top - h
 rect(LEFT, y, WIDTH, h, fill=SHADE)
@@ -121,7 +121,7 @@ base_x = LEFT + pred_w + 2.5
 base_w = RIGHT - base_x
 rect(base_x, y, base_w, h, ls=(0, (3, 2)))
 text(base_x + base_w / 2, top - 3.0, "Reference predictors", weight="bold")
-text(base_x + base_w / 2, top - 8.0, "linear, SVR, XGBoost,\nfour ablations,\npersistence",
+text(base_x + base_w / 2, top - 8.0, "linear, SVR, XGBoost,\nfour ablations,\nTransformer, persistence",
      size=FS_SMALL)
 stage_label(top, y, "c", "Prediction")
 down_arrow(CX, y, y - 5.5, r"validation residuals $|y-\hat{y}|$, per dataset")
@@ -159,7 +159,7 @@ down_arrow(CX, y, y - 5.5, r"intervals $\hat{y}\pm q$ on test cells")
 
 # -------------------------------------------------------------- (e) Evaluation
 top = y - 5.5
-h = 17.5
+h = 20.9
 y = top - h
 rect(LEFT, y, WIDTH, h)
 text(CX, top - 3.0, "Evaluation on test cells", size=FS_TITLE, weight="bold")
@@ -171,9 +171,13 @@ cols = [
      "point accuracy vs. persistence",
      "inference cost"],
 ]
+# The field check is a separate study on its own data (Section 5.6), so it gets its own line below.
+field_line = (f"field check: {N['FieldVehiclesTotal']} electric vehicles, same code and model, "
+              "analysed separately")
 for c, items in enumerate(cols):
     for k, item in enumerate(items):
         text(LEFT + 2.0 + c * WIDTH / 2, top - 7.2 - k * 3.4, "•  " + item, size=FS_SMALL, ha="left")
+text(LEFT + 2.0, top - 7.2 - 3 * 3.4, "•  " + field_line, size=FS_SMALL, ha="left")
 stage_label(top, y, "e", "Evaluation")
 gap_h = 5.0
 cw = (WIDTH - 2 * gap_h) / 3

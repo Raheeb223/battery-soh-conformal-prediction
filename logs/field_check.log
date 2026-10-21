@@ -1,0 +1,110 @@
+C:\Users\User\PycharmProjects\preprocessing.py:156: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  df = df.groupby(["dataset", "cell_id"], group_keys=False).apply(_soh)
+
+======================================================================
+field split 42
+======================================================================
+Inputs (real SOH units)
+Dataset  val cells       q_g   sigma2_g (cell bootstrap)  in RE fit
+EV1             15   0.02364                   5.768e-06  yes
+EV2             12   0.01902                   1.375e-05  yes
+
+All 2 groups   : mu_hat=0.02219  tau2_hat=8.912e-07  group-bootstrap 95% CI for tau2: [8.91e-07, 8.91e-07]
+Excluding CALCE (2): mu_hat=0.02219  tau2_hat=8.912e-07   (sensitivity to the unresolved CALCE series issue)
+
+Calibration-level leave-one-dataset-out, coverage on the target's test set (90% nominal)
+Target      mu_-t   tau2_-t   w_EB  prior-only  EB-shrunk   own q  x-src pooled  width p/o
+EV1       0.01902  0.00e+00  0.000       84.7%      84.7%   89.6%         84.7%       0.80x
+EV2       0.02364  0.00e+00  0.000       94.7%      94.7%   91.6%         94.7%       1.24x
+
+======================================================================
+field split 43
+======================================================================
+Inputs (real SOH units)
+Dataset  val cells       q_g   sigma2_g (cell bootstrap)  in RE fit
+EV1             15   0.02423                   4.174e-06  yes
+EV2             12   0.01617                   1.356e-05  yes
+
+All 2 groups   : mu_hat=0.02078  tau2_hat=2.362e-05  group-bootstrap 95% CI for tau2: [2.36e-05, 2.36e-05]
+Excluding CALCE (2): mu_hat=0.02078  tau2_hat=2.362e-05   (sensitivity to the unresolved CALCE series issue)
+
+Calibration-level leave-one-dataset-out, coverage on the target's test set (90% nominal)
+Target      mu_-t   tau2_-t   w_EB  prior-only  EB-shrunk   own q  x-src pooled  width p/o
+EV1       0.01617  0.00e+00  0.000       84.0%      84.0%   91.9%         84.0%       0.67x
+EV2       0.02423  0.00e+00  0.000       95.3%      95.3%   90.2%         95.3%       1.50x
+
+======================================================================
+field split 44
+======================================================================
+Inputs (real SOH units)
+Dataset  val cells       q_g   sigma2_g (cell bootstrap)  in RE fit
+EV1             15   0.02074                   2.947e-06  yes
+EV2             12   0.01636                   6.427e-06  yes
+EV3              1   0.03201                   undefined  no
+
+All 2 groups   : mu_hat=0.01895  tau2_hat=4.907e-06  group-bootstrap 95% CI for tau2: [4.91e-06, 4.91e-06]
+Excluding CALCE (2): mu_hat=0.01895  tau2_hat=4.907e-06   (sensitivity to the unresolved CALCE series issue)
+
+Calibration-level leave-one-dataset-out, coverage on the target's test set (90% nominal)
+Target      mu_-t   tau2_-t   w_EB  prior-only  EB-shrunk   own q  x-src pooled  width p/o
+EV1       0.01636  0.00e+00  0.000       80.9%      80.9%   86.8%         82.6%       0.79x
+EV2       0.02074  0.00e+00  0.000       93.4%      93.4%   90.2%         93.8%       1.27x
+EV3       0.01895  4.91e-06    n/a       96.2%       n/a   99.0%         96.6%       0.59x
+  EV1     chose mean_slope lam=0.0   beta=2.0   -> coverage  92.6% (own  86.8%), width x1.38 of own
+  EV2     chose mean_slope lam=0.0   beta=2.0   -> coverage  97.3% (own  90.2%), width x1.90 of own
+  EV3     chose mean_slope lam=0.0   beta=2.0   -> coverage  96.2% (own  99.0%), width x0.60 of own
+
+======================================================================
+field split 45
+======================================================================
+Inputs (real SOH units)
+Dataset  val cells       q_g   sigma2_g (cell bootstrap)  in RE fit
+EV1             15   0.02350                   3.787e-06  yes
+EV2             12   0.02337                   1.770e-05  yes
+EV3              1   0.01544                   undefined  no
+
+All 2 groups   : mu_hat=0.02348  tau2_hat=0.000e+00  group-bootstrap 95% CI for tau2: [0.00e+00, 0.00e+00]
+Excluding CALCE (2): mu_hat=0.02348  tau2_hat=0.000e+00   (sensitivity to the unresolved CALCE series issue)
+
+Calibration-level leave-one-dataset-out, coverage on the target's test set (90% nominal)
+Target      mu_-t   tau2_-t   w_EB  prior-only  EB-shrunk   own q  x-src pooled  width p/o
+EV1       0.02337  0.00e+00  0.000       91.5%      91.5%   91.6%         91.3%       0.99x
+EV2       0.02350  0.00e+00  0.000       97.8%      97.8%   97.8%         97.8%       1.01x
+
+======================================================================
+field split 46
+======================================================================
+Inputs (real SOH units)
+Dataset  val cells       q_g   sigma2_g (cell bootstrap)  in RE fit
+EV1             15   0.02178                   4.738e-06  yes
+EV2             12   0.01507                   5.302e-06  yes
+EV3              1   0.01910                   undefined  no
+
+All 2 groups   : mu_hat=0.01847  tau2_hat=1.749e-05  group-bootstrap 95% CI for tau2: [1.75e-05, 1.75e-05]
+Excluding CALCE (2): mu_hat=0.01847  tau2_hat=1.749e-05   (sensitivity to the unresolved CALCE series issue)
+
+Calibration-level leave-one-dataset-out, coverage on the target's test set (90% nominal)
+Target      mu_-t   tau2_-t   w_EB  prior-only  EB-shrunk   own q  x-src pooled  width p/o
+EV1       0.01507  0.00e+00  0.000       81.1%      81.1%   89.1%         81.4%       0.69x
+EV2       0.02178  0.00e+00  0.000       94.3%      94.3%   89.1%         94.0%       1.45x
+EV3       0.01847  1.75e-05    n/a       95.2%       n/a   95.2%         95.2%       0.97x
+  EV1     chose summary5   lam=0.0   beta=2.0   -> coverage  84.0% (own  89.1%), width x0.78 of own
+  EV2     chose window     lam=0.0   beta=2.0   -> coverage  97.2% (own  89.1%), width x1.96 of own
+  EV3     chose mean_slope lam=0.0   beta=2.0   -> coverage  96.2% (own  95.2%), width x1.05 of own
+Calibration-cell-budget sensitivity (groupwise conformal), 90% nominal target
+Dataset  n_cells_avail  budgets swept
+EV1                 15  [1, 2, 3, 5, 7, 10, 15]
+EV2                 12  [1, 2, 3, 5, 7, 10, 12]
+
+Per-dataset, per-budget mean coverage (%):
+EV1       b=1   89.4%  b=2   88.3%  b=3   89.2%  b=5   89.2%  b=7   89.3%  b=10  89.3%  b=15  89.6%
+EV2       b=1   86.1%  b=2   89.6%  b=3   90.6%  b=5   91.1%  b=7   91.6%  b=10  91.6%  b=12  91.6%
+
+Coverage (%) per split: pooled / groupwise
+  42: EV1 91.2/89.6  EV2 89.4/91.6
+  43: EV1 92.1/91.9  EV2 89.4/90.2
+  44: EV1 89.4/86.8  EV2 87.6/90.2  EV3 97.1/99.0
+  45: EV1 93.8/91.6  EV2 95.2/97.8
+  46: EV1 90.1/89.1  EV2 87.3/89.1  EV3 97.1/95.2
+
+saved C:\Users\User\PycharmProjects\outputs\field_check.json

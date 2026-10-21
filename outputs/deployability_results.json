@@ -11,64 +11,75 @@
     "full": {
       "n_params": 292033,
       "checkpoint_kb": 1147.7109375,
-      "cpu_batch1_deterministic_median_ms": 1.5392999998766754,
-      "cpu_batch1_deterministic_p95_ms": 1.6838600002756718,
-      "cpu_batch1_mc_mean_as_evaluated_median_ms": 48.883449999948425,
-      "cpu_batch1_mc_mean_as_evaluated_p95_ms": 50.13091000023451,
-      "cpu_batch1_mc_mean_batched_replicas_median_ms": 5.942400000094494,
-      "cpu_batch1_mc_mean_batched_replicas_p95_ms": 6.445179999946049,
-      "gpu_throughput_deterministic_samples_per_s": 202324.00935453366
+      "cpu_batch1_deterministic_median_ms": 1.6057499960879795,
+      "cpu_batch1_deterministic_p95_ms": 1.7731000018102347,
+      "cpu_batch1_mc_mean_as_evaluated_median_ms": 48.99135000232491,
+      "cpu_batch1_mc_mean_as_evaluated_p95_ms": 50.23181500000646,
+      "cpu_batch1_mc_mean_batched_replicas_median_ms": 5.941650000750087,
+      "cpu_batch1_mc_mean_batched_replicas_p95_ms": 6.14488499595609,
+      "gpu_throughput_deterministic_samples_per_s": 202555.88336818785
     },
     "no_attention": {
       "n_params": 283777,
       "checkpoint_kb": 1114.578125,
-      "cpu_batch1_deterministic_median_ms": 1.4580500001102337,
-      "cpu_batch1_deterministic_p95_ms": 1.6019049999613342,
-      "cpu_batch1_mc_mean_as_evaluated_median_ms": 46.11984999996821,
-      "cpu_batch1_mc_mean_as_evaluated_p95_ms": 47.41289500007042,
-      "cpu_batch1_mc_mean_batched_replicas_median_ms": 5.76325000020006,
-      "cpu_batch1_mc_mean_batched_replicas_p95_ms": 6.344815000352355,
-      "gpu_throughput_deterministic_samples_per_s": 209994.04521288932
+      "cpu_batch1_deterministic_median_ms": 1.4848999999230728,
+      "cpu_batch1_deterministic_p95_ms": 1.5736699988337932,
+      "cpu_batch1_mc_mean_as_evaluated_median_ms": 45.612249999976484,
+      "cpu_batch1_mc_mean_as_evaluated_p95_ms": 46.59265999835043,
+      "cpu_batch1_mc_mean_batched_replicas_median_ms": 5.68829999974696,
+      "cpu_batch1_mc_mean_batched_replicas_p95_ms": 6.038329996954417,
+      "gpu_throughput_deterministic_samples_per_s": 211449.06883221085
     },
     "no_multiscale": {
       "n_params": 146113,
       "checkpoint_kb": 575.80859375,
-      "cpu_batch1_deterministic_median_ms": 0.8803000000625616,
-      "cpu_batch1_deterministic_p95_ms": 0.9909500000276239,
-      "cpu_batch1_mc_mean_as_evaluated_median_ms": 28.88000000007196,
-      "cpu_batch1_mc_mean_as_evaluated_p95_ms": 29.595414999926106,
-      "cpu_batch1_mc_mean_batched_replicas_median_ms": 3.7801499997840438,
-      "cpu_batch1_mc_mean_batched_replicas_p95_ms": 4.045124999925065,
-      "gpu_throughput_deterministic_samples_per_s": 339005.07473089395
+      "cpu_batch1_deterministic_median_ms": 0.874549998115981,
+      "cpu_batch1_deterministic_p95_ms": 0.9583349990862189,
+      "cpu_batch1_mc_mean_as_evaluated_median_ms": 27.584099996602163,
+      "cpu_batch1_mc_mean_as_evaluated_p95_ms": 28.316704998724163,
+      "cpu_batch1_mc_mean_batched_replicas_median_ms": 3.7435000012919772,
+      "cpu_batch1_mc_mean_batched_replicas_p95_ms": 3.968314999656286,
+      "gpu_throughput_deterministic_samples_per_s": 341973.6790430876
     },
     "plain_lstm": {
       "n_params": 141953,
       "checkpoint_kb": 558.544921875,
-      "cpu_batch1_deterministic_median_ms": 0.84500000002663,
-      "cpu_batch1_deterministic_p95_ms": 0.9337299999742752,
-      "cpu_batch1_mc_mean_as_evaluated_median_ms": 26.59504999996898,
-      "cpu_batch1_mc_mean_as_evaluated_p95_ms": 27.19296999994185,
-      "cpu_batch1_mc_mean_batched_replicas_median_ms": 3.5670999998274056,
-      "cpu_batch1_mc_mean_batched_replicas_p95_ms": 3.9501600003859494,
-      "gpu_throughput_deterministic_samples_per_s": 366614.9473454335
+      "cpu_batch1_deterministic_median_ms": 0.8101499988697469,
+      "cpu_batch1_deterministic_p95_ms": 0.8606800027337156,
+      "cpu_batch1_mc_mean_as_evaluated_median_ms": 25.639349998527905,
+      "cpu_batch1_mc_mean_as_evaluated_p95_ms": 26.248674999078503,
+      "cpu_batch1_mc_mean_batched_replicas_median_ms": 3.5581499978434294,
+      "cpu_batch1_mc_mean_batched_replicas_p95_ms": 3.725535006014979,
+      "gpu_throughput_deterministic_samples_per_s": 370551.4712353444
     },
     "gru": {
       "n_params": 42049,
       "checkpoint_kb": 167.3583984375,
-      "cpu_batch1_deterministic_median_ms": 1.3801499999317457,
-      "cpu_batch1_deterministic_p95_ms": 1.4825149999978748,
-      "cpu_batch1_mc_mean_as_evaluated_median_ms": 43.56400000006033,
-      "cpu_batch1_mc_mean_as_evaluated_p95_ms": 44.89595000013651,
-      "cpu_batch1_mc_mean_batched_replicas_median_ms": 2.639199999975972,
-      "cpu_batch1_mc_mean_batched_replicas_p95_ms": 2.9110099998888463,
-      "gpu_throughput_deterministic_samples_per_s": 840540.4823039891
+      "cpu_batch1_deterministic_median_ms": 1.4030499987711664,
+      "cpu_batch1_deterministic_p95_ms": 1.5084599996043828,
+      "cpu_batch1_mc_mean_as_evaluated_median_ms": 43.894749996979954,
+      "cpu_batch1_mc_mean_as_evaluated_p95_ms": 44.78226000064751,
+      "cpu_batch1_mc_mean_batched_replicas_median_ms": 2.659700003277976,
+      "cpu_batch1_mc_mean_batched_replicas_p95_ms": 2.9174200026318426,
+      "gpu_throughput_deterministic_samples_per_s": 872565.2160253462
+    },
+    "transformer": {
+      "n_params": 71425,
+      "checkpoint_kb": 322.611328125,
+      "cpu_batch1_deterministic_median_ms": 0.7382000003417488,
+      "cpu_batch1_deterministic_p95_ms": 0.781295003616833,
+      "cpu_batch1_mc_mean_as_evaluated_median_ms": 24.141549998603296,
+      "cpu_batch1_mc_mean_as_evaluated_p95_ms": 24.700860002849367,
+      "cpu_batch1_mc_mean_batched_replicas_median_ms": 4.079700000147568,
+      "cpu_batch1_mc_mean_batched_replicas_p95_ms": 4.39959499744873,
+      "gpu_throughput_deterministic_samples_per_s": 258424.5879388346
     }
   },
   "conformal_overhead_full_model": {
     "n_calibration_samples": 41747,
     "n_test_samples": 37164,
     "n_groups": 7,
-    "calibration_time_ms": 4.320300000017596,
-    "interval_time_per_sample_us": 0.017476590248859898
+    "calibration_time_ms": 4.321399999753339,
+    "interval_time_per_sample_us": 0.017441610132853332
   }
 }

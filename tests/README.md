@@ -16,6 +16,7 @@ python tests/run_checks.py --full   # also the data-layer check (needs the raw d
 | `check_hierarchical_calibration.py` | the DerSimonian–Laird estimator behind hierarchical calibration | nothing | < 1 s |
 | `check_hgc_cp.py` | the similarity weighting in HGC-CP | nothing | < 1 s |
 | `check_hgc_cp_split_equivalence.py` | the fast HGC-CP path gives identical intervals | nothing | < 1 s |
+| `check_evbattery_loader.py` | the field-data loader refuses unsafe pickles and reads valid ones | nothing | < 1 s |
 | `check_checkpoint_reproduction.py` | the saved model reproduces the reported accuracy | `cache/`, `outputs/` | ~10 s |
 | `check_data_layer.py` | cells, splits, windows, and pipeline determinism | raw datasets | tens of minutes |
 
@@ -69,6 +70,14 @@ reproducible bandwidth selection, and infinite width when calibration data are i
 The quantile is computed once per calibration set and reused for each test point, instead of being
 recomputed per point. The two paths must give bit-identical intervals over 250 (test point, random
 configuration) combinations, including a configuration that triggers the infinite-width case.
+
+### `check_evbattery_loader.py`: safe loading of the field data
+
+The EVBattery snippets are Python pickle files, and unpickling can run arbitrary code.
+`evbattery_loader.py` therefore uses a restricted unpickler that allows only the numpy and
+collections types the files contain. The test checks that it (1) refuses a pickle that would call
+`os.system`, (2) refuses one that would call `eval`, and (3) still reads a synthetic snippet built
+exactly like the real files.
 
 ### `check_checkpoint_reproduction.py`: saved model
 

@@ -14,8 +14,11 @@ run the ablation experiments that isolate what each architectural choice
 actually contributes over a plain BiLSTM baseline.
 """
 
+import math
+
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 import config
 
 
@@ -108,9 +111,12 @@ def build_model(variant: str = "full") -> nn.Module:
     - 'no_multiscale' : single branch + attention
     - 'plain_lstm'    : single branch + mean-pooling (closest thing to a vanilla BiLSTM)
     - 'gru'           : a plain GRU baseline (common comparison in SOH papers)
+    - 'transformer'   : a small Transformer encoder baseline
     """
     if variant == "gru":
         return GRUBaseline()
+    if variant == "transformer":
+        return TransformerBaseline()
     variants = {
         "full":          dict(use_multiscale=True,  use_attention=True),
         "no_attention":  dict(use_multiscale=True,  use_attention=False),
@@ -118,7 +124,7 @@ def build_model(variant: str = "full") -> nn.Module:
         "plain_lstm":    dict(use_multiscale=False, use_attention=False),
     }
     if variant not in variants:
-        raise ValueError(f"Unknown model variant '{variant}'. Choose from {list(variants) + ['gru']}.")
+        raise ValueError(f"Unknown model variant '{variant}'. Choose from {list(variants) + ['gru', 'transformer']}.")
     return MultiScaleBiLSTMAttention(**variants[variant])
 
 
@@ -148,6 +154,64 @@ class GRUBaseline(nn.Module):
         last = out[:, -1, :]             # take the final time step
         last = self.dropout(last)
         pred = self.head(last).squeeze(-1)
+        return pred, None
+
+
+class TransformerBlock(nn.Module):
+    """One pre-norm Transformer encoder layer. Its dropout is applied with F.dropout gated on the
+    block's own training flag, not through nn.Dropout modules, so enable_mc_dropout() leaves it off
+    at inference -- the same as the LSTMs' internal dropout. (torch.nn.TransformerEncoderLayer is not
+    used because its inference fast path can skip dropout layers that enable_mc_dropout() switches
+    on, which would make MC sampling depend on which code path PyTorch takes.)"""
+    def __init__(self, d_model, n_heads, d_ff, dropout):
+        super().__init__()
+        self.norm1 = nn.LayerNorm(d_model)
+        self.attn = nn.MultiheadAttention(d_model, n_heads, dropout=dropout, batch_first=True)
+        self.norm2 = nn.LayerNorm(d_model)
+        self.ff1 = nn.Linear(d_model, d_ff)
+        self.ff2 = nn.Linear(d_ff, d_model)
+        self.p = dropout
+
+    def forward(self, x):
+        h = self.norm1(x)
+        a, _ = self.attn(h, h, h, need_weights=False)
+        x = x + F.dropout(a, self.p, self.training)
+        h = self.ff2(F.dropout(F.gelu(self.ff1(self.norm2(x))), self.p, self.training))
+        return x + F.dropout(h, self.p, self.training)
+
+
+class TransformerBaseline(nn.Module):
+    """A small Transformer encoder baseline: each cycle's SOH is projected to d_model, a fixed
+    sinusoidal position encoding is added, two encoder layers follow, and the sequence is mean-pooled
+    into the same regression head as the GRU baseline. Trained with the same settings as every other
+    variant (config.py), without separate tuning. Returns (pred, None) like GRUBaseline."""
+    def __init__(self, input_size=1, d_model=64, n_heads=4, d_ff=128, num_layers=2,
+                 hidden_size=config.HIDDEN_SIZE, dropout=config.DROPOUT, max_len=128):
+        super().__init__()
+        self.input_proj = nn.Linear(input_size, d_model)
+        pos = torch.arange(max_len).unsqueeze(1)
+        freq = torch.exp(torch.arange(0, d_model, 2) * (-math.log(10000.0) / d_model))
+        pe = torch.zeros(max_len, d_model)
+        pe[:, 0::2] = torch.sin(pos * freq)
+        pe[:, 1::2] = torch.cos(pos * freq)
+        self.register_buffer("pe", pe)
+        self.blocks = nn.ModuleList([TransformerBlock(d_model, n_heads, d_ff, dropout)
+                                     for _ in range(num_layers)])
+        self.norm = nn.LayerNorm(d_model)
+        self.dropout = nn.Dropout(dropout)
+        self.head = nn.Sequential(
+            nn.Linear(d_model, hidden_size),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(hidden_size, 1),
+        )
+
+    def forward(self, x):
+        h = self.input_proj(x) + self.pe[: x.size(1)]   # (batch, seq_len, d_model)
+        for block in self.blocks:
+            h = block(h)
+        pooled = self.dropout(self.norm(h).mean(dim=1))
+        pred = self.head(pooled).squeeze(-1)
         return pred, None
 
 

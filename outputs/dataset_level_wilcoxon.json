@@ -13,7 +13,8 @@
     "SVR",
     "XGBoost",
     "LSTM",
-    "GRU"
+    "GRU",
+    "Transformer"
   ],
   "dataset_level": {
     "n": 6,
@@ -23,8 +24,8 @@
     "p_min_attainable": 0.015625
   },
   "pair_level_not_independent": {
-    "n": 36,
-    "groupwise_closer": 35,
-    "p_one_sided_exact": 2.9103830456733704e-11
+    "n": 42,
+    "groupwise_closer": 41,
+    "p_one_sided_exact": 4.547473508864641e-13
   }
 }

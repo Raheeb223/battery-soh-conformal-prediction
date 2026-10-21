@@ -48,6 +48,7 @@ check and why it matters. In short:
 | `check_hierarchical_calibration.py` | the DerSimonian–Laird estimator against hand calculations and an independent implementation |
 | `check_hgc_cp.py` | HGC-CP's similarity weights and its reduction to ordinary split conformal |
 | `check_hgc_cp_split_equivalence.py` | the fast HGC-CP code path gives bit-identical intervals |
+| `check_evbattery_loader.py` | the field-data loader refuses unsafe pickle files and reads valid ones |
 | `check_checkpoint_reproduction.py` | the saved model reproduces the reported accuracy |
 | `check_data_layer.py` | cell counts, cell-level split, windows, and that preprocessing is deterministic (needs the raw data) |
 
@@ -71,7 +72,7 @@ listed there.
 
 | File | Purpose |
 |---|---|
-| `model.py` | multi-scale bidirectional LSTM with self-attention, ablation variants, GRU baseline, MC-Dropout |
+| `model.py` | multi-scale bidirectional LSTM with self-attention, ablation variants, GRU and Transformer baselines, MC-Dropout |
 | `train.py` | training loop, MC-Dropout prediction, conformal calibration and evaluation |
 | `generate_val_predictions.py` | the main model's MC-Dropout predictions on the validation set, which every recalibration analysis reads |
 | `experiments.py` | baselines, architecture ablations, window sizes, model seeds, calibration modes |
@@ -91,6 +92,7 @@ listed there.
 | `repeated_split_experiment.py` | further cell-level splits with the model seed fixed |
 | `split_replication.py` | the calibration-strategy comparison re-run on those splits with every design frozen; a held-out check of HGC-CP |
 | `hgc_cp_validation_only.py` | HGC-CP-val: HGC-CP with its whole design (representation, λ, β) chosen on validation data only, on all five splits |
+| `evbattery_loader.py`, `field_preprocessing.py`, `field_check.py` | field check on the EVBattery fleet data: safe loading of its pickle files, the same preprocessing as the laboratory data, and the main analyses repeated on five vehicle-level splits |
 | `cell_clustered_bootstrap.py`, `predictor_consistent_recalibration.py` | window-level and cell-clustered coverage intervals |
 | `baseline_conformal_coverage.py` | pooled vs. groupwise coverage for every point predictor |
 | `dataset_level_wilcoxon.py` | pooled vs. groupwise significance test at dataset level |
@@ -126,6 +128,12 @@ described in [REPRODUCIBILITY.md](REPRODUCIBILITY.md#2-raw-data).
 | NASA PCoE | 6 | [NASA PCoE Data Set Repository](https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/) |
 
 \*Cells that contribute at least one window after preprocessing (337 of the 339 loaded).
+
+The field check uses one more public dataset, analysed separately with its own model:
+
+| Dataset | Vehicles used | Source |
+|---|---|---|
+| EVBattery (charging records of electric vehicles, three manufacturers) | 191 with capacity labels | [figshare, DOI 10.6084/m9.figshare.23301881](https://doi.org/10.6084/m9.figshare.23301881), CC BY 4.0; He et al., arXiv:2201.12358 |
 
 ## Citation
 

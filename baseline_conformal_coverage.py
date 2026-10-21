@@ -17,9 +17,11 @@ nonconformity scores from the same predictor).
   only the POOLED number is new here, since experiments.py's ablation section
   only ran groupwise mode for architecture variants.
 
-Run:  python baseline_conformal_coverage.py
+Run:  python baseline_conformal_coverage.py                       # every predictor
+      python baseline_conformal_coverage.py --only transformer  # add one, keep the rest
 Out:  outputs/baseline_conformal_results.json
 """
+import argparse
 import json
 import os
 
@@ -140,30 +142,41 @@ def ablation_checkpoint_conformal_coverage(variant_name, model_variant):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--only", nargs="*", default=None,
+                        help="compute only these predictors and merge them into the existing results "
+                             "file, leaving the others unchanged (MC-Dropout makes a rerun differ slightly)")
+    args = parser.parse_args()
+    out_path = os.path.join(config.OUTPUT_DIR, "baseline_conformal_results.json")
+    wanted = lambda name: args.only is None or name in args.only  # noqa: E731
     out = {}
-    out["linear"] = sklearn_conformal_coverage("linear", LinearRegression())
-    out["svr"] = sklearn_conformal_coverage("svr", SVR(kernel="rbf", C=1.0, epsilon=0.01), max_train_samples=20000)
-    if _HAS_XGBOOST:
-        xgb_model = XGBRegressor(n_estimators=300, max_depth=6, learning_rate=0.05,
-                                  subsample=0.8, colsample_bytree=0.8,
-                                  random_state=config.RANDOM_SEED, n_jobs=-1)
-        out["xgboost"] = sklearn_conformal_coverage("xgboost", xgb_model)
-    else:
-        print("[xgboost] skipped -- not installed")
+    if args.only is not None and os.path.exists(out_path):
+        with open(out_path) as fh:
+            out = json.load(fh)
 
-    lstm_result = ablation_checkpoint_conformal_coverage("plain_lstm", "plain_lstm")
-    if lstm_result is not None:
-        out["plain_lstm"] = lstm_result
+    if wanted("linear"):
+        out["linear"] = sklearn_conformal_coverage("linear", LinearRegression())
+    if wanted("svr"):
+        out["svr"] = sklearn_conformal_coverage("svr", SVR(kernel="rbf", C=1.0, epsilon=0.01), max_train_samples=20000)
+    if wanted("xgboost"):
+        if _HAS_XGBOOST:
+            xgb_model = XGBRegressor(n_estimators=300, max_depth=6, learning_rate=0.05,
+                                      subsample=0.8, colsample_bytree=0.8,
+                                      random_state=config.RANDOM_SEED, n_jobs=-1)
+            out["xgboost"] = sklearn_conformal_coverage("xgboost", xgb_model)
+        else:
+            print("[xgboost] skipped -- not installed")
 
-    gru_result = ablation_checkpoint_conformal_coverage("gru", "gru")
-    if gru_result is not None:
-        out["gru"] = gru_result
+    for variant in ("plain_lstm", "gru", "transformer"):
+        if wanted(variant):
+            result = ablation_checkpoint_conformal_coverage(variant, variant)
+            if result is not None:
+                out[variant] = result
 
     print("\n=== Summary: pooled vs groupwise coverage ===")
     for arch, r in out.items():
         print(f"{arch}: pooled={r['pooled_overall_coverage']:.2%}  groupwise={r['groupwise_overall_coverage']:.2%}")
 
-    out_path = os.path.join(config.OUTPUT_DIR, "baseline_conformal_results.json")
     with open(out_path, "w") as fh:
         json.dump(out, fh, indent=2)
     print(f"\nsaved {out_path}")

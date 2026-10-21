@@ -127,5 +127,32 @@
     },
     "groupwise_source": "reused from outputs/ablation_gru_results.json (not recomputed)",
     "no_retrain": true
+  },
+  "transformer": {
+    "architecture": "transformer",
+    "test_mae": 0.04125001281499863,
+    "test_rmse": 0.12360724806785583,
+    "pooled_overall_coverage": 0.8883327951781294,
+    "pooled_per_dataset_coverage": {
+      "BIT": 0.2506265664160401,
+      "CALCE": 0.6861100984323734,
+      "MIT": 0.9648261291611946,
+      "NASA": 0.0,
+      "Oxford": 0.5178571428571429,
+      "RWTH": 0.9579800684218355,
+      "XJTU": 0.43186180422264875
+    },
+    "groupwise_overall_coverage": 0.9068184264341836,
+    "groupwise_per_dataset_coverage": {
+      "BIT": 0.8734335839598998,
+      "CALCE": 0.8512577469923441,
+      "MIT": 0.9223434020441957,
+      "NASA": 0.0,
+      "Oxford": 1.0,
+      "RWTH": 0.8948386137141158,
+      "XJTU": 0.9320537428023032
+    },
+    "groupwise_source": "reused from outputs/ablation_transformer_results.json (not recomputed)",
+    "no_retrain": true
   }
 }

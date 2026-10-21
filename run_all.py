@@ -69,6 +69,8 @@ STEPS = [
      os.path.join(config.OUTPUT_DIR, "split_replication.json")),
     ("hgc_cp_validation_only", [sys.executable, "hgc_cp_validation_only.py"],
      os.path.join(config.OUTPUT_DIR, "hgc_cp_validation_only.json")),
+    ("field_check", [sys.executable, "field_check.py"],
+     os.path.join(config.OUTPUT_DIR, "field_check.json")),
     ("deterministic_predictor", [sys.executable, "deterministic_predictor_comparison.py"],
      os.path.join(config.OUTPUT_DIR, "deterministic_predictor_results.json")),
     ("deployability", [sys.executable, "deployability_benchmark.py"],
@@ -80,7 +82,7 @@ STEPS = [
 # Steps that train a model on the GPU and take non-trivial wall-clock time --
 # flagged so --execute without --only prints a warning before launching all
 # of them back to back.
-GPU_HEAVY = {"train", "experiments", "leave_one_out", "repeated_split", "train_cqr"}
+GPU_HEAVY = {"train", "experiments", "leave_one_out", "repeated_split", "train_cqr", "field_check"}
 
 
 def main():

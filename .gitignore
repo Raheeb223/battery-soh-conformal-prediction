@@ -51,3 +51,6 @@ figures/out/
 
 # Manuscript (kept private, not pushed to GitHub)
 paper/
+
+# EVBattery field data (download from figshare, not redistributed)
+EVBattery/

@@ -279,7 +279,7 @@ def _print_window_summary(name: str, labels: np.ndarray):
     print(f"  [windows:{name}] {parts}")
 
 
-def run(window: int = None, split_seed: int = None, raw_df=None):
+def run(window: int = None, split_seed: int = None, raw_df=None, out_path: str = None):
     """window: override config.INPUT_WINDOW for this run (used by the window-size
     ablation in experiments.py). The cell split itself is NOT affected by window
     size for a GIVEN split_seed — it's computed once per seed so every window-size
@@ -292,7 +292,10 @@ def run(window: int = None, split_seed: int = None, raw_df=None):
     raw_df: pre-loaded, pre-SOH'd dataframe (add_soh(load_all_raw())), reused
     across multiple split_seed / window variants by a caller that needs several
     caches built in one run (e.g. the K6 repeated-split experiment) so raw data
-    is parsed once rather than once per variant. Pass None to load fresh."""
+    is parsed once rather than once per variant. Pass None to load fresh.
+
+    out_path: where to write the cache (default: cache_path_for(window, split_seed)). The field
+    check (field_preprocessing.py) passes its own path so it never touches the laboratory caches."""
     os.makedirs(config.CACHE_DIR, exist_ok=True)
     w = window if window is not None else config.INPUT_WINDOW
 
@@ -323,7 +326,7 @@ def run(window: int = None, split_seed: int = None, raw_df=None):
     _print_window_summary("val", lab_val)
     _print_window_summary("test", lab_test)
 
-    out_path = cache_path_for(w, split_seed=split_seed)
+    out_path = out_path or cache_path_for(w, split_seed=split_seed)
     np.savez(out_path,
              X_train=X_train, y_train=y_train, lab_train=lab_train, cell_train=cell_train,
              window_cycle_indices_train=cyc_train,

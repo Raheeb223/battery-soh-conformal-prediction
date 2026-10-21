@@ -24,6 +24,7 @@ CHECKS = [
     ("check_hierarchical_calibration.py", "DerSimonian-Laird estimator vs. hand calculation", [], False),
     ("check_hgc_cp.py", "HGC-CP weighting properties", [], False),
     ("check_hgc_cp_split_equivalence.py", "fast HGC-CP path is bit-identical", [], False),
+    ("check_evbattery_loader.py", "field-data loader refuses unsafe pickles", [], False),
     ("check_checkpoint_reproduction.py", "saved model reproduces the reported MAE",
      ["cache/processed.npz", "outputs/conformal_groupwise_model.pt",
       "outputs/conformal_groupwise_results.json"], False),

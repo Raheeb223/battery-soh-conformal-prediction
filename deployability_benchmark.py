@@ -34,7 +34,7 @@ import config
 from conformal import GroupwiseConformal
 from model import build_model, enable_mc_dropout, mc_dropout_predict, predict_in_batches
 
-VARIANTS = ["full", "no_attention", "no_multiscale", "plain_lstm", "gru"]
+VARIANTS = ["full", "no_attention", "no_multiscale", "plain_lstm", "gru", "transformer"]
 N_WARMUP = 20
 N_CPU_SINGLE = 500
 N_CPU_MC = 100

@@ -2,7 +2,7 @@
 Cross-architecture pooled-vs-groupwise coverage test, with the correct unit
 of analysis.
 
-The pair-level statistic uses 6 architectures x 6 datasets.
+The pair-level statistic uses 7 architectures x 6 datasets.
 The architectures for a given dataset are evaluated on the SAME test
 cells, so these pairs are not independent; the independent units are the six
 datasets (and, more fundamentally, the cells within them). This script
@@ -12,7 +12,7 @@ cannot go below 1/64 = 0.0156.
 Coverage values (see ERROR_REGISTER.md, task K2) are now read directly from the
 machine-generated result files below, never hand-copied. BiLSTM comes from
 the main conformal pipeline (outputs/conformal_{groupwise,pooled}_results.json);
-linear regression, SVR, XGBoost, plain LSTM, and GRU come from outputs/baseline_conformal_results.json
+linear regression, SVR, XGBoost, plain LSTM, GRU, and Transformer come from outputs/baseline_conformal_results.json
 (baseline_conformal_coverage.py). NASA is excluded from this
 table, consistent with its treatment as illustrative-only elsewhere in this
 project (n=3 test windows, 1 test cell).
@@ -54,7 +54,7 @@ def load_coverage_table():
     table = {
         "BiLSTM": [(bilstm_pool[d] * 100, bilstm_group[d] * 100) for d in DATASETS],
     }
-    name_map = {"Linear": "linear", "SVR": "svr", "XGBoost": "xgboost", "LSTM": "plain_lstm", "GRU": "gru"}
+    name_map = {"Linear": "linear", "SVR": "svr", "XGBoost": "xgboost", "LSTM": "plain_lstm", "GRU": "gru", "Transformer": "transformer"}
     for label, key in name_map.items():
         if key not in baselines:
             raise KeyError(f"'{key}' missing from baseline_conformal_results.json -- "

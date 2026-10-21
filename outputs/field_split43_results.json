@@ -1,0 +1,27 @@
+{
+  "run_name": "field_split43",
+  "model_variant": "full",
+  "seed": 42,
+  "conformal_mode": "groupwise",
+  "calibration_predictor": "mc_mean",
+  "best_epoch": 33,
+  "best_val_loss": 0.16710140141607313,
+  "test_mae": 0.24149855971336365,
+  "test_rmse": 0.4039454162120819,
+  "overall_coverage": 0.9168560606060606,
+  "per_dataset_mae": {
+    "EV1": 0.23605459928512573,
+    "EV2": 0.26181840896606445,
+    "EV3": 0.15636971592903137
+  },
+  "per_dataset_coverage": {
+    "EV1": 0.9200120736492605,
+    "EV2": 0.9044911881750994,
+    "EV3": 0.9711538461538461
+  },
+  "dataset_signature": [
+    "EV1",
+    "EV2",
+    "EV3"
+  ]
+}

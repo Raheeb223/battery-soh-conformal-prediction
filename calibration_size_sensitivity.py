@@ -56,18 +56,20 @@ def fsq(r, alpha=ALPHA):
     return float(np.quantile(r, min(1.0, np.ceil((n + 1) * (1 - alpha)) / n)))
 
 
-def main():
+def budget_sweep(cache_path, val_path, test_path, datasets=ALL):
+    """The whole sweep on one set of files; main() runs it on the main split, field_check.py on the
+    field data."""
     rng = np.random.default_rng(SEED)
-    cache = np.load(os.path.join(config.CACHE_DIR, "processed.npz"), allow_pickle=True)
-    val = np.load(os.path.join(config.OUTPUT_DIR, "conformal_groupwise_predictions_val.npz"), allow_pickle=True)
-    test = np.load(os.path.join(config.OUTPUT_DIR, "conformal_groupwise_predictions.npz"), allow_pickle=True)
+    cache = np.load(cache_path, allow_pickle=True)
+    val = np.load(val_path, allow_pickle=True)
+    test = np.load(test_path, allow_pickle=True)
     std = cache["soh_std"].item()
 
     out = {"alpha": ALPHA, "n_repeats": N_REPEATS, "budget_grid": BUDGET_GRID, "per_dataset": {}}
 
     print("Calibration-cell-budget sensitivity (groupwise conformal), 90% nominal target")
     print(f"{'Dataset':8s}{'n_cells_avail':>14s}  budgets swept")
-    for d in ALL:
+    for d in datasets:
         mv = val["lab_val"] == d
         rv = np.abs(val["y_val"][mv] - val["mean_pred"][mv]) * std[d]
         cell_v = val["cell_val"][mv]
@@ -108,13 +110,19 @@ def main():
         out["per_dataset"][d] = {"n_cells_available": n_avail, "n_test": int(len(rt)), "per_budget": per_budget}
 
     print("\nPer-dataset, per-budget mean coverage (%):")
-    for d in ALL:
+    for d in datasets:
         pb = out["per_dataset"][d]["per_budget"]
         row = f"{d:8s}"
         for b in sorted(pb, key=int):
             row += f"  b={b:<3s}{100*pb[b]['coverage_mean']:5.1f}%"
         print(row)
+    return out
 
+
+def main():
+    out = budget_sweep(os.path.join(config.CACHE_DIR, "processed.npz"),
+                       os.path.join(config.OUTPUT_DIR, "conformal_groupwise_predictions_val.npz"),
+                       os.path.join(config.OUTPUT_DIR, "conformal_groupwise_predictions.npz"))
     path = os.path.join(config.OUTPUT_DIR, "calibration_size_sensitivity.json")
     with open(path, "w") as fh:
         json.dump(out, fh, indent=2)
