@@ -732,7 +732,7 @@ def main():
         macro("CellsWithWindows", cells_with_windows, "{:d}")
         ascending_detail = data_layer["checks"]["windows_cycle_ascending_within_window"]["detail"]
         total_test_windows = int(re.search(r"of (\d+) test windows", ascending_detail).group(1))
-        macro("TotalTestWindows", total_test_windows, "{:d}")
+        macro("TotalTestWindows", total_test_windows, "{:,d}")
     else:
         macro("TotalCellsLoaded", None)
         macro("CellsWithWindows", None)
@@ -740,8 +740,8 @@ def main():
 
     dc = registry["sections"]["data_counts"]
     have = dc != UNVERIFIED
-    macro("TrainWindows", dc["train_windows"] if have else None, "{:d}")
-    macro("ValWindows", dc["val_windows"] if have else None, "{:d}")
+    macro("TrainWindows", dc["train_windows"] if have else None, "{:,d}")
+    macro("ValWindows", dc["val_windows"] if have else None, "{:,d}")
     for d in ("MIT", "RWTH", "XJTU", "BIT", "CALCE", "Oxford", "NASA"):
         macro(f"TestCells{d}", dc["test_cells"][d] if have else None, "{:d}")
         macro(f"TestWindows{d}", dc["test_windows"][d] if have else None, "{:,}")

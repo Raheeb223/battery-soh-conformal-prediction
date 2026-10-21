@@ -3893,9 +3893,11 @@
       ],
       "architectures": [
         "BiLSTM",
+        "Linear",
         "SVR",
         "XGBoost",
-        "LSTM"
+        "LSTM",
+        "GRU"
       ],
       "dataset_level": {
         "n": 6,
@@ -3905,9 +3907,9 @@
         "p_min_attainable": 0.015625
       },
       "pair_level_not_independent": {
-        "n": 24,
-        "groupwise_closer": 23,
-        "p_one_sided_exact": 1.1920928955078125e-07
+        "n": 36,
+        "groupwise_closer": 35,
+        "p_one_sided_exact": 2.9103830456733704e-11
       }
     },
     "rwth_corrections": {
@@ -5869,9 +5871,9 @@
     "NasaFallbackSplits": "2",
     "TotalCellsLoaded": "339",
     "CellsWithWindows": "337",
-    "TotalTestWindows": "37164",
-    "TrainWindows": "182710",
-    "ValWindows": "41747",
+    "TotalTestWindows": "37,164",
+    "TrainWindows": "182,710",
+    "ValWindows": "41,747",
     "TestCellsMIT": "21",
     "TestWindowsMIT": "17,513",
     "TestCellsRWTH": "6",
@@ -5913,8 +5915,8 @@
     "WilcoxonGroupwiseCloser": "6",
     "WilcoxonP": "0.0156",
     "WilcoxonPMin": "0.0156",
-    "WilcoxonNArch": "4",
-    "WilcoxonPairN": "24",
+    "WilcoxonNArch": "6",
+    "WilcoxonPairN": "36",
     "RwthRowsRaw": "114,716",
     "RwthDropFirstRows": "734",
     "RwthDropFirstPct": "0.64",
