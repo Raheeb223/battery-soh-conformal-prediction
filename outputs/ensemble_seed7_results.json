@@ -1,0 +1,39 @@
+{
+  "run_name": "ensemble_seed7",
+  "model_variant": "full",
+  "seed": 7,
+  "conformal_mode": "groupwise",
+  "calibration_predictor": "mc_mean",
+  "best_epoch": 87,
+  "best_val_loss": 0.0049969884084439566,
+  "test_mae": 0.02852741628885269,
+  "test_rmse": 0.10128077864646912,
+  "overall_coverage": 0.9025670003228932,
+  "per_dataset_mae": {
+    "BIT": 0.13587181270122528,
+    "CALCE": 0.08322664350271225,
+    "MIT": 0.01796567626297474,
+    "NASA": 0.11344770342111588,
+    "Oxford": 0.03625723719596863,
+    "RWTH": 0.019253192469477654,
+    "XJTU": 0.05665813386440277
+  },
+  "per_dataset_coverage": {
+    "BIT": 0.868421052631579,
+    "CALCE": 0.7356908494349252,
+    "MIT": 0.9173756637926112,
+    "NASA": 0.0,
+    "Oxford": 1.0,
+    "RWTH": 0.9085229808121374,
+    "XJTU": 0.9573896353166986
+  },
+  "dataset_signature": [
+    "BIT",
+    "CALCE",
+    "MIT",
+    "NASA",
+    "Oxford",
+    "RWTH",
+    "XJTU"
+  ]
+}

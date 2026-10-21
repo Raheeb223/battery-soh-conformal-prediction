@@ -618,6 +618,95 @@ def main():
             macro(f"SplitMeanDevGroupwise{d}", np.mean([dev("groupwise", s, d) for s in pm["groupwise"]]), "{:.1f}")
         macro("SplitPooledBITMax", max(pm["pooled"][s]["per_dataset_coverage"]["BIT"] for s in pm["pooled"]) * 100, "{:.1f}")
 
+    # Size of the groupwise gain per dataset, with paired cell-bootstrap intervals
+    # (pooled_vs_groupwise_bootstrap.py).
+    boot = load("pooled_vs_groupwise_bootstrap.json")
+    registry["sections"]["pooled_vs_groupwise_bootstrap"] = boot or UNVERIFIED
+    if boot:
+        bd = boot["per_dataset"]
+        for d, v in bd.items():
+            macro(f"BootGain{d}", v["mean_gain"], "{:.1f}")
+            if "mean_gain_ci" in v:
+                macro(f"BootGain{d}Lo", v["mean_gain_ci"][0], "{:.1f}")
+                macro(f"BootGain{d}Hi", v["mean_gain_ci"][1], "{:.1f}")
+        with_ci = [v for v in bd.values() if "mean_gain_ci" in v]
+        macro("BootDatasetsWithCI", len(with_ci), "{:d}")
+        macro("BootDatasetsCIAboveZero", sum(v["mean_gain_ci"][0] > 0 for v in with_ci), "{:d}")
+        macro("BootDatasetsTotal", len(bd), "{:d}")
+        macro("BootNBoot", boot["n_boot"], "{:,d}")
+    else:
+        macro("BootDatasetsCIAboveZero", None)
+
+    # Deep ensemble as a second source of uncertainty (deep_ensemble.py).
+    ens = load("deep_ensemble.json")
+    registry["sections"]["deep_ensemble"] = ens or UNVERIFIED
+    if ens:
+        macro("EnsNMembers", ens["n_members"], "{:d}")
+        for src, tag in (("deep_ensemble", "Ens"), ("mc_dropout", "Mc")):
+            r = ens[src]
+            macro(f"{tag}MAE", r["test_mae"], "{:.5f}")
+            for mode, mtag in (("raw_gaussian", "Raw"), ("pooled", "Pooled"), ("groupwise", "Groupwise"),
+                               ("normalized_groupwise", "NormGroupwise")):
+                m = r[mode]
+                macro(f"{tag}{mtag}Overall", m["overall_coverage"] * 100, "{:.1f}")
+                macro(f"{tag}{mtag}Width", m["mean_width"], "{:.4f}")
+                macro(f"{tag}{mtag}DevFive", m["mean_abs_dev_five"] * 100, "{:.2f}")
+                for d in ("MIT", "RWTH", "XJTU", "BIT", "CALCE", "Oxford"):
+                    macro(f"{tag}{mtag}{d}", m["per_dataset_coverage"][d] * 100, "{:.1f}")
+        e, mc = ens["deep_ensemble"], ens["mc_dropout"]
+        macro("EnsMaeVsMcPercent", (1 - e["test_mae"] / mc["test_mae"]) * 100, "{:.0f}")
+        macro("EnsGroupwiseWidthVsMcPercent",
+              (1 - e["groupwise"]["mean_width"] / mc["groupwise"]["mean_width"]) * 100, "{:.0f}")
+        macro("EnsMemberMAEMin", min(ens["member_test_mae"]), "{:.5f}")
+        macro("EnsMemberMAEMax", max(ens["member_test_mae"]), "{:.5f}")
+    else:
+        macro("EnsNMembers", None)
+
+    # Leave-one-dataset-out with calibration cells from the left-out dataset (lodo_target_calibration.py).
+    lt = load("lodo_target_calibration.json")
+    registry["sections"]["lodo_target_calibration"] = lt or UNVERIFIED
+    if lt:
+        pd_ = lt["per_dataset"]
+        for d, v in pd_.items():
+            macro(f"LodoT{d}Others", v["others"]["coverage"] * 100, "{:.1f}")
+            if v["own_val"] is not None:
+                macro(f"LodoT{d}OwnVal", v["own_val"]["coverage"] * 100, "{:.1f}")
+            macro(f"LodoT{d}OwnAll", v["own_all"]["coverage"] * 100, "{:.1f}")
+            macro(f"LodoT{d}AllWinOthers", v["all_windows_others_coverage"] * 100, "{:.1f}")
+            macro(f"LodoT{d}InTraining", v["in_training"]["coverage"] * 100, "{:.1f}")
+            macro(f"LodoT{d}WidthRatio", v["own_all"]["half_width_soh"] / v["in_training"]["half_width_soh"], "{:.1f}")
+            macro(f"LodoT{d}MaeRatio", v["lodo_test_mae_soh"] / v["in_training"]["test_mae_soh"], "{:.1f}")
+            macro(f"LodoT{d}PoolCells", v["n_pool_cells"], "{:d}")
+            macro(f"LodoT{d}TestCells", v["n_test_cells"], "{:d}")
+            if v.get("budget") is not None:
+                pb = v["budget"]["per_budget"]
+                if v["cells_needed"] is not None:
+                    macro(f"LodoT{d}CellsNeeded", v["cells_needed"], "{:d}")
+                macro(f"LodoT{d}OneCellPLow", pb["1"]["coverage_p05"] * 100, "{:.1f}")
+                macro(f"LodoT{d}OneCellMean", pb["1"]["coverage_mean"] * 100, "{:.1f}")
+                # The largest random subset below the full set of non-test cells.
+                sub = max(int(b) for b in pb if int(b) < v["budget"]["n_cells_available"])
+                macro(f"LodoT{d}MaxSubCells", sub, "{:d}")
+                macro(f"LodoT{d}MaxSubPLow", pb[str(sub)]["coverage_p05"] * 100, "{:.1f}")
+                macro(f"LodoT{d}MaxSubMean", pb[str(sub)]["coverage_mean"] * 100, "{:.1f}")
+            macro(f"LodoT{d}OwnValWidthRatio",
+                  v["own_val"]["half_width_soh"] / v["in_training"]["half_width_soh"] if v["own_val"] else None,
+                  "{:.1f}")
+        five = [d for d in ("MIT", "RWTH", "XJTU", "BIT", "CALCE") if d in pd_]
+        dev = lambda k: float(np.mean([abs(pd_[d][k]["coverage"] - 0.9) for d in five])) * 100  # noqa: E731
+        macro("LodoTDevOthers", dev("others"), "{:.2f}")
+        macro("LodoTDevOwnAll", dev("own_all"), "{:.2f}")
+        macro("LodoTDevOwnVal", dev("own_val"), "{:.2f}")
+        macro("LodoTDevInTraining", dev("in_training"), "{:.2f}")
+        ratios = [pd_[d]["own_val"]["half_width_soh"] / pd_[d]["in_training"]["half_width_soh"] for d in five]
+        macro("LodoTWidthRatioMin", min(ratios), "{:.1f}")
+        macro("LodoTWidthRatioMax", max(ratios), "{:.1f}")
+        macro("LodoTOwnValBeatsOthers", sum(abs(pd_[d]["own_val"]["coverage"] - 0.9)
+                                            < abs(pd_[d]["others"]["coverage"] - 0.9) for d in five), "{:d}")
+        macro("LodoTNFive", len(five), "{:d}")
+    else:
+        macro("LodoTDevOwnAll", None)
+
     # Strategy comparison replicated on splits 43-46 with every design frozen (split_replication.py).
     rep = load("split_replication.json")
     registry["sections"]["split_replication"] = rep or UNVERIFIED
@@ -735,9 +824,10 @@ def main():
         macro("FieldNSplits", len(field["splits"]), "{:d}")
         per = [field["per_split"][str(s)] for s in field["splits"]]
         main = per[0]
-        # Pooled vs groupwise (z-units), every dataset-split pair with test and validation windows.
+        # Pooled vs groupwise (z-units), EV1 and EV2 in every split. EV3 (a single test vehicle when
+        # it has one at all) is left out here as everywhere else in the field section.
         pairs = [(p["pooled_vs_groupwise"]["pooled"][d], p["pooled_vs_groupwise"]["groupwise"][d])
-                 for p in per for d in p["pooled_vs_groupwise"]["groupwise"]]
+                 for p in per for d in ("EV1", "EV2")]
         macro("FieldPairsTotal", len(pairs), "{:d}")
         macro("FieldPairsGroupwiseCloser", sum(abs(g - 0.9) < abs(q - 0.9) for q, g in pairs), "{:d}")
         macro("FieldMeanDevPooled", np.mean([abs(q - 0.9) for q, _ in pairs]) * 100, "{:.1f}")

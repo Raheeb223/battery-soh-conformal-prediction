@@ -4,7 +4,8 @@ Results figures for the manuscript, built from outputs/*.json.
   coverage_comparison           pooled vs. groupwise coverage per dataset (Section 5.1)
   calibration_size_sensitivity  coverage vs. calibration-cell budget (Section 5.3)
   cqr_comparison                CQR vs. groupwise calibration: coverage and width (Section 5.4)
-  repeated_split_variability    coverage across cell-level splits (Section 5.6)
+  field_check                   field check on the EVBattery fleet data (Section 5.6)
+  repeated_split_variability    coverage across cell-level splits (Section 5.7)
   mwhc_sensitivity              MWHC temperature sweep (Appendix B)
 
 Run from the repository root:  python figures/make_results_figures.py [--out DIR]
@@ -153,11 +154,77 @@ def mwhc_sensitivity(out):
     save(fig, out, "mwhc_sensitivity")
 
 
+def field_check(out):
+    field = output("field_check")
+    lab = field["lab_model_on_field"]
+    per = [field["per_split"][str(s)] for s in field["splits"]]
+    budget = field["budget"]["per_dataset"]
+    evs = ["EV1", "EV2"]
+
+    fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(TEXT_WIDTH, 2.3),
+                                        gridspec_kw={"width_ratios": [1, 1.45, 1.15]})
+    x = np.arange(len(evs))
+    w = 0.38
+    lp = [lab["lab_pooled_quantile"][d] * 100 for d in evs]
+    fo = [lab["field_own_quantile"][d] * 100 for d in evs]
+    ax1.bar(x - w / 2, lp, w, facecolor=LIGHT, edgecolor=INK, linewidth=0.6, label="lab quantile")
+    ax1.bar(x + w / 2, fo, w, facecolor=INK, edgecolor=INK, linewidth=0.6, label="field quantile")
+    bar_labels(ax1, x - w / 2, lp, fmt="{:.1f}", size=5.5)
+    bar_labels(ax1, x + w / 2, fo, fmt="{:.1f}", size=5.5)
+    target_line(ax1, label=False)
+    ax1.set_xticks(x, evs)
+    ax1.set_ylabel("Test coverage (%)")
+    ax1.set_ylim(0, 140)
+    ax1.set_yticks([0, 20, 40, 60, 80, 100])
+    ax1.set_title("(a) Laboratory model", loc="left", pad=4)
+    ax1.legend(loc="upper left", ncol=1, handlelength=1.2, borderaxespad=0.1)
+
+    # Field model: the marker is the main split, the bar the range over all vehicle-level splits.
+    methods = [("Pooled (z-units)", "^", "white",
+                lambda p, d: p["pooled_vs_groupwise"]["pooled"][d]),
+               ("Own data", "o", INK, lambda p, d: p["borrowing"]["per_dataset"][d]["own"]),
+               ("Other manufacturer", "s", "white",
+                lambda p, d: p["borrowing"]["per_dataset"][d]["others_pooled"])]
+    for i, (label, marker, face, get) in enumerate(methods):
+        xs = x + (i - 1) * 0.25
+        vals = np.array([[get(p, d) * 100 for p in per] for d in evs])
+        main = vals[:, 0]
+        ax2.errorbar(xs, main, yerr=[main - vals.min(1), vals.max(1) - main], fmt=marker,
+                     color=INK, markerfacecolor=face, ecolor=INK, elinewidth=0.8, capsize=2.5,
+                     label=label)
+    target_line(ax2, label=False)
+    ax2.set_xticks(x, evs)
+    ax2.set_xlim(-0.5, 1.5)
+    ax2.set_ylim(70, 100)
+    ax2.set_ylabel("Test coverage (%)")
+    ax2.set_title("(b) Field model", loc="left", pad=4)
+    ax2.legend(loc="lower right", ncol=1, handlelength=1.2, borderaxespad=0.1)
+
+    for d, marker, face, style in (("EV1", "o", INK, "-"), ("EV2", "s", "white", "--")):
+        pb = budget[d]["per_budget"]
+        b = sorted(int(k) for k in pb if int(k) < budget[d]["n_cells_available"])
+        ax3.plot(b, [pb[str(k)]["coverage_p05"] * 100 for k in b], marker=marker, linestyle=style,
+                 color=INK, markerfacecolor=face, label=d)
+    ax3.axhline(85, color=MID, linestyle=":", linewidth=1.0)
+    ax3.text(1, 85.8, "85% rule", fontsize=6.0, va="bottom", color=DARK)
+    ax3.set_xscale("log")
+    ax3.set_xticks([1, 3, 10], ["1", "3", "10"])
+    ax3.minorticks_off()
+    ax3.set_xlabel("Calibration vehicles")
+    ax3.set_ylabel("Worst 5% of draws (%)")
+    ax3.set_ylim(40, 100)
+    ax3.set_title("(c) Vehicles needed", loc="left", pad=4)
+    ax3.legend(loc="lower right")
+    fig.subplots_adjust(wspace=0.55)
+    save(fig, out, "field_check")
+
+
 if __name__ == "__main__":
     setup()
     out_dir = output_dir()
     coverage_comparison(out_dir)
     calibration_size_sensitivity(out_dir)
     cqr_comparison(out_dir)
+    field_check(out_dir)
     repeated_split_variability(out_dir)
     mwhc_sensitivity(out_dir)

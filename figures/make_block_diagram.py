@@ -116,7 +116,8 @@ pcx = LEFT + pred_w / 2
 text(pcx, top - 3.0, "Point predictor", size=FS_TITLE, weight="bold")
 text(pcx, top - 6.3, "multi-scale bidirectional LSTM, self-attention")
 text(pcx, top - 9.6, fr"centre $\hat{{y}}$: mean of {N['DeployMcDropoutSamples']} MC-Dropout passes,"
-                     "\nor one deterministic pass", size=FS_SMALL, style="italic")
+                     f"\none deterministic pass, or a {N['EnsNMembers']}-model deep ensemble",
+     size=FS_SMALL, style="italic")
 base_x = LEFT + pred_w + 2.5
 base_w = RIGHT - base_x
 rect(base_x, y, base_w, h, ls=(0, (3, 2)))
@@ -166,8 +167,8 @@ text(CX, top - 3.0, "Evaluation on test cells", size=FS_TITLE, weight="bold")
 cols = [
     ["per-dataset coverage and width",
      "calibration-cell budget sweep",
-     "leave-one-dataset-out (model level)"],
-    [f"{N['RepeatedSplitNSplits']} cell-level splits; cell bootstrap",
+     "leave-one-dataset-out, then target cells"],
+    [f"{N['RepeatedSplitNSplits']} cell-level splits; paired cell bootstrap",
      "point accuracy vs. persistence",
      "inference cost"],
 ]

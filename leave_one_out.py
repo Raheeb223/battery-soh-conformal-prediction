@@ -155,6 +155,16 @@ def run_lodo(held_out_dataset: str, model_variant="full", save_outputs=True, raw
     if len(X_train) == 0 or len(X_test) == 0:
         raise RuntimeError(f"[{run_name}] empty train or test set — check dataset name and windowing.")
 
+    model = train_lodo_model(data, run_name, model_variant, device)
+    return evaluate_lodo(model, data, run_name, held_out_dataset, model_variant, device, save_outputs)
+
+
+def train_lodo_model(data, run_name, model_variant="full", device=None):
+    """The LODO training loop: Adam on MSE with early stopping on the other datasets' validation
+    cells. lodo_target_calibration.py reuses it to retrain and save the LODO models."""
+    device = device or torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    X_train, y_train = data["X_train"], data["y_train"]
+    X_val, y_val = data["X_val"], data["y_val"]
     train_ds = TensorDataset(torch.tensor(X_train), torch.tensor(y_train))
     val_ds = TensorDataset(torch.tensor(X_val), torch.tensor(y_val))
     train_loader = DataLoader(train_ds, batch_size=config.BATCH_SIZE, shuffle=True)
@@ -198,6 +208,13 @@ def run_lodo(held_out_dataset: str, model_variant="full", save_outputs=True, raw
                 break
 
     model.load_state_dict(best_state)
+    return model
+
+
+def evaluate_lodo(model, data, run_name, held_out_dataset, model_variant, device, save_outputs):
+    X_val, y_val = data["X_val"], data["y_val"]
+    X_test, y_test = data["X_test"], data["y_test"]
+    held_out_soh_std = data["held_out_soh_std"]
 
     # simple pooled conformal here — the held-out dataset IS the only test
     # group, so per-group calibration would be identical to pooled anyway

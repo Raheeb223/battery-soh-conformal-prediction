@@ -91,6 +91,11 @@ python split_replication.py                # strategy comparison (hierarchical, 
                                            # on those splits with every design frozen (no retraining)
 python hgc_cp_validation_only.py           # HGC-CP with its design chosen on validation data only,
                                            # all five splits (no retraining)
+python pooled_vs_groupwise_bootstrap.py    # size of the groupwise gain per dataset, paired cell bootstrap
+python lodo_target_calibration.py          # leave-one-dataset-out models retrained and saved, then
+                                           # calibrated on cells of the left-out dataset
+python deep_ensemble.py                    # five-member deep ensemble (trains seeds 7 and 99), calibrated
+                                           # like the MC-Dropout model
 python field_check.py                      # field check on the EVBattery fleet data: builds the field
                                            # caches, trains one model per vehicle split, repeats the
                                            # main analyses, applies the laboratory model to the field

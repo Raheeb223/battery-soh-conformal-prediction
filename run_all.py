@@ -69,6 +69,12 @@ STEPS = [
      os.path.join(config.OUTPUT_DIR, "split_replication.json")),
     ("hgc_cp_validation_only", [sys.executable, "hgc_cp_validation_only.py"],
      os.path.join(config.OUTPUT_DIR, "hgc_cp_validation_only.json")),
+    ("pooled_vs_groupwise_bootstrap", [sys.executable, "pooled_vs_groupwise_bootstrap.py"],
+     os.path.join(config.OUTPUT_DIR, "pooled_vs_groupwise_bootstrap.json")),
+    ("lodo_target_calibration", [sys.executable, "lodo_target_calibration.py"],
+     os.path.join(config.OUTPUT_DIR, "lodo_target_calibration.json")),
+    ("deep_ensemble", [sys.executable, "deep_ensemble.py"],
+     os.path.join(config.OUTPUT_DIR, "deep_ensemble.json")),
     ("field_check", [sys.executable, "field_check.py"],
      os.path.join(config.OUTPUT_DIR, "field_check.json")),
     ("deterministic_predictor", [sys.executable, "deterministic_predictor_comparison.py"],
@@ -82,7 +88,8 @@ STEPS = [
 # Steps that train a model on the GPU and take non-trivial wall-clock time --
 # flagged so --execute without --only prints a warning before launching all
 # of them back to back.
-GPU_HEAVY = {"train", "experiments", "leave_one_out", "repeated_split", "train_cqr", "field_check"}
+GPU_HEAVY = {"train", "experiments", "leave_one_out", "repeated_split", "train_cqr", "field_check",
+             "lodo_target_calibration", "deep_ensemble"}
 
 
 def main():

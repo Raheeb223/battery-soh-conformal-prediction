@@ -89,6 +89,9 @@ listed there.
 | `mwhc_calibration.py` | MWHC and its temperature sweep |
 | `calibration_size_sensitivity.py` | coverage vs. number of calibration cells |
 | `leave_one_out.py` | each dataset withheld from training |
+| `lodo_target_calibration.py` | the withheld dataset calibrated on a few of its own cells, and how many are needed |
+| `deep_ensemble.py` | a five-member deep ensemble as a second source of uncertainty, calibrated with the same methods |
+| `pooled_vs_groupwise_bootstrap.py` | size of the groupwise gain on each dataset, with paired cell-bootstrap intervals |
 | `repeated_split_experiment.py` | further cell-level splits with the model seed fixed |
 | `split_replication.py` | the calibration-strategy comparison re-run on those splits with every design frozen; a held-out check of HGC-CP |
 | `hgc_cp_validation_only.py` | HGC-CP-val: HGC-CP with its whole design (representation, λ, β) chosen on validation data only, on all five splits |

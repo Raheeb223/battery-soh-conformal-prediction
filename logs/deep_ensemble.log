@@ -1,0 +1,213 @@
+[ensemble] member seed 42: test MAE 0.01960
+[ensemble] member seed 123: test MAE 0.02078
+[ensemble] member seed 2024: test MAE 0.01967
+[ensemble] training member ensemble_seed7
+[train:ensemble_seed7] using device: cuda
+[ensemble_seed7][epoch 001] train_loss=0.03200  val_loss=0.01374
+[ensemble_seed7][epoch 002] train_loss=0.02299  val_loss=0.00972
+[ensemble_seed7][epoch 003] train_loss=0.01998  val_loss=0.01046
+[ensemble_seed7][epoch 004] train_loss=0.01909  val_loss=0.01175
+[ensemble_seed7][epoch 005] train_loss=0.01865  val_loss=0.00966
+[ensemble_seed7][epoch 006] train_loss=0.01810  val_loss=0.00883
+[ensemble_seed7][epoch 007] train_loss=0.01757  val_loss=0.00884
+[ensemble_seed7][epoch 008] train_loss=0.01735  val_loss=0.00962
+[ensemble_seed7][epoch 009] train_loss=0.01693  val_loss=0.00916
+[ensemble_seed7][epoch 010] train_loss=0.01697  val_loss=0.00714
+[ensemble_seed7][epoch 011] train_loss=0.01685  val_loss=0.00736
+[ensemble_seed7][epoch 012] train_loss=0.01674  val_loss=0.00769
+[ensemble_seed7][epoch 013] train_loss=0.01650  val_loss=0.00730
+[ensemble_seed7][epoch 014] train_loss=0.01629  val_loss=0.00674
+[ensemble_seed7][epoch 015] train_loss=0.01633  val_loss=0.00686
+[ensemble_seed7][epoch 016] train_loss=0.01608  val_loss=0.00672
+[ensemble_seed7][epoch 017] train_loss=0.01613  val_loss=0.00718
+[ensemble_seed7][epoch 018] train_loss=0.01591  val_loss=0.00696
+[ensemble_seed7][epoch 019] train_loss=0.01576  val_loss=0.00656
+[ensemble_seed7][epoch 020] train_loss=0.01568  val_loss=0.00631
+[ensemble_seed7][epoch 021] train_loss=0.01569  val_loss=0.00636
+[ensemble_seed7][epoch 022] train_loss=0.01556  val_loss=0.00839
+[ensemble_seed7][epoch 023] train_loss=0.01536  val_loss=0.00717
+[ensemble_seed7][epoch 024] train_loss=0.01559  val_loss=0.00715
+[ensemble_seed7][epoch 025] train_loss=0.01534  val_loss=0.00687
+[ensemble_seed7][epoch 026] train_loss=0.01546  val_loss=0.00829
+[ensemble_seed7][epoch 027] train_loss=0.01522  val_loss=0.00669
+[ensemble_seed7][epoch 028] train_loss=0.01499  val_loss=0.00628
+[ensemble_seed7][epoch 029] train_loss=0.01488  val_loss=0.00686
+[ensemble_seed7][epoch 030] train_loss=0.01482  val_loss=0.00629
+[ensemble_seed7][epoch 031] train_loss=0.01476  val_loss=0.00609
+[ensemble_seed7][epoch 032] train_loss=0.01474  val_loss=0.00681
+[ensemble_seed7][epoch 033] train_loss=0.01484  val_loss=0.00633
+[ensemble_seed7][epoch 034] train_loss=0.01468  val_loss=0.00642
+[ensemble_seed7][epoch 035] train_loss=0.01480  val_loss=0.00700
+[ensemble_seed7][epoch 036] train_loss=0.01467  val_loss=0.00609
+[ensemble_seed7][epoch 037] train_loss=0.01448  val_loss=0.00690
+[ensemble_seed7][epoch 038] train_loss=0.01444  val_loss=0.00700
+[ensemble_seed7][epoch 039] train_loss=0.01461  val_loss=0.00657
+[ensemble_seed7][epoch 040] train_loss=0.01455  val_loss=0.00571
+[ensemble_seed7][epoch 041] train_loss=0.01432  val_loss=0.00607
+[ensemble_seed7][epoch 042] train_loss=0.01434  val_loss=0.00792
+[ensemble_seed7][epoch 043] train_loss=0.01431  val_loss=0.00609
+[ensemble_seed7][epoch 044] train_loss=0.01433  val_loss=0.00593
+[ensemble_seed7][epoch 045] train_loss=0.01418  val_loss=0.00766
+[ensemble_seed7][epoch 046] train_loss=0.01425  val_loss=0.00634
+[ensemble_seed7][epoch 047] train_loss=0.01415  val_loss=0.00584
+[ensemble_seed7][epoch 048] train_loss=0.01410  val_loss=0.00611
+[ensemble_seed7][epoch 049] train_loss=0.01410  val_loss=0.00697
+[ensemble_seed7][epoch 050] train_loss=0.01409  val_loss=0.00564
+[ensemble_seed7][epoch 051] train_loss=0.01430  val_loss=0.00596
+[ensemble_seed7][epoch 052] train_loss=0.01387  val_loss=0.00662
+[ensemble_seed7][epoch 053] train_loss=0.01403  val_loss=0.00666
+[ensemble_seed7][epoch 054] train_loss=0.01395  val_loss=0.00595
+[ensemble_seed7][epoch 055] train_loss=0.01393  val_loss=0.00609
+[ensemble_seed7][epoch 056] train_loss=0.01377  val_loss=0.00607
+[ensemble_seed7][epoch 057] train_loss=0.01408  val_loss=0.00549
+[ensemble_seed7][epoch 058] train_loss=0.01368  val_loss=0.00576
+[ensemble_seed7][epoch 059] train_loss=0.01372  val_loss=0.00535
+[ensemble_seed7][epoch 060] train_loss=0.01381  val_loss=0.00561
+[ensemble_seed7][epoch 061] train_loss=0.01390  val_loss=0.00648
+[ensemble_seed7][epoch 062] train_loss=0.01372  val_loss=0.00669
+[ensemble_seed7][epoch 063] train_loss=0.01360  val_loss=0.00578
+[ensemble_seed7][epoch 064] train_loss=0.01364  val_loss=0.00549
+[ensemble_seed7][epoch 065] train_loss=0.01360  val_loss=0.00699
+[ensemble_seed7][epoch 066] train_loss=0.01386  val_loss=0.00528
+[ensemble_seed7][epoch 067] train_loss=0.01364  val_loss=0.00581
+[ensemble_seed7][epoch 068] train_loss=0.01375  val_loss=0.00508
+[ensemble_seed7][epoch 069] train_loss=0.01345  val_loss=0.00554
+[ensemble_seed7][epoch 070] train_loss=0.01350  val_loss=0.00584
+[ensemble_seed7][epoch 071] train_loss=0.01349  val_loss=0.00560
+[ensemble_seed7][epoch 072] train_loss=0.01362  val_loss=0.00502
+[ensemble_seed7][epoch 073] train_loss=0.01363  val_loss=0.00540
+[ensemble_seed7][epoch 074] train_loss=0.01341  val_loss=0.00548
+[ensemble_seed7][epoch 075] train_loss=0.01367  val_loss=0.00533
+[ensemble_seed7][epoch 076] train_loss=0.01332  val_loss=0.00568
+[ensemble_seed7][epoch 077] train_loss=0.01349  val_loss=0.00525
+[ensemble_seed7][epoch 078] train_loss=0.01343  val_loss=0.00550
+[ensemble_seed7][epoch 079] train_loss=0.01342  val_loss=0.00581
+[ensemble_seed7][epoch 080] train_loss=0.01343  val_loss=0.00535
+[ensemble_seed7][epoch 081] train_loss=0.01330  val_loss=0.00521
+[ensemble_seed7][epoch 082] train_loss=0.01322  val_loss=0.00571
+[ensemble_seed7][epoch 083] train_loss=0.01328  val_loss=0.00586
+[ensemble_seed7][epoch 084] train_loss=0.01327  val_loss=0.00524
+[ensemble_seed7][epoch 085] train_loss=0.01315  val_loss=0.00528
+[ensemble_seed7][epoch 086] train_loss=0.01336  val_loss=0.00541
+[ensemble_seed7][epoch 087] train_loss=0.01325  val_loss=0.00500
+[ensemble_seed7][epoch 088] train_loss=0.01319  val_loss=0.00533
+[ensemble_seed7][epoch 089] train_loss=0.01323  val_loss=0.00504
+[ensemble_seed7][epoch 090] train_loss=0.01321  val_loss=0.00577
+[ensemble_seed7][epoch 091] train_loss=0.01311  val_loss=0.00536
+[ensemble_seed7][epoch 092] train_loss=0.01325  val_loss=0.00524
+[ensemble_seed7][epoch 093] train_loss=0.01303  val_loss=0.00513
+[ensemble_seed7][epoch 094] train_loss=0.01343  val_loss=0.00559
+[ensemble_seed7][epoch 095] train_loss=0.01318  val_loss=0.00542
+[ensemble_seed7][epoch 096] train_loss=0.01321  val_loss=0.00657
+[ensemble_seed7][epoch 097] train_loss=0.01326  val_loss=0.00524
+[ensemble_seed7][epoch 098] train_loss=0.01303  val_loss=0.00540
+[ensemble_seed7][epoch 099] train_loss=0.01315  val_loss=0.00579
+[ensemble_seed7][epoch 100] train_loss=0.01298  val_loss=0.00506
+
+[ensemble_seed7][test] overall MAE=0.02853  RMSE=0.10128
+[ensemble_seed7][test] overall coverage @ 90% target: 90.26%
+  BIT: MAE=0.13587  coverage=86.84%
+  CALCE: MAE=0.08323  coverage=73.57%
+  MIT: MAE=0.01797  coverage=91.74%
+  NASA: MAE=0.11345  coverage=0.00%
+  Oxford: MAE=0.03626  coverage=100.00%
+  RWTH: MAE=0.01925  coverage=90.85%
+  XJTU: MAE=0.05666  coverage=95.74%
+[ensemble] member seed 7: test MAE 0.02439
+[ensemble] training member ensemble_seed99
+[train:ensemble_seed99] using device: cuda
+[ensemble_seed99][epoch 001] train_loss=0.03310  val_loss=0.01458
+[ensemble_seed99][epoch 002] train_loss=0.02394  val_loss=0.01265
+[ensemble_seed99][epoch 003] train_loss=0.02112  val_loss=0.00868
+[ensemble_seed99][epoch 004] train_loss=0.01928  val_loss=0.00824
+[ensemble_seed99][epoch 005] train_loss=0.01838  val_loss=0.00851
+[ensemble_seed99][epoch 006] train_loss=0.01763  val_loss=0.00789
+[ensemble_seed99][epoch 007] train_loss=0.01727  val_loss=0.00750
+[ensemble_seed99][epoch 008] train_loss=0.01693  val_loss=0.00715
+[ensemble_seed99][epoch 009] train_loss=0.01679  val_loss=0.00729
+[ensemble_seed99][epoch 010] train_loss=0.01630  val_loss=0.00718
+[ensemble_seed99][epoch 011] train_loss=0.01604  val_loss=0.00719
+[ensemble_seed99][epoch 012] train_loss=0.01588  val_loss=0.01019
+[ensemble_seed99][epoch 013] train_loss=0.01571  val_loss=0.00713
+[ensemble_seed99][epoch 014] train_loss=0.01582  val_loss=0.00769
+[ensemble_seed99][epoch 015] train_loss=0.01558  val_loss=0.00816
+[ensemble_seed99][epoch 016] train_loss=0.01548  val_loss=0.00670
+[ensemble_seed99][epoch 017] train_loss=0.01526  val_loss=0.00647
+[ensemble_seed99][epoch 018] train_loss=0.01516  val_loss=0.00688
+[ensemble_seed99][epoch 019] train_loss=0.01528  val_loss=0.00702
+[ensemble_seed99][epoch 020] train_loss=0.01499  val_loss=0.00626
+[ensemble_seed99][epoch 021] train_loss=0.01476  val_loss=0.00731
+[ensemble_seed99][epoch 022] train_loss=0.01489  val_loss=0.00685
+[ensemble_seed99][epoch 023] train_loss=0.01454  val_loss=0.00715
+[ensemble_seed99][epoch 024] train_loss=0.01444  val_loss=0.00639
+[ensemble_seed99][epoch 025] train_loss=0.01449  val_loss=0.00697
+[ensemble_seed99][epoch 026] train_loss=0.01446  val_loss=0.00642
+[ensemble_seed99][epoch 027] train_loss=0.01444  val_loss=0.00602
+[ensemble_seed99][epoch 028] train_loss=0.01440  val_loss=0.00619
+[ensemble_seed99][epoch 029] train_loss=0.01430  val_loss=0.00671
+[ensemble_seed99][epoch 030] train_loss=0.01416  val_loss=0.00718
+[ensemble_seed99][epoch 031] train_loss=0.01391  val_loss=0.00708
+[ensemble_seed99][epoch 032] train_loss=0.01391  val_loss=0.00671
+[ensemble_seed99][epoch 033] train_loss=0.01388  val_loss=0.00579
+[ensemble_seed99][epoch 034] train_loss=0.01379  val_loss=0.00608
+[ensemble_seed99][epoch 035] train_loss=0.01376  val_loss=0.00645
+[ensemble_seed99][epoch 036] train_loss=0.01371  val_loss=0.00667
+[ensemble_seed99][epoch 037] train_loss=0.01373  val_loss=0.00632
+[ensemble_seed99][epoch 038] train_loss=0.01364  val_loss=0.00742
+[ensemble_seed99][epoch 039] train_loss=0.01361  val_loss=0.00657
+[ensemble_seed99][epoch 040] train_loss=0.01351  val_loss=0.00755
+[ensemble_seed99][epoch 041] train_loss=0.01364  val_loss=0.00553
+[ensemble_seed99][epoch 042] train_loss=0.01351  val_loss=0.00616
+[ensemble_seed99][epoch 043] train_loss=0.01346  val_loss=0.00564
+[ensemble_seed99][epoch 044] train_loss=0.01337  val_loss=0.00784
+[ensemble_seed99][epoch 045] train_loss=0.01338  val_loss=0.00691
+[ensemble_seed99][epoch 046] train_loss=0.01344  val_loss=0.00657
+[ensemble_seed99][epoch 047] train_loss=0.01346  val_loss=0.00558
+[ensemble_seed99][epoch 048] train_loss=0.01329  val_loss=0.00580
+[ensemble_seed99][epoch 049] train_loss=0.01327  val_loss=0.00600
+[ensemble_seed99][epoch 050] train_loss=0.01327  val_loss=0.00576
+[ensemble_seed99][epoch 051] train_loss=0.01321  val_loss=0.00541
+[ensemble_seed99][epoch 052] train_loss=0.01334  val_loss=0.00563
+[ensemble_seed99][epoch 053] train_loss=0.01309  val_loss=0.00528
+[ensemble_seed99][epoch 054] train_loss=0.01311  val_loss=0.00557
+[ensemble_seed99][epoch 055] train_loss=0.01325  val_loss=0.00584
+[ensemble_seed99][epoch 056] train_loss=0.01303  val_loss=0.00558
+[ensemble_seed99][epoch 057] train_loss=0.01311  val_loss=0.00544
+[ensemble_seed99][epoch 058] train_loss=0.01297  val_loss=0.00568
+[ensemble_seed99][epoch 059] train_loss=0.01285  val_loss=0.00578
+[ensemble_seed99][epoch 060] train_loss=0.01301  val_loss=0.00608
+[ensemble_seed99][epoch 061] train_loss=0.01291  val_loss=0.00605
+[ensemble_seed99][epoch 062] train_loss=0.01319  val_loss=0.00567
+[ensemble_seed99][epoch 063] train_loss=0.01286  val_loss=0.00568
+[ensemble_seed99][epoch 064] train_loss=0.01296  val_loss=0.00614
+[ensemble_seed99][epoch 065] train_loss=0.01288  val_loss=0.00562
+[ensemble_seed99][epoch 066] train_loss=0.01280  val_loss=0.00585
+[ensemble_seed99][epoch 067] train_loss=0.01282  val_loss=0.00623
+[ensemble_seed99][epoch 068] train_loss=0.01291  val_loss=0.00538
+[ensemble_seed99] early stopping at epoch 68 (best val_loss=0.00528)
+
+[ensemble_seed99][test] overall MAE=0.02778  RMSE=0.10279
+[ensemble_seed99][test] overall coverage @ 90% target: 90.12%
+  BIT: MAE=0.15536  coverage=86.84%
+  CALCE: MAE=0.08410  coverage=75.50%
+  MIT: MAE=0.01670  coverage=92.05%
+  NASA: MAE=0.09012  coverage=66.67%
+  Oxford: MAE=0.03477  coverage=100.00%
+  RWTH: MAE=0.01905  coverage=90.18%
+  XJTU: MAE=0.04873  coverage=93.13%
+[ensemble] member seed 99: test MAE 0.02378
+
+deep_ensemble: test MAE 0.01635
+  raw_gaussian          overall  86.2  width 0.0448  dev5 14.34  | MIT  91.7  RWTH  89.5  XJTU  72.3  BIT  77.7  CALCE  50.5  Oxford  60.7
+  pooled                overall  89.9  width 0.0474  dev5 26.50  | MIT  97.3  RWTH  97.2  XJTU  58.8  BIT  42.9  CALCE  50.3  Oxford  57.1
+  groupwise             overall  89.7  width 0.0573  dev5  5.08  | MIT  91.8  RWTH  89.8  XJTU  93.4  BIT  86.3  CALCE  73.6  Oxford 100.0
+  normalized_groupwise  overall  90.2  width 0.0669  dev5  2.25  | MIT  91.3  RWTH  90.4  XJTU  90.5  BIT  90.2  CALCE  81.2  Oxford  98.2
+
+mc_dropout: test MAE 0.02479
+  raw_gaussian          overall  96.7  width 0.2446  dev5  9.77  | MIT  99.8  RWTH  99.5  XJTU  88.9  BIT  75.1  CALCE  76.4  Oxford  94.6
+  pooled                overall  89.9  width 0.0847  dev5 19.85  | MIT  94.9  RWTH  94.9  XJTU  73.1  BIT  44.2  CALCE  63.2  Oxford  82.1
+  groupwise             overall  90.4  width 0.0968  dev5  4.43  | MIT  92.2  RWTH  90.7  XJTU  93.0  BIT  88.1  CALCE  75.6  Oxford 100.0
+  normalized_groupwise  overall  89.7  width 0.1133  dev5  3.68  | MIT  92.0  RWTH  89.6  XJTU  89.9  BIT  88.1  CALCE  76.0  Oxford  98.2
+
+saved C:\Users\User\PycharmProjects\outputs\deep_ensemble.json
+deep_ensemble exit=0
