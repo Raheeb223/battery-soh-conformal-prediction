@@ -1,170 +1,98 @@
 """
 Graphical abstract (submitted as a separate file, in colour; not part of the manuscript body).
 
-Six panels: seven real sources; data-quality corrections; the predictor; pooled vs. groupwise
-coverage (values from results_registry.json); leave-one-dataset-out; registry-based reporting.
+Three panels, all values from results_registry.json: coverage of a pooled vs. a groupwise quantile
+per dataset; borrowing from other datasets vs. own-data calibration; and calibration of new data
+(a dataset left out of training, and field vehicles) on other data vs. on its own data.
+Landscape, as Elsevier asks for graphical abstracts (at least 1328 x 531 px).
 
 Run from the repository root:  python figures/make_graphical_abstract.py [--out DIR]
 """
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.patches import FancyBboxPatch, Circle, FancyArrowPatch, Rectangle
 
-from style import number, output_dir, registry_values, save
+from style import DATASETS, number, output_dir, registry_values, save, setup
 
 OUT = output_dir()
 V = registry_values()
+setup()
+plt.rcParams["font.size"] = 9
 
-plt.rcParams["font.size"] = 8
+BAD = "#C44E52"
+GOOD = "#4C72B0"
+NEUTRAL = "#8c8c8c"
 
-fig = plt.figure(figsize=(13, 8.5))
-
-COLORS = {
-    "nasa": "#4C72B0", "calce": "#DD8452", "oxford": "#55A868", "mit": "#C44E52",
-    "bit": "#8172B2", "xjtu": "#937860", "rwth": "#CCB974",
-    "good": "#55A868", "bad": "#C44E52",
-}
-
-
-def panel_frame(ax, number, title):
-    ax.set_xlim(0, 10)
-    ax.set_ylim(0, 10)
-    ax.axis("off")
-    ax.add_patch(Rectangle((0, 0), 10, 10, fill=False, edgecolor="black", linewidth=1.3, zorder=1))
-    ax.add_patch(Circle((0.5, 9.3), 0.36, facecolor="black", edgecolor="none", zorder=5))
-    ax.text(0.5, 9.3, str(number), ha="center", va="center", color="white",
-            fontsize=10.5, fontweight="bold", zorder=6)
-    ax.text(1.15, 9.3, title, ha="left", va="center", fontsize=8.8, fontweight="bold", zorder=5)
+fig, axes = plt.subplots(1, 3, figsize=(13, 4.6), gridspec_kw={"width_ratios": [1.35, 1, 1]})
+fig.suptitle(f"How far does calibrated uncertainty for battery SOH transfer? "
+             f"Seven public datasets ({V['TotalCellsLoaded']} cells) and "
+             f"{V['FieldVehiclesTotal']} electric vehicles", fontsize=11.5, fontweight="bold", y=0.99)
 
 
-# ------------------------------------------------------------------
-# Panel 1: seven heterogeneous real-world sources
-# ------------------------------------------------------------------
-ax1 = fig.add_subplot(2, 3, 1)
-panel_frame(ax1, 1, "Seven real sources,\none shared problem")
-labels = ["NASA", "CALCE", "Oxford", "MIT", "BIT", "XJTU", "RWTH"]
-colors = [COLORS[k] for k in ["nasa", "calce", "oxford", "mit", "bit", "xjtu", "rwth"]]
-positions = [(1.1, 7.0), (2.9, 7.7), (4.7, 7.0), (6.5, 7.7), (8.3, 7.0), (2.0, 5.3), (7.4, 5.3)]
-for (x, y), c, lab in zip(positions, colors, labels):
-    ax1.add_patch(FancyBboxPatch((x - 0.68, y - 0.42), 1.36, 0.84, boxstyle="round,pad=0.06",
-                                  facecolor=c, edgecolor="black", linewidth=0.8))
-    ax1.text(x, y, lab, ha="center", va="center", fontsize=6.8, color="white", fontweight="bold")
-    ax1.add_patch(FancyArrowPatch((x, y - 0.45), (5.0, 2.3), arrowstyle="-|>",
-                                   color=c, linewidth=1.0, alpha=0.75,
-                                   connectionstyle="arc3,rad=0.08", zorder=2))
-ax1.add_patch(FancyBboxPatch((3.6, 1.4), 2.8, 1.1, boxstyle="round,pad=0.1",
-                              facecolor="white", edgecolor="black", linewidth=1.3, zorder=4))
-ax1.text(5.0, 1.95, f"{V['TotalCellsLoaded']} cells\n7 research groups", ha="center", va="center",
-         fontsize=7, zorder=5)
+def target(ax):
+    ax.axhline(90, color="black", linestyle=(0, (4, 2)), linewidth=0.9, zorder=1, label="90% target")
 
-# ------------------------------------------------------------------
-# Panel 2: hidden data-quality defects, found and fixed
-# ------------------------------------------------------------------
-ax2 = fig.add_subplot(2, 3, 2)
-panel_frame(ax2, 2, "Hidden defects,\nfound and fixed")
-cyc = np.linspace(0, 10, 60)
-true_curve = 6.8 - 0.35 * cyc
-broken = true_curve.copy()
-broken[20:30] += np.linspace(0, 2.3, 10)
-ax2.plot(cyc, broken, color=COLORS["bad"], linewidth=1.6, label="raw (uncorrected)", zorder=3)
-ax2.plot(cyc, true_curve, color=COLORS["good"], linewidth=1.8, linestyle="--", label="corrected", zorder=3)
-peak_idx = 25
-ax2.add_patch(Circle((cyc[peak_idx], broken[peak_idx]), 0.75, fill=False, edgecolor="black",
-                      linewidth=1.2, linestyle=":", zorder=4))
-ax2.annotate("cumulative-counter\nartifact (CALCE)", xy=(cyc[peak_idx], broken[peak_idx]),
-             xytext=(6.8, 6.0), fontsize=6.6, ha="left",
-             arrowprops=dict(arrowstyle="-", color="black", linewidth=0.7), zorder=4)
-ax2.legend(loc="lower left", fontsize=6.3, frameon=False, bbox_to_anchor=(0.0, 0.12))
-ax2.text(5.0, 0.6, "Re-verified against raw files\nfor 3 of 7 datasets", fontsize=6.6, ha="center")
 
-# ------------------------------------------------------------------
-# Panel 3: model + uncertainty
-# ------------------------------------------------------------------
-ax3 = fig.add_subplot(2, 3, 3)
-panel_frame(ax3, 3, "Multi-scale BiLSTM +\nattention + MC-Dropout")
-layer_x = [1.4, 3.0, 4.6, 6.2]
-layer_labels = ["input\nwindow\n(20 cyc.)", "BiLSTM\n(fine)", "BiLSTM\n(coarse)", "attention\n+ MLP"]
-for x, lab in zip(layer_x, layer_labels):
-    ax3.add_patch(FancyBboxPatch((x - 0.58, 4.3), 1.16, 2.1, boxstyle="round,pad=0.06",
-                                  facecolor="#DCE6F1", edgecolor="black", linewidth=0.9, zorder=3))
-    ax3.text(x, 5.35, lab, ha="center", va="center", fontsize=6.2)
-for i in range(len(layer_x) - 1):
-    ax3.add_patch(FancyArrowPatch((layer_x[i] + 0.62, 5.35), (layer_x[i + 1] - 0.62, 5.35),
-                                   arrowstyle="-|>", color="black", linewidth=0.9, zorder=2))
-ax3.add_patch(FancyArrowPatch((6.8, 5.35), (7.7, 5.35), arrowstyle="-|>", color="black", linewidth=0.9))
-x_un = np.linspace(7.9, 9.3, 20)
-y_mean = np.full_like(x_un, 2.6)
-y_band = 0.5 + 0.2 * np.sin(np.linspace(0, 3, 20))
-ax3.fill_between(x_un, y_mean - y_band, y_mean + y_band, color=COLORS["mit"], alpha=0.25, zorder=2)
-ax3.plot(x_un, y_mean, color=COLORS["mit"], linewidth=1.3, zorder=3)
-ax3.text(8.6, 1.5, "$\\hat{y}$ +/- MC-Dropout\nuncertainty", ha="center", fontsize=6.4)
+def labels(ax, xs, vals, fmt="{:.0f}"):
+    for x, v in zip(xs, vals):
+        ax.text(x, v + 1.5, fmt.format(v), ha="center", va="bottom", fontsize=7.5)
 
-# ------------------------------------------------------------------
-# Panel 4: calibration across heterogeneity
-# ------------------------------------------------------------------
-ax4 = fig.add_subplot(2, 3, 4)
-panel_frame(ax4, 4, "One interval width does\nnot fit all datasets")
-ds = ["MIT", "RWTH", "XJTU", "BIT", "CALCE"]
-pooled_cov = [number(V, f"PooledCoverage{d}") for d in ds]
-group_cov = [number(V, f"Coverage{d}") for d in ds]
-bar_w = 0.62
-x0 = 1.4
-gap = 1.75
-scale = 5.6
-for i, (d, pc, gc) in enumerate(zip(ds, pooled_cov, group_cov)):
-    xc = x0 + i * gap
-    ax4.bar(xc - bar_w / 2, pc / 100 * scale, width=bar_w, bottom=1.2, color=COLORS["bad"], zorder=3)
-    ax4.bar(xc + bar_w / 2, gc / 100 * scale, width=bar_w, bottom=1.2, color=COLORS["good"], zorder=3)
-    ax4.text(xc, 0.75, d, ha="center", fontsize=6.6)
-target_y = 1.2 + 0.9 * scale
-ax4.plot([0.5, 9.5], [target_y, target_y], color="black", linewidth=1.0, linestyle="--", zorder=4)
-ax4.text(9.5, target_y + 0.2, "90% target", fontsize=6.2, ha="right", va="bottom")
-ax4.add_patch(Rectangle((1.2, 7.75), 0.45, 0.3, facecolor=COLORS["bad"]))
-ax4.text(1.8, 7.9, "pooled", fontsize=6.3, va="center")
-ax4.add_patch(Rectangle((3.4, 7.75), 0.45, 0.3, facecolor=COLORS["good"]))
-ax4.text(4.0, 7.9, "groupwise", fontsize=6.3, va="center")
 
-# ------------------------------------------------------------------
-# Panel 5: the real test -- leave-one-dataset-out
-# ------------------------------------------------------------------
-ax5 = fig.add_subplot(2, 3, 5)
-panel_frame(ax5, 5, "The real test: a source\nnever seen in training")
-row1 = [(1.3, 7.3), (3.1, 7.3), (4.9, 7.3), (6.7, 7.3), (8.5, 7.3)]
-for (x, y), c, lab in zip(row1, colors[:5], labels[:5]):
-    ax5.add_patch(FancyBboxPatch((x - 0.65, y - 0.4), 1.3, 0.8, boxstyle="round,pad=0.05",
-                                  facecolor=c, edgecolor="black", linewidth=0.7, zorder=3))
-    ax5.text(x, y, lab, ha="center", va="center", fontsize=6.2, color="white")
-ax5.add_patch(FancyBboxPatch((1.3 - 0.65, 5.9 - 0.4), 1.3, 0.8, boxstyle="round,pad=0.05",
-                              facecolor=colors[5], edgecolor="black", linewidth=0.7, zorder=3))
-ax5.text(1.3, 5.9, labels[5], ha="center", va="center", fontsize=6.2, color="white")
-hx, hy = 3.4, 5.9
-ax5.add_patch(FancyBboxPatch((hx - 0.7, hy - 0.42), 1.4, 0.84, boxstyle="round,pad=0.06",
-                              facecolor="white", edgecolor=COLORS["rwth"], linewidth=2.2,
-                              linestyle="--", zorder=3))
-ax5.text(hx, hy, "RWTH\n(held out)", ha="center", va="center", fontsize=6.3, fontweight="bold")
-ax5.add_patch(FancyArrowPatch((hx, hy - 0.5), (5.0, 2.6), arrowstyle="-|>",
-                               color=COLORS["rwth"], linewidth=1.3, linestyle="--", zorder=2))
-ax5.add_patch(FancyBboxPatch((3.3, 1.6), 3.4, 1.15, boxstyle="round,pad=0.1",
-                              facecolor="white", edgecolor="black", linewidth=1.2, zorder=4))
-ax5.text(5.0, 2.18, "trained on the other 6 --\nnever sees RWTH's\ndistribution at all", ha="center",
-         va="center", fontsize=6.4, zorder=5)
+# (a) Pooled vs. groupwise coverage per dataset
+ax = axes[0]
+x = np.arange(len(DATASETS))
+w = 0.38
+pooled = [number(V, f"PooledCoverage{d}") for d in DATASETS]
+group = [number(V, f"Coverage{d}") for d in DATASETS]
+ax.bar(x - w / 2, pooled, w, color=BAD, label="One pooled quantile")
+ax.bar(x + w / 2, group, w, color=GOOD, label="Each dataset on its own cells")
+labels(ax, x - w / 2, pooled)
+labels(ax, x + w / 2, group)
+ax.set_xticks(x, DATASETS)
+ax.set_ylim(0, 118)
+ax.set_xlim(-0.6, len(DATASETS) - 0.4)
+ax.set_ylabel("Test coverage (%)")
+target(ax)
+ax.legend(loc="upper left", ncol=3, fontsize=8)
+ax.set_title("(a) A pooled quantile looks right overall\nbut fails on individual datasets",
+             fontsize=10, loc="left")
 
-# ------------------------------------------------------------------
-# Panel 6: one registry for every number
-# ------------------------------------------------------------------
-ax6 = fig.add_subplot(2, 3, 6)
-panel_frame(ax6, 6, "Report every number\nfrom the same registry")
-ax6.text(5, 7.5, "results_registry.json", ha="center", fontsize=8, fontweight="bold",
-         family="monospace")
-ax6.add_patch(FancyArrowPatch((5, 7.1), (5, 6.2), arrowstyle="-|>", color="black", linewidth=1.1))
-ax6.text(5, 5.6, "numbers.tex", ha="center", fontsize=7.6, family="monospace")
-ax6.add_patch(FancyArrowPatch((5, 5.2), (5, 4.3), arrowstyle="-|>", color="black", linewidth=1.1))
-ax6.add_patch(FancyBboxPatch((1.0, 1.1), 8.0, 3.0, boxstyle="round,pad=0.12",
-                              facecolor="#FBEEEE", edgecolor="black", linewidth=1.0))
-ax6.text(5.0, 2.6,
-         "Where the model falls short -- does not\nbeat persistence on MIT/RWTH, HGC-CP\ncannot "
-         "generalize with one setting --\nis reported, not hidden.",
-         ha="center", va="center", fontsize=6.8)
+# (b) Borrowing vs. own data, averaged over five cell-level splits
+ax = axes[1]
+rows = [("Own cells only", "BvOwnDevMean", GOOD),
+        ("Shrinkage, linear scale", "BvHierLinDevMean", BAD),
+        ("Bayesian, log scale", "BvBayesLogDevMean", NEUTRAL),
+        ("Best method without\nown cells", "BvPriorNoiseDevMean", BAD)]
+y = np.arange(len(rows))[::-1]
+vals = [number(V, k) for _, k, _ in rows]
+ax.barh(y, vals, color=[c for *_, c in rows], height=0.6)
+for yi, v in zip(y, vals):
+    ax.text(v + 0.3, yi, f"{v:.1f}", va="center", fontsize=8)
+ax.set_yticks(y, [r[0] for r in rows])
+ax.set_xlabel("Distance of coverage from 90% (points),\nmean over 5 splits")
+ax.set_xlim(0, max(vals) * 1.25)
+ax.set_title("(b) Borrowing from other datasets\ndoes not beat own data", fontsize=10, loc="left")
 
-plt.tight_layout(pad=1.0, w_pad=1.5, h_pad=1.5)
+# (c) New data: calibrated on other data vs. on its own data
+ax = axes[2]
+cases = [("BIT\n(left out)", "LodoTBITOthers", "LodoTBITOwnVal"),
+         ("XJTU\n(left out)", "LodoTXJTUOthers", "LodoTXJTUOwnVal"),
+         ("EV fleet 1", "FieldLabPooledEvOne", "FieldLabOwnEvOne"),
+         ("EV fleet 2", "FieldLabPooledEvTwo", "FieldLabOwnEvTwo")]
+x = np.arange(len(cases))
+other = [number(V, a) for _, a, _ in cases]
+own = [number(V, b) for *_, b in cases]
+ax.bar(x - w / 2, other, w, color=BAD, label="Calibrated on other data")
+ax.bar(x + w / 2, own, w, color=GOOD, label="Calibrated on its own data")
+labels(ax, x - w / 2, other)
+labels(ax, x + w / 2, own)
+ax.set_xticks(x, [c[0] for c in cases])
+ax.set_ylim(0, 118)
+ax.set_xlim(-0.6, len(cases) - 0.4)
+ax.set_ylabel("Test coverage (%)")
+target(ax)
+ax.legend(loc="upper left", ncol=2, fontsize=8)
+ax.set_title("(c) New datasets and field data need\ncalibration data of their own", fontsize=10,
+             loc="left")
+
+fig.tight_layout(rect=(0, 0, 1, 0.97), w_pad=2.5)
 save(fig, OUT, "graphical_abstract")
