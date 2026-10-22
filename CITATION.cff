@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this code, please cite it as below."
-title: "How Far Does Calibrated Uncertainty Transfer Across Battery Datasets? An Empirical Study of Conformal Calibration for State-of-Health Prediction on Seven Public Datasets"
+title: "How Far Does Calibrated Uncertainty Transfer Across Battery Datasets? Conformal Calibration of State-of-Health Prediction on Seven Laboratory Datasets and an Electric-Vehicle Fleet"
 type: software
 authors:
   - given-names: "Raheeb"

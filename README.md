@@ -5,8 +5,8 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 Code and results for the paper *How Far Does Calibrated Uncertainty Transfer Across Battery
-Datasets? An Empirical Study of Conformal Calibration for State-of-Health Prediction on Seven Public
-Datasets* (R. Sadman, submitted to the *Journal of Energy Storage*).
+Datasets? Conformal Calibration of State-of-Health Prediction on Seven Laboratory Datasets and an
+Electric-Vehicle Fleet* (R. Sadman, submitted to the *Journal of Energy Storage*).
 
 The study trains one state-of-health (SOH) predictor on seven public lithium-ion battery datasets
 (339 cells from seven research groups) and asks how well its prediction intervals transfer between
@@ -224,8 +224,8 @@ The field check uses one more public dataset, analysed separately with its own m
 
 ## Citation
 
-> Sadman, R. *How Far Does Calibrated Uncertainty Transfer Across Battery Datasets? An Empirical
-> Study of Conformal Calibration for State-of-Health Prediction on Seven Public Datasets.*
+> Sadman, R. *How Far Does Calibrated Uncertainty Transfer Across Battery Datasets? Conformal
+> Calibration of State-of-Health Prediction on Seven Laboratory Datasets and an Electric-Vehicle Fleet.*
 > Submitted to the *Journal of Energy Storage* (2026).
 
 Please also cite the original publications of the datasets you use.
