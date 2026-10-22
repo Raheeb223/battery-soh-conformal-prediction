@@ -150,7 +150,7 @@ ax5.text(5.0, 2.18, "trained on the other 6 --\nnever sees RWTH's\ndistribution 
          va="center", fontsize=6.4, zorder=5)
 
 # ------------------------------------------------------------------
-# Panel 6: honest reporting
+# Panel 6: one registry for every number
 # ------------------------------------------------------------------
 ax6 = fig.add_subplot(2, 3, 6)
 panel_frame(ax6, 6, "Report every number\nfrom the same registry")

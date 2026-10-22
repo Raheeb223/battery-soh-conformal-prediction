@@ -220,7 +220,7 @@ def enable_mc_dropout(model: nn.Module):
     (so they still sample), while everything else (e.g. batchnorm, if any)
     stays in eval mode. This is what makes MC-Dropout uncertainty work.
 
-    SCOPE (confirmed directly, E4): the `isinstance(m, nn.Dropout)` check
+    SCOPE: the `isinstance(m, nn.Dropout)` check
     only re-enables the EXPLICIT nn.Dropout submodules (post-fusion and
     head, in MultiScaleBiLSTMAttention/GRUBaseline). nn.LSTM's own internal
     inter-layer recurrent dropout (set via the `dropout=` kwarg at

@@ -1,43 +1,13 @@
 """
-HGC-CP evaluation harness: pooled vs. nearest-source vs. HGC-CP,
-across shrinking calibration-sample-size budgets, via a calibration-level
-leave-one-dataset-out protocol -- the same validation style already used for
-hierarchical_calibration.py (Section 5.3.6) in this project.
+HGC-CP evaluation harness: pooled, nearest-source, and HGC-CP calibration over shrinking
+calibration budgets, under a calibration-level leave-one-dataset-out protocol.
 
 The paper's HGC-CP results come from nested_hyperparameter_search.py and
-hgc_cp_validation_only.py, which use this file's three loaders; the
-run_calibration_level_lodo() comparison below is an earlier exploratory
-harness. The hgc_cp.py functions it imports are checked by
-tests/check_hgc_cp.py and tests/check_hgc_cp_split_equivalence.py.
-
---- CHANGES IN THIS VERSION ---
-1. RENAMED the third comparison arm from "groupwise" to "nearest_source"
-   throughout (results dict keys, printed/saved columns). This is a
-   calibration-level LODO protocol: the target dataset contributes ZERO of
-   its own calibration data, by design -- that's the point of testing
-   genuine unseen-source generalization. So this arm was never computing
-   "the target's own quantile" the way predictor_consistent_recalibration.py
-   or cell_clustered_bootstrap.py do; it picks whichever of the 6 OTHER
-   datasets is closest by MMD distance and uses THAT dataset's own quantile
-   as a stand-in for the unseen target (target_group=min(distances,
-   key=distances.get)). Calling that "groupwise" caused a real, confusing
-   mismatch when its numbers were compared against this project's actual
-   groupwise calibration (target calibrated on its own data) -- they are
-   answering different questions and were never expected to agree. The
-   computation itself is unchanged; only the label is corrected. If
-   nearest_source_baseline.py already computes this same quantity
-   elsewhere in the project, cross-check the two against each other.
-2. EFFICIENCY: pooled_quantile() and groupwise_quantile() [now
-   nearest_source_quantile in spirit] depend only on all_scores /
-   all_group_ids / distances, none of which change across a target's test
-   windows -- they were being recomputed identically on every single
-   window inside the per-window loop. Moved outside the loop so each is
-   computed once per (target, calib_size) instead of once per window (for
-   MIT's 17,513 test windows, this was 17,513 redundant identical calls
-   per calib_size setting). Verified behavior-preserving against the
-   original per-window version on synthetic data before applying here --
-   same coverage, same MPIW, byte-identical. hgc_cp_interval() is NOT
-   moved, since it genuinely depends on each window's own yhat.
+hgc_cp_validation_only.py, which use this file's three loaders; run_calibration_level_lodo() below
+is an exploratory comparison. "nearest_source" uses the quantile of the other dataset closest to the
+target by MMD, since the target contributes no calibration data in this protocol. The pooled and
+nearest-source quantiles do not depend on the test window and are computed once per target and
+budget.
 """
 
 import os
@@ -82,10 +52,8 @@ def load_representations(dataset_name: str, npz_path: str = PROCESSED_NPZ_PATH,
     actual uploaded processed.npz (BIT window de-normalizes to a plausible
     0.74-1.07 SOH range, not a z-score range).
 
-    If your trained model's penultimate-layer features are available and
-    preferred over these summary statistics, replace this function's body
-    with a call to your model's forward pass up to that layer -- the rest
-    of this harness only depends on the (n, d) shape of what's returned.
+    A model's penultimate-layer features could be used instead; the rest of
+    the harness only depends on the (n, d) shape of what is returned.
     """
     data = np.load(npz_path, allow_pickle=True)
     soh_mean = data["soh_mean"].item()
@@ -169,26 +137,18 @@ def run_calibration_level_lodo(alpha: float = 0.1, lam: float = 3.0, beta: float
     to estimate distributional similarity (if this were tied to a small
     calib_size) would make the distance estimate too noisy to trust,
     independent of the memory issue. mmd_sample_size=300 matches what was
-    validated on this project's real representations earlier in this
-    conversation (stable, interpretable distances; e.g. MIT/XJTU correctly
-    identified as closest to each other).
+    checked on this project's representations (stable, interpretable
+    distances; e.g. MIT and XJTU are closest to each other).
 
     lam=3.0, beta=0.0 are the defaults as of the nested, held-out
     hyperparameter search (see nested_hyperparameter_search.py): selected
     using only 6 of the 7 datasets as pseudo-targets (never the one being
     evaluated), giving a genuine, non-tuned-on-test improvement over the
     earlier lam=5.0/beta=0.5 defaults (mean |coverage-90%| across the 6
-    held-out pseudo-target rotations: 0.1453 vs 0.1714). This did NOT fix
-    CALCE specifically (still ~23-28% coverage under either setting) --
-    see hgc_cp.py's module docstring and this project's CALCE hypothesis
-    test for why that failure is a specific, understood limitation (BIT is
-    a good residual proxy for CALCE; RWTH, its second-closest match by
-    representation, is a poor one and dilutes the signal) rather than a
-    tuning problem. This was all validated on the data available before
-    the CALCE loader fix -- treat it as provisional until re-checked.
+    held-out pseudo-target rotations: 0.1453 vs 0.1714). These values were
+    computed before the CALCE loader correction.
 
-    The 'nearest_source' comparison arm (see module docstring, CHANGES
-    item 1) uses whichever of the 6 sources is closest to the target by
+    The 'nearest_source' comparison arm (see the module docstring) uses whichever of the 6 sources is closest to the target by
     MMD distance, NOT the target's own data -- the target contributes no
     calibration data at all in this protocol, by design."""
     rng = np.random.default_rng(seed)
@@ -229,7 +189,7 @@ def run_calibration_level_lodo(alpha: float = 0.1, lam: float = 3.0, beta: float
         # all_group_ids / distances -- none of which vary across this
         # target's test windows -- so compute each ONCE here rather than
         # redundantly inside the per-window loop below (verified
-        # behavior-preserving: see module docstring, CHANGES item 2).
+        # behavior-preserving).
         pq = pooled_quantile(all_scores, alpha)
         nearest_source_group = min(distances, key=distances.get)
         nq = groupwise_quantile(all_scores, all_group_ids,

@@ -1,45 +1,22 @@
 """
-Hierarchical partial-pooling (empirical-Bayes) calibration across datasets.
+Hierarchical (empirical-Bayes) calibration across datasets.
 
-This is version 2; earlier versions (hierarchical_calibration.py,
-hierarchical_calibration_corrected.py) were removed from the repository.
+For each dataset g with at least two validation cells: q_g is the finite-sample conformal quantile of
+|y - yhat| on its validation set, in SOH units, and sigma2_g is the variance of q_g under a
+cell-clustered bootstrap (whole cells resampled with replacement). Oxford and NASA have a single
+validation cell each, so sigma2_g is undefined; they are left out of the random-effects fit (Oxford
+is still evaluated as a target). mu_hat and tau2_hat come from DerSimonian-Laird on
+{(q_g, sigma2_g)}. q_g, sigma2_g, and the test intervals all use the same predictor (the MC-Dropout
+mean).
 
-WHAT WAS WRONG WITH THE PREVIOUS VERSION (see ERROR_REGISTER.md, E1, E3, E6, E13):
-  * Shrinkage weight. It used w = n_g / (n_g + tau2/sigma2_g). With sigma2_g
-    the sampling variance of the group quantile estimate (the quantity the
-    DerSimonian-Laird step requires), the empirical-Bayes weight on the group's
-    own estimate is tau2 / (tau2 + sigma2_g). The previous expression moves in
-    the opposite direction: a MORE precisely estimated group (smaller sigma2_g)
-    was shrunk MORE. Weights and every interpretation built on them (for
-    example RWTH's 0.537) were artifacts.
-  * Variance input. A test-coverage confidence-interval width was used as a
-    proxy for the variance of a calibration QUANTILE. Different quantity,
-    different dimension. It is not used here.
-  * Mixed inputs. q_g came from the main run (deterministic-calibration) and
-    sigma2_g from a regenerated MC-Dropout validation file. Here q_g and
-    sigma2_g both come from the SAME validation residuals, and the test
-    intervals use the SAME predictor (MC-Dropout mean).
-  * Units. q_g was in per-dataset z-scored units, which are not comparable
-    across datasets and would require the target's own SOH mean/std to apply
-    the prior to a new source. Everything here is in physical SOH units.
-
-METHOD.
-  For each dataset g with >= 2 validation cells: q_g = finite-sample conformal
-  quantile of |y - yhat| (real SOH units) on that dataset's validation set;
-  sigma2_g = variance of q_g under a cell-clustered bootstrap (whole cells
-  resampled with replacement). Oxford and NASA each have a single validation
-  cell, so a cell-level variance is undefined; they are excluded from the
-  random-effects fit (Oxford is still evaluated as a held-out target).
-  mu_hat, tau2_hat: DerSimonian-Laird on {(q_g, sigma2_g)}.
-  Held-out evaluation (calibration-level leave-one-dataset-out): for target t,
-  refit mu_hat, tau2_hat WITHOUT t, then evaluate on t's test set:
-    prior-only     : half-width mu_hat_{-t}
-    EB-shrunk      : w q_t + (1-w) mu_hat_{-t},  w = tau2_{-t}/(tau2_{-t}+sigma2_t)
-    own quantile   : q_t (groupwise ceiling)
-    cross-source pooled : finite-sample quantile of the OTHER datasets' pooled
-                          validation residuals
-  tau2_hat is estimated from at most five groups; its group-level bootstrap
-  interval is reported and is very wide. Treat all weights as descriptive.
+Calibration-level leave-one-dataset-out: for target t, mu_hat and tau2_hat are refitted without t
+and evaluated on t's test set with
+    prior only           : half-width mu_hat_{-t}
+    empirical-Bayes      : w q_t + (1 - w) mu_hat_{-t},  w = tau2_{-t} / (tau2_{-t} + sigma2_t)
+    own quantile         : q_t (groupwise)
+    other datasets pooled: the quantile of the other datasets' pooled validation residuals
+tau2_hat comes from at most five groups; its group-level bootstrap interval is reported and is wide,
+so the weights are descriptive.
 
 Requires: cache/processed.npz, outputs/conformal_groupwise_predictions_val.npz,
 outputs/conformal_groupwise_predictions.npz, config.py.

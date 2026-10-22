@@ -1,45 +1,16 @@
 """
-rwth_local_outlier_fix.py
+Local-outlier filter for the RWTH capacity series.
 
-Confirmed finding: ALL 48 RWTH cells contain isolated single-row capacity
-outliers -- most consistently at cycle=1 (a value ~26-27% of the cell's
-real baseline capacity, remarkably consistent across independent cells --
-e.g. sanyo_030: 0.288/1.076=26.8%, sanyo_004: 0.281/1.059=26.5%,
-sanyo_006: 0.283/1.064=26.6%, sanyo_009: 0.293/1.069=27.4%), plus ~15-18
-MORE such outliers scattered through each cell's later sequence (count
-roughly tracks the number of distinct session files per cell, 34-41),
-plus one severe case (RWTH_ep_sanyo_019) with several consecutive
-near-zero readings.
+Every RWTH cell contains isolated single-row capacity outliers: the first cycle of each session file
+reports about 26-27% of the cell's capacity (for example sanyo_030: 0.288/1.076 Ah), and a few more
+appear later in each cell, roughly one per session file. One cell (RWTH_ep_sanyo_019) has several
+consecutive near-zero readings. The consistent ratio across cells points to a systematic artifact at
+the start of each session file rather than sensor noise. On its own, the filter removes 787 of 114,716
+rows (0.686%).
 
-The consistency of the ~26-27% ratio across unrelated cells rules out
-random sensor noise -- this is very likely a systematic measurement
-artifact at the START of each concatenated session file (a formation/
-characterization-style partial reading, consistent with the "BOL"
-(Beginning Of Life) session-type codes seen in RWTH's raw filenames),
-not a broken sensor. Total impact: 787 of 114,716 rows (0.686%).
-
-This module provides strip_local_outliers(df), using the EXACT verified
-detector from diagnose_rwth_local_outliers.py (same thresholds, same
-edge-case handling for first/last rows in a cell -- tested against 5
-scenarios including the real cycle=1 pattern found in this data).
-
---- HOW TO INTEGRATE INTO YOUR REAL rwth_loader.py ---
-Add near the top:
-    from rwth_local_outlier_fix import strip_local_outliers
-
-Then, in load_all(), right before the final `return pd.concat(frames, ...)`
-(or equivalently, right after building each per-cell DataFrame, before
-appending it to `frames` -- whichever matches your actual loader's
-structure), call:
-    df = strip_local_outliers(df)
-
-Since this project's convention (established in xjtu_loader.py) is to
-strip per-cell right after each cell's DataFrame is built, the cleanest
-integration point is likely wherever your loader currently builds one
-cell's cycle/capacity DataFrame, analogous to xjtu_loader.py's
-load_xjtu_cell() calling strip_calibration_blocks() before returning.
-Paste your actual rwth_loader.py here if you want the exact insertion
-point identified rather than guessed.
+strip_local_outliers(df) drops a row whose capacity departs strongly from its neighbours in the same
+cell, with special handling of the first and last row of a cell. rwth_loader.load_rwth_cell() applies it
+to every cell after the session-boundary correction.
 """
 
 import numpy as np
@@ -91,9 +62,7 @@ def strip_local_outliers(df: pd.DataFrame, cell_id_col="cell_id",
     """Drops rows flagged by find_local_outliers(), computed per-cell on
     the cycle-sorted capacity sequence. Applies to ALL cells (unlike the
     XJTU fix, this artifact affects all 48/48 RWTH cells, not a specific
-    sub-batch) -- if you reuse this module for a different dataset,
-    consider whether a per-cell or per-dataset scope restriction is
-    appropriate there instead."""
+    sub-batch)."""
     cleaned_groups = []
     total_dropped = 0
 

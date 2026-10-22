@@ -1,21 +1,13 @@
 """
-Pooled and groupwise conformal coverage for the point predictors other than the
-main model (see ERROR_REGISTER.md, E2): the baselines (linear, SVR, XGBoost, plain LSTM), computed under the
-same predictor-consistency requirement as train.py (calibration and test
-nonconformity scores from the same predictor).
+Pooled and groupwise conformal coverage for every point predictor other than the main model.
 
-- linear / SVR / XGBoost: trained fresh via baselines.run_baseline(), which
-  now also saves validation predictions (ERROR_REGISTER E2 fix). No
-  retraining ambiguity here since these are fast, deterministic sklearn/
-  XGBoost fits (predict() has no train/eval-mode distinction to mismatch).
-- plain LSTM: NOT retrained. Loads the existing outputs/ablation_plain_lstm_model.pt
-  checkpoint and computes predictor-consistent (mc_dropout_predict for both
-  calibration and test, matching train.py's default) pooled AND groupwise
-  coverage directly. Groupwise coverage for this variant already exists in
-  outputs/ablation_plain_lstm_results.json (computed by train.py, already
-  predictor-consistent) and is reused rather than recomputed, for exactness;
-  only the POOLED number is new here, since experiments.py's ablation section
-  only ran groupwise mode for architecture variants.
+Calibration and test residuals always come from the same predictor, as in train.py.
+
+- linear / SVR / XGBoost: trained with baselines.run_baseline(), which saves validation and test
+  predictions. These fits are deterministic, so there is no train/eval-mode distinction.
+- plain BiLSTM, GRU, Transformer: the saved ablation checkpoints are loaded, and MC-Dropout
+  predictions are used for both calibration and test. Groupwise coverage is read from the ablation
+  results written by train.py; pooled coverage is computed here.
 
 Run:  python baseline_conformal_coverage.py                       # every predictor
       python baseline_conformal_coverage.py --only transformer  # add one, keep the rest
@@ -87,7 +79,7 @@ def ablation_checkpoint_conformal_coverage(variant_name, model_variant):
     already predictor-consistent outputs/ablation_{variant}_results.json
     rather than recomputed, to avoid introducing a second, possibly-non-
     identical source of truth for a number that already exists correctly.
-    Used for plain_lstm and gru (Stage 5's K3 scope beyond SVR/XGBoost)."""
+    Used for the neural ablation variants."""
     ckpt_path = os.path.join(config.OUTPUT_DIR, f"ablation_{variant_name}_model.pt")
     existing_path = os.path.join(config.OUTPUT_DIR, f"ablation_{variant_name}_results.json")
     if not (os.path.exists(ckpt_path) and os.path.exists(existing_path)):

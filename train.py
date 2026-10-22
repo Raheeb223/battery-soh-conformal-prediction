@@ -49,8 +49,7 @@ def train_one(cache_path=None, model_variant="full", seed=config.RANDOM_SEED,
 
     conformal_mode: 'groupwise' calibrates a separate qhat per dataset (the
     default, fixes the small-group coverage problem). 'pooled' calibrates one
-    qhat across all groups together — kept here ONLY so you can run the
-    pooled-vs-groupwise ablation and show numerically why groupwise matters.
+    qhat across all groups together, for the pooled-vs-groupwise comparison.
     'normalized_groupwise' additionally scales each sample's interval width
     by that sample's own MC-Dropout uncertainty (still calibrated per-group
     for validity) — unlike the other two modes, this gives genuinely

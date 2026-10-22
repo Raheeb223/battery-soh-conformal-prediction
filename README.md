@@ -71,8 +71,8 @@ behind it. For example, the 44.2% BIT coverage is `values.PooledCoverageBIT`. Th
 
 Rerunning the experiments themselves (training, leave-one-dataset-out, field check) needs the raw
 datasets and a GPU; [REPRODUCIBILITY.md](REPRODUCIBILITY.md) gives the environment, data layout and
-run order. Every defect found while auditing the pipeline is recorded, with its evidence and fix, in
-[ERROR_REGISTER.md](ERROR_REGISTER.md).
+run order. [CHANGELOG.md](CHANGELOG.md) lists the corrections to code and data handling that
+affect the results.
 
 ## Where each result in the paper comes from
 
@@ -197,7 +197,7 @@ listed there.
 | `outputs/` | per-experiment result files |
 | `data_layer_report.json` | output of `tests/check_data_layer.py` |
 | `logs/` | console logs of the long runs (leave-one-dataset-out, repeated splits, data checks) |
-| `ERROR_REGISTER.md` | every defect found while auditing this pipeline, with evidence and fix |
+| `CHANGELOG.md` | corrections to code and data handling that affect the results |
 
 ## Data
 

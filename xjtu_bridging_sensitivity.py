@@ -1,17 +1,10 @@
 """
-Effect of XJTU's sentinel-bridging windows on error and coverage (follow-up to
-xjtu_bridging_isolation.py; ERROR_REGISTER.md, E9).
+Effect of XJTU's bridging windows on error and coverage.
 
-xjtu_bridging_isolation.py established that 376 of XJTU's 2,605 test
-windows (all from the 8 Sim_satellite_* cells) bridge a removed
-sentinel-value block on every single window, while the other 2,229 XJTU
-test windows show zero bridging. This script quantifies the practical
-effect: does excluding those 376 windows change XJTU's reported MAE/RMSE/
-coverage materially?
-
-No retrain needed -- this re-slices the ALREADY-COMPUTED per-window test
-predictions (outputs/conformal_groupwise_predictions.npz) using the
-bridging mask, which is just a filter over existing rows.
+xjtu_bridging_isolation.py finds that all 376 test windows from the eight Sim_satellite_* cells span
+a removed sentinel block, and that none of the other 2,229 XJTU test windows do. This script compares
+XJTU's MAE, RMSE, and coverage with and without those windows, using the saved test predictions
+(outputs/conformal_groupwise_predictions.npz); nothing is retrained.
 
 Run:  python xjtu_bridging_sensitivity.py
 Out:  outputs/xjtu_bridging_sensitivity.json

@@ -9,7 +9,7 @@ zero-training baselines are:
   linear extrapolation: yhat = 2*x[-1] - x[-2]
 None of these was included in the baseline comparison of the manuscript.
 
-UNITS. The pipeline z-scores SOH per dataset, and the manuscript's pooled MAE
+UNITS. The pipeline z-scores SOH per dataset, and the pooled MAE
 and RMSE are in those z-units, not in physical SOH units. This script reports
 both: `z` (per-dataset z-units, pooled over windows) and `real` (physical SOH
 units, used for the per-dataset persistence comparison).

@@ -10,45 +10,34 @@ Folder structure: Battery Dataset/Batch-N/<protocol>_battery-M.mat
   Batch-6: Sim_satellite_battery-1..8.mat (8 cells, simulated satellite profile)
 
 Each per-cell .mat file has two top-level keys:
-  'data'    — per-cycle raw voltage/current/temperature traces (NOT used here,
-              only needed if you later want richer per-cycle features)
+  'data'    — per-cycle raw voltage/current/temperature traces (not used here)
   'summary' — a struct with per-cycle SUMMARY arrays already computed,
               including 'discharge_capacity_Ah' (index i = cycle i+1) —
               this is exactly the capacity-fade curve we need, no
               reconstruction from raw traces required.
 
-Chemistry: NCM (per the original dataset description) — verify exact
-cathode/anode composition against XJTU's own "Data Introduction" PDF
-(included in the download) before stating it precisely in your methods.
+Chemistry: NCM (per the original dataset description; see the "Data
+Introduction" PDF in the download for the exact composition).
 
---- SENTINEL-VALUE FIX (rewritten from an earlier consecutive-run-only
-    version) ---
+--- SENTINEL VALUES ---
 Batch-6 Sim_satellite_* cells contain periodic calibration/reference
-sentinel values mixed into the real degradation curve. This was
-originally found as long flat runs of value 1.601 (caught by an
-earlier min_run=5 consecutive-run detector), then shorter fragments of
-the same value (caught by lowering to min_run=2) -- but a THIRD,
-structurally different form was then found: single-row sentinel values
-(0.111 and 1.579, confirmed via diagnose_alternating_pattern.py) that
-recur at a consistent ~41-row spacing but are NEVER consecutive with
-each other (real degradation readings sit between them), so no
-consecutive-run detector, at any threshold, can ever catch them.
+sentinel values mixed into the degradation curve, in three forms: long
+flat runs of the value 1.601, shorter fragments of the same value, and
+single-row values (0.111 and 1.579) that recur about every 41 rows and
+are never consecutive, so a consecutive-run detector cannot catch them.
 
-detect_and_strip_sentinel_values() replaces the old consecutive-run-only
-approach with a more general, more robust one: any capacity value that
-occurs >= min_occurrences times ANYWHERE in a cell's sequence (regardless
-of spacing or consecutivity) is treated as a sentinel and removed. This
-single approach catches all three confirmed patterns (long flat runs,
-short flat fragments, non-consecutive periodic sentinels) without
-needing to know or guess the specific period. Real degradation
+detect_and_strip_sentinel_values() therefore treats any capacity value
+that occurs >= min_occurrences times anywhere in a cell's sequence as a
+sentinel and removes it, which catches all three forms without assuming
+a period. Real degradation
 measurements essentially never hit the exact same floating-point value
 4+ times independently across hundreds of cycles, so this threshold has
 wide safety margin (both confirmed real sentinel values recurred ~18
 times each -- 4.5x the threshold).
 
-Scoped to Sim_satellite_* cells only, exactly as before.
+Applied to Sim_satellite_* cells only.
 
---- SENSITIVITY-ANALYSIS TOGGLE (added for pre-submission validation) ---
+--- SENSITIVITY-ANALYSIS TOGGLE ---
 To let the correction be switched off for a clean before/after sensitivity
 comparison without editing this file, this module honors the environment
 variable XJTU_APPLY_SENTINEL_FIX. Set it to "0" (or "false") to disable
@@ -65,7 +54,7 @@ detect_and_strip_sentinel_values() entirely for this run, e.g.:
     python preprocessing.py && python experiments.py
     set XJTU_APPLY_SENTINEL_FIX=
 
-Leaving the variable unset (the default) applies the fix as before. This
+Leaving the variable unset (the default) applies the correction. This
 does not touch any other correction (RWTH, LODO normalization) -- only
 the XJTU sentinel-value strip is toggled, giving an isolated ablation.
 """

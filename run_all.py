@@ -117,8 +117,8 @@ def main():
     gpu_heavy_in_plan = [s[0] for s in steps if s[0] in GPU_HEAVY]
     if args.execute and gpu_heavy_in_plan and not args.only:
         print(f"[!] about to run {len(gpu_heavy_in_plan)} GPU-heavy step(s) back to back: "
-              f"{gpu_heavy_in_plan}. This can take many hours. Re-run with --only to run one at "
-              f"a time if that's not what you want.")
+              f"{gpu_heavy_in_plan}. This can take many hours; --only runs "
+              f"one at a time.")
 
     for name, cmd, output_check, *stdout_log in steps:
         exists = output_check is not None and os.path.exists(output_check)

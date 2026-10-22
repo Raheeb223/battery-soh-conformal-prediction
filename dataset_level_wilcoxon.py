@@ -1,21 +1,14 @@
 """
-Cross-architecture pooled-vs-groupwise coverage test, with the correct unit
-of analysis.
+Pooled vs. groupwise coverage across predictors, tested at the dataset level.
 
-The pair-level statistic uses 7 architectures x 6 datasets.
-The architectures for a given dataset are evaluated on the SAME test
-cells, so these pairs are not independent; the independent units are the six
-datasets (and, more fundamentally, the cells within them). This script
-reports the pair-level statistic and the analysis at the dataset level, where the exact one-sided Wilcoxon signed-rank p-value with n=6
-cannot go below 1/64 = 0.0156.
+The seven predictors are evaluated on the same test cells of each dataset, so the 7 x 6
+predictor-dataset pairs are not independent; the independent units are the six datasets. This
+script reports the pair-level statistic for reference and the exact one-sided Wilcoxon signed-rank
+test over datasets, whose p-value cannot go below 1/64 = 0.0156 with n = 6.
 
-Coverage values (see ERROR_REGISTER.md, task K2) are now read directly from the
-machine-generated result files below, never hand-copied. BiLSTM comes from
-the main conformal pipeline (outputs/conformal_{groupwise,pooled}_results.json);
-linear regression, SVR, XGBoost, plain LSTM, GRU, and Transformer come from outputs/baseline_conformal_results.json
-(baseline_conformal_coverage.py). NASA is excluded from this
-table, consistent with its treatment as illustrative-only elsewhere in this
-project (n=3 test windows, 1 test cell).
+Coverage values are read from outputs/conformal_{groupwise,pooled}_results.json (main model) and
+outputs/baseline_conformal_results.json (the other six predictors). NASA, with one test cell, is
+left out.
 
 Run:  python dataset_level_wilcoxon.py
 """

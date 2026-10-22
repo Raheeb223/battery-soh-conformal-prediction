@@ -1,19 +1,13 @@
 """
-Independent re-verification of RWTH's two documented data-quality
-corrections, against the CURRENT raw CSV files on disk --
-session-boundary partial-cycle truncation (drop_first) and the
-statistical local-outlier safety net (strip_local_outliers).
+Re-checks RWTH's two data-quality corrections against the raw CSV files: dropping the partial first
+cycle of each session file (drop_first) and the local-outlier filter (strip_local_outliers).
 
-Runs rwth_loader.load_all() under all 4 combinations of
-{drop_first, apply_local_outlier_fix} x {True, False} and reports, for
-each: total rows, total cells, median |first-difference of capacity| (a
-smoothness proxy -- a real degradation curve should step smoothly; a
-residual artifact shows up as an inflated median |step|), and the exact
-row-count delta each correction removes relative to "neither correction
-applied." This is the RWTH analogue of K8's CALCE INCOMPLETE_POLICY
-drop-vs-flag sensitivity check.
+rwth_loader.load_all() is run with each of the four combinations of the two corrections, and for
+each the script reports the number of rows and cells, the median absolute capacity step between
+consecutive cycles (smooth degradation gives small steps; remaining artifacts inflate it), and how
+many rows each correction removes.
 
-Requires the actual RWTH raw CSVs under config.RWTH_DIR.
+Requires the RWTH raw CSV files under config.RWTH_DIR.
 Run:  python verify_rwth_v2.py
 Out:  outputs/rwth_verification_v2.json
 """

@@ -1,35 +1,12 @@
 """
-Calibration-set-size sensitivity: how many calibration CELLS does groupwise
-conformal calibration actually need before its coverage is reliable?
-=========================================================================
+How many calibration cells does groupwise calibration need?
 
-MOTIVATION. Throughout this paper (Sections 5.3, 5.9), the datasets with few
-validation cells (BIT, CALCE, XJTU -- and Oxford/NASA, excluded here because
-they have only 1 validation cell each, so there is nothing to subsample) show
-the least stable groupwise coverage, while MIT and RWTH (many validation
-cells) are stable. That observation has so far been qualitative -- "small
-datasets are less stable" -- and demonstrated indirectly, through K6's
-repeated SPLIT-seed experiment (which changes which cells land in validation
-at all) rather than directly, through the calibration BUDGET itself holding
-everything else fixed.
-
-THIS SCRIPT answers the direct question: for a FIXED test set and a FIXED
-pool of validation cells, how does groupwise coverage behave as the number of
-validation CELLS actually used for calibration shrinks? For each dataset and
-each calibration-cell budget b < (that dataset's available validation cells),
-we repeatedly subsample b cells WITHOUT replacement (not windows -- windows
-from the same cell are not independent, the same reasoning
-hierarchical_calibration_v2.py's cell-bootstrap variance already relies on),
-recompute the finite-sample conformal quantile from only those cells' windows,
-and evaluate coverage on the dataset's (unchanged) test set. Repeating many
-times at each budget gives a distribution of coverage outcomes for "if you
-only had this many calibration cells from this source, how reliable would
-your interval be" -- directly actionable for a practitioner deciding whether
-a new, small field deployment has enough calibration data yet.
-
-Does NOT require retraining any model -- like hierarchical_calibration_v2.py
-and mwhc_calibration.py, this operates purely on the already-cached
-validation/test residuals.
+For a fixed test set and a fixed pool of validation cells, each dataset is calibrated on random
+subsets of b of its validation cells (cells, not windows, are drawn without replacement, because
+windows from one cell are correlated), for every b below the number available, and the resulting
+coverage on the unchanged test set is recorded. Repeating the draw many times at each b gives the
+distribution of coverage with b calibration cells. Oxford and NASA have one validation cell each and
+are left out. No model is retrained.
 
 Requires: outputs/conformal_groupwise_predictions_val.npz,
 outputs/conformal_groupwise_predictions.npz, cache/processed.npz, config.py.

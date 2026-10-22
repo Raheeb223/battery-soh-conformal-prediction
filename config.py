@@ -25,10 +25,8 @@ CALCE_DIRS = {
             os.path.join(ROOT_DIR, "CX2_37")],
 }
 OXFORD_MAT = os.path.join(ROOT_DIR, "Oxford_Battery_Degradation_Dataset_1.mat")
-# If your FastCharge_..._structure.json files sit loose directly in ROOT_DIR
-# (as opposed to inside their own subfolder), leave this as ROOT_DIR — the
-# loader searches recursively either way, so this also works if you later
-# move them into a subfolder.
+# The MIT loader searches MIT_DIR recursively for FastCharge_..._structure.json
+# files, so they can sit directly in ROOT_DIR or in a subfolder.
 MIT_DIR    = ROOT_DIR
 BIT_DIR    = os.path.join(ROOT_DIR, "kw34hhw7xg-3")
 XJTU_DIR   = os.path.join(ROOT_DIR, "Battery Dataset")
@@ -49,7 +47,7 @@ TEST_FRAC  = 0.15
 RANDOM_SEED = 42          # model init / training seed
 
 # Cell-level split seed, kept SEPARATE from RANDOM_SEED (model-init seed) so
-# repeated-split experiments (K6) can vary the split without also changing
+# repeated-split experiments can vary the split without also changing
 # model initialization, and vice versa. Defaults to RANDOM_SEED so existing
 # seed-42 results reproduce exactly when this is left unset.
 SPLIT_SEED = RANDOM_SEED

@@ -1,28 +1,22 @@
 """
-Runs the full experiment suite for the paper and writes one summary table.
+Baselines, architecture ablations, window sizes, model seeds, and calibration modes.
 
-This is the ONLY script you need to run to generate every number your
-results section needs. It runs, in order:
-  1. Baselines (linear regression, SVR)
-  2. Ablations (full model vs no-attention vs no-multiscale vs plain LSTM)
-  3. Conformal ablation (groupwise vs pooled calibration)
-  4. Window-size ablation (10, 20, 30, 50 cycles)
-  5. Multi-seed runs of the full model (3 seeds, for mean±std reporting)
-  6. Leave-one-dataset-out generalization test (all 7 datasets)
+Runs, in order:
+  1. point-prediction baselines (linear regression, SVR, XGBoost)
+  2. architecture ablations (full model, no attention, no multi-scale branch, plain BiLSTM, GRU,
+     Transformer)
+  3. pooled, groupwise, and normalized-groupwise calibration of the full model
+  4. window sizes of 10, 20, 30, and 50 cycles
+  5. three model seeds of the full model
 
-WARNING: this trains many models back to back and will take a while on CPU
-(each individual training run is what you've already seen take a few
-minutes — multiply by ~15 runs here). Run it when you can leave it going in
-the background. If you want to run pieces individually to check them first,
-call the run_baselines() / run_ablations() / etc. functions directly, or
-comment out sections in run_all() below.
+Each step trains models, so the script takes several hours on a GPU. The functions
+run_baselines(), run_ablations(), and so on can also be called individually.
 
 Run:
     python experiments.py
 Output:
-    outputs/experiment_summary.json  — every run's results in one place
-    outputs/experiment_summary.md    — the same, as a markdown table you can
-                                        paste straight into your paper draft
+    outputs/<run>_results.json for every run, plus
+    outputs/experiment_summary.json and outputs/experiment_summary.md (all runs in one table)
 """
 
 import os
@@ -182,8 +176,7 @@ def run_multiseed_section():
     print(f"\n[multiseed summary] MAE = {np.mean(maes):.5f} ± {np.std(maes):.5f}")
     print(f"[multiseed summary] RMSE = {np.mean(rmses):.5f} ± {np.std(rmses):.5f}")
     print(f"[multiseed summary] Overall coverage = {np.mean(coverages):.2%} ± {np.std(coverages):.2%}")
-    print(f"[multiseed summary] NOTE: coverage typically varies more across seeds than MAE/RMSE does — "
-          f"report this spread explicitly rather than a single run's coverage number.")
+    print(f"[multiseed summary] Coverage usually varies more across seeds than MAE/RMSE.")
     return results
 
 

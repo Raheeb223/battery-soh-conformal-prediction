@@ -1,34 +1,17 @@
 """
-Nested hyperparameter search for HGC-CP's (lam, beta), designed specifically
-to avoid tuning on the same data being reported on.
+Nested hyperparameter search for HGC-CP's (lambda, beta), without using the target's test data.
 
-WHY THIS IS STRUCTURED AS A NESTED SEARCH:
-Simply sweeping (lam, beta) and picking whatever gives CALCE the best test
-coverage would be tuning-on-test -- the hyperparameters would be chosen
-using the exact numbers being reported, silently inflating how good the
-result looks. Instead, to choose (lam, beta) for evaluating a given REAL
-target (e.g. CALCE), this script:
-  1. Takes the other 6 datasets only.
-  2. Rotates through them as PSEUDO-targets (holding each out in turn,
-     calibrating on the remaining 5).
-  3. For each candidate (lam, beta), computes average coverage-deviation-
-     from-90%-target across all 6 pseudo-target rotations.
-  4. Picks whichever (lam, beta) performs best on average across those 6 --
-     CALCE's own test set is never touched during this selection.
-  5. Only THEN applies the selected (lam, beta) to CALCE's actual held-out
-     test set, exactly once.
+To choose (lambda, beta) for a real target (for example CALCE), the script:
+  1. takes the other six datasets only;
+  2. holds each of them out in turn as a pseudo-target, calibrating on the remaining five;
+  3. computes, for each candidate (lambda, beta), the average distance of coverage from the 90%
+     target over the six pseudo-targets;
+  4. selects the candidate with the smallest average;
+  5. applies it once to the real target's test set.
+With seven datasets the selection is itself noisy. MMD distances are computed once per pseudo-target
+and the (lambda, beta) grid is swept on top of them.
 
-This is a genuine, if computationally heavier, generalization estimate --
-not a perfect one (7 datasets is still a small sample for this kind of
-nested design), but a meaningfully more honest one than picking whatever
-looks best on the real target directly.
-
-COMPUTATIONAL NOTE: MMD/distance computation is the expensive part; the
-weighting and quantile steps are cheap. This script computes each pseudo-
-target's distances ONCE and sweeps the (lam, beta) grid cheaply on top of
-that, rather than recomputing distances per grid point.
-
-USAGE: python nested_hyperparameter_search.py --target CALCE
+Usage: python nested_hyperparameter_search.py --target CALCE
 """
 
 import argparse

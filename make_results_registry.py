@@ -141,7 +141,7 @@ def main():
     # ---- Hierarchical calibration (v2, canonical) ----
     registry["sections"]["hierarchical_calibration"] = load("hierarchical_calibration_v2.json") or UNVERIFIED
 
-    # ---- HGC-CP nested hyperparameter search (K4) ----
+    # ---- HGC-CP nested hyperparameter search ----
     registry["sections"]["hgc_cp_nested_search"] = load("nested_hp_search_results.json") or UNVERIFIED
 
     # ---- MWHC: MMD-weighted hierarchical calibration (new method) ----
@@ -154,26 +154,21 @@ def main():
     registry["sections"]["cqr_pooled"] = load("cqr_pooled_results.json") or UNVERIFIED
     registry["sections"]["cqr_groupwise"] = load("cqr_groupwise_results.json") or UNVERIFIED
 
-    # ---- LODO (K1-fixed) -- tolerant of partial completion ----
-    # IMPORTANT: lodo_*_results.json files from the OLD (pre-K1-fix) run are
-    # still on disk for configs run_all_lodo() hasn't reached yet in the
-    # current background run -- they lack "calibration_predictor" (only the
-    # fixed train_one()-mirroring code path writes that field) and must be
-    # treated as UNVERIFIED/stale here, NOT silently accepted as current.
-    # Confirmed concretely: lodo_MIT_results.json (10/1/2026, no
-    # calibration_predictor field) matches the stale pre-fix "as-run" value
-    # (MAE 0.00089/coverage 92.16%) exactly -- this is the pre-fix file.
+    # ---- LODO ----
+    # Only result files that record "calibration_predictor" were written by the current
+    # leave_one_out.py (same predictor for calibration and test); any other file is treated
+    # as missing.
     lodo = {}
     for d in ("NASA", "CALCE", "Oxford", "MIT", "BIT", "XJTU", "RWTH"):
         v = load(f"lodo_{d}_results.json")
         if v and "calibration_predictor" in v:
             lodo[d] = v
         else:
-            lodo[d] = UNVERIFIED  # missing, or a stale pre-K1-fix file
+            lodo[d] = UNVERIFIED  # missing, or written by older code
     registry["sections"]["lodo"] = lodo
     registry["sections"]["lodo_complete"] = all(v != UNVERIFIED for v in lodo.values())
 
-    # ---- Predictor-consistent recalibration (per-dataset coverage + both CI types, E13-fixed) ----
+    # ---- Predictor-consistent recalibration (per-dataset coverage, window- and cell-level CIs) ----
     registry["sections"]["predictor_consistent_coverage"] = load("predictor_consistent_recalibration.json") or UNVERIFIED
 
     # ---- Cell-clustered bootstrap / XJTU bridging / RWTH verification ----
@@ -182,7 +177,7 @@ def main():
     registry["sections"]["xjtu_bridging_sensitivity"] = load("xjtu_bridging_sensitivity.json") or UNVERIFIED
     registry["sections"]["rwth_verification"] = load("rwth_verification_v2.json") or UNVERIFIED
 
-    # ---- K6: repeated cell-level splits (between-split variability) ----
+    # ---- Repeated cell-level splits (between-split variability) ----
     registry["sections"]["repeated_splits"] = load("repeated_split_summary.json") or UNVERIFIED
 
     # ---- Data-layer verification (tests/check_data_layer.py): cell and window counts ----
@@ -261,10 +256,9 @@ def main():
 
     def macro(name, value, fmt="{:.4f}"):
         safe_name = re.sub(r"[^A-Za-z]", "", name)  # LaTeX macro names: letters only
-        # Guards against exactly the bug found and fixed once already in this file: two
-        # DIFFERENT inputs (e.g. "Window10MAE" / "Window20MAE") can sanitize to the SAME
+        # Two DIFFERENT inputs (e.g. "Window10MAE" / "Window20MAE") can sanitize to the SAME
         # macro name once digits are stripped, silently overwriting one value with another
-        # in the .tex output. Fail loudly here instead of producing a wrong manuscript number.
+        # in the .tex output, so a repeated name raises an error.
         if safe_name in seen_macro_names:
             raise ValueError(f"macro name collision: '{name}' sanitizes to '\\{safe_name}', "
                               f"which was already defined by a previous macro() call. Rename "
@@ -417,7 +411,7 @@ def main():
     # NOTE: macro() strips all non-letter characters from the name, so a
     # purely-numeric differentiator (e.g. "Window10MAE" vs "Window20MAE")
     # would collapse to the SAME macro name ("WindowMAE") and silently
-    # overwrite -- confirmed and fixed; spell out the window size in words.
+    # overwrite, so the window size is spelled out in words.
     window_words = {10: "Ten", 20: "Twenty", 30: "Thirty", 50: "Fifty"}
     for w, v in registry["sections"]["window_size"].items():
         if v != UNVERIFIED:
@@ -494,7 +488,7 @@ def main():
             macro(f"MwhcDevFlooredLam{word}", s["mean_abs_dev_by_lam_floored"][str(lam)] * 100, "{:.2f}")
             macro(f"MwhcEssLam{word}", s["mean_ess_by_lam"][str(lam)], "{:.2f}")
         # XJTU is the clearest single-dataset illustration of the weight-concentration
-        # failure mode and the floor fix -- see Section~\ref{sec:mwhc}.
+        # failure mode and the floor.
         xjtu_lam20 = mwhc["per_target"]["XJTU"]["per_lam"]["20.0"]
         macro("MwhcXjtuUnflooredLamTwenty", xjtu_lam20["cov_eb_shrunk_sim"] * 100, "{:.1f}")
         macro("MwhcXjtuFlooredLamTwenty", xjtu_lam20["floored"]["cov_eb_shrunk"] * 100, "{:.1f}")

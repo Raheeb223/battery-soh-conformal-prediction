@@ -1,64 +1,17 @@
 """
-MWHC: MMD-Weighted Hierarchical Calibration
-================================================
+MWHC: MMD-weighted hierarchical calibration.
 
-New method (not a hand-tuned variant of an existing one) combining two ideas
-already evaluated separately in this project, each of which has a gap the
-other's design happens to close:
+Hierarchical calibration (hierarchical_calibration_v2.py) shrinks a dataset's own conformal
+quantile toward a prior fitted to the other datasets, weighting each of them by the precision of its
+quantile (1/sigma2_d) only. MWHC multiplies that weight by HGC-CP's MMD similarity weight sim_d
+(hgc_cp.compute_group_weights), so that datasets that resemble the target count more in the prior.
+The shrinkage weight tau2/(tau2 + sigma2_t) is computed as before, from the similarity-weighted fit.
+With equal similarities, weighted_dersimonian_laird reduces exactly to the ordinary
+DerSimonian-Laird estimator; this is checked when the script runs.
 
-  - Hierarchical (empirical-Bayes) calibration (hierarchical_calibration_v2.py)
-    pools a dataset's own conformal quantile toward a cross-dataset prior
-    with a statistically principled SHRINKAGE AMOUNT -- the EB weight
-    tau2/(tau2+sigma2_t), derived from how much genuine between-dataset
-    heterogeneity exists (tau2) versus how precisely the target's own
-    quantile happens to be estimated (sigma2_t). But the prior itself pools
-    every OTHER dataset using only 1/sigma2_d (how precisely THAT dataset's
-    own quantile is estimated) -- with no notion of whether that dataset's
-    degradation behavior actually resembles the target's. A precisely
-    estimated but totally dissimilar dataset gets pooled in just as eagerly
-    as a precisely estimated, highly similar one.
-
-  - HGC-CP (hgc_cp.py, Section 5.3.7) weights source datasets by MMD
-    similarity to the target -- a principled choice of WHOM to borrow
-    strength from -- but has no EB-style mechanism for HOW MUCH to borrow;
-    that balance is controlled by a separate inflation hyperparameter
-    (beta) which this project's nested search showed needs per-target
-    tuning and does not generalize across all seven real datasets (no
-    single (lambda, beta) setting works well everywhere).
-
-MWHC: replace hierarchical calibration's flat 1/sigma2_d weight in the
-DerSimonian-Laird random-effects fit with sim_d/sigma2_d, where sim_d is
-HGC-CP's own MMD-based group weight (Stage 1 of hgc_cp.py, reused directly,
-not reimplemented) -- a similarity-DISCOUNTED precision weight. The
-EB-shrinkage mechanism (how much of this now-similarity-weighted prior to
-trust versus the target's own quantile) is kept exactly as principled as
-hierarchical_calibration_v2.py's: tau2/(tau2+sigma2_t), now computed from
-the similarity-weighted fit's own tau2 instead of the flat one. When every
-sim_d is equal, weighted_dersimonian_laird reduces EXACTLY to the ordinary
-DerSimonian-Laird estimator (verified below the class definition) -- this
-is a generalization, not a different method wearing the same name.
-
-This is a standard move in the meta-analysis literature -- random-effects
-meta-regression with study-level moderator weights, or (closer to this
-paper's actual setting) similarity-informed borrowing of strength as in
-network meta-analysis -- applied here to conformal calibration quantiles
-instead of treatment effect sizes.
-
-PROTOCOL: identical calibration-level leave-one-dataset-out validation as
-hierarchical_calibration_v2.py (same q_g / sigma2_g inputs, computed fresh
-here rather than re-read from that file's JSON, so this script is
-self-contained and the flat-vs-similarity-weighted comparison in its output
-comes from literally the same run). Does NOT require retraining any model
--- like hierarchical_calibration_v2.py and hgc_cp.py, it operates purely on
-cached validation/test residuals and the window-summary-statistic
-representation features HGC-CP already uses for MMD.
-
-lam (the MMD softmax temperature, hgc_cp.compute_group_weights's only
-hyperparameter) is swept over the SAME grid HGC-CP's nested search uses
-([1, 3, 5, 10, 20]) to check whether MWHC needs the same kind of per-target
-tuning HGC-CP's nested search found necessary, or is robust to this choice
-without any such search -- see the lam-sensitivity table in the output and
-the printed summary at the end.
+The protocol is the calibration-level leave-one-dataset-out of hierarchical_calibration_v2.py, with
+q_g and sigma2_g recomputed here so the flat and similarity-weighted fits come from the same run.
+The MMD temperature lambda is swept over HGC-CP's grid [1, 3, 5, 10, 20]. No model is retrained.
 
 Requires: cache/processed.npz, outputs/conformal_groupwise_predictions_val.npz,
 outputs/conformal_groupwise_predictions.npz, config.py.

@@ -1,40 +1,14 @@
 """
-Leave-one-dataset-out (LODO) generalization test.
+Leave-one-dataset-out (LODO) test.
 
-This is different from your normal train/val/test split: instead of mixing
-cells from all 4 datasets into every split, this holds out ONE ENTIRE
-DATASET for testing and trains only on the other 3. It directly answers:
-"does this model generalize to a battery chemistry/lab it has never seen
-during training?" — which is a much stronger and more meaningful claim than
-your normal cell-independent split (where the model has at least seen SOME
-cells from every dataset).
+Each of the seven datasets is held out in turn: the model is trained on the other six and tested on
+all windows of the held-out dataset. Calibration uses the other datasets' validation cells, so the
+held-out dataset contributes nothing to either the model or its interval.
 
-Expect LODO MAE to be noticeably worse than your normal test MAE — that's
-not a failure, that's the honest, expected result of testing true
-generalization instead of interpolation. Report both numbers side by side.
-
---- UNITS FIX (added) ---
-The held-out dataset's SOH values are z-scored using ITS OWN mean/std
-(soh_mean[held_out_dataset], soh_std[held_out_dataset]) rather than any
-other dataset's stats -- this is correct and necessary to avoid leakage
-(see build_lodo_cache()'s comment). But it means MAE/RMSE computed
-directly on y_test/mean_pred in that normalized space are in DIFFERENT
-UNITS for every held-out dataset: a dataset with a small soh_std gets its
-errors inflated relative to a dataset with a large soh_std, purely from
-the local scale, not from the model actually predicting worse. This
-made CALCE's LODO MAE (1.13, larger than SOH's entire [0,1.10] range)
-look like a broken/impossible result when it was actually a units
-artifact -- CALCE's held-out soh_std is small relative to the other six
-datasets, so the same real-world capacity-fade error gets amplified in
-CALCE's local normalized units.
-
-run_lodo() now reports BOTH the raw normalized-space MAE/RMSE (kept for
-debugging/comparison against older logged runs) and de-normalized
-MAE/RMSE (multiplied back by soh_std[held_out_dataset]) in real SOH
-units, which ARE comparable across the seven held-out-dataset rows.
-Report the de-normalized numbers in the manuscript's LODO table.
-Coverage is unaffected by this issue -- it's a hit-rate, not a
-magnitude, so it was already comparable across rows.
+The held-out dataset is standardized with its own mean and standard deviation, so errors in z-units
+are not comparable between held-out datasets. run_lodo() therefore reports MAE and RMSE both in
+z-units and in SOH units (multiplied back by the held-out dataset's standard deviation). Coverage is
+the same in both.
 
 Run:
     python leave_one_out.py
@@ -219,11 +193,9 @@ def evaluate_lodo(model, data, run_name, held_out_dataset, model_variant, device
     # simple pooled conformal here — the held-out dataset IS the only test
     # group, so per-group calibration would be identical to pooled anyway
     #
-    # PREDICTOR CONSISTENCY (fix for ERROR_REGISTER E1 / brief K1): split-conformal
+    # PREDICTOR CONSISTENCY: split-conformal
     # validity requires calibration and test nonconformity scores to come from the
-    # SAME predictor. This previously calibrated on predict_in_batches() (dropout
-    # off) but evaluated on mc_dropout_predict() (dropout on, MC-mean) -- a
-    # predictor mismatch. Now both use the same predictor, matching train.py's
+    # SAME predictor, so calibration and test both use the same one, matching train.py's
     # default (config.CALIBRATION_PREDICTOR, defaulting to "mc_mean").
     model.eval()
     calibration_predictor = getattr(config, "CALIBRATION_PREDICTOR", "mc_mean")
@@ -277,7 +249,7 @@ def evaluate_lodo(model, data, run_name, held_out_dataset, model_variant, device
         # SAME affine de-normalization to y_test and to [lower, upper] preserves
         # the inequality, so coverage is numerically identical in z-units and
         # real SOH units. Reported once rather than duplicated as two equal
-        # numbers; see ERROR_REGISTER.md note on this under E1.
+        # numbers.
         "coverage": coverage,
         "n_test_samples": int(len(y_test)),
         # datasets actually used for TRAINING in this LODO run (everything

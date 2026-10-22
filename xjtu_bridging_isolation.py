@@ -1,34 +1,14 @@
 """
-xjtu_bridging_isolation.py
+Which XJTU test windows span removed rows?
 
-windowing_bridge_sensitivity.py found 14.43% overall bridging for XJTU.
-But diagnose_bridging_anomaly.py just showed that CALCE/NASA/Oxford's
-"bridging" is mostly native RPT-style measurement sparsity, unrelated to
-any correction this project applied -- not a real data-quality signal.
-XJTU may have the same issue: some of its 14.43% could be genuine
-correction-related bridging (from the sentinel-value row removal,
-Section 3.2.1), and some could be native sparsity unrelated to that
-correction entirely, exactly like CALCE.
+xjtu_loader.py removes sentinel readings from the eight Sim_satellite_* cells and keeps the original
+cycle numbers, so a window can join readings on either side of a removed block. This script counts,
+from the windows' cycle indices, the fraction of test windows with a gap, separately for the
+Sim_satellite_* cells and for the other XJTU cells, which no correction touched. A gap in the other
+cells reflects the dataset's own sampling; a gap only in the corrected cells is caused by the
+correction.
 
-This isolates the two by comparing bridging rates between:
-  - The 8 Sim_satellite_* cells (where the sentinel-value correction was
-    actually applied) -- NOTE: preprocessing.py's own docstring already
-    says the renumbering there ERASES the gap, so these cells' bridging
-    should be near-ZERO regardless of whether the correction mattered,
-    which is itself informative (confirms the erasure, doesn't test it).
-  - The other 47 XJTU cells (never touched by any correction) -- ANY
-    bridging detected here is, by definition, native structure, not a
-    correction artifact, exactly analogous to CALCE/NASA/Oxford.
-
-If the two groups show SIMILAR bridging rates, that's strong evidence
-XJTU's 14.43% is mostly native sparsity too, like the other three
-datasets, and the disclosed windowing-limitation concern is much smaller
-in practice than the raw number suggested. If the non-satellite cells
-show much LOWER bridging than satellite cells, that would be surprising
-given the erasure issue, and worth a second look at the detection logic
-itself.
-
-Run from your project root:
+Run:
     python xjtu_bridging_isolation.py
 """
 

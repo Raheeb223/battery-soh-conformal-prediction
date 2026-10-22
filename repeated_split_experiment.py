@@ -1,27 +1,16 @@
 """
-Repeated cell-level splits (verification task K6 in ERROR_REGISTER.md).
+Repeated cell-level splits.
 
-The main pipeline uses a single, fixed cell-level split (config.SPLIT_SEED,
-default = config.RANDOM_SEED = 42). This script builds 4 ADDITIONAL splits
-(different split_seed, same model-init seed) end to end -- preprocessing,
-training the full model under all three conformal modes, persistence
-baselines, and cell-clustered bootstrap coverage CIs -- and reports
-between-split variability for the central calibration comparison.
+The main pipeline uses one cell-level split (config.SPLIT_SEED, default 42). This script builds four
+further splits with different split seeds and the same model seed, and runs each end to end:
+preprocessing, training the full model under all three calibration modes, persistence baselines,
+and cell-clustered bootstrap intervals. Because the model seed is fixed, the variation between
+splits reflects which cells land in which set; seed-to-seed variation is reported separately
+(outputs/multiseed_*_results.json). Raw data are parsed once and reused for all four splits.
 
-Model-init seed (config.RANDOM_SEED) is held fixed across all 5 splits, so
-variability reported here is attributable to WHICH CELLS landed in which
-split, not to training-seed variance (that is a separate, already-reported
-source of uncertainty: outputs/multiseed_*_results.json).
-
-Raw data is parsed ONCE and reused across all 4 new splits (see E10) --
-re-parsing CALCE/RWTH/etc. 4 more times would be the same unnecessary cost
-that made the pre-fix LODO run impractically slow.
-
-New artifacts only -- nothing from the original seed-42 run is touched or
-overwritten (rule: write new artifacts to new filenames/subfolders).
-Per-split cache: cache/processed_split{seed}.npz
+Per-split cache:   cache/processed_split{seed}.npz
 Per-split results: outputs/split{seed}_{mode}_results.json / _predictions.npz
-Summary: outputs/repeated_split_summary.json
+Summary:           outputs/repeated_split_summary.json
 
 Run:  python repeated_split_experiment.py
 """

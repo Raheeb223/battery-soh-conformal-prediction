@@ -97,8 +97,8 @@ def main():
             cells_d = cell_test[mt]
             n_cells = len(np.unique(cells_d))
             if n_cells >= 2:
-                # reuse the already-verified cell-clustered bootstrap (K6's
-                # cell_clustered_bootstrap.py) -- same logic, applied here so
+                # reuse the cell-clustered bootstrap of
+                # cell_clustered_bootstrap.py -- same logic, applied here so
                 # THIS script's per-dataset coverage CI is cell-valid too,
                 # not just the main results table's. cell_clustered_bootstrap_
                 # coverage computes (y>=lower)&(y<=upper); encode the existing

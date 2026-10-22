@@ -11,7 +11,7 @@ For each of five vehicle-level splits (split seeds 42-46, as for the laboratory 
      (train.train_one, model 'full'), on field training vehicles only.
   3. One MC-Dropout run gives validation and test predictions (saved in the same format as the
      laboratory prediction files).
-  4. Pooled and groupwise calibration in z-units (as in Section 5.1 of the paper), the hierarchical
+  4. Pooled and groupwise calibration in z-units (as for the laboratory data), the hierarchical
      analysis (hierarchical_calibration_v2.analyse: own data, empirical-Bayes shrinkage, prior only,
      other datasets pooled), and HGC-CP with its design chosen on validation data only
      (hgc_cp_validation_only.run_split).

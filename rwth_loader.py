@@ -15,10 +15,7 @@ Column mapping (German Basytec export):
   Zyklus  = cycle number (within this session file)
   AhEla   = Ah "Entladen" = CUMULATIVE discharged Ah since test start —
             NOT a per-cycle value. Per-cycle capacity is derived as
-            max(AhEla) - min(AhEla) within each cycle's rows (confirmed
-            necessary after an early run showed capacity values increasing
-            ~1.08/cycle instead of fading — a clear sign of an unremoved
-            cumulative baseline).
+            max(AhEla) - min(AhEla) within each cycle's rows.
   Zeit    = timestamp
 
 Each CSV's row 0 is the header, row 1 is a units row (skipped), data starts
@@ -27,13 +24,10 @@ per-cycle capacity, sessions are concatenated in chronological order (by
 the timestamp embedded in the filename) and cycles are renumbered globally
 per cell — same approach used for CALCE's multi-session files.
 
-Chemistry: cells are Sanyo-manufactured (per 'ep sanyo' naming) — verify
-exact chemistry (the dataset is commonly cited as NMC) against RWTH's own
-publication describing this dataset before stating it precisely in your
-methods section.
+Chemistry: Sanyo cells (per the 'ep sanyo' naming), commonly cited as NMC;
+see the dataset's own publication for the exact composition.
 
---- SESSION-BOUNDARY PARTIAL-CYCLE FIX ---
-Confirmed root cause of a systematic artifact affecting ALL 48 cells:
+--- SESSION-BOUNDARY PARTIAL CYCLES ---
 AhEla resets to (near) zero at the START of every new session file's
 logging window, not at the true start of whatever cycle happens to be
 in progress at that moment. If a session begins mid-cycle (routine --
@@ -45,12 +39,11 @@ via diagnose_rwth_local_outliers.py: this reading is remarkably
 consistent at ~26-27% of true baseline capacity across many independent
 cells (e.g. 0.288/1.076=26.8%, 0.281/1.059=26.5%, 0.283/1.064=26.6%),
 which is inconsistent with random sensor noise and consistent with a
-structural, mechanism-level truncation.
+structural, mechanism-level truncation that affects all 48 cells.
 
-Fix: drop the first Zyklus group of every session (see
-_parse_session_file()'s new `drop_first=True` behavior) -- this is a
-STRUCTURAL fix (removes the row that is unreliable BY CONSTRUCTION),
-not a statistical outlier guess. strip_local_outliers() is still
+The first Zyklus group of every session is therefore dropped
+(_parse_session_file(drop_first=True)); that row is unreliable by
+construction. strip_local_outliers() is still
 applied afterward in load_rwth_cell() as a safety net for a separate,
 less common failure mode (e.g. RWTH_ep_sanyo_019's multi-row
 near-zero stretch, which looks like a genuinely corrupted session's
@@ -120,7 +113,7 @@ def _parse_session_file(path: str, drop_first: bool = True) -> pd.DataFrame:
 def load_rwth_cell(session_files: list, cell_id: str, drop_first: bool = True,
                     apply_local_outlier_fix: bool = True) -> pd.DataFrame:
     """drop_first / apply_local_outlier_fix: both default True (the
-    production path). Exposed as toggles ONLY so a K7-style with/without
+    production path). Exposed as toggles only so a with/without
     sensitivity check (verify_rwth_v2.py) can quantify each correction's
     effect independently, same convention as CALCE's INCOMPLETE_POLICY and
     XJTU's XJTU_APPLY_SENTINEL_FIX -- not meant to be changed for a real run."""

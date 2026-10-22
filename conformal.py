@@ -1,15 +1,14 @@
 """
-Split conformal prediction on top of the point predictions.
+Split conformal calibration around point predictions.
 
-Why: your earlier MC-Dropout intervals were found severely overconfident.
-Conformal prediction fixes this by calibrating interval width on a held-out
-calibration set so the interval has a PROVABLE (1 - alpha) coverage
-guarantee, regardless of whether the model's internal uncertainty estimate
-was well-calibrated to begin with.
+SplitConformal calibrates one interval half-width on held-out residuals so that the interval
+covers the true value with probability at least 1 - alpha, whatever the model's own uncertainty
+estimate. NormalizedSplitConformal scales that half-width by each sample's MC-Dropout standard
+deviation, and GroupwiseSplitConformal calibrates each group (dataset) separately.
 
 Usage:
     conformal = SplitConformal(alpha=config.CONFORMAL_ALPHA)
-    conformal.calibrate(y_true_cal, y_pred_cal)          # run once on val set
+    conformal.calibrate(y_true_cal, y_pred_cal)          # on the validation set
     lower, upper = conformal.predict_interval(y_pred_test)
 """
 
@@ -23,7 +22,7 @@ class SplitConformal:
 
     def calibrate(self, y_true_cal: np.ndarray, y_pred_cal: np.ndarray):
         """y_true_cal, y_pred_cal: 1D arrays from a held-out calibration set
-        (use your VALIDATION set for this — never the test set)."""
+        (the validation set, never the test set)."""
         residuals = np.abs(y_true_cal - y_pred_cal)
         n = len(residuals)
         # the (1-alpha) empirical quantile, with the standard finite-sample correction
@@ -47,8 +46,7 @@ class SplitConformal:
         return y_pred - self.qhat, y_pred + self.qhat
 
     def coverage(self, y_true: np.ndarray, y_pred: np.ndarray) -> float:
-        """Empirical coverage on a test set — report this number in your paper
-        alongside the nominal (1 - alpha) target."""
+        """Empirical coverage on a test set."""
         lower, upper = self.predict_interval(y_pred)
         return float(np.mean((y_true >= lower) & (y_true <= upper)))
 
@@ -63,18 +61,10 @@ class NormalizedSplitConformal:
 
         interval_i = pred_i +/- qhat * mc_std_i
 
-    Why this matters: plain SplitConformal gives every sample the SAME
-    width, so per-sample uncertainty (MC-Dropout) has no effect on interval
-    size at all — the model's uncertainty estimate is computed but never
-    actually used to size the interval. This wastes exactly the information
-    needed to explain (Task 6) why some samples get wider/narrower intervals,
-    and it never allows you to test whether MC-Dropout uncertainty is USEFUL
-    for anything (Task 7) beyond a diagnostic correlation number, since it
-    doesn't affect any downstream output. This class fixes that: coverage
-    validity still holds (it's a standard, textbook conformal variant —
-    Papadopoulos et al. 2008), while intervals now genuinely vary per
-    sample based on the model's own uncertainty, giving you something for
-    feature-attribution methods (interval_width_explanation.py) to explain.
+    Plain SplitConformal gives every sample the same width, so the model's
+    per-sample uncertainty does not affect the interval. Normalized conformal
+    prediction (Papadopoulos et al. 2008) keeps the coverage guarantee while
+    letting the width follow that uncertainty.
 
     mc_std values of 0 (or very close to 0) are clipped to a small epsilon
     to avoid division-by-zero-equivalent blowups in the calibration quantile.
@@ -173,8 +163,7 @@ class GroupwiseConformal:
     come out far from the target even though the pooled/global number looks
     fine. Calibrating per-group fixes this at the cost of needing enough
     calibration samples in EACH group (a group with very few validation
-    samples will still have a noisy qhat — that's a real limitation to
-    mention in your paper if any group's cell count stays small).
+    samples still has a noisy qhat).
     """
 
     def __init__(self, alpha=0.10):
@@ -203,20 +192,16 @@ class GroupwiseConformal:
         missing_mask = np.isnan(lower)
         if missing_mask.any():
             missing_groups = sorted(set(labels[missing_mask]))
-            print(f"[conformal] WARNING: no calibration data for {missing_groups} — "
-                  f"this means that group had 0 validation cells (a split bug, not "
-                  f"expected behavior). Falling back to a pooled qhat across all "
-                  f"calibrated groups so results aren't silently wrong, but you should "
-                  f"fix the split so every dataset gets validation cells.")
+            print(f"[conformal] WARNING: no calibration data for {missing_groups} "
+                  f"(no validation windows for that group in this split); using the mean "
+                  f"qhat of the calibrated groups for it.")
             pooled_qhat = np.mean([c.qhat for c in self.group_conformals.values()])
             lower[missing_mask] = y_pred[missing_mask] - pooled_qhat
             upper[missing_mask] = y_pred[missing_mask] + pooled_qhat
         return lower, upper
 
     def coverage_by_group(self, y_true: np.ndarray, y_pred: np.ndarray, labels: np.ndarray):
-        """Returns {group_name: coverage} — report per-group coverage in your
-        paper, not just one pooled number, since that's the whole point of
-        calibrating per group."""
+        """Returns {group_name: coverage}."""
         lower, upper = self.predict_interval(y_pred, labels)
         results = {}
         for group in np.unique(labels):

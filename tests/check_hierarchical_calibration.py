@@ -102,8 +102,8 @@ def test_shrinkage_direction():
           "over-weight it -- i.e. random-effects mu lies between the fixed-effect mu and the "
           "simple unweighted average, moving toward the unweighted average as tau2 grows")
     # Hand-checkable inputs with clear heterogeneity: w_fe=[1, 0.25], mu_fe=2, Q=20, df=1,
-    # c=0.4, so tau2=(20-1)/0.4=47.5. (An earlier version used inputs where Q==df, which
-    # clipped tau2 to 0 and made the check below pass trivially with mu_re == mu_fe.)
+    # c=0.4, so tau2=(20-1)/0.4=47.5. (Inputs with Q <= df would clip tau2 to 0 and make the
+    # check below pass trivially with mu_re == mu_fe.)
     q = np.array([0.0, 10.0])
     s2 = np.array([1.0, 4.0])
     mu_re, tau2 = dersimonian_laird(q, s2)

@@ -1,84 +1,30 @@
 """
-Turns raw per-dataset capacity-fade curves into windowed train/val/test arrays
-ready for the model.
+Turns per-dataset capacity curves into windowed train/validation/test arrays for the model.
 
-Key design choices (match what your project already established):
-  - SOH = capacity(cycle) / median(capacity of that cell's first 3 cycles)
-    -> unitless, comparable across
-    datasets with different rated capacities/chemistries.
-  - Cell-independent split: an entire cell's cycle history goes to exactly
-    one of train/val/test. Never split a single cell's cycles across sets —
-    that's the leakage bug you already fixed once.
-  - Per-dataset normalization: SOH is already roughly [0,1] and comparable,
-    but we still z-score each dataset's SOH values *using statistics computed
-    only from that dataset's TRAIN cells*, to correct for any residual scale
-    differences between chemistries.
+  - SOH = capacity(cycle) / median(capacity of that cell's first three cycles), so datasets with
+    different rated capacities are comparable.
+  - The split is by cell: all cycles of a cell go to exactly one of train, validation, and test.
+  - Each dataset's SOH is standardized (z-scored) with the mean and standard deviation of that
+    dataset's training cells only.
+  - CALCE is loaded through calce_loader_v2, which differences the cumulative discharge-capacity
+    counter found in most CALCE workbooks (see that module's docstring).
+  - load_all_raw() keeps only the columns dataset, cell_id, cycle, capacity, so every loader
+    returns the same schema; a loader that fails is skipped with a message.
+  - make_windows() also returns the cell of every window (cell_train/cell_val/cell_test), which
+    the per-cell figures, the XJTU bridging analysis, and the cell-clustered bootstrap need.
+  - run() prints the number of windows per dataset and split, so a dataset that yields no windows
+    for a given window length is visible immediately.
+  - add_soh() asserts that no (dataset, cell_id, cycle) row is duplicated, since a duplicate would
+    bias the reference capacity.
 
---- CHANGES IN THIS VERSION ---
-0. CALCE now loads through calce_loader_v2 instead of the original
-   calce_loader. The original loader misread a cumulative discharge-capacity
-   counter as a per-cycle reading, which corrupted the CALCE series (see
-   calce_loader_v2.py's docstring and the manuscript's CALCE section for the
-   full mechanism, fix, and validation). calce_loader_v2 returns the same
-   ["dataset", "cell_id", "cycle", "capacity"] schema plus extra per-row
-   diagnostic columns (cycle_raw, source_file, complete_discharge,
-   straddles_boundary, truncated_final_cycle, terminal_voltage). Those extras
-   are informational only — inspect them directly via calce_loader_v2's own
-   diagnostic scripts (verify_calce_v2.py, analyze_low_side_outliers.py, etc.)
-   if needed — and are trimmed off in load_all_raw() below (see change 1)
-   rather than left to flow silently through the rest of the pipeline.
-1. load_all_raw() now restricts every loaded dataframe to the canonical
-   ["dataset", "cell_id", "cycle", "capacity"] columns before concatenating.
-   Previously, concatenating dataframes with different column sets (e.g.
-   CALCE's diagnostic extras against every other loader's plain four columns)
-   silently NaN-fills the missing columns for every non-CALCE row — harmless
-   for correctness (nothing downstream reads those columns), but untidy and
-   a plausible source of confusion later (e.g. a stray df.isnull().sum()
-   check). This makes the loaded schema homogeneous and explicit instead.
-   A loader missing a required column is skipped with a clear message,
-   same as any other loader failure, rather than crashing the whole run.
-2. make_windows() now also returns a cell_id array (cell_train/cell_val/
-   cell_test), saved into the cache alongside lab_train/lab_val/lab_test.
-   Downstream analyses (per-cell figures, the XJTU bridging analysis, the
-   cell-clustered bootstrap) need to know which cell each window came from. Old code reading only X/y/lab still works
-   unchanged — this is a pure addition, no existing keys removed or renamed.
-3. run() now prints a per-dataset, per-split row-count summary AFTER
-   windowing (not just cell counts), so a silent zero-window dataset
-   (like the NASA window=30/50 case you already found) is visible
-   immediately in this script's own output, not just discovered later
-   via a separate diagnostic script.
-4. add_soh() now asserts there are no duplicate (dataset, cell_id, cycle)
-   rows before computing SOH -- a duplicate row would silently bias the
-   reference-capacity median and every downstream SOH value for that
-   cell, and would fail quietly otherwise.
-
---- KNOWN LIMITATION, NOT FIXED HERE (documented rather than silently
-    papered over) ---
-make_windows() slides windows positionally over each cell's SOH array,
-in cycle-sorted order. For XJTU's Sim_satellite_* cells, xjtu_loader.py's
-detect_and_strip_sentinel_values() removes sentinel rows but does NOT
-re-number the 'cycle' column afterward -- only the pandas row index is
-reset; surviving rows keep their original (now-gapped) cycle numbers.
-Verified directly (E9/xjtu_bridging_isolation.py, run against
-cache/processed.npz's window_cycle_indices_test): of XJTU's 2,605 test
-windows, the 376 drawn from the 8 Sim_satellite_* cells bridge a removed
-block on EVERY SINGLE WINDOW (bridging fraction 1.0000); the other 2,229
-windows, from cells never touched by this correction, show ZERO bridging.
-So the gap is not erased and not undetectable -- every Sim_satellite test
-window joins the capacity reading just before a removed sentinel block to
-the one just after it as if they were 20 consecutive real cycles, when
-they are not. This is the same class of issue as the already-documented
-CALCE/RWTH concatenation-boundary limitation (no cell-ID field to mark
-internal boundaries), but unlike CALCE/NASA/Oxford's diffuse native
-sparsity (see diagnose_bridging_anomaly.py), it is 100% concentrated in
-these 8 cells and should be reported as such, with an explicit
-with/without-these-376-windows sensitivity check
-(xjtu_bridging_sensitivity.py) rather than dismissed as negligible.
+Windows are taken over consecutive rows of each cell. xjtu_loader.py removes sentinel readings from
+the eight Sim_satellite_* cells without renumbering cycles, so every test window from those cells
+(376 of XJTU's 2,605) spans a removed block. xjtu_bridging_isolation.py measures this and
+xjtu_bridging_sensitivity.py reports its effect on error and coverage.
 
 Run:
     python preprocessing.py
-This caches processed arrays into config.CACHE_DIR as .npz files so you don't
-need to re-parse raw files every time you tweak the model.
+The processed arrays are cached in config.CACHE_DIR as .npz files.
 """
 
 import os
@@ -95,7 +41,7 @@ CANONICAL_COLUMNS = ["dataset", "cell_id", "cycle", "capacity"]
 def load_all_raw() -> pd.DataFrame:
     """Load every dataset that's available; skip ones that fail with a warning
     rather than crashing the whole pipeline. Every loaded dataframe is trimmed
-    to CANONICAL_COLUMNS before concatenation (see module docstring, change 1),
+    to CANONICAL_COLUMNS before concatenation (see module docstring),
     so a loader that returns extra diagnostic columns (CALCE's, currently)
     never produces a heterogeneous, NaN-scattered combined dataframe."""
     loaders = {
@@ -164,16 +110,13 @@ def cell_independent_split(df: pd.DataFrame, split_seed: int = None):
     stratified by dataset so every split has representation from every source.
 
     Guarantees at least 1 cell in val and 1 in test for any group with 3+
-    cells. sklearn's train_test_split (used previously) applies the val/test
-    fraction to whatever's left AFTER carving out train, which can round a
-    small remaining pool down to 0 in one of the two splits — that's exactly
-    what happened to NASA's 7 cells, silently leaving it with 0 validation
-    cells and breaking conformal calibration for that group. This version
-    computes explicit integer counts up front and never lets a required
-    split fall to 0.
+    cells. Applying the validation/test fraction to what is left after the
+    training cells are removed can round a small pool down to 0 (NASA has 7
+    cells), so explicit integer counts are computed up front and a required
+    split never falls to 0.
 
     split_seed: overrides config.SPLIT_SEED for this call (used by the
-    repeated-split experiment, K6, to vary the split independently of the
+    repeated-split experiment to vary the split independently of the
     model-init seed, config.RANDOM_SEED)."""
     cell_table = df[["dataset", "cell_id"]].drop_duplicates()
     seed = split_seed if split_seed is not None else getattr(config, "SPLIT_SEED", config.RANDOM_SEED)
@@ -220,11 +163,10 @@ def make_windows(df: pd.DataFrame, cell_ids: set, soh_mean: dict, soh_std: dict,
     cell-ID labels, AND per-sample raw cycle-index arrays (needed for
     xjtu_bridging_isolation.py / xjtu_bridging_sensitivity.py to detect
     windows that bridge across rows removed during data-quality cleaning.
-    This DOES catch XJTU's Sim_satellite_* cells -- confirmed directly
-    (E9): xjtu_loader.py's detect_and_strip_sentinel_values() does not
+    This catches XJTU's Sim_satellite_* cells: xjtu_loader.py's detect_and_strip_sentinel_values() does not
     re-number 'cycle' after removing rows, so the gap survives and every
     Sim_satellite_* test window bridges it (see this file's module-level
-    docstring, 'KNOWN LIMITATION' section, for the verified numbers)."""
+    docstring for the numbers)."""
     w = window if window is not None else config.INPUT_WINDOW
     h = horizon if horizon is not None else config.FORECAST_HORIZON
 
@@ -253,7 +195,7 @@ def make_windows(df: pd.DataFrame, cell_ids: set, soh_mean: dict, soh_std: dict,
 def cache_path_for(window: int, split_seed: int = None) -> str:
     """Each window size gets its own cache file so ablation runs never
     clobber each other or the main experiment's cache. A non-default
-    split_seed also gets its own suffix (K6 repeated-split experiment), so
+    split_seed also gets its own suffix, so
     those runs never overwrite the verified seed-42 cache."""
     default_seed = getattr(config, "SPLIT_SEED", config.RANDOM_SEED)
     seed = split_seed if split_seed is not None else default_seed
@@ -287,12 +229,12 @@ def run(window: int = None, split_seed: int = None, raw_df=None, out_path: str =
     variant at that seed trains/tests on the exact same cells, making the
     comparison fair.
 
-    split_seed: override config.SPLIT_SEED (K6 repeated-split experiment). Left
+    split_seed: override config.SPLIT_SEED (repeated-split experiment). Left
     None, this reproduces the original seed-42 cache exactly.
 
     raw_df: pre-loaded, pre-SOH'd dataframe (add_soh(load_all_raw())), reused
     across multiple split_seed / window variants by a caller that needs several
-    caches built in one run (e.g. the K6 repeated-split experiment) so raw data
+    caches built in one run (e.g. the repeated-split experiment) so raw data
     is parsed once rather than once per variant. Pass None to load fresh.
 
     out_path: where to write the cache (default: cache_path_for(window, split_seed)). The field

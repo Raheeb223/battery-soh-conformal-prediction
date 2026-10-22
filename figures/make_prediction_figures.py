@@ -2,11 +2,11 @@
 Figures built from the saved per-window predictions rather than from summary results.
 
   prediction_examples   true and predicted SOH with pooled and groupwise 90% intervals, on one
-                        test cell per dataset (Section 5.1)
+                        test cell per dataset
   calibration_errors    each dataset's validation errors against the pooled and groupwise
-                        quantiles, and where its test errors fall (Section 5.1)
+                        quantiles, and where its test errors fall
   strategy_comparison   coverage of every calibration strategy on the five datasets where all
-                        are defined (Section 5.2)
+                        are defined
 
 Inputs: outputs/conformal_{groupwise,pooled}_predictions.npz (test intervals, as evaluated in the
 paper), outputs/conformal_groupwise_predictions_val.npz (validation errors),
@@ -37,8 +37,7 @@ def load_predictions():
 
 
 def example_cell(gw, dataset):
-    """The dataset's test cell with the most test windows (ties broken by name), so the choice is
-    fixed in advance rather than picked by eye."""
+    """The dataset's test cell with the most test windows (ties broken by name)."""
     cells, counts = np.unique(gw["cell_test"][gw["lab_test"] == dataset], return_counts=True)
     return sorted(zip(-counts, cells))[0][1]
 

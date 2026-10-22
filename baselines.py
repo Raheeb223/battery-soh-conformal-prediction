@@ -1,17 +1,13 @@
 """
-Simple non-deep baselines, evaluated on the exact same windowed/normalized
-data your neural network uses (same cache file, same train/val/test cells,
-same per-dataset normalization). This is what makes the comparison fair —
-without this, "our LSTM beats X" claims aren't credible.
+Point-prediction baselines on exactly the same windows, cells, and per-dataset normalization as the
+neural models.
 
-Baselines:
-  - linear   : plain linear regression on the flattened window
+  - linear   : linear regression on the flattened window
   - svr      : support vector regression (RBF kernel) on the flattened window
   - xgboost  : gradient-boosted trees on the flattened window
 
-None of these get conformal intervals — split conformal only needs a
-point predictor to wrap, but for a first pass we just report point-prediction
-MAE/RMSE, since that's the comparison reviewers actually look for.
+Each baseline also saves its validation predictions, so baseline_conformal_coverage.py can
+calibrate it with the same conformal code as the main model.
 
 Run:
     python baselines.py
@@ -58,7 +54,7 @@ def run_baseline(name: str, model, cache_path=None, save_outputs=True, max_train
     print(f"[baseline:{name}] training on {X_train.shape[0]} samples...")
     model.fit(X_train, y_train)
     pred = model.predict(X_test)
-    # ERROR_REGISTER E2 fix: also predict on the VALIDATION set, so conformal
+    # Also predict on the VALIDATION set, so conformal
     # calibration (which needs held-out residuals, never test residuals) can
     # be computed for this architecture downstream (baseline_conformal_coverage.py).
     val_pred = model.predict(X_val)
@@ -100,7 +96,7 @@ def run_baseline(name: str, model, cache_path=None, save_outputs=True, max_train
 def run_all_baselines(cache_path=None):
     results = []
     results.append(run_baseline("linear", LinearRegression(), cache_path))
-    # SVR is much slower on large sample counts (your MIT-dominated dataset has
+    # SVR is much slower on large sample counts (the MIT-dominated training set has
     # ~74k+ training windows) — subsample for tractability. This is a real
     # limitation of the SVR baseline specifically; the neural network and
     # linear baseline both still train on the full training set.

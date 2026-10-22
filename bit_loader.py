@@ -17,9 +17,8 @@ charge/discharge capacity columns, so we take the MAX Capacity(Ah) recorded
 per Cycle_Index as that cycle's capacity (same heuristic used for CALCE,
 where capacity accumulates through a cycle and peaks near end-of-discharge).
 
-Chemistry/cell model: LR1865SZ, 18650 form factor. Verify exact chemistry
-against the dataset's Readme.txt / associated paper before stating it in
-your methods section — not asserted here.
+Cell model: LR1865SZ, 18650 form factor (see the dataset's Readme.txt and
+associated paper for the chemistry).
 """
 
 import os

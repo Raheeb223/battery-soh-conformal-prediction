@@ -54,8 +54,6 @@ DEFECTS IN THE ORIGINAL LOADER (calce_loader.py, since removed) THAT THIS VERSIO
                               on the raw values a cumulative file's last group is
                               always its largest, so the rule could never fire
                               there even for a genuinely truncated final cycle.
-                              An earlier version computed it on the raw values
-                              and never fired on real CALCE data as a result.
   5. Non-cycling session files. A small number of CALCE workbooks are not
      ordinary charge/discharge cycling sessions at all (confirmed example:
      "..._self discharge test.xlsx", which records a rest/self-discharge
@@ -85,7 +83,7 @@ defaults to "flag" (all groups kept, chronological order fixed). "drop" removes
 groups with straddles_boundary == True or truncated_final_cycle == True -- NOT
 complete_discharge (see above: uncalibrated, wiring it into "drop" previously
 removed 82-100% of some cells' rows). Adopt "drop" only if verify_calce_v2.py's
-outliers(drop)/rows(drop) columns confirm it helps on your actual data.
+outliers(drop)/rows(drop) columns show that it helps.
 File names without a parseable date fall back to NAME order (printed as a
 warning); check those cells with verify_calce_v2.py.
 

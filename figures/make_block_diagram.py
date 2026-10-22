@@ -172,7 +172,7 @@ cols = [
      "point accuracy vs. persistence",
      "inference cost"],
 ]
-# The field check is a separate study on its own data (Section 5.6), so it gets its own line below.
+# The field check is a separate study on its own data, so it gets its own line below.
 field_line = (f"field check: {N['FieldVehiclesTotal']} electric vehicles, same code and model, "
               "analysed separately")
 for c, items in enumerate(cols):

@@ -157,8 +157,8 @@ def main():
         import shutil
         shutil.rmtree(tmp_dir, ignore_errors=True)
 
-    # --- CALCE K8 assertions ---
-    print("\n=== CALCE K8 assertions ===")
+    # --- CALCE assertions ---
+    print("\n=== CALCE assertions ===")
     calce_raw = raw[raw["dataset"] == "CALCE"]
     record("calce_total_rows_14188", len(calce_raw) == 14188, f"actual rows: {len(calce_raw)} (brief claims 14,188)")
     calce_filtered = df[df["dataset"] == "CALCE"]

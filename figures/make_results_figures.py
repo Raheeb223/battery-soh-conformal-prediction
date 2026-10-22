@@ -1,12 +1,12 @@
 """
 Results figures for the manuscript, built from outputs/*.json.
 
-  coverage_comparison           pooled vs. groupwise coverage per dataset (Section 5.1)
-  calibration_size_sensitivity  coverage vs. calibration-cell budget (Section 5.3)
-  cqr_comparison                CQR vs. groupwise calibration: coverage and width (Section 5.4)
-  field_check                   field check on the EVBattery fleet data (Section 5.6)
-  repeated_split_variability    coverage across cell-level splits (Section 5.7)
-  mwhc_sensitivity              MWHC temperature sweep (Appendix B)
+  coverage_comparison           pooled vs. groupwise coverage per dataset
+  calibration_size_sensitivity  coverage vs. calibration-cell budget
+  cqr_comparison                CQR vs. groupwise calibration: coverage and width
+  field_check                   field check on the EVBattery fleet data
+  repeated_split_variability    coverage across cell-level splits
+  mwhc_sensitivity              MWHC temperature sweep (appendix)
 
 Run from the repository root:  python figures/make_results_figures.py [--out DIR]
 """
