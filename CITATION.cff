@@ -6,6 +6,7 @@ authors:
   - given-names: "Raheeb"
     family-names: "Sadman"
     affiliation: "BRAC University, Dhaka, Bangladesh"
+    email: raheeb.sadman@g.bracu.ac.bd
 license: MIT
 repository-code: "https://github.com/Raheeb223/battery-soh-conformal-prediction"
 keywords:
