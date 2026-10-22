@@ -14,6 +14,7 @@ python tests/run_checks.py --full   # also the data-layer check (needs the raw d
 |---|---|---|---|
 | `check_conformal.py` | the split-conformal calibration behind every interval | nothing (synthetic data) | < 1 s |
 | `check_hierarchical_calibration.py` | the DerSimonian–Laird estimator behind hierarchical calibration | nothing | < 1 s |
+| `check_bayesian_borrowing.py` | the Bayesian log-scale borrowing baselines | nothing | ~25 s |
 | `check_hgc_cp.py` | the similarity weighting in HGC-CP | nothing | < 1 s |
 | `check_hgc_cp_split_equivalence.py` | the fast HGC-CP path gives identical intervals | nothing | < 1 s |
 | `check_evbattery_loader.py` | the field-data loader refuses unsafe pickles and reads valid ones | nothing | < 1 s |
@@ -51,6 +52,19 @@ between-dataset variance τ². The estimator is checked against arithmetic done 
    module exactly over 30 random configurations.
 3. **Direction of pooling.** With clearly heterogeneous inputs (hand value τ² = 47.5), the
    random-effects mean must lie strictly between the fixed-effect and the unweighted mean.
+
+### `check_bayesian_borrowing.py`: Bayesian log-scale borrowing (`borrowing_variants.py`)
+
+The stronger borrowing baselines integrate the between-dataset spread out on a grid. They are
+checked against a posterior computed a second way.
+
+1. **Brute-force posterior.** An independently written two-dimensional integration over the mean
+   and the between-dataset spread gives the posterior mean of a group's log quantile, both for a
+   group in the fit and for a new group. It must match the module to 2e-3 in 36 random settings.
+2. **Limits.** A group measured almost without error keeps its own value, identical groups return
+   their common value, and the posterior weight on a group's own value lies in [0, 1].
+3. **Meta-regression.** When a covariate explains the group values exactly, a new group's
+   predicted value is the fitted line at its covariate.
 
 ### `check_hgc_cp.py`: heterogeneity-guided conformal prediction (`hgc_cp.py`)
 

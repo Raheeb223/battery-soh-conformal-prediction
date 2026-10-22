@@ -518,6 +518,7 @@ def main():
         # of every cell has zero spread by construction.
         rule_floor = 0.85
         macro("CalSizeRuleFloor", rule_floor * 100, "{:.0f}")
+        macro("CalSizeNRepeats", calsize["n_repeats"], "{:d}")
         for d, v in calsize["per_dataset"].items():
             n_full = v["n_cells_available"]
             ok = sorted(int(b) for b, r in v["per_budget"].items()
@@ -662,6 +663,138 @@ def main():
     else:
         macro("EnsNMembers", None)
 
+    # The deep ensemble on every cell-level split (deep_ensemble_splits.py).
+    es = load("deep_ensemble_splits.json")
+    registry["sections"]["deep_ensemble_splits"] = es or UNVERIFIED
+    if es:
+        macro("EsNSplits", len(es["splits"]), "{:d}")
+        macro("EsNormBestSplits", es["ens_norm_best_splits"], "{:d}")
+        macro("EsNormBeatsMcGroupwiseSplits", es["ens_norm_beats_mc_groupwise_splits"], "{:d}")
+        macro("EsNormNarrowerSplits", es["ens_norm_narrower_than_mc_groupwise_splits"], "{:d}")
+        macro("EsMoreAccurateSplits", es["ens_more_accurate_splits"], "{:d}")
+        macro("EsGroupwiseBeatsPooledSplits", es["ens_groupwise_beats_pooled_splits"], "{:d}")
+        macro("EsPooledBITMin", es["ens_pooled_bit_range"][0] * 100, "{:.1f}")
+        macro("EsPooledBITMax", es["ens_pooled_bit_range"][1] * 100, "{:.1f}")
+        macro("EsGroupwiseBITMin", es["ens_groupwise_bit_range"][0] * 100, "{:.1f}")
+        macro("EsGroupwiseBITMax", es["ens_groupwise_bit_range"][1] * 100, "{:.1f}")
+        for key, tag in (("deep_ensemble/normalized_groupwise", "EnsNorm"), ("deep_ensemble/groupwise", "EnsGw"),
+                         ("deep_ensemble/pooled", "EnsPooled"), ("mc_dropout/groupwise", "McGw"),
+                         ("mc_dropout/normalized_groupwise", "McNorm"), ("mc_dropout/pooled", "McPooled")):
+            v = es["summary"][key]
+            macro(f"Es{tag}DevMean", v["mean_dev_five"] * 100, "{:.2f}")
+            macro(f"Es{tag}DevMin", v["min_dev_five"] * 100, "{:.2f}")
+            macro(f"Es{tag}DevMax", v["max_dev_five"] * 100, "{:.2f}")
+            macro(f"Es{tag}Width", v["mean_width"], "{:.4f}")
+    else:
+        macro("EsNSplits", None)
+
+    # Stronger borrowing baselines on every split (borrowing_variants.py).
+    bv = load("borrowing_variants.json")
+    registry["sections"]["borrowing_variants"] = bv or UNVERIFIED
+    if bv:
+        tags = {"own": "Own", "hier_linear_loo": "HierLin", "eb_linear_joint": "EbLinJoint",
+                "eb_log_joint": "EbLogJoint", "bayes_log": "BayesLog", "bayes_log_noise": "BayesNoise",
+                "bayes_log_spread": "BayesSpread", "prior_linear_loo": "PriorLin", "prior_log": "PriorLog",
+                "prior_log_noise": "PriorNoise", "prior_log_spread": "PriorSpread"}
+        sm = bv["summary"]
+        macro("BvNSplits", len(bv["splits"]), "{:d}")
+        macro("BvPriorScale", bv["prior_scale"], "{:g}")
+        for m, tag in tags.items():
+            macro(f"Bv{tag}DevMean", sm["mean_abs_dev"][m]["mean"] * 100, "{:.2f}")
+            macro(f"Bv{tag}DevMin", sm["mean_abs_dev"][m]["min"] * 100, "{:.2f}")
+            macro(f"Bv{tag}DevMax", sm["mean_abs_dev"][m]["max"] * 100, "{:.2f}")
+            macro(f"Bv{tag}BeatsOwn", sm["mean_abs_dev"][m]["beats_own_splits"], "{:d}")
+            macro(f"Bv{tag}BITMin", sm["bit_coverage"][m]["min"] * 100, "{:.1f}")
+            macro(f"Bv{tag}BITMax", sm["bit_coverage"][m]["max"] * 100, "{:.1f}")
+            macro(f"Bv{tag}DevMain", bv["splits"][str(config.RANDOM_SEED)]["mean_abs_dev"][m] * 100, "{:.2f}")
+            further = [v["mean_abs_dev"][m] * 100 for s, v in bv["splits"].items() if s != str(config.RANDOM_SEED)]
+            macro(f"Bv{tag}FurtherMean", np.mean(further), "{:.2f}")
+            macro(f"Bv{tag}FurtherMin", min(further), "{:.2f}")
+            macro(f"Bv{tag}FurtherMax", max(further), "{:.2f}")
+        with_own = ["hier_linear_loo", "eb_linear_joint", "eb_log_joint", "bayes_log", "bayes_log_noise",
+                    "bayes_log_spread"]
+        best = min(with_own, key=lambda m: sm["mean_abs_dev"][m]["mean"])
+        macro("BvBestGainMean", (sm["mean_abs_dev"]["own"]["mean"] - sm["mean_abs_dev"][best]["mean"]) * 100, "{:.2f}")
+        gains = [(v["mean_abs_dev"]["own"] - v["mean_abs_dev"][best]) * 100 for v in bv["splits"].values()]
+        macro("BvBestGainSplitMax", max(gains), "{:.1f}")
+        for m, v in sm["bit_weight_own"].items():
+            macro(f"Bv{tags[m]}BITWeightMin", v["min"], "{:.2f}")
+            macro(f"Bv{tags[m]}BITWeightMax", v["max"], "{:.2f}")
+        for a, name in (("0.5", "Half"), ("2.0", "Two")):
+            macro(f"BvBayesLogDevScale{name}", sm["prior_scale_sensitivity"][a]["bayes_log"] * 100, "{:.2f}")
+            macro(f"BvPriorLogDevScale{name}", sm["prior_scale_sensitivity"][a]["prior_log"] * 100, "{:.2f}")
+        shifts = {d: [100 * (s["per_target"][d]["coverage"]["bayes_log_noise"] - s["per_target"][d]["coverage"]["own"])
+                      for s in bv["splits"].values() if d in s["per_target"]]
+                  for d in ("MIT", "RWTH", "XJTU", "BIT", "CALCE")}
+        macro("BvNoiseXJTUShiftMin", min(shifts["XJTU"]), "{:.1f}")
+        macro("BvNoiseXJTUShiftMax", max(shifts["XJTU"]), "{:.1f}")
+        macro("BvNoiseOtherShiftMax", max(abs(x) for d in shifts if d != "XJTU" for x in shifts[d]), "{:.1f}")
+    else:
+        macro("BvNSplits", None)
+
+    # Calibration-cell budget on every split (budget_across_splits.py).
+    ba = load("budget_across_splits.json")
+    registry["sections"]["budget_across_splits"] = ba or UNVERIFIED
+    if ba:
+        macro("BaNSplits", len(ba["per_split"]), "{:d}")
+        for d, v in ba["across_splits"].items():
+            macro(f"Ba{d}NeededMin", v["needed_min"], "{:d}")
+            macro(f"Ba{d}NeededMax", v["needed_max"], "{:d}")
+            macro(f"Ba{d}NotReached", v["not_reached_splits"], "{:d}")
+            macro(f"Ba{d}FullMin", v["full_mean_min"] * 100, "{:.1f}")
+            macro(f"Ba{d}FullMax", v["full_mean_max"] * 100, "{:.1f}")
+            macro(f"Ba{d}BelowRule", v["full_below_rule_splits"], "{:d}")
+            macro(f"Ba{d}OneMin", v["one_cell_mean_min"] * 100, "{:.1f}")
+            macro(f"Ba{d}OneMax", v["one_cell_mean_max"] * 100, "{:.1f}")
+            macro(f"Ba{d}Available", v["available_max"], "{:d}")
+            other = [ba["per_split"][s][d]["full_mean"] * 100 for s in ba["per_split"] if s != str(config.RANDOM_SEED)]
+            macro(f"Ba{d}FullOtherMin", min(other), "{:.1f}")
+            macro(f"Ba{d}FullOtherMax", max(other), "{:.1f}")
+    else:
+        macro("BaNSplits", None)
+
+    # Longer forecast horizons and calibrated naive forecasts (horizon_experiment.py).
+    hz = load("horizon_experiment.json")
+    registry["sections"]["horizon_experiment"] = hz or UNVERIFIED
+    if hz:
+        names = {"1": "One", "10": "Ten", "50": "Fifty"}
+        for h, r in hz.items():
+            t = names[h]
+            mae = r["mae_real"]
+            macro(f"Hz{t}NDatasets", len(mae), "{:d}")
+            macro(f"Hz{t}BeatsPersist", sum(v["model_beats_persistence"] for v in mae.values()), "{:d}")
+            macro(f"Hz{t}BeatsDrift", sum(v["model_beats_drift"] for v in mae.values()), "{:d}")
+            for d, v in mae.items():
+                # MAE in SOH percentage points.
+                macro(f"Hz{t}{d}Model", v["model"] * 100, "{:.3f}")
+                macro(f"Hz{t}{d}Persist", v["persistence"] * 100, "{:.3f}")
+                macro(f"Hz{t}{d}Drift", v["drift"] * 100, "{:.3f}")
+            for k, tag in (("model", "Model"), ("persistence", "Persist"), ("drift", "Drift")):
+                macro(f"Hz{t}Pooled{tag}MAE", r["pooled_mae_real"][k] * 100, "{:.3f}")
+            mc = r["model_calibration"]
+            for mode, tag in (("pooled", "Pooled"), ("groupwise", "Groupwise"), ("normalized_groupwise", "Norm")):
+                macro(f"Hz{t}{tag}Dev", mc[mode]["mean_abs_dev_five"] * 100, "{:.2f}")
+                macro(f"Hz{t}{tag}BIT", mc[mode]["per_dataset_coverage"]["BIT"] * 100, "{:.1f}")
+            for k, tag in (("persistence", "Persist"), ("drift", "Drift")):
+                for mode, mtag in (("pooled", "Pooled"), ("groupwise", "Groupwise")):
+                    c = r["naive_calibration"][k][mode]
+                    macro(f"Hz{t}{tag}{mtag}Dev", c["mean_abs_dev_five"] * 100, "{:.2f}")
+                    macro(f"Hz{t}{tag}{mtag}BIT", c["per_dataset_coverage"]["BIT"] * 100, "{:.1f}")
+        naive = {mode: [r["naive_calibration"][k][mode]["mean_abs_dev_five"] * 100
+                        for r in hz.values() for k in ("persistence", "drift")]
+                 for mode in ("pooled", "groupwise")}
+        model = {mode: [r["model_calibration"][mode]["mean_abs_dev_five"] * 100 for r in hz.values()]
+                 for mode in ("pooled", "groupwise")}
+        for mode, tag in (("pooled", "Pooled"), ("groupwise", "Groupwise")):
+            macro(f"HzNaive{tag}DevMin", min(naive[mode]), "{:.1f}")
+            macro(f"HzNaive{tag}DevMax", max(naive[mode]), "{:.1f}")
+            macro(f"HzModel{tag}DevMin", min(model[mode]), "{:.1f}")
+            macro(f"HzModel{tag}DevMax", max(model[mode]), "{:.1f}")
+        macro("HzFiftyModelVsPersistPercent",
+              (1 - hz["50"]["pooled_mae_real"]["model"] / hz["50"]["pooled_mae_real"]["persistence"]) * 100, "{:.0f}")
+    else:
+        macro("HzOneNDatasets", None)
+
     # Leave-one-dataset-out with calibration cells from the left-out dataset (lodo_target_calibration.py).
     lt = load("lodo_target_calibration.json")
     registry["sections"]["lodo_target_calibration"] = lt or UNVERIFIED
@@ -704,6 +837,14 @@ def main():
         macro("LodoTOwnValBeatsOthers", sum(abs(pd_[d]["own_val"]["coverage"] - 0.9)
                                             < abs(pd_[d]["others"]["coverage"] - 0.9) for d in five), "{:d}")
         macro("LodoTNFive", len(five), "{:d}")
+        # How far the retrained LODO models move from leave_one_out.py, both calibrated on the
+        # other datasets and scored on all of the left-out dataset's windows.
+        shift = {d: abs(pd_[d]["all_windows_others_coverage"] - lodo[d]["coverage"]) * 100
+                 for d in pd_ if lodo.get(d, UNVERIFIED) != UNVERIFIED}
+        for name, ds in (("Five", five), ("All", list(shift))):
+            worst = max(ds, key=shift.get)
+            macro(f"LodoTRetrainShift{name}Max", shift[worst], "{:.1f}")
+            macro(f"LodoTRetrainShift{name}Dataset", worst, "{}")
     else:
         macro("LodoTDevOwnAll", None)
 
@@ -729,6 +870,19 @@ def main():
             bit = [per[s]["per_dataset"]["BIT"][m] * 100 for s in splits]
             macro(f"ReplicationBIT{k}Min", min(bit), "{:.1f}")
             macro(f"ReplicationBIT{k}Max", max(bit), "{:.1f}")
+        # BIT coverage over all five splits (main split + the four above), for the borrowing table.
+        hier_main = registry["sections"]["hierarchical_calibration"]
+        hgc_main = registry["sections"]["hgc_cp_nested_search"]
+        if hier_main != UNVERIFIED and hgc_main != UNVERIFIED:
+            main_bit = {"own": hier_main["per_target"]["BIT"]["cov_own_quantile"],
+                        "hierarchical": hier_main["per_target"]["BIT"]["cov_eb_shrunk"],
+                        "prior_only": hier_main["per_target"]["BIT"]["cov_prior_only"],
+                        "others_pooled": hier_main["per_target"]["BIT"]["cov_cross_source_pooled"],
+                        "hgc_cp": hgc_main["BIT"]["real_target_test_coverage"]}
+            for k, m in methods.items():
+                bit = [main_bit[m] * 100] + [per[s]["per_dataset"]["BIT"][m] * 100 for s in splits]
+                macro(f"RepAllBIT{k}Min", min(bit), "{:.1f}")
+                macro(f"RepAllBIT{k}Max", max(bit), "{:.1f}")
         w_bit = [per[s]["per_dataset"]["BIT"]["w_eb"] for s in splits]
         macro("ReplicationBITWeightMin", min(w_bit), "{:.3f}")
         macro("ReplicationBITWeightMax", max(w_bit), "{:.3f}")
@@ -875,6 +1029,7 @@ def main():
         macro("FieldLabModelMAE", lab["test_mae"], "{:.3f}")
         macro("FieldModelMAE", main["pooled_vs_groupwise"]["test_mae"], "{:.3f}")
         # Calibration budget in vehicles, with the laboratory rule.
+        macro("FieldBudgetNRepeats", field["budget"]["n_repeats"], "{:d}")
         for d, v in field["budget"]["per_dataset"].items():
             n_full = v["n_cells_available"]
             macro(f"FieldBudget{ev_name[d]}Available", n_full, "{:d}")

@@ -5128,6 +5128,3292 @@
         "mc_dropout": 0.06754745543003082
       }
     },
+    "deep_ensemble_splits": {
+      "splits": [
+        "42",
+        "43",
+        "44",
+        "45",
+        "46"
+      ],
+      "five": [
+        "MIT",
+        "RWTH",
+        "XJTU",
+        "BIT",
+        "CALCE"
+      ],
+      "per_split": {
+        "42": {
+          "deep_ensemble": {
+            "raw_gaussian": {
+              "overall_coverage": 0.861855559143257,
+              "per_dataset_coverage": {
+                "BIT": 0.7769423558897243,
+                "CALCE": 0.5049216186656945,
+                "MIT": 0.9173185633529378,
+                "NASA": 1.0,
+                "Oxford": 0.6071428571428571,
+                "RWTH": 0.8953592146363231,
+                "XJTU": 0.7232245681381958
+              },
+              "mean_width": 0.044822849333286285,
+              "mean_abs_dev_five": 0.14337416120460006,
+              "mean_abs_dev_six": 0.16828799148002385
+            },
+            "pooled": {
+              "overall_coverage": 0.8987460983747713,
+              "per_dataset_coverage": {
+                "BIT": 0.42857142857142855,
+                "CALCE": 0.5034633612832665,
+                "MIT": 0.9729914920344886,
+                "NASA": 0.3333333333333333,
+                "Oxford": 0.5714285714285714,
+                "RWTH": 0.9722594080023799,
+                "XJTU": 0.5880998080614204
+              },
+              "mean_width": 0.04740292951464653,
+              "mean_abs_dev_five": 0.2650232604241506,
+              "mean_abs_dev_six": 0.2756146217820303
+            },
+            "groupwise": {
+              "overall_coverage": 0.8974007103648692,
+              "per_dataset_coverage": {
+                "BIT": 0.8634085213032582,
+                "CALCE": 0.7360554137805323,
+                "MIT": 0.9180608690686918,
+                "NASA": 0.6666666666666666,
+                "Oxford": 1.0,
+                "RWTH": 0.8980365908076752,
+                "XJTU": 0.9335892514395393
+              },
+              "mean_width": 0.05725737661123276,
+              "mean_abs_dev_five": 0.05082991892335309,
+              "mean_abs_dev_six": 0.059024932436127574
+            },
+            "normalized_groupwise": {
+              "overall_coverage": 0.9016521364761597,
+              "per_dataset_coverage": {
+                "BIT": 0.9022556390977443,
+                "CALCE": 0.8118847976667882,
+                "MIT": 0.9133215325758008,
+                "NASA": 1.0,
+                "Oxford": 0.9821428571428571,
+                "RWTH": 0.9036888293916406,
+                "XJTU": 0.9051823416506718
+              },
+              "mean_width": 0.06690087914466858,
+              "mean_abs_dev_five": 0.022512709009813857,
+              "mean_abs_dev_six": 0.032451067031987725
+            },
+            "test_mae": 0.016352472826838493,
+            "test_rmse": 0.0970800369977951
+          },
+          "mc_dropout": {
+            "raw_gaussian": {
+              "overall_coverage": 0.9665536540738349,
+              "per_dataset_coverage": {
+                "BIT": 0.7506265664160401,
+                "CALCE": 0.7644914327378782,
+                "MIT": 0.9977159824130646,
+                "NASA": 1.0,
+                "Oxford": 0.9464285714285714,
+                "RWTH": 0.9950914770191879,
+                "XJTU": 0.8890595009596929
+              },
+              "mean_width": 0.2446356564760208,
+              "mean_abs_dev_five": 0.09772599186372825,
+              "mean_abs_dev_six": 0.08917642179120211
+            },
+            "pooled": {
+              "overall_coverage": 0.8991228070175439,
+              "per_dataset_coverage": {
+                "BIT": 0.4423558897243108,
+                "CALCE": 0.6321545752825374,
+                "MIT": 0.9490664078113401,
+                "NASA": 0.6666666666666666,
+                "Oxford": 0.8214285714285714,
+                "RWTH": 0.9486092518221032,
+                "XJTU": 0.7309021113243762
+              },
+              "mean_width": 0.084699846804142,
+              "mean_abs_dev_five": 0.1984526166604438,
+              "mean_abs_dev_six": 0.17847241864560792
+            },
+            "groupwise": {
+              "overall_coverage": 0.9041276504143795,
+              "per_dataset_coverage": {
+                "BIT": 0.8809523809523809,
+                "CALCE": 0.7564710171345242,
+                "MIT": 0.9218294980871353,
+                "NASA": 0.6666666666666666,
+                "Oxford": 1.0,
+                "RWTH": 0.9071842927264614,
+                "XJTU": 0.9301343570057582
+              },
+              "mean_width": 0.0968228429555893,
+              "mean_abs_dev_five": 0.044344949946489944,
+              "mean_abs_dev_six": 0.05362079162207495
+            },
+            "normalized_groupwise": {
+              "overall_coverage": 0.8972930793240771,
+              "per_dataset_coverage": {
+                "BIT": 0.8809523809523809,
+                "CALCE": 0.7597520962449872,
+                "MIT": 0.9198309826985668,
+                "NASA": 1.0,
+                "Oxford": 0.9821428571428571,
+                "RWTH": 0.8963260449204224,
+                "XJTU": 0.8986564299424185
+              },
+              "mean_width": 0.11332687735557556,
+              "mean_abs_dev_five": 0.036828806127671566,
+              "mean_abs_dev_six": 0.044381147963535816
+            },
+            "test_mae": 0.024789657443761826,
+            "test_rmse": 0.10174031555652618
+          }
+        },
+        "43": {
+          "deep_ensemble": {
+            "raw_gaussian": {
+              "overall_coverage": 0.8297931734551452,
+              "per_dataset_coverage": {
+                "BIT": 0.7536231884057971,
+                "CALCE": 0.4574468085106383,
+                "MIT": 0.8442462741265575,
+                "NASA": 0.49107142857142855,
+                "Oxford": 0.48214285714285715,
+                "RWTH": 0.9223225497817378,
+                "XJTU": 0.5792117465224111
+              },
+              "mean_width": 0.03981553018093109,
+              "mean_abs_dev_five": 0.19755890644326674,
+              "mean_abs_dev_six": 0.23427527917891278
+            },
+            "pooled": {
+              "overall_coverage": 0.8732394366197183,
+              "per_dataset_coverage": {
+                "BIT": 0.42632850241545894,
+                "CALCE": 0.42223037417461484,
+                "MIT": 0.9507085267529929,
+                "NASA": 0.3125,
+                "Oxford": 0.7321428571428571,
+                "RWTH": 0.970938228786701,
+                "XJTU": 0.3972179289026275
+              },
+              "mean_width": 0.04676220193505287,
+              "mean_abs_dev_five": 0.3151739900093985,
+              "mean_abs_dev_six": 0.2906211821506893
+            },
+            "groupwise": {
+              "overall_coverage": 0.873772363913209,
+              "per_dataset_coverage": {
+                "BIT": 0.8635265700483091,
+                "CALCE": 0.9035216434336023,
+                "MIT": 0.9029440508184705,
+                "NASA": 0.7589285714285714,
+                "Oxford": 0.9107142857142857,
+                "RWTH": 0.8868624050708604,
+                "XJTU": 0.5807573415765069
+              },
+              "mean_width": 0.05144708231091499,
+              "mean_abs_dev_five": 0.07506387551127927,
+              "mean_abs_dev_six": 0.064338943878447
+            },
+            "normalized_groupwise": {
+              "overall_coverage": 0.886207334094658,
+              "per_dataset_coverage": {
+                "BIT": 0.9070048309178744,
+                "CALCE": 0.9013206162876009,
+                "MIT": 0.9053261666259468,
+                "NASA": 0.9017857142857143,
+                "Oxford": 0.9464285714285714,
+                "RWTH": 0.876995754350296,
+                "XJTU": 0.8002318392581144
+              },
+              "mean_width": 0.0694580152630806,
+              "mean_abs_dev_five": 0.02728480404460234,
+              "mean_abs_dev_six": 0.030475431941930513
+            },
+            "test_mae": 0.018169304355978966,
+            "test_rmse": 0.0910392627120018
+          },
+          "mc_dropout": {
+            "raw_gaussian": {
+              "overall_coverage": 0.9615531023981728,
+              "per_dataset_coverage": {
+                "BIT": 0.7669082125603864,
+                "CALCE": 0.7942039618488628,
+                "MIT": 0.993403371610066,
+                "NASA": 0.7142857142857143,
+                "Oxford": 0.9642857142857143,
+                "RWTH": 0.9937212222687317,
+                "XJTU": 0.8013910355486863
+              },
+              "mean_width": 0.25418582558631897,
+              "mean_abs_dev_five": 0.10492427678417245,
+              "mean_abs_dev_six": 0.09815118303442942
+            },
+            "pooled": {
+              "overall_coverage": 0.8772237025758153,
+              "per_dataset_coverage": {
+                "BIT": 0.45410628019323673,
+                "CALCE": 0.5484225972120322,
+                "MIT": 0.9525409235279746,
+                "NASA": 0.45535714285714285,
+                "Oxford": 0.7678571428571429,
+                "RWTH": 0.9383483824672607,
+                "XJTU": 0.5081143740340031
+              },
+              "mean_width": 0.0774991512298584,
+              "mean_abs_dev_five": 0.25604921091119265,
+              "mean_abs_dev_six": 0.2353981519498034
+            },
+            "groupwise": {
+              "overall_coverage": 0.8834919426468723,
+              "per_dataset_coverage": {
+                "BIT": 0.8768115942028986,
+                "CALCE": 0.8870139398385913,
+                "MIT": 0.8970193012460298,
+                "NASA": 0.7946428571428571,
+                "Oxford": 0.9285714285714286,
+                "RWTH": 0.8980446092208336,
+                "XJTU": 0.705177743431221
+              },
+              "mean_width": 0.08381668478250504,
+              "mean_abs_dev_five": 0.047186562412085166,
+              "mean_abs_dev_six": 0.044084040105309065
+            },
+            "normalized_groupwise": {
+              "overall_coverage": 0.8808780611597513,
+              "per_dataset_coverage": {
+                "BIT": 0.8514492753623188,
+                "CALCE": 0.8334556126192223,
+                "MIT": 0.9014170535059858,
+                "NASA": 0.6517857142857143,
+                "Oxford": 0.875,
+                "RWTH": 0.9002571308975662,
+                "XJTU": 0.6951313755795981
+              },
+              "mean_width": 0.10382422059774399,
+              "mean_abs_dev_five": 0.06432758416848254,
+              "mean_abs_dev_six": 0.05777298680706879
+            },
+            "test_mae": 0.025297947227954865,
+            "test_rmse": 0.09511450678110123
+          },
+          "member_test_mae": [
+            0.018972650170326233,
+            0.019906386733055115,
+            0.024920891970396042,
+            0.022035468369722366,
+            0.021294381469488144
+          ]
+        },
+        "44": {
+          "deep_ensemble": {
+            "raw_gaussian": {
+              "overall_coverage": 0.8432817786370227,
+              "per_dataset_coverage": {
+                "BIT": 0.7188703465982028,
+                "CALCE": 0.49666172106824924,
+                "MIT": 0.877464711374746,
+                "NASA": 0.5608108108108109,
+                "Oxford": 0.7241379310344828,
+                "RWTH": 0.896584328093606,
+                "XJTU": 0.6704280155642023
+              },
+              "mean_width": 0.03998851776123047,
+              "mean_abs_dev_five": 0.16799817546019874,
+              "mean_abs_dev_six": 0.16930882437775185
+            },
+            "pooled": {
+              "overall_coverage": 0.8706379893668439,
+              "per_dataset_coverage": {
+                "BIT": 0.36585365853658536,
+                "CALCE": 0.461053412462908,
+                "MIT": 0.9303564563080134,
+                "NASA": 0.38513513513513514,
+                "Oxford": 0.46551724137931033,
+                "RWTH": 0.9627703581136982,
+                "XJTU": 0.46070038910505834
+              },
+              "mean_width": 0.03862409293651581,
+              "mean_abs_dev_five": 0.30110387086343204,
+              "mean_abs_dev_six": 0.32333368548964164
+            },
+            "groupwise": {
+              "overall_coverage": 0.8703963267278879,
+              "per_dataset_coverage": {
+                "BIT": 0.8806161745827985,
+                "CALCE": 0.9380563798219584,
+                "MIT": 0.8668094688855934,
+                "NASA": 0.9662162162162162,
+                "Oxford": 1.0,
+                "RWTH": 0.881751566008746,
+                "XJTU": 0.7385214007782102
+              },
+              "mean_width": 0.05386122316122055,
+              "mean_abs_dev_five": 0.05407155391332208,
+              "mean_abs_dev_six": 0.0617262949277684
+            },
+            "normalized_groupwise": {
+              "overall_coverage": 0.889439342677622,
+              "per_dataset_coverage": {
+                "BIT": 0.8870346598202824,
+                "CALCE": 0.870919881305638,
+                "MIT": 0.8701598286373373,
+                "NASA": 0.8243243243243243,
+                "Oxford": 0.9827586206896551,
+                "RWTH": 0.9128944569199858,
+                "XJTU": 0.8933852140077821
+              },
+              "mean_width": 0.058416761457920074,
+              "mean_abs_dev_five": 0.018278974629789203,
+              "mean_abs_dev_six": 0.029025582306433522
+            },
+            "test_mae": 0.015813924372196198,
+            "test_rmse": 0.08786313980817795
+          },
+          "mc_dropout": {
+            "raw_gaussian": {
+              "overall_coverage": 0.9728854519091349,
+              "per_dataset_coverage": {
+                "BIT": 0.7715019255455713,
+                "CALCE": 0.9002225519287834,
+                "MIT": 0.9828637337287857,
+                "NASA": 0.9324324324324325,
+                "Oxford": 0.9655172413793104,
+                "RWTH": 0.9944451010518851,
+                "XJTU": 0.9
+              },
+              "mean_width": 0.2597910463809967,
+              "mean_abs_dev_five": 0.061205892232776574,
+              "mean_abs_dev_six": 0.06192445042386554
+            },
+            "pooled": {
+              "overall_coverage": 0.8700338327694539,
+              "per_dataset_coverage": {
+                "BIT": 0.45186136071887034,
+                "CALCE": 0.6242581602373887,
+                "MIT": 0.9260174658098533,
+                "NASA": 0.5675675675675675,
+                "Oxford": 0.8103448275862069,
+                "RWTH": 0.9159673797423472,
+                "XJTU": 0.5743190661478599
+              },
+              "mean_width": 0.07556097209453583,
+              "mean_abs_dev_five": 0.21830925168961635,
+              "mean_abs_dev_six": 0.1968669051436458
+            },
+            "groupwise": {
+              "overall_coverage": 0.8767037216046399,
+              "per_dataset_coverage": {
+                "BIT": 0.8947368421052632,
+                "CALCE": 0.9473293768545994,
+                "MIT": 0.8826275608282529,
+                "NASA": 0.9459459459459459,
+                "Oxford": 1.0,
+                "RWTH": 0.8789150218650278,
+                "XJTU": 0.733852140077821
+              },
+              "mean_width": 0.0918661504983902,
+              "mean_abs_dev_five": 0.05143956239564693,
+              "mean_abs_dev_six": 0.05953296866303911
+            },
+            "normalized_groupwise": {
+              "overall_coverage": 0.8745045915901402,
+              "per_dataset_coverage": {
+                "BIT": 0.8844672657252889,
+                "CALCE": 0.9217359050445104,
+                "MIT": 0.8589004229142637,
+                "NASA": 0.9324324324324325,
+                "Oxford": 1.0,
+                "RWTH": 0.9013709963361305,
+                "XJTU": 0.7494163424124514
+              },
+              "mean_width": 0.10515499114990234,
+              "mean_abs_dev_five": 0.04606457406572739,
+              "mean_abs_dev_six": 0.05505381172143949
+            },
+            "test_mae": 0.02437593601644039,
+            "test_rmse": 0.09172894805669785
+          },
+          "member_test_mae": [
+            0.019077135249972343,
+            0.023414434865117073,
+            0.01873067021369934,
+            0.017863480374217033,
+            0.021775685250759125
+          ]
+        },
+        "45": {
+          "deep_ensemble": {
+            "raw_gaussian": {
+              "overall_coverage": 0.5462736951441184,
+              "per_dataset_coverage": {
+                "BIT": 0.6976744186046512,
+                "CALCE": 0.4353405725567621,
+                "MIT": 0.5526000630318311,
+                "NASA": 0.5714285714285714,
+                "Oxford": 0.7192982456140351,
+                "RWTH": 0.5441541911631008,
+                "XJTU": 0.6082771896053898
+              },
+              "mean_width": 0.03371391072869301,
+              "mean_abs_dev_five": 0.332390713007653,
+              "mean_abs_dev_six": 0.30710921990403833
+            },
+            "pooled": {
+              "overall_coverage": 0.8927551285380421,
+              "per_dataset_coverage": {
+                "BIT": 0.39767441860465114,
+                "CALCE": 0.5452451464297466,
+                "MIT": 0.9569492593759849,
+                "NASA": 0.44642857142857145,
+                "Oxford": 0.6140350877192983,
+                "RWTH": 0.9518758712649251,
+                "XJTU": 0.678055822906641
+              },
+              "mean_width": 0.051078781485557556,
+              "mean_abs_dev_five": 0.23756994853997426,
+              "mean_abs_dev_six": 0.24563577583009552
+            },
+            "groupwise": {
+              "overall_coverage": 0.8910412879771488,
+              "per_dataset_coverage": {
+                "BIT": 0.8860465116279069,
+                "CALCE": 0.9631457716354064,
+                "MIT": 0.8794831389851875,
+                "NASA": 0.9107142857142857,
+                "Oxford": 0.9649122807017544,
+                "RWTH": 0.889447845323959,
+                "XJTU": 0.8854667949951877
+              },
+              "mean_width": 0.0729430541396141,
+              "mean_abs_dev_five": 0.024540296140633067,
+              "mean_abs_dev_six": 0.031268960234153285
+            },
+            "normalized_groupwise": {
+              "overall_coverage": 0.8991950142820047,
+              "per_dataset_coverage": {
+                "BIT": 0.891860465116279,
+                "CALCE": 0.924646265218822,
+                "MIT": 0.900724866057359,
+                "NASA": 0.9642857142857143,
+                "Oxford": 0.9824561403508771,
+                "RWTH": 0.8958724771198254,
+                "XJTU": 0.8739172281039461
+              },
+              "mean_width": 0.09541194140911102,
+              "mean_abs_dev_five": 0.012744192187226088,
+              "mean_abs_dev_six": 0.02436285021450126
+            },
+            "test_mae": 0.018661828711628914,
+            "test_rmse": 0.08489160984754562
+          },
+          "mc_dropout": {
+            "raw_gaussian": {
+              "overall_coverage": 0.9381719034017139,
+              "per_dataset_coverage": {
+                "BIT": 0.7906976744186046,
+                "CALCE": 0.7726225732148733,
+                "MIT": 0.9522218720453829,
+                "NASA": 0.7232142857142857,
+                "Oxford": 0.8947368421052632,
+                "RWTH": 0.9659373295351233,
+                "XJTU": 0.9263715110683349
+              },
+              "mean_width": 0.24729539453983307,
+              "mean_abs_dev_five": 0.07624209300307265,
+              "mean_abs_dev_six": 0.06441227048501669
+            },
+            "pooled": {
+              "overall_coverage": 0.900077901843677,
+              "per_dataset_coverage": {
+                "BIT": 0.4872093023255814,
+                "CALCE": 0.6683119447186574,
+                "MIT": 0.9440907658367476,
+                "NASA": 0.6517857142857143,
+                "Oxford": 0.7543859649122807,
+                "RWTH": 0.941450997030123,
+                "XJTU": 0.762752646775746
+              },
+              "mean_width": 0.08922385424375534,
+              "mean_abs_dev_five": 0.17345357380937718,
+              "mean_abs_dev_six": 0.16881365068910084
+            },
+            "groupwise": {
+              "overall_coverage": 0.8975071410023371,
+              "per_dataset_coverage": {
+                "BIT": 0.8848837209302326,
+                "CALCE": 0.9608423823626193,
+                "MIT": 0.8884966908288686,
+                "NASA": 0.9017857142857143,
+                "Oxford": 0.9824561403508771,
+                "RWTH": 0.8970846717982908,
+                "XJTU": 0.8796920115495669
+              },
+              "mean_width": 0.10512197017669678,
+              "mean_abs_dev_five": 0.022137057451132102,
+              "mean_abs_dev_six": 0.03219023793442294
+            },
+            "normalized_groupwise": {
+              "overall_coverage": 0.8927810958192677,
+              "per_dataset_coverage": {
+                "BIT": 0.8825581395348837,
+                "CALCE": 0.9361632115827575,
+                "MIT": 0.8824456350456981,
+                "NASA": 0.7678571428571429,
+                "Oxford": 0.8771929824561403,
+                "RWTH": 0.8999939390266076,
+                "XJTU": 0.8623676612127045
+              },
+              "mean_width": 0.16988185048103333,
+              "mean_abs_dev_five": 0.02175956735257274,
+              "mean_abs_dev_six": 0.021934142384453903
+            },
+            "test_mae": 0.027292544022202492,
+            "test_rmse": 0.08824335783720016
+          },
+          "member_test_mae": [
+            0.02296368218958378,
+            0.020445173606276512,
+            0.022010279819369316,
+            0.020031284540891647,
+            0.019284673035144806
+          ]
+        },
+        "46": {
+          "deep_ensemble": {
+            "raw_gaussian": {
+              "overall_coverage": 0.8745425518850547,
+              "per_dataset_coverage": {
+                "BIT": 0.8333333333333334,
+                "CALCE": 0.5042857142857143,
+                "MIT": 0.9134232640424591,
+                "NASA": 0.5337837837837838,
+                "Oxford": 0.6964285714285714,
+                "RWTH": 0.9377835385612443,
+                "XJTU": 0.510483870967742
+              },
+              "mean_width": 0.04064372181892395,
+              "mean_abs_dev_five": 0.18062077680338276,
+              "mean_abs_dev_six": 0.1844458854313904
+            },
+            "pooled": {
+              "overall_coverage": 0.9062262065577796,
+              "per_dataset_coverage": {
+                "BIT": 0.5241379310344828,
+                "CALCE": 0.5423809523809524,
+                "MIT": 0.9784940291906237,
+                "NASA": 0.49324324324324326,
+                "Oxford": 0.7142857142857143,
+                "RWTH": 0.975843987509574,
+                "XJTU": 0.37379032258064515
+              },
+              "mean_width": 0.04474728927016258,
+              "mean_abs_dev_five": 0.2828057621408234,
+              "mean_abs_dev_six": 0.26662384940306716
+            },
+            "groupwise": {
+              "overall_coverage": 0.9084858160383151,
+              "per_dataset_coverage": {
+                "BIT": 0.9114942528735632,
+                "CALCE": 0.9123809523809524,
+                "MIT": 0.9241486068111455,
+                "NASA": 0.9864864864864865,
+                "Oxford": 0.9642857142857143,
+                "RWTH": 0.8988982501620221,
+                "XJTU": 0.8495967741935484
+              },
+              "mean_width": 0.06018994376063347,
+              "mean_abs_dev_five": 0.01990575754201813,
+              "mean_abs_dev_six": 0.027302416999300822
+            },
+            "normalized_groupwise": {
+              "overall_coverage": 0.9096893036964264,
+              "per_dataset_coverage": {
+                "BIT": 0.9402298850574713,
+                "CALCE": 0.9195238095238095,
+                "MIT": 0.9170720919946926,
+                "NASA": 0.49324324324324326,
+                "Oxford": 0.8392857142857143,
+                "RWTH": 0.9028456961055794,
+                "XJTU": 0.9100806451612903
+              },
+              "mean_width": 0.06647656112909317,
+              "mean_abs_dev_five": 0.017950425568568608,
+              "mean_abs_dev_six": 0.025077735592854793
+            },
+            "test_mae": 0.014673052355647087,
+            "test_rmse": 0.0802047848701477
+          },
+          "mc_dropout": {
+            "raw_gaussian": {
+              "overall_coverage": 0.9711654181505588,
+              "per_dataset_coverage": {
+                "BIT": 0.7574712643678161,
+                "CALCE": 0.9,
+                "MIT": 0.9970698805838125,
+                "NASA": 0.8648648648648649,
+                "Oxford": 0.8214285714285714,
+                "RWTH": 0.9954633830200907,
+                "XJTU": 0.7608870967741935
+              },
+              "mean_width": 0.2613969147205353,
+              "mean_abs_dev_five": 0.09483498049237873,
+              "mean_abs_dev_six": 0.09212438850555371
+            },
+            "pooled": {
+              "overall_coverage": 0.9037455483237136,
+              "per_dataset_coverage": {
+                "BIT": 0.5367816091954023,
+                "CALCE": 0.74,
+                "MIT": 0.9594758956214064,
+                "NASA": 0.7364864864864865,
+                "Oxford": 0.8035714285714286,
+                "RWTH": 0.9379013727685147,
+                "XJTU": 0.5431451612903225
+              },
+              "mean_width": 0.08999824523925781,
+              "mean_abs_dev_five": 0.19549009958083927,
+              "mean_abs_dev_six": 0.17897984488879462
+            },
+            "groupwise": {
+              "overall_coverage": 0.9057349871054894,
+              "per_dataset_coverage": {
+                "BIT": 0.9022988505747126,
+                "CALCE": 0.9228571428571428,
+                "MIT": 0.9230981866430783,
+                "NASA": 0.9932432432432432,
+                "Oxford": 1.0,
+                "RWTH": 0.8941848818712073,
+                "XJTU": 0.8375
+              },
+              "mean_width": 0.11115939170122147,
+              "mean_abs_dev_five": 0.023313859640745282,
+              "mean_abs_dev_six": 0.036094883033954396
+            },
+            "normalized_groupwise": {
+              "overall_coverage": 0.9084612550657006,
+              "per_dataset_coverage": {
+                "BIT": 0.9103448275862069,
+                "CALCE": 0.9519047619047619,
+                "MIT": 0.9212184873949579,
+                "NASA": 0.8716216216216216,
+                "Oxford": 0.9821428571428571,
+                "RWTH": 0.899840923820185,
+                "XJTU": 0.8375
+              },
+              "mean_width": 0.13917596638202667,
+              "mean_abs_dev_five": 0.02922543061314835,
+              "mean_abs_dev_six": 0.038045001701433136
+            },
+            "test_mae": 0.025256523862481117,
+            "test_rmse": 0.0884641632437706
+          },
+          "member_test_mae": [
+            0.019427485764026642,
+            0.017530430108308792,
+            0.019496075809001923,
+            0.01822461560368538,
+            0.02167729288339615
+          ]
+        }
+      },
+      "summary": {
+        "deep_ensemble/raw_gaussian": {
+          "mean_dev_five": 0.20438854658382027,
+          "min_dev_five": 0.14337416120460006,
+          "max_dev_five": 0.332390713007653,
+          "mean_width": 0.03979690596461296
+        },
+        "deep_ensemble/pooled": {
+          "mean_dev_five": 0.2803353663955558,
+          "min_dev_five": 0.23756994853997426,
+          "max_dev_five": 0.3151739900093985,
+          "mean_width": 0.04572305902838707
+        },
+        "deep_ensemble/groupwise": {
+          "mean_dev_five": 0.044882280406121126,
+          "min_dev_five": 0.01990575754201813,
+          "max_dev_five": 0.07506387551127927,
+          "mean_width": 0.059139735996723175
+        },
+        "deep_ensemble/normalized_groupwise": {
+          "mean_dev_five": 0.01975422108800002,
+          "min_dev_five": 0.012744192187226088,
+          "max_dev_five": 0.02728480404460234,
+          "mean_width": 0.07133283168077469
+        },
+        "mc_dropout/raw_gaussian": {
+          "mean_dev_five": 0.08698664687522573,
+          "min_dev_five": 0.061205892232776574,
+          "max_dev_five": 0.10492427678417245,
+          "mean_width": 0.253460967540741
+        },
+        "mc_dropout/pooled": {
+          "mean_dev_five": 0.20835095053029384,
+          "min_dev_five": 0.17345357380937718,
+          "max_dev_five": 0.25604921091119265,
+          "mean_width": 0.08339641392230987
+        },
+        "mc_dropout/groupwise": {
+          "mean_dev_five": 0.037684398369219885,
+          "min_dev_five": 0.022137057451132102,
+          "max_dev_five": 0.05143956239564693,
+          "mean_width": 0.09775740802288055
+        },
+        "mc_dropout/normalized_groupwise": {
+          "mean_dev_five": 0.03964119246552052,
+          "min_dev_five": 0.02175956735257274,
+          "max_dev_five": 0.06432758416848254,
+          "mean_width": 0.12627278119325638
+        }
+      },
+      "best_per_split": {
+        "42": "deep_ensemble/normalized_groupwise",
+        "43": "deep_ensemble/normalized_groupwise",
+        "44": "deep_ensemble/normalized_groupwise",
+        "45": "deep_ensemble/normalized_groupwise",
+        "46": "deep_ensemble/normalized_groupwise"
+      },
+      "ens_norm_best_splits": 5,
+      "ens_norm_beats_mc_groupwise_splits": 5,
+      "ens_norm_narrower_than_mc_groupwise_splits": 5,
+      "ens_more_accurate_splits": 5,
+      "ens_groupwise_beats_pooled_splits": 5,
+      "ens_pooled_bit_range": [
+        0.36585365853658536,
+        0.5241379310344828
+      ],
+      "ens_groupwise_bit_range": [
+        0.8634085213032582,
+        0.9114942528735632
+      ]
+    },
+    "borrowing_variants": {
+      "prior_scale": 1.0,
+      "splits": {
+        "42": {
+          "fit_groups": [
+            "MIT",
+            "RWTH",
+            "XJTU",
+            "BIT",
+            "CALCE"
+          ],
+          "targets": [
+            "MIT",
+            "RWTH",
+            "XJTU",
+            "BIT",
+            "CALCE"
+          ],
+          "q": {
+            "MIT": 0.0015175881070926896,
+            "RWTH": 0.008102529325815018,
+            "XJTU": 0.007971393053573885,
+            "BIT": 0.06869575651626009,
+            "CALCE": 0.011381067149970373,
+            "Oxford": 0.013539716566227503,
+            "NASA": 0.011546285111910186
+          },
+          "covariate_noise": {
+            "MIT": 0.0001341886818408966,
+            "RWTH": 0.0005837082862854004,
+            "XJTU": 0.004250790923833847,
+            "BIT": 0.006281406618654728,
+            "CALCE": 0.0012998580932617188,
+            "Oxford": 0.0037777796387672424,
+            "NASA": 0.0027492865920066833
+          },
+          "covariate_spread": {
+            "MIT": 0.003212982539037321,
+            "RWTH": 0.019602830859109938,
+            "XJTU": 0.0048364030164306845,
+            "BIT": 0.019736803742575384,
+            "CALCE": 0.010541496254600642,
+            "Oxford": 0.0060902992562310064,
+            "NASA": 0.007329612220615404
+          },
+          "per_target": {
+            "MIT": {
+              "coverage": {
+                "own": 0.9218294980871353,
+                "hier_linear_loo": 0.9297664592017358,
+                "prior_linear_loo": 0.999714497801633,
+                "eb_linear_joint": 0.9240564152343973,
+                "eb_log_joint": 0.9351339005310341,
+                "bayes_log": 0.9259978301832924,
+                "bayes_log_noise": 0.9243419174327643,
+                "bayes_log_spread": 0.923999314794724,
+                "prior_log": 0.9998286986809798,
+                "prior_log_noise": 0.9771598241306458,
+                "prior_log_spread": 0.9961742705418831
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 1.0581529195138646,
+                "prior_linear_loo": 6.398450951377298,
+                "eb_linear_joint": 1.0135759217367886,
+                "eb_log_joint": 1.1081424656775367,
+                "bayes_log": 1.0277119501063807,
+                "bayes_log_noise": 1.0158351121777078,
+                "bayes_log_spread": 1.0127280202061872,
+                "prior_log": 9.554281970210791,
+                "prior_log_noise": 1.9460509526442586,
+                "prior_log_spread": 3.571120158958046
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.9892278507228026,
+                "eb_linear_joint": 0.9967107853575824,
+                "eb_log_joint": 0.9410203615676054,
+                "bayes_log": 0.9847685006443472,
+                "bayes_log_noise": 0.9233112326345273,
+                "bayes_log_spread": 0.9713202102644817
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.9263975332610062,
+                  "weight_own": 0.9830779655182363,
+                  "prior_coverage": 0.9998286986809798
+                },
+                "2.0": {
+                  "coverage": 0.9255410266659053,
+                  "weight_own": 0.9867958132703726,
+                  "prior_coverage": 0.9998286986809798
+                }
+              }
+            },
+            "RWTH": {
+              "coverage": {
+                "own": 0.9071842927264614,
+                "hier_linear_loo": 0.9071842927264614,
+                "prior_linear_loo": 0.9209430313847985,
+                "eb_linear_joint": 0.9071842927264614,
+                "eb_log_joint": 0.9071842927264614,
+                "bayes_log": 0.9071842927264614,
+                "bayes_log_noise": 0.9070355496058308,
+                "bayes_log_spread": 0.9071842927264614,
+                "prior_log": 0.9411720957905697,
+                "prior_log_noise": 0.7535326491149784,
+                "prior_log_spread": 0.9991075412762159
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 1.0000348167912632,
+                "prior_linear_loo": 1.0697561904483,
+                "eb_linear_joint": 0.9999543314083518,
+                "eb_log_joint": 1.0000652146931541,
+                "bayes_log": 1.0000293389886519,
+                "bayes_log_noise": 0.9995097292338196,
+                "bayes_log_spread": 1.000486891332688,
+                "prior_log": 1.187688211533974,
+                "prior_log_noise": 0.6071446814317819,
+                "prior_log_spread": 6.367537636328239
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.9995008788318379,
+                "eb_linear_joint": 0.998848116781232,
+                "eb_log_joint": 0.9990115309670579,
+                "bayes_log": 0.9997540835532854,
+                "bayes_log_noise": 0.9984524023185763,
+                "bayes_log_spread": 0.9995241434287864
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.9071842927264614,
+                  "weight_own": 0.9997261791689669,
+                  "prior_coverage": 0.940577123308047
+                },
+                "2.0": {
+                  "coverage": 0.9071842927264614,
+                  "weight_own": 0.9997872986733315,
+                  "prior_coverage": 0.9418414398334077
+                }
+              }
+            },
+            "XJTU": {
+              "coverage": {
+                "own": 0.9301343570057582,
+                "hier_linear_loo": 0.9293666026871401,
+                "prior_linear_loo": 0.927063339731286,
+                "eb_linear_joint": 0.9297504798464491,
+                "eb_log_joint": 0.9332053742802303,
+                "bayes_log": 0.9324376199616122,
+                "bayes_log_noise": 0.9746641074856046,
+                "bayes_log_spread": 0.9143953934740883,
+                "prior_log": 0.9585412667946257,
+                "prior_log_noise": 0.999616122840691,
+                "prior_log_spread": 0.7796545105566218
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 0.9897926745926686,
+                "prior_linear_loo": 0.9717987179826331,
+                "eb_linear_joint": 0.9913284203327478,
+                "eb_log_joint": 1.0287020213663831,
+                "bayes_log": 1.0152410695867575,
+                "bayes_log_noise": 1.4908188744660016,
+                "bayes_log_spread": 0.8801456810039402,
+                "prior_log": 1.2068051775084048,
+                "prior_log_noise": 5.439950095510612,
+                "prior_log_spread": 0.37157682483552557
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.63805456074495,
+                "eb_linear_joint": 0.6363852134482494,
+                "eb_log_joint": 0.6561219305488661,
+                "bayes_log": 0.8899527595169366,
+                "bayes_log_noise": 0.6683703526219312,
+                "bayes_log_spread": 0.8180246537007786
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.9324376199616122,
+                  "weight_own": 0.8793085199018903,
+                  "prior_coverage": 0.9581573896353167
+                },
+                "2.0": {
+                  "coverage": 0.9324376199616122,
+                  "weight_own": 0.9032824122168659,
+                  "prior_coverage": 0.9593090211132438
+                }
+              }
+            },
+            "BIT": {
+              "coverage": {
+                "own": 0.8809523809523809,
+                "hier_linear_loo": 0.41478696741854637,
+                "prior_linear_loo": 0.3258145363408521,
+                "eb_linear_joint": 0.42857142857142855,
+                "eb_log_joint": 0.8270676691729323,
+                "bayes_log": 0.8696741854636592,
+                "bayes_log_noise": 0.8696741854636592,
+                "bayes_log_spread": 0.8721804511278195,
+                "prior_log": 0.2644110275689223,
+                "prior_log_noise": 0.6591478696741855,
+                "prior_log_spread": 0.4924812030075188
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 0.13756912801870066,
+                "prior_linear_loo": 0.10388534972835728,
+                "eb_linear_joint": 0.14700460156033215,
+                "eb_log_joint": 0.5581566541681908,
+                "bayes_log": 0.8416154197249642,
+                "bayes_log_noise": 0.8339119071058045,
+                "bayes_log_spread": 0.8526269116801541,
+                "prior_log": 0.08354780931126253,
+                "prior_log_noise": 0.27664366146478436,
+                "prior_log_spread": 0.17866581260593983
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.03758869278627761,
+                "eb_linear_joint": 0.03804191699916535,
+                "eb_log_joint": 0.7185107607277481,
+                "bayes_log": 0.9145002500075858,
+                "bayes_log_noise": 0.7182069964912217,
+                "bayes_log_spread": 0.8544887160421931
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.8696741854636592,
+                  "weight_own": 0.9059315144376766,
+                  "prior_coverage": 0.2644110275689223
+                },
+                "2.0": {
+                  "coverage": 0.8734335839598998,
+                  "weight_own": 0.9251163804172076,
+                  "prior_coverage": 0.2644110275689223
+                }
+              }
+            },
+            "CALCE": {
+              "coverage": {
+                "own": 0.7564710171345242,
+                "hier_linear_loo": 0.7531899380240612,
+                "prior_linear_loo": 0.5946044476850164,
+                "eb_linear_joint": 0.7542836310608823,
+                "eb_log_joint": 0.7550127597520963,
+                "bayes_log": 0.7561064527889172,
+                "bayes_log_noise": 0.7561064527889172,
+                "bayes_log_spread": 0.7561064527889172,
+                "prior_log": 0.6901203062340503,
+                "prior_log_noise": 0.7178271965001822,
+                "prior_log_spread": 0.7440758293838863
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 0.9866154859912173,
+                "prior_linear_loo": 0.5716734909469495,
+                "eb_linear_joint": 0.9898223974655065,
+                "eb_log_joint": 0.9960267424162378,
+                "bayes_log": 0.999196149166052,
+                "bayes_log_noise": 0.999213072165452,
+                "bayes_log_spread": 0.9993626623159582,
+                "prior_log": 0.7736275811578729,
+                "prior_log_noise": 0.8741636714238752,
+                "prior_log_spread": 0.9489548293671318
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.968751609517764,
+                "eb_linear_joint": 0.9678224658085055,
+                "eb_log_joint": 0.985459647982999,
+                "bayes_log": 0.9963514435095536,
+                "bayes_log_noise": 0.9785961786487299,
+                "bayes_log_spread": 0.9929854421805522
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.7561064527889172,
+                  "weight_own": 0.9959395191373258,
+                  "prior_coverage": 0.6893911775428363
+                },
+                "2.0": {
+                  "coverage": 0.7561064527889172,
+                  "weight_own": 0.9968426039774592,
+                  "prior_coverage": 0.6912139992708713
+                }
+              }
+            }
+          },
+          "mean_abs_dev": {
+            "own": 0.044344949946489944,
+            "hier_linear_loo": 0.13966808983454596,
+            "eb_linear_joint": 0.1356272256349994,
+            "eb_log_joint": 0.058688627722539445,
+            "bayes_log": 0.04796782092375793,
+            "bayes_log_noise": 0.05605218725432466,
+            "bayes_log_spread": 0.04345841941570738,
+            "prior_linear_loo": 0.20546037697836977,
+            "prior_log": 0.2090021454926405,
+            "prior_log_noise": 0.14925364633639815,
+            "prior_log_spread": 0.17581405377401443
+          },
+          "mean_abs_dev_prior_scale": {
+            "0.5": {
+              "bayes_log": 0.04804776153930068,
+              "prior_log": 0.208952201302517
+            },
+            "2.0": {
+              "bayes_log": 0.04712458052103239,
+              "prior_log": 0.20907082655756754
+            }
+          }
+        },
+        "43": {
+          "fit_groups": [
+            "MIT",
+            "RWTH",
+            "XJTU",
+            "BIT",
+            "CALCE"
+          ],
+          "targets": [
+            "MIT",
+            "RWTH",
+            "XJTU",
+            "BIT",
+            "CALCE"
+          ],
+          "q": {
+            "MIT": 0.0012490452997410745,
+            "RWTH": 0.007540384243439831,
+            "XJTU": 0.003988160330505919,
+            "BIT": 0.05932478413247228,
+            "CALCE": 0.015482494356518533,
+            "Oxford": 0.004077378692555017
+          },
+          "covariate_noise": {
+            "MIT": 0.00011233706027269363,
+            "RWTH": 0.0005536377429962158,
+            "XJTU": 0.0021344702690839767,
+            "BIT": 0.007321537937968969,
+            "CALCE": 0.0017155557870864868,
+            "Oxford": 0.00316808745265007
+          },
+          "covariate_spread": {
+            "MIT": 0.003147220080331142,
+            "RWTH": 0.019705722062339937,
+            "XJTU": 0.00488324584362823,
+            "BIT": 0.02132791863459407,
+            "CALCE": 0.01402641605429757,
+            "Oxford": 0.005613462007645744
+          },
+          "per_target": {
+            "MIT": {
+              "coverage": {
+                "own": 0.8970193012460298,
+                "hier_linear_loo": 0.8975690202785243,
+                "prior_linear_loo": 0.9994502809675055,
+                "eb_linear_joint": 0.8974468604935255,
+                "eb_log_joint": 0.8984852186660152,
+                "bayes_log": 0.8981187393110188,
+                "bayes_log_noise": 0.8970803811385292,
+                "bayes_log_spread": 0.8974468604935255,
+                "prior_log": 0.9995724407525043,
+                "prior_log_noise": 0.9353163938431468,
+                "prior_log_spread": 0.9721475690202785
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 1.0023210410356551,
+                "prior_linear_loo": 7.842653005301289,
+                "eb_linear_joint": 1.001572542506788,
+                "eb_log_joint": 1.005905806996838,
+                "bayes_log": 1.0042096650248715,
+                "bayes_log_noise": 1.0005810914076043,
+                "bayes_log_spread": 1.001482025929379,
+                "prior_log": 10.054213605212926,
+                "prior_log_noise": 1.2550671704556597,
+                "prior_log_spread": 1.868181477400768
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.9996607980802392,
+                "eb_linear_joint": 0.9996947072339069,
+                "eb_log_joint": 0.9967939368492973,
+                "bayes_log": 0.9977122844152877,
+                "bayes_log_noise": 0.9928324992237695,
+                "bayes_log_spread": 0.9933147380645244
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.8982408990960176,
+                  "weight_own": 0.9974844098565511,
+                  "prior_coverage": 0.9995724407525043
+                },
+                "2.0": {
+                  "coverage": 0.8979965795260201,
+                  "weight_own": 0.9980070251890966,
+                  "prior_coverage": 0.9995724407525043
+                }
+              }
+            },
+            "RWTH": {
+              "coverage": {
+                "own": 0.8980446092208336,
+                "hier_linear_loo": 0.8980446092208336,
+                "prior_linear_loo": 0.9296776894097949,
+                "eb_linear_joint": 0.8980446092208336,
+                "eb_log_joint": 0.8980446092208336,
+                "bayes_log": 0.8980446092208336,
+                "bayes_log_noise": 0.8978652155713688,
+                "bayes_log_spread": 0.8984631944029181,
+                "prior_log": 0.9129342821264127,
+                "prior_log_noise": 0.6868384859175986,
+                "prior_log_spread": 0.9976678825569575
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 1.0002063907082288,
+                "prior_linear_loo": 1.1635966356649696,
+                "eb_linear_joint": 1.0000516564217972,
+                "eb_log_joint": 1.0000320668576732,
+                "bayes_log": 1.000022632901456,
+                "bayes_log_noise": 0.999134104359577,
+                "bayes_log_spread": 1.0017136684183012,
+                "prior_log": 1.0673999449940843,
+                "prior_log_noise": 0.529975334631613,
+                "prior_log_spread": 4.878457083016241
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.9987384171600485,
+                "eb_linear_joint": 0.9972648625584516,
+                "eb_log_joint": 0.9991727516427604,
+                "bayes_log": 0.9994096529392223,
+                "bayes_log_noise": 0.9981369697634728,
+                "bayes_log_spread": 0.9982642529404977
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.8980446092208336,
+                  "weight_own": 0.9993507078987414,
+                  "prior_coverage": 0.9123363032948634
+                },
+                "2.0": {
+                  "coverage": 0.8980446092208336,
+                  "weight_own": 0.9994858364512608,
+                  "prior_coverage": 0.913592058841117
+                }
+              }
+            },
+            "XJTU": {
+              "coverage": {
+                "own": 0.705177743431221,
+                "hier_linear_loo": 0.7268160741885626,
+                "prior_linear_loo": 0.8829211746522411,
+                "eb_linear_joint": 0.7217928902627512,
+                "eb_log_joint": 0.7148377125193199,
+                "bayes_log": 0.7121329211746522,
+                "bayes_log_noise": 0.7422720247295209,
+                "bayes_log_spread": 0.6955177743431221,
+                "prior_log": 0.8906491499227203,
+                "prior_log_noise": 0.9783616692426584,
+                "prior_log_spread": 0.5309119010819165
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 1.0691339960100898,
+                "prior_linear_loo": 2.230167984159544,
+                "eb_linear_joint": 1.0540174711464996,
+                "eb_log_joint": 1.0312530223537126,
+                "bayes_log": 1.0221794255861807,
+                "bayes_log_noise": 1.1188094049207833,
+                "bayes_log_spread": 0.9723844428731643,
+                "prior_log": 2.357652004580408,
+                "prior_log_noise": 5.196266378575861,
+                "prior_log_spread": 0.6176109029740836
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.9438011743921929,
+                "eb_linear_joint": 0.94169101028154,
+                "eb_log_joint": 0.9544556343462476,
+                "bayes_log": 0.9675348007617872,
+                "bayes_log_noise": 0.9087542659957554,
+                "bayes_log_spread": 0.9137063163684345
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.7129057187017002,
+                  "weight_own": 0.9644358709527023,
+                  "prior_coverage": 0.8906491499227203
+                },
+                "2.0": {
+                  "coverage": 0.7113601236476044,
+                  "weight_own": 0.9715963205206668,
+                  "prior_coverage": 0.8910355486862442
+                }
+              }
+            },
+            "BIT": {
+              "coverage": {
+                "own": 0.8768115942028986,
+                "hier_linear_loo": 0.4577294685990338,
+                "prior_linear_loo": 0.3466183574879227,
+                "eb_linear_joint": 0.4806763285024155,
+                "eb_log_joint": 0.8683574879227053,
+                "bayes_log": 0.8719806763285024,
+                "bayes_log_noise": 0.8731884057971014,
+                "bayes_log_spread": 0.8719806763285024,
+                "prior_log": 0.24758454106280192,
+                "prior_log_noise": 0.7439613526570048,
+                "prior_log_spread": 0.5978260869565217
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 0.16548005686126577,
+                "prior_linear_loo": 0.11695824942335091,
+                "eb_linear_joint": 0.17784247985639648,
+                "eb_log_joint": 0.8296738081093287,
+                "bayes_log": 0.8753718916626388,
+                "bayes_log_noise": 0.9190664284958585,
+                "bayes_log_spread": 0.8574410055975982,
+                "prior_log": 0.08295832192109782,
+                "prior_log_noise": 0.3481717828417976,
+                "prior_log_spread": 0.23417466381469126
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.0549484861913141,
+                "eb_linear_joint": 0.05552987134983034,
+                "eb_log_joint": 0.9077453289384427,
+                "bayes_log": 0.9342218019259596,
+                "bayes_log_noise": 0.8315891357978165,
+                "bayes_log_spread": 0.8392597055403501
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.8719806763285024,
+                  "weight_own": 0.9282299023478802,
+                  "prior_coverage": 0.24758454106280192
+                },
+                "2.0": {
+                  "coverage": 0.8719806763285024,
+                  "weight_own": 0.9421852099597754,
+                  "prior_coverage": 0.24758454106280192
+                }
+              }
+            },
+            "CALCE": {
+              "coverage": {
+                "own": 0.8870139398385913,
+                "hier_linear_loo": 0.8749082905355833,
+                "prior_linear_loo": 0.528980190755686,
+                "eb_linear_joint": 0.8782098312545855,
+                "eb_log_joint": 0.8859134262655907,
+                "bayes_log": 0.8862802641232576,
+                "bayes_log_noise": 0.8859134262655907,
+                "bayes_log_spread": 0.8862802641232576,
+                "prior_log": 0.6148202494497432,
+                "prior_log_noise": 0.7909024211298606,
+                "prior_log_spread": 0.8462949376375642
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 0.9415039048796223,
+                "prior_linear_loo": 0.3344436984589984,
+                "eb_linear_joint": 0.9603186171865816,
+                "eb_log_joint": 0.9964928693592066,
+                "bayes_log": 0.9974949813502642,
+                "bayes_log_noise": 0.9965992956106242,
+                "bayes_log_spread": 0.9977805640984124,
+                "prior_log": 0.43202578538315434,
+                "prior_log_noise": 0.6754031773191758,
+                "prior_log_spread": 0.798849468537799
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.9121094714527708,
+                "eb_linear_joint": 0.9212320052147983,
+                "eb_log_joint": 0.994838507053012,
+                "bayes_log": 0.996317247704728,
+                "bayes_log_noise": 0.9885288967415627,
+                "bayes_log_spread": 0.9892913303553332
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.8859134262655907,
+                  "weight_own": 0.9959511414653719,
+                  "prior_coverage": 0.6137197358767424
+                },
+                "2.0": {
+                  "coverage": 0.8862802641232576,
+                  "weight_own": 0.9967910777113159,
+                  "prior_coverage": 0.6159207630227439
+                }
+              }
+            }
+          },
+          "mean_abs_dev": {
+            "own": 0.047186562412085166,
+            "hier_linear_loo": 0.1289865074354925,
+            "eb_linear_joint": 0.12476589605317775,
+            "eb_log_joint": 0.04687230908110709,
+            "bayes_log": 0.0466885579683471,
+            "bayes_log_noise": 0.04073610929957783,
+            "bayes_log_spread": 0.050062246061734886,
+            "prior_linear_loo": 0.21412164949629015,
+            "prior_log": 0.2118905564887303,
+            "prior_log_noise": 0.11839516067626825,
+            "prior_log_spread": 0.1789565051802467
+          },
+          "mean_abs_dev_prior_scale": {
+            "0.5": {
+              "bayes_log": 0.04658293407747114,
+              "prior_log": 0.21199106343702062
+            },
+            "2.0": {
+              "bayes_log": 0.04686754943075642,
+              "prior_log": 0.21172472936436626
+            }
+          }
+        },
+        "44": {
+          "fit_groups": [
+            "MIT",
+            "RWTH",
+            "XJTU",
+            "BIT",
+            "CALCE"
+          ],
+          "targets": [
+            "MIT",
+            "RWTH",
+            "XJTU",
+            "BIT",
+            "CALCE"
+          ],
+          "q": {
+            "MIT": 0.0013320718695472298,
+            "RWTH": 0.007718467140106152,
+            "XJTU": 0.003347784609736092,
+            "BIT": 0.08909075161448579,
+            "CALCE": 0.02047770270766252,
+            "Oxford": 0.007381715990889553
+          },
+          "covariate_noise": {
+            "MIT": 0.00011894851922988892,
+            "RWTH": 0.0005633831024169922,
+            "XJTU": 0.0005543157458305359,
+            "BIT": 0.006981740705668926,
+            "CALCE": 0.001908324658870697,
+            "Oxford": 0.0041494593024253845
+          },
+          "covariate_spread": {
+            "MIT": 0.003467507338522927,
+            "RWTH": 0.0194124850536806,
+            "XJTU": 0.005027700663923747,
+            "BIT": 0.020384348358176537,
+            "CALCE": 0.01659730775614725,
+            "Oxford": 0.0026075553586613377
+          },
+          "per_target": {
+            "MIT": {
+              "coverage": {
+                "own": 0.8826275608282529,
+                "hier_linear_loo": 0.8827374086889658,
+                "prior_linear_loo": 0.9971439556214643,
+                "eb_linear_joint": 0.8827374086889658,
+                "eb_log_joint": 0.8829021804800351,
+                "bayes_log": 0.8827923326193222,
+                "bayes_log_noise": 0.8826275608282529,
+                "bayes_log_spread": 0.8826275608282529,
+                "prior_log": 0.9978579667160982,
+                "prior_log_noise": 0.8206733673861701,
+                "prior_log_spread": 0.9314000109847861
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 1.0004580019503728,
+                "prior_linear_loo": 9.224074593158916,
+                "eb_linear_joint": 1.000497634270343,
+                "eb_log_joint": 1.001293060565878,
+                "bayes_log": 1.0008942161943413,
+                "bayes_log_noise": 1.0001003707168825,
+                "bayes_log_spread": 1.000131738596479,
+                "prior_log": 11.12855255979138,
+                "prior_log_noise": 0.7782477834275624,
+                "prior_log_spread": 1.3645806812065857
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.9999443096064871,
+                "eb_linear_joint": 0.9999072831885185,
+                "eb_log_joint": 0.9993265723617926,
+                "bayes_log": 0.9995341935798421,
+                "bayes_log_noise": 0.9728616808519884,
+                "bayes_log_spread": 0.9987878916760711
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.8827923326193222,
+                  "weight_own": 0.9994960498214326,
+                  "prior_coverage": 0.9978579667160982
+                },
+                "2.0": {
+                  "coverage": 0.8827923326193222,
+                  "weight_own": 0.9995901452967316,
+                  "prior_coverage": 0.9977481188553853
+                }
+              }
+            },
+            "RWTH": {
+              "coverage": {
+                "own": 0.8789150218650278,
+                "hier_linear_loo": 0.8790332112043494,
+                "prior_linear_loo": 0.9529606429500059,
+                "eb_linear_joint": 0.8789150218650278,
+                "eb_log_joint": 0.8789150218650278,
+                "bayes_log": 0.8789150218650278,
+                "bayes_log_noise": 0.8786195485167237,
+                "bayes_log_spread": 0.8792695898829925,
+                "prior_log": 0.9260725682543435,
+                "prior_log_noise": 0.7854863491313083,
+                "prior_log_spread": 0.9989953906157665
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 1.0002119590655847,
+                "prior_linear_loo": 1.42310568162947,
+                "eb_linear_joint": 1.0001152941328144,
+                "eb_log_joint": 1.0000411386992958,
+                "bayes_log": 1.0000284516232512,
+                "bayes_log_noise": 0.9983376794842763,
+                "bayes_log_spread": 1.0005448143889186,
+                "prior_log": 1.2278436909735368,
+                "prior_log_noise": 0.73846457442976,
+                "prior_log_spread": 6.325308187286097
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.9994990398976246,
+                "eb_linear_joint": 0.9988339458722553,
+                "eb_log_joint": 0.9997460586340949,
+                "bayes_log": 0.9998243510315454,
+                "bayes_log_noise": 0.9885172658220288,
+                "bayes_log_spread": 0.9995425631233353
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.8789150218650278,
+                  "weight_own": 0.9998099618102414,
+                  "prior_coverage": 0.9260725682543435
+                },
+                "2.0": {
+                  "coverage": 0.8789150218650278,
+                  "weight_own": 0.9998454556600094,
+                  "prior_coverage": 0.9260725682543435
+                }
+              }
+            },
+            "XJTU": {
+              "coverage": {
+                "own": 0.733852140077821,
+                "hier_linear_loo": 0.7879377431906615,
+                "prior_linear_loo": 0.9766536964980544,
+                "eb_linear_joint": 0.7770428015564202,
+                "eb_log_joint": 0.7505836575875486,
+                "bayes_log": 0.7431906614785992,
+                "bayes_log_noise": 0.8295719844357977,
+                "bayes_log_spread": 0.7295719844357976,
+                "prior_log": 0.9824902723735408,
+                "prior_log_noise": 0.9334630350194553,
+                "prior_log_spread": 0.6038910505836576
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 1.176309945258805,
+                "prior_linear_loo": 3.0515264957011956,
+                "eb_linear_joint": 1.1332550102101473,
+                "eb_log_joint": 1.0554980560208889,
+                "bayes_log": 1.0381290734554696,
+                "bayes_log_noise": 1.3588099016292077,
+                "bayes_log_spread": 0.9823363489529389,
+                "prior_log": 3.4615049543025886,
+                "prior_log_noise": 2.002525276258966,
+                "prior_log_spread": 0.7364903488287085
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.9140591429707353,
+                "eb_linear_joint": 0.9131043724974021,
+                "eb_log_joint": 0.9458418072118204,
+                "bayes_log": 0.9624809442839477,
+                "bayes_log_noise": 0.5077533605499983,
+                "bayes_log_spread": 0.910857654432987
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.7439688715953308,
+                  "weight_own": 0.959561111036289,
+                  "prior_coverage": 0.9824902723735408
+                },
+                "2.0": {
+                  "coverage": 0.7428015564202335,
+                  "weight_own": 0.9668251117043052,
+                  "prior_coverage": 0.9824902723735408
+                }
+              }
+            },
+            "BIT": {
+              "coverage": {
+                "own": 0.8947368421052632,
+                "hier_linear_loo": 0.521181001283697,
+                "prior_linear_loo": 0.3594351732991014,
+                "eb_linear_joint": 0.5571245186136072,
+                "eb_log_joint": 0.8870346598202824,
+                "bayes_log": 0.8908857509627728,
+                "bayes_log_noise": 0.8908857509627728,
+                "bayes_log_spread": 0.8870346598202824,
+                "prior_log": 0.2631578947368421,
+                "prior_log_noise": 0.8754813863928113,
+                "prior_log_spread": 0.6020539152759948
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 0.1299072410413271,
+                "prior_linear_loo": 0.08181475492778213,
+                "eb_linear_joint": 0.14313988138750972,
+                "eb_log_joint": 0.9370110990517609,
+                "bayes_log": 0.9559703466499632,
+                "bayes_log_noise": 0.9785812923559569,
+                "bayes_log_spread": 0.9443207848034072,
+                "prior_log": 0.057959243828327345,
+                "prior_log_noise": 0.7907832719927731,
+                "prior_log_spread": 0.16214256399685964
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.052377759685914314,
+                "eb_linear_joint": 0.05298166829189061,
+                "eb_log_joint": 0.9715153473238697,
+                "bayes_log": 0.9802855165563236,
+                "bayes_log_noise": 0.6278902510136743,
+                "bayes_log_spread": 0.9511946757846265
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.8908857509627728,
+                  "weight_own": 0.9787133287757459,
+                  "prior_coverage": 0.2631578947368421
+                },
+                "2.0": {
+                  "coverage": 0.8908857509627728,
+                  "weight_own": 0.9826089616652749,
+                  "prior_coverage": 0.2631578947368421
+                }
+              }
+            },
+            "CALCE": {
+              "coverage": {
+                "own": 0.9473293768545994,
+                "hier_linear_loo": 0.9161721068249258,
+                "prior_linear_loo": 0.6428041543026706,
+                "eb_linear_joint": 0.9239614243323442,
+                "eb_log_joint": 0.9458456973293768,
+                "bayes_log": 0.9465875370919882,
+                "bayes_log_noise": 0.9491839762611276,
+                "bayes_log_spread": 0.9473293768545994,
+                "prior_log": 0.7329376854599406,
+                "prior_log_noise": 0.9506676557863502,
+                "prior_log_spread": 0.94473293768546
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 0.7753411309431676,
+                "prior_linear_loo": 0.27566863516908857,
+                "eb_linear_joint": 0.820880428620476,
+                "eb_log_joint": 0.9901864040322816,
+                "bayes_log": 0.9932003459893265,
+                "bayes_log_noise": 1.0221359227732951,
+                "bayes_log_spread": 0.9990852574585763,
+                "prior_log": 0.36194748406848565,
+                "prior_log_noise": 1.074565968602724,
+                "prior_log_spread": 0.9636233036650499
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.6898396507939746,
+                "eb_linear_joint": 0.6942367162397405,
+                "eb_log_joint": 0.9878803204622482,
+                "bayes_log": 0.9916152817227883,
+                "bayes_log_noise": 0.7642660690931506,
+                "bayes_log_spread": 0.9786416259167511
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.9462166172106825,
+                  "weight_own": 0.9909361235150478,
+                  "prior_coverage": 0.732566765578635
+                },
+                "2.0": {
+                  "coverage": 0.9465875370919882,
+                  "weight_own": 0.9926146002475109,
+                  "prior_coverage": 0.7329376854599406
+                }
+              }
+            }
+          },
+          "mean_abs_dev": {
+            "own": 0.05143956239564693,
+            "hier_linear_loo": 0.10905654849145044,
+            "eb_linear_joint": 0.10562833472166464,
+            "eb_log_joint": 0.0492820355152966,
+            "bayes_log": 0.05016075403325324,
+            "bayes_log_noise": 0.03349582630351611,
+            "bayes_log_spread": 0.053765116377454805,
+            "prior_linear_loo": 0.20490379349355053,
+            "prior_log": 0.20206504542943993,
+            "prior_log_noise": 0.060497917579103146,
+            "prior_log_spread": 0.153836674685272
+          },
+          "mean_abs_dev_prior_scale": {
+            "0.5": {
+              "bayes_log": 0.04993092803364581,
+              "prior_log": 0.20213922940570103
+            },
+            "2.0": {
+              "bayes_log": 0.05023857504492639,
+              "prior_log": 0.20204307585729736
+            }
+          }
+        },
+        "45": {
+          "fit_groups": [
+            "MIT",
+            "RWTH",
+            "XJTU",
+            "BIT",
+            "CALCE"
+          ],
+          "targets": [
+            "MIT",
+            "RWTH",
+            "XJTU",
+            "BIT",
+            "CALCE"
+          ],
+          "q": {
+            "MIT": 0.001589869165427459,
+            "RWTH": 0.008741912685786125,
+            "XJTU": 0.004174738203119794,
+            "BIT": 0.0773834946945574,
+            "CALCE": 0.02504762242684997,
+            "Oxford": 0.004941102229701034,
+            "NASA": 0.017488620697042427
+          },
+          "covariate_noise": {
+            "MIT": 0.00015593413263559341,
+            "RWTH": 0.0006008148193359375,
+            "XJTU": 0.0016611367464065552,
+            "BIT": 0.006464123725891113,
+            "CALCE": 0.0020607709884643555,
+            "Oxford": 0.0031680911779403687,
+            "NASA": 0.005175657570362091
+          },
+          "covariate_spread": {
+            "MIT": 0.0032840722410045335,
+            "RWTH": 0.019551997686870153,
+            "XJTU": 0.005062932589799579,
+            "BIT": 0.022218869311733343,
+            "CALCE": 0.012143219432077097,
+            "Oxford": 0.005275518691988857,
+            "NASA": 0.01122385487814283
+          },
+          "per_target": {
+            "MIT": {
+              "coverage": {
+                "own": 0.8884966908288686,
+                "hier_linear_loo": 0.8884966908288686,
+                "prior_linear_loo": 0.9997478726757012,
+                "eb_linear_joint": 0.8884966908288686,
+                "eb_log_joint": 0.8884966908288686,
+                "bayes_log": 0.8884966908288686,
+                "bayes_log_noise": 0.8884966908288686,
+                "bayes_log_spread": 0.8884966908288686,
+                "prior_log": 0.9999369681689253,
+                "prior_log_noise": 0.8525685471162937,
+                "prior_log_spread": 0.9723290261582099
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 1.0001183303689385,
+                "prior_linear_loo": 7.084562606540689,
+                "eb_linear_joint": 1.0000857533913738,
+                "eb_log_joint": 1.0002554438911082,
+                "bayes_log": 1.0001903889226977,
+                "bayes_log_noise": 1.0000010612502954,
+                "bayes_log_spread": 1.0000474723261668,
+                "prior_log": 10.12429821080409,
+                "prior_log_noise": 0.906019668216763,
+                "prior_log_spread": 1.6381529118061744
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.9999805523623323,
+                "eb_linear_joint": 0.9999797089287809,
+                "eb_log_joint": 0.9998608227332092,
+                "bayes_log": 0.9998961571331825,
+                "bayes_log_noise": 0.9995814764076999,
+                "bayes_log_spread": 0.9997280959198064
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.8884966908288686,
+                  "weight_own": 0.9998864595901628,
+                  "prior_coverage": 0.9999369681689253
+                },
+                "2.0": {
+                  "coverage": 0.8884966908288686,
+                  "weight_own": 0.9999092915171012,
+                  "prior_coverage": 0.9999369681689253
+                }
+              }
+            },
+            "RWTH": {
+              "coverage": {
+                "own": 0.8970846717982908,
+                "hier_linear_loo": 0.8970846717982908,
+                "prior_linear_loo": 0.8994484514212983,
+                "eb_linear_joint": 0.8970846717982908,
+                "eb_log_joint": 0.8970846717982908,
+                "bayes_log": 0.8970846717982908,
+                "bayes_log_noise": 0.8970846717982908,
+                "bayes_log_spread": 0.8970846717982908,
+                "prior_log": 0.9390266076731923,
+                "prior_log_noise": 0.5937935632462573,
+                "prior_log_spread": 0.9994545123946906
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 1.0000072456075821,
+                "prior_linear_loo": 1.009612096270757,
+                "eb_linear_joint": 0.999952658644994,
+                "eb_log_joint": 1.0000287863927095,
+                "bayes_log": 1.0000211669479253,
+                "bayes_log_noise": 0.9997142624517502,
+                "bayes_log_spread": 1.0004935377426178,
+                "prior_log": 1.1950284378787042,
+                "prior_log_noise": 0.5426317282214429,
+                "prior_log_spread": 7.174862796896036
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.99924619902069,
+                "eb_linear_joint": 0.9990442081687971,
+                "eb_log_joint": 0.9997797106767061,
+                "bayes_log": 0.9998356389476454,
+                "bayes_log_noise": 0.9993378551635214,
+                "bayes_log_spread": 0.999569710861373
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.8970846717982908,
+                  "weight_own": 0.9998202911260847,
+                  "prior_coverage": 0.938723559003576
+                },
+                "2.0": {
+                  "coverage": 0.8970846717982908,
+                  "weight_own": 0.9998564266339329,
+                  "prior_coverage": 0.9397539244802715
+                }
+              }
+            },
+            "XJTU": {
+              "coverage": {
+                "own": 0.8796920115495669,
+                "hier_linear_loo": 0.9100096246390761,
+                "prior_linear_loo": 0.9764196342637151,
+                "eb_linear_joint": 0.9027911453320501,
+                "eb_log_joint": 0.8936477382098171,
+                "bayes_log": 0.8893166506256015,
+                "bayes_log_noise": 0.9201154956689124,
+                "bayes_log_spread": 0.8792107795957652,
+                "prior_log": 0.9855630413859481,
+                "prior_log_noise": 0.9942252165543792,
+                "prior_log_spread": 0.8426371511068335
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 1.1333551669932973,
+                "prior_linear_loo": 2.3591764643431885,
+                "eb_linear_joint": 1.0978773830733242,
+                "eb_log_joint": 1.0528054202249777,
+                "bayes_log": 1.0389385185394584,
+                "bayes_log_noise": 1.1966033466052597,
+                "bayes_log_spread": 0.9857066515683298,
+                "prior_log": 2.989520744332725,
+                "prior_log_noise": 5.123502205008557,
+                "prior_log_spread": 0.8265420097578476
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.901885317696595,
+                "eb_linear_joint": 0.9011623598008071,
+                "eb_log_joint": 0.9408354368502979,
+                "bayes_log": 0.956012968944659,
+                "bayes_log_noise": 0.8577331479446687,
+                "bayes_log_spread": 0.8968900690140997
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.8907603464870067,
+                  "weight_own": 0.9521511776320307,
+                  "prior_coverage": 0.9855630413859481
+                },
+                "2.0": {
+                  "coverage": 0.8888354186717998,
+                  "weight_own": 0.961340703004108,
+                  "prior_coverage": 0.9860442733397498
+                }
+              }
+            },
+            "BIT": {
+              "coverage": {
+                "own": 0.8848837209302326,
+                "hier_linear_loo": 0.4686046511627907,
+                "prior_linear_loo": 0.35930232558139535,
+                "eb_linear_joint": 0.49534883720930234,
+                "eb_log_joint": 0.8767441860465116,
+                "bayes_log": 0.8813953488372093,
+                "bayes_log_noise": 0.8837209302325582,
+                "bayes_log_spread": 0.8813953488372093,
+                "prior_log": 0.3058139534883721,
+                "prior_log_noise": 0.8116279069767441,
+                "prior_log_spread": 0.6895348837209302
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 0.1361580969096539,
+                "prior_linear_loo": 0.09497243493723116,
+                "eb_linear_joint": 0.1481755274787979,
+                "eb_log_joint": 0.8800966773689257,
+                "bayes_log": 0.9093664838750933,
+                "bayes_log_noise": 0.9455309158980858,
+                "bayes_log_spread": 0.9136723236775679,
+                "prior_log": 0.07808787579159467,
+                "prior_log_noise": 0.4143254656264302,
+                "prior_log_spread": 0.24619200622300705
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.045507632653781396,
+                "eb_linear_joint": 0.04571035396774505,
+                "eb_log_joint": 0.9376949638969846,
+                "bayes_log": 0.9536836721558801,
+                "bayes_log_noise": 0.8515206127382818,
+                "bayes_log_spread": 0.8919796877502426
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.8813953488372093,
+                  "weight_own": 0.9496306378979379,
+                  "prior_coverage": 0.30465116279069765
+                },
+                "2.0": {
+                  "coverage": 0.8825581395348837,
+                  "weight_own": 0.9592805432247588,
+                  "prior_coverage": 0.3081395348837209
+                }
+              }
+            },
+            "CALCE": {
+              "coverage": {
+                "own": 0.9608423823626193,
+                "hier_linear_loo": 0.8845014807502468,
+                "prior_linear_loo": 0.5432708127673577,
+                "eb_linear_joint": 0.9072063178677197,
+                "eb_log_joint": 0.9572227706482396,
+                "bayes_log": 0.9582099374794341,
+                "bayes_log_noise": 0.9582099374794341,
+                "bayes_log_spread": 0.9568937150378414,
+                "prior_log": 0.6798288910825929,
+                "prior_log_noise": 0.9190523198420533,
+                "prior_log_spread": 0.843040473840079
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 0.5492834431527044,
+                "prior_linear_loo": 0.23859075962309728,
+                "eb_linear_joint": 0.6053823508272044,
+                "eb_log_joint": 0.9413960549383983,
+                "bayes_log": 0.9560451242980185,
+                "bayes_log_noise": 0.9506590099890219,
+                "bayes_log_spread": 0.9327842926043142,
+                "prior_log": 0.3212402720070462,
+                "prior_log_noise": 0.6431606254430725,
+                "prior_log_spread": 0.4747914379773847
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.4080495311244346,
+                "eb_linear_joint": 0.4094983171388131,
+                "eb_log_joint": 0.9344979535169303,
+                "bayes_log": 0.9513126803540608,
+                "bayes_log_noise": 0.8452936312106544,
+                "bayes_log_spread": 0.8870280304908014
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.9582099374794341,
+                  "weight_own": 0.9470663002492322,
+                  "prior_coverage": 0.6791707798617966
+                },
+                "2.0": {
+                  "coverage": 0.9582099374794341,
+                  "weight_own": 0.9571821830170978,
+                  "prior_coverage": 0.6814741691345837
+                }
+              }
+            }
+          },
+          "mean_abs_dev": {
+            "own": 0.022137057451132102,
+            "hier_linear_loo": 0.09426442601977585,
+            "eb_linear_joint": 0.0858134526726616,
+            "eb_log_joint": 0.020249896752950303,
+            "bayes_log": 0.020383315077892795,
+            "bayes_log_noise": 0.021804628057725782,
+            "bayes_log_spread": 0.022141244795541516,
+            "prior_linear_loo": 0.214829183433873,
+            "prior_log": 0.20777675453142014,
+            "prior_log_noise": 0.11105750381142747,
+            "prior_log_spread": 0.0993142059770116
+          },
+          "mean_abs_dev_prior_scale": {
+            "0.5": {
+              "bayes_log": 0.020094575905611745,
+              "prior_log": 0.208080325181191
+            },
+            "2.0": {
+              "bayes_log": 0.02024700332911824,
+              "prior_log": 0.20722429239412837
+            }
+          }
+        },
+        "46": {
+          "fit_groups": [
+            "MIT",
+            "RWTH",
+            "XJTU",
+            "BIT",
+            "CALCE"
+          ],
+          "targets": [
+            "MIT",
+            "RWTH",
+            "XJTU",
+            "BIT",
+            "CALCE"
+          ],
+          "q": {
+            "MIT": 0.0014931597535201352,
+            "RWTH": 0.008521155970652373,
+            "XJTU": 0.01106620662119035,
+            "BIT": 0.09261738466964639,
+            "CALCE": 0.015807127930917018,
+            "Oxford": 0.006814085361030348,
+            "NASA": 0.03909459337592125
+          },
+          "covariate_noise": {
+            "MIT": 0.0001395922154188156,
+            "RWTH": 0.0005948096513748169,
+            "XJTU": 0.001049865037202835,
+            "BIT": 0.006960555911064148,
+            "CALCE": 0.001995787024497986,
+            "Oxford": 0.0049581378698349,
+            "NASA": 0.016479134559631348
+          },
+          "covariate_spread": {
+            "MIT": 0.0034456540235922976,
+            "RWTH": 0.01963460146743168,
+            "XJTU": 0.004931835617437468,
+            "BIT": 0.018806057356141322,
+            "CALCE": 0.011704844950196492,
+            "Oxford": 0.003888500577721484,
+            "NASA": 0.031511112525652814
+          },
+          "per_target": {
+            "MIT": {
+              "coverage": {
+                "own": 0.9230981866430783,
+                "hier_linear_loo": 0.9237616099071208,
+                "prior_linear_loo": 0.9998894294559929,
+                "eb_linear_joint": 0.9235957540911102,
+                "eb_log_joint": 0.9255307386112339,
+                "bayes_log": 0.9238721804511278,
+                "bayes_log_noise": 0.9237616099071208,
+                "bayes_log_spread": 0.9236510393631137,
+                "prior_log": 0.9998894294559929,
+                "prior_log_noise": 0.9462627156125608,
+                "prior_log_spread": 0.9997788589119858
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 1.0027651541132856,
+                "prior_linear_loo": 8.80508395652567,
+                "eb_linear_joint": 1.001697688694478,
+                "eb_log_joint": 1.0150997259082821,
+                "bayes_log": 1.004329899952156,
+                "bayes_log_noise": 1.0024933766584256,
+                "bayes_log_spread": 1.0019885554524957,
+                "prior_log": 13.009726589769201,
+                "prior_log_noise": 1.1994994465513564,
+                "prior_log_spread": 5.780252690476671
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.9996457239757205,
+                "eb_linear_joint": 0.9996998127481507,
+                "eb_log_joint": 0.9924742569873811,
+                "bayes_log": 0.9978651951335075,
+                "bayes_log_noise": 0.9645868012940001,
+                "bayes_log_spread": 0.9963807883846327
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.9239274657231313,
+                  "weight_own": 0.9976675456139943,
+                  "prior_coverage": 0.9998894294559929
+                },
+                "2.0": {
+                  "coverage": 0.9237616099071208,
+                  "weight_own": 0.9981327969792224,
+                  "prior_coverage": 0.9998894294559929
+                }
+              }
+            },
+            "RWTH": {
+              "coverage": {
+                "own": 0.8941848818712073,
+                "hier_linear_loo": 0.8941848818712073,
+                "prior_linear_loo": 0.9673010074824722,
+                "eb_linear_joint": 0.8941848818712073,
+                "eb_log_joint": 0.8941848818712073,
+                "bayes_log": 0.8941848818712073,
+                "bayes_log_noise": 0.8940670476639369,
+                "bayes_log_spread": 0.8941848818712073,
+                "prior_log": 0.961527131326224,
+                "prior_log_noise": 0.791079950509633,
+                "prior_log_spread": 0.9993519118600129
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 1.0001047191443204,
+                "prior_linear_loo": 1.5163839094469707,
+                "eb_linear_joint": 1.0001083794564758,
+                "eb_log_joint": 1.0001329149109461,
+                "bayes_log": 1.000042420644146,
+                "bayes_log_noise": 0.9993067704250395,
+                "bayes_log_spread": 1.0003180247999606,
+                "prior_log": 1.445656522370247,
+                "prior_log_noise": 0.6949231692151717,
+                "prior_log_spread": 8.753145030529994
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.9997972068021397,
+                "eb_linear_joint": 0.999348013217706,
+                "eb_log_joint": 0.9994678545024469,
+                "bayes_log": 0.9998496738613539,
+                "bayes_log_noise": 0.9973373713574513,
+                "bayes_log_spread": 0.9997444537887243
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.8941848818712073,
+                  "weight_own": 0.99983571745825,
+                  "prior_coverage": 0.9613503800153185
+                },
+                "2.0": {
+                  "coverage": 0.8941848818712073,
+                  "weight_own": 0.9998685538490051,
+                  "prior_coverage": 0.9618217168443999
+                }
+              }
+            },
+            "XJTU": {
+              "coverage": {
+                "own": 0.8375,
+                "hier_linear_loo": 0.8278225806451613,
+                "prior_linear_loo": 0.8153225806451613,
+                "eb_linear_joint": 0.8298387096774194,
+                "eb_log_joint": 0.8362903225806452,
+                "bayes_log": 0.8383064516129032,
+                "bayes_log_noise": 0.8439516129032258,
+                "bayes_log_spread": 0.8008064516129032,
+                "prior_log": 0.8475806451612903,
+                "prior_log_noise": 0.8512096774193548,
+                "prior_log_spread": 0.5766129032258065
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 0.9372282798276768,
+                "prior_linear_loo": 0.8823968589790492,
+                "eb_linear_joint": 0.9455538262244181,
+                "eb_log_joint": 0.9949995733105114,
+                "bayes_log": 1.0037431721575396,
+                "bayes_log_noise": 1.027244094066373,
+                "bayes_log_spread": 0.7978366356457773,
+                "prior_log": 1.0381594881309242,
+                "prior_log_noise": 1.051513249593989,
+                "prior_log_spread": 0.26987656613092054
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.46624112564186937,
+                "eb_linear_joint": 0.4661334934583071,
+                "eb_log_joint": 0.5674318348058546,
+                "bayes_log": 0.8330478826537754,
+                "bayes_log_noise": 0.3297736236430578,
+                "bayes_log_spread": 0.7596477495479551
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.8383064516129032,
+                  "weight_own": 0.8207669001101292,
+                  "prior_coverage": 0.8471774193548387
+                },
+                "2.0": {
+                  "coverage": 0.8383064516129032,
+                  "weight_own": 0.8507650785071805,
+                  "prior_coverage": 0.847983870967742
+                }
+              }
+            },
+            "BIT": {
+              "coverage": {
+                "own": 0.9022988505747126,
+                "hier_linear_loo": 0.5586206896551724,
+                "prior_linear_loo": 0.4632183908045977,
+                "eb_linear_joint": 0.5793103448275863,
+                "eb_log_joint": 0.8931034482758621,
+                "bayes_log": 0.9,
+                "bayes_log_noise": 0.9,
+                "bayes_log_spread": 0.9,
+                "prior_log": 0.3563218390804598,
+                "prior_log_noise": 0.8804597701149425,
+                "prior_log_spread": 0.5896551724137931
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 0.13444839713486043,
+                "prior_linear_loo": 0.09637218630193736,
+                "eb_linear_joint": 0.1450636593812996,
+                "eb_log_joint": 0.7525061141330974,
+                "bayes_log": 0.9176619060223961,
+                "bayes_log_noise": 0.9197630612559866,
+                "bayes_log_spread": 0.9238439164633019,
+                "prior_log": 0.07184232389886236,
+                "prior_log_noise": 0.6252403230467877,
+                "prior_log_spread": 0.150092378408117
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.042137050515408114,
+                "eb_linear_joint": 0.04230531122273093,
+                "eb_log_joint": 0.8668897154125794,
+                "bayes_log": 0.9591474582939484,
+                "bayes_log_noise": 0.6442397592197008,
+                "bayes_log_spread": 0.9339735052116118
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.9,
+                  "weight_own": 0.9555630043261303,
+                  "prior_coverage": 0.35517241379310344
+                },
+                "2.0": {
+                  "coverage": 0.9,
+                  "weight_own": 0.9640784325941638,
+                  "prior_coverage": 0.35747126436781607
+                }
+              }
+            },
+            "CALCE": {
+              "coverage": {
+                "own": 0.9228571428571428,
+                "hier_linear_loo": 0.9214285714285714,
+                "prior_linear_loo": 0.7638095238095238,
+                "eb_linear_joint": 0.9228571428571428,
+                "eb_log_joint": 0.9228571428571428,
+                "bayes_log": 0.9228571428571428,
+                "bayes_log_noise": 0.9228571428571428,
+                "bayes_log_spread": 0.9228571428571428,
+                "prior_log": 0.8533333333333334,
+                "prior_log_noise": 0.9576190476190476,
+                "prior_log_spread": 0.9104761904761904
+              },
+              "half_width_over_own": {
+                "own": 1.0,
+                "hier_linear_loo": 0.9957154397775039,
+                "prior_linear_loo": 0.45564599374573234,
+                "eb_linear_joint": 0.9977292377508143,
+                "eb_log_joint": 0.9994949081128152,
+                "bayes_log": 0.9998697965988143,
+                "bayes_log_noise": 1.002040692969639,
+                "bayes_log_spread": 0.9999353342617431,
+                "prior_log": 0.6629433063759036,
+                "prior_log_noise": 1.7349341091115877,
+                "prior_log_spread": 0.9285609438301782
+              },
+              "weight_own": {
+                "hier_linear_loo": 0.9921290921472617,
+                "eb_linear_joint": 0.9938846232820667,
+                "eb_log_joint": 0.9986276945410202,
+                "bayes_log": 0.9996121434007081,
+                "bayes_log_noise": 0.9931875327985171,
+                "bayes_log_spread": 0.9993408803211719
+              },
+              "prior_scale_sensitivity": {
+                "0.5": {
+                  "coverage": 0.9228571428571428,
+                  "weight_own": 0.9995761463977377,
+                  "prior_coverage": 0.8533333333333334
+                },
+                "2.0": {
+                  "coverage": 0.9228571428571428,
+                  "weight_own": 0.9996608444491809,
+                  "prior_coverage": 0.8538095238095238
+                }
+              }
+            }
+          },
+          "mean_abs_dev": {
+            "own": 0.023313859640745282,
+            "hier_linear_loo": 0.09291240583283022,
+            "eb_linear_joint": 0.08862379211440803,
+            "eb_log_joint": 0.024961845748132448,
+            "bayes_log": 0.022847597964832045,
+            "bayes_log_noise": 0.021720018439420175,
+            "bayes_log_spread": 0.030303369747229202,
+            "prior_linear_loo": 0.16496798833583645,
+            "prior_log": 0.1608361486414267,
+            "prior_log_noise": 0.056226473037535626,
+            "prior_log_spread": 0.16866777712171793
+          },
+          "mean_abs_dev_prior_scale": {
+            "0.5": {
+              "bayes_log": 0.022858655019232742,
+              "prior_log": 0.16111132859800717
+            },
+            "2.0": {
+              "bayes_log": 0.022825483856030625,
+              "prior_log": 0.1604892974310622
+            }
+          }
+        }
+      },
+      "summary": {
+        "mean_abs_dev": {
+          "own": {
+            "mean": 0.037684398369219885,
+            "min": 0.022137057451132102,
+            "max": 0.05143956239564693,
+            "beats_own_splits": 0,
+            "ties_or_beats_own_splits": 5
+          },
+          "hier_linear_loo": {
+            "mean": 0.11297759552281898,
+            "min": 0.09291240583283022,
+            "max": 0.13966808983454596,
+            "beats_own_splits": 0,
+            "ties_or_beats_own_splits": 0
+          },
+          "eb_linear_joint": {
+            "mean": 0.10809174023938231,
+            "min": 0.0858134526726616,
+            "max": 0.1356272256349994,
+            "beats_own_splits": 0,
+            "ties_or_beats_own_splits": 0
+          },
+          "eb_log_joint": {
+            "mean": 0.040010942964005175,
+            "min": 0.020249896752950303,
+            "max": 0.058688627722539445,
+            "beats_own_splits": 3,
+            "ties_or_beats_own_splits": 3
+          },
+          "bayes_log": {
+            "mean": 0.037609609193616625,
+            "min": 0.020383315077892795,
+            "max": 0.05016075403325324,
+            "beats_own_splits": 4,
+            "ties_or_beats_own_splits": 4
+          },
+          "bayes_log_noise": {
+            "mean": 0.03476175387091291,
+            "min": 0.021720018439420175,
+            "max": 0.05605218725432466,
+            "beats_own_splits": 4,
+            "ties_or_beats_own_splits": 4
+          },
+          "bayes_log_spread": {
+            "mean": 0.03994607927953356,
+            "min": 0.022141244795541516,
+            "max": 0.053765116377454805,
+            "beats_own_splits": 1,
+            "ties_or_beats_own_splits": 1
+          },
+          "prior_linear_loo": {
+            "mean": 0.200856598347584,
+            "min": 0.16496798833583645,
+            "max": 0.214829183433873,
+            "beats_own_splits": 0,
+            "ties_or_beats_own_splits": 0
+          },
+          "prior_log": {
+            "mean": 0.19831413011673155,
+            "min": 0.1608361486414267,
+            "max": 0.2118905564887303,
+            "beats_own_splits": 0,
+            "ties_or_beats_own_splits": 0
+          },
+          "prior_log_noise": {
+            "mean": 0.09908614028814654,
+            "min": 0.056226473037535626,
+            "max": 0.14925364633639815,
+            "beats_own_splits": 0,
+            "ties_or_beats_own_splits": 0
+          },
+          "prior_log_spread": {
+            "mean": 0.15531784334765253,
+            "min": 0.0993142059770116,
+            "max": 0.1789565051802467,
+            "beats_own_splits": 0,
+            "ties_or_beats_own_splits": 0
+          }
+        },
+        "bit_coverage": {
+          "own": {
+            "min": 0.8768115942028986,
+            "max": 0.9022988505747126
+          },
+          "hier_linear_loo": {
+            "min": 0.41478696741854637,
+            "max": 0.5586206896551724
+          },
+          "eb_linear_joint": {
+            "min": 0.42857142857142855,
+            "max": 0.5793103448275863
+          },
+          "eb_log_joint": {
+            "min": 0.8270676691729323,
+            "max": 0.8931034482758621
+          },
+          "bayes_log": {
+            "min": 0.8696741854636592,
+            "max": 0.9
+          },
+          "bayes_log_noise": {
+            "min": 0.8696741854636592,
+            "max": 0.9
+          },
+          "bayes_log_spread": {
+            "min": 0.8719806763285024,
+            "max": 0.9
+          },
+          "prior_linear_loo": {
+            "min": 0.3258145363408521,
+            "max": 0.4632183908045977
+          },
+          "prior_log": {
+            "min": 0.24758454106280192,
+            "max": 0.3563218390804598
+          },
+          "prior_log_noise": {
+            "min": 0.6591478696741855,
+            "max": 0.8804597701149425
+          },
+          "prior_log_spread": {
+            "min": 0.4924812030075188,
+            "max": 0.6895348837209302
+          }
+        },
+        "bit_weight_own": {
+          "hier_linear_loo": {
+            "min": 0.03758869278627761,
+            "max": 0.0549484861913141
+          },
+          "eb_linear_joint": {
+            "min": 0.03804191699916535,
+            "max": 0.05552987134983034
+          },
+          "eb_log_joint": {
+            "min": 0.7185107607277481,
+            "max": 0.9715153473238697
+          },
+          "bayes_log": {
+            "min": 0.9145002500075858,
+            "max": 0.9802855165563236
+          },
+          "bayes_log_noise": {
+            "min": 0.6278902510136743,
+            "max": 0.8515206127382818
+          },
+          "bayes_log_spread": {
+            "min": 0.8392597055403501,
+            "max": 0.9511946757846265
+          }
+        },
+        "prior_scale_sensitivity": {
+          "0.5": {
+            "bayes_log": 0.037502970915052426,
+            "prior_log": 0.19845482958488736
+          },
+          "2.0": {
+            "bayes_log": 0.03746063843637281,
+            "prior_log": 0.19811044432088434
+          }
+        }
+      }
+    },
+    "budget_across_splits": {
+      "rule_floor": 0.85,
+      "per_split": {
+        "42": {
+          "MIT": {
+            "n_cells_available": 21,
+            "needed": 2,
+            "one_cell_mean": 0.9091529720778849,
+            "one_cell_p05": 0.8497658881973392,
+            "full_mean": 0.9218294980871353,
+            "full_below_rule": false
+          },
+          "RWTH": {
+            "n_cells_available": 7,
+            "needed": 1,
+            "one_cell_mean": 0.9062376915067678,
+            "one_cell_p05": 0.8781050126431652,
+            "full_mean": 0.9071842927264614,
+            "full_below_rule": false
+          },
+          "XJTU": {
+            "n_cells_available": 8,
+            "needed": 7,
+            "one_cell_mean": 0.8452491362763916,
+            "one_cell_p05": 0.6936660268714011,
+            "full_mean": 0.9301343570057582,
+            "full_below_rule": false
+          },
+          "BIT": {
+            "n_cells_available": 11,
+            "needed": 10,
+            "one_cell_mean": 0.8041177944862156,
+            "one_cell_p05": 0.43859649122807015,
+            "full_mean": 0.8809523809523809,
+            "full_below_rule": false
+          },
+          "CALCE": {
+            "n_cells_available": 2,
+            "needed": null,
+            "one_cell_mean": 0.749966460080204,
+            "one_cell_p05": 0.7189208895370033,
+            "full_mean": 0.7564710171345242,
+            "full_below_rule": true
+          }
+        },
+        "43": {
+          "MIT": {
+            "n_cells_available": 21,
+            "needed": 5,
+            "one_cell_mean": 0.8981783532860982,
+            "one_cell_p05": 0.8217077937942829,
+            "full_mean": 0.8970193012460298,
+            "full_below_rule": false
+          },
+          "RWTH": {
+            "n_cells_available": 6,
+            "needed": 1,
+            "one_cell_mean": 0.8948982838007534,
+            "one_cell_p05": 0.8740656580757041,
+            "full_mean": 0.8980446092208336,
+            "full_below_rule": false
+          },
+          "XJTU": {
+            "n_cells_available": 8,
+            "needed": null,
+            "one_cell_mean": 0.652516228748068,
+            "one_cell_p05": 0.5154559505409583,
+            "full_mean": 0.705177743431221,
+            "full_below_rule": true
+          },
+          "BIT": {
+            "n_cells_available": 11,
+            "needed": 10,
+            "one_cell_mean": 0.8140241545893719,
+            "one_cell_p05": 0.45410628019323673,
+            "full_mean": 0.8768115942028986,
+            "full_below_rule": false
+          },
+          "CALCE": {
+            "n_cells_available": 2,
+            "needed": 1,
+            "one_cell_mean": 0.8990403521643432,
+            "one_cell_p05": 0.8793103448275862,
+            "full_mean": 0.8870139398385913,
+            "full_below_rule": false
+          }
+        },
+        "44": {
+          "MIT": {
+            "n_cells_available": 21,
+            "needed": 3,
+            "one_cell_mean": 0.8880797495468775,
+            "one_cell_p05": 0.8392376558466524,
+            "full_mean": 0.8826275608282529,
+            "full_below_rule": false
+          },
+          "RWTH": {
+            "n_cells_available": 7,
+            "needed": 1,
+            "one_cell_mean": 0.8795396525233424,
+            "one_cell_p05": 0.8624867036993263,
+            "full_mean": 0.8789150218650278,
+            "full_below_rule": false
+          },
+          "XJTU": {
+            "n_cells_available": 8,
+            "needed": null,
+            "one_cell_mean": 0.6978241245136187,
+            "one_cell_p05": 0.5926070038910506,
+            "full_mean": 0.733852140077821,
+            "full_below_rule": true
+          },
+          "BIT": {
+            "n_cells_available": 11,
+            "needed": 5,
+            "one_cell_mean": 0.8803543003851091,
+            "one_cell_p05": 0.4865211810012837,
+            "full_mean": 0.8947368421052632,
+            "full_below_rule": false
+          },
+          "CALCE": {
+            "n_cells_available": 2,
+            "needed": 1,
+            "one_cell_mean": 0.9446646884272998,
+            "one_cell_p05": 0.9276706231454006,
+            "full_mean": 0.9473293768545994,
+            "full_below_rule": false
+          }
+        },
+        "45": {
+          "MIT": {
+            "n_cells_available": 21,
+            "needed": 1,
+            "one_cell_mean": 0.8937042546485976,
+            "one_cell_p05": 0.8622754491017964,
+            "full_mean": 0.8884966908288686,
+            "full_below_rule": false
+          },
+          "RWTH": {
+            "n_cells_available": 7,
+            "needed": 1,
+            "one_cell_mean": 0.8929736347657434,
+            "one_cell_p05": 0.8567791987393175,
+            "full_mean": 0.8970846717982908,
+            "full_below_rule": false
+          },
+          "XJTU": {
+            "n_cells_available": 8,
+            "needed": null,
+            "one_cell_mean": 0.8340384985563042,
+            "one_cell_p05": 0.6934552454282964,
+            "full_mean": 0.8796920115495669,
+            "full_below_rule": false
+          },
+          "BIT": {
+            "n_cells_available": 11,
+            "needed": 7,
+            "one_cell_mean": 0.8456046511627908,
+            "one_cell_p05": 0.5069767441860465,
+            "full_mean": 0.8848837209302326,
+            "full_below_rule": false
+          },
+          "CALCE": {
+            "n_cells_available": 2,
+            "needed": 1,
+            "one_cell_mean": 0.9136689700559394,
+            "one_cell_p05": 0.8608094768015795,
+            "full_mean": 0.9608423823626193,
+            "full_below_rule": false
+          }
+        },
+        "46": {
+          "MIT": {
+            "n_cells_available": 21,
+            "needed": 1,
+            "one_cell_mean": 0.9241813356921716,
+            "one_cell_p05": 0.8695820433436533,
+            "full_mean": 0.9230981866430783,
+            "full_below_rule": false
+          },
+          "RWTH": {
+            "n_cells_available": 7,
+            "needed": 1,
+            "one_cell_mean": 0.8915360867259765,
+            "one_cell_p05": 0.8634301537736405,
+            "full_mean": 0.8941848818712073,
+            "full_below_rule": false
+          },
+          "XJTU": {
+            "n_cells_available": 8,
+            "needed": null,
+            "one_cell_mean": 0.694066935483871,
+            "one_cell_p05": 0.5133064516129032,
+            "full_mean": 0.8375,
+            "full_below_rule": true
+          },
+          "BIT": {
+            "n_cells_available": 11,
+            "needed": 5,
+            "one_cell_mean": 0.8771080459770115,
+            "one_cell_p05": 0.496551724137931,
+            "full_mean": 0.9022988505747126,
+            "full_below_rule": false
+          },
+          "CALCE": {
+            "n_cells_available": 2,
+            "needed": 1,
+            "one_cell_mean": 0.9240314285714286,
+            "one_cell_p05": 0.92,
+            "full_mean": 0.9228571428571428,
+            "full_below_rule": false
+          }
+        }
+      },
+      "across_splits": {
+        "MIT": {
+          "needed_min": 1,
+          "needed_max": 5,
+          "not_reached_splits": 0,
+          "available_min": 21,
+          "available_max": 21,
+          "full_mean_min": 0.8826275608282529,
+          "full_mean_max": 0.9230981866430783,
+          "full_below_rule_splits": 0,
+          "one_cell_mean_min": 0.8880797495468775,
+          "one_cell_mean_max": 0.9241813356921716
+        },
+        "RWTH": {
+          "needed_min": 1,
+          "needed_max": 1,
+          "not_reached_splits": 0,
+          "available_min": 6,
+          "available_max": 7,
+          "full_mean_min": 0.8789150218650278,
+          "full_mean_max": 0.9071842927264614,
+          "full_below_rule_splits": 0,
+          "one_cell_mean_min": 0.8795396525233424,
+          "one_cell_mean_max": 0.9062376915067678
+        },
+        "XJTU": {
+          "needed_min": 7,
+          "needed_max": 7,
+          "not_reached_splits": 4,
+          "available_min": 8,
+          "available_max": 8,
+          "full_mean_min": 0.705177743431221,
+          "full_mean_max": 0.9301343570057582,
+          "full_below_rule_splits": 3,
+          "one_cell_mean_min": 0.652516228748068,
+          "one_cell_mean_max": 0.8452491362763916
+        },
+        "BIT": {
+          "needed_min": 5,
+          "needed_max": 10,
+          "not_reached_splits": 0,
+          "available_min": 11,
+          "available_max": 11,
+          "full_mean_min": 0.8768115942028986,
+          "full_mean_max": 0.9022988505747126,
+          "full_below_rule_splits": 0,
+          "one_cell_mean_min": 0.8041177944862156,
+          "one_cell_mean_max": 0.8803543003851091
+        },
+        "CALCE": {
+          "needed_min": 1,
+          "needed_max": 1,
+          "not_reached_splits": 1,
+          "available_min": 2,
+          "available_max": 2,
+          "full_mean_min": 0.7564710171345242,
+          "full_mean_max": 0.9608423823626193,
+          "full_below_rule_splits": 1,
+          "one_cell_mean_min": 0.749966460080204,
+          "one_cell_mean_max": 0.9446646884272998
+        }
+      }
+    },
+    "horizon_experiment": {
+      "1": {
+        "horizon": 1,
+        "mae_real": {
+          "MIT": {
+            "n_test_windows": 17513,
+            "n_test_cells": 21,
+            "model": 0.0006535947790188667,
+            "persistence": 0.0003261458550082318,
+            "drift": 0.00024991111315162654,
+            "model_beats_persistence": false,
+            "model_beats_drift": false
+          },
+          "RWTH": {
+            "n_test_windows": 13446,
+            "n_test_cells": 6,
+            "model": 0.003728403835804996,
+            "persistence": 0.0011220450173712053,
+            "drift": 0.001957674348307203,
+            "model_beats_persistence": false,
+            "model_beats_drift": false
+          },
+          "XJTU": {
+            "n_test_windows": 2605,
+            "n_test_cells": 8,
+            "model": 0.00272141155217063,
+            "persistence": 0.011759954667253342,
+            "drift": 0.012817916490485316,
+            "model_beats_persistence": true,
+            "model_beats_drift": true
+          },
+          "BIT": {
+            "n_test_windows": 798,
+            "n_test_cells": 11,
+            "model": 0.035212730885946834,
+            "persistence": 0.039346880789875506,
+            "drift": 0.11980195034737225,
+            "model_beats_persistence": true,
+            "model_beats_drift": true
+          },
+          "CALCE": {
+            "n_test_windows": 2743,
+            "n_test_cells": 2,
+            "model": 0.014361333538424378,
+            "persistence": 0.01630354158341544,
+            "drift": 0.021063276495823128,
+            "model_beats_persistence": true,
+            "model_beats_drift": true
+          },
+          "Oxford": {
+            "n_test_windows": 56,
+            "n_test_cells": 1,
+            "model": 0.0017129421510438199,
+            "persistence": 0.002735541948733575,
+            "drift": 0.0020969700975340894,
+            "model_beats_persistence": true,
+            "model_beats_drift": true
+          },
+          "NASA": {
+            "n_test_windows": 3,
+            "n_test_cells": 1,
+            "model": 0.007890098266305861,
+            "persistence": 0.015488680727328692,
+            "drift": 0.07702779621973702,
+            "model_beats_persistence": true,
+            "model_beats_drift": true
+          }
+        },
+        "pooled_mae_real": {
+          "model": 0.0036669974498732246,
+          "persistence": 0.0034375356096078905,
+          "drift": 0.0058609754759725635
+        },
+        "model_calibration": {
+          "raw_gaussian": {
+            "overall_coverage": 0.9665536540738349,
+            "per_dataset_coverage": {
+              "BIT": 0.7506265664160401,
+              "CALCE": 0.7644914327378782,
+              "MIT": 0.9977159824130646,
+              "NASA": 1.0,
+              "Oxford": 0.9464285714285714,
+              "RWTH": 0.9950914770191879,
+              "XJTU": 0.8890595009596929
+            },
+            "mean_width": 0.2446356564760208,
+            "mean_abs_dev_five": 0.09772599186372825,
+            "mean_abs_dev_six": 0.08917642179120211
+          },
+          "pooled": {
+            "overall_coverage": 0.8991228070175439,
+            "per_dataset_coverage": {
+              "BIT": 0.4423558897243108,
+              "CALCE": 0.6321545752825374,
+              "MIT": 0.9490664078113401,
+              "NASA": 0.6666666666666666,
+              "Oxford": 0.8214285714285714,
+              "RWTH": 0.9486092518221032,
+              "XJTU": 0.7309021113243762
+            },
+            "mean_width": 0.084699846804142,
+            "mean_abs_dev_five": 0.1984526166604438,
+            "mean_abs_dev_six": 0.17847241864560792
+          },
+          "groupwise": {
+            "overall_coverage": 0.9041276504143795,
+            "per_dataset_coverage": {
+              "BIT": 0.8809523809523809,
+              "CALCE": 0.7564710171345242,
+              "MIT": 0.9218294980871353,
+              "NASA": 0.6666666666666666,
+              "Oxford": 1.0,
+              "RWTH": 0.9071842927264614,
+              "XJTU": 0.9301343570057582
+            },
+            "mean_width": 0.0968228429555893,
+            "mean_abs_dev_five": 0.044344949946489944,
+            "mean_abs_dev_six": 0.05362079162207495
+          },
+          "normalized_groupwise": {
+            "overall_coverage": 0.8972930793240771,
+            "per_dataset_coverage": {
+              "BIT": 0.8809523809523809,
+              "CALCE": 0.7597520962449872,
+              "MIT": 0.9198309826985668,
+              "NASA": 1.0,
+              "Oxford": 0.9821428571428571,
+              "RWTH": 0.8963260449204224,
+              "XJTU": 0.8986564299424185
+            },
+            "mean_width": 0.11332687735557556,
+            "mean_abs_dev_five": 0.036828806127671566,
+            "mean_abs_dev_six": 0.044381147963535816
+          },
+          "test_mae": 0.024789657443761826,
+          "test_rmse": 0.10174031555652618
+        },
+        "naive_calibration": {
+          "persistence": {
+            "pooled": {
+              "per_dataset_coverage": {
+                "BIT": 0.4724310776942356,
+                "CALCE": 0.6868392271235874,
+                "MIT": 0.9593444869525495,
+                "NASA": 0.0,
+                "Oxford": 0.26785714285714285,
+                "RWTH": 0.9856462888591403,
+                "XJTU": 0.2310940499040307
+              },
+              "mean_abs_dev_five": 0.2909252842179672
+            },
+            "groupwise": {
+              "per_dataset_coverage": {
+                "BIT": 0.8759398496240601,
+                "CALCE": 0.7969376594969012,
+                "MIT": 0.9008165362873294,
+                "NASA": 0.0,
+                "Oxford": 1.0,
+                "RWTH": 0.9121671872675888,
+                "XJTU": 0.9389635316698657
+              },
+              "mean_abs_dev_five": 0.03581394922076451
+            }
+          },
+          "drift": {
+            "pooled": {
+              "per_dataset_coverage": {
+                "BIT": 0.12406015037593984,
+                "CALCE": 0.5493984688297484,
+                "MIT": 0.9965168731799234,
+                "NASA": 0.0,
+                "Oxford": 0.8392857142857143,
+                "RWTH": 0.9779860181466608,
+                "XJTU": 0.33205374280230326
+              },
+              "mean_abs_dev_five": 0.37379810586371853
+            },
+            "groupwise": {
+              "per_dataset_coverage": {
+                "BIT": 0.8972431077694235,
+                "CALCE": 0.7903755012759752,
+                "MIT": 0.9162336549991434,
+                "NASA": 0.0,
+                "Oxford": 1.0,
+                "RWTH": 0.8909712925777182,
+                "XJTU": 0.889827255278311
+              },
+              "mean_abs_dev_five": 0.029563299619543116
+            }
+          }
+        }
+      },
+      "10": {
+        "horizon": 10,
+        "mae_real": {
+          "MIT": {
+            "n_test_windows": 17324,
+            "n_test_cells": 21,
+            "model": 0.0007964004543800517,
+            "persistence": 0.0023259921314146875,
+            "drift": 0.0005968770236305985,
+            "model_beats_persistence": true,
+            "model_beats_drift": false
+          },
+          "RWTH": {
+            "n_test_windows": 13392,
+            "n_test_cells": 6,
+            "model": 0.00458401889861639,
+            "persistence": 0.005074058951509873,
+            "drift": 0.0044628207433484056,
+            "model_beats_persistence": true,
+            "model_beats_drift": false
+          },
+          "XJTU": {
+            "n_test_windows": 2533,
+            "n_test_cells": 8,
+            "model": 0.003934618554610641,
+            "persistence": 0.017706788382532444,
+            "drift": 0.011211710054491933,
+            "model_beats_persistence": true,
+            "model_beats_drift": true
+          },
+          "BIT": {
+            "n_test_windows": 699,
+            "n_test_cells": 11,
+            "model": 0.07518529016192396,
+            "persistence": 0.18803408001137187,
+            "drift": 0.19193003037874065,
+            "model_beats_persistence": true,
+            "model_beats_drift": true
+          },
+          "CALCE": {
+            "n_test_windows": 2725,
+            "n_test_cells": 2,
+            "model": 0.020685005664648037,
+            "persistence": 0.025703095320544073,
+            "drift": 0.0352565794957686,
+            "model_beats_persistence": true,
+            "model_beats_drift": true
+          },
+          "Oxford": {
+            "n_test_windows": 47,
+            "n_test_cells": 1,
+            "model": 0.004774620016251754,
+            "persistence": 0.026490493608665074,
+            "drift": 0.008266934335464951,
+            "model_beats_persistence": true,
+            "model_beats_drift": true
+          }
+        },
+        "pooled_mae_real": {
+          "model": 0.005291339158476316,
+          "persistence": 0.009690097767217912,
+          "drift": 0.008963166415980457
+        },
+        "model_calibration": {
+          "raw_gaussian": {
+            "overall_coverage": 0.9297113289760348,
+            "per_dataset_coverage": {
+              "BIT": 0.5336194563662375,
+              "CALCE": 0.6425688073394495,
+              "MIT": 0.9691179866081736,
+              "Oxford": 0.8297872340425532,
+              "RWTH": 0.9790919952210275,
+              "XJTU": 0.8191867350967232
+            },
+            "mean_width": 0.24428027868270874,
+            "mean_abs_dev_five": 0.17056699660535818,
+            "mean_abs_dev_six": 0.15384129149737294
+          },
+          "pooled": {
+            "overall_coverage": 0.9020152505446624,
+            "per_dataset_coverage": {
+              "BIT": 0.23891273247496422,
+              "CALCE": 0.5218348623853211,
+              "MIT": 0.9685407527129993,
+              "Oxford": 0.46808510638297873,
+              "RWTH": 0.9601254480286738,
+              "XJTU": 0.7398341887090407
+            },
+            "mean_width": 0.12071538716554642,
+            "mean_abs_dev_five": 0.26561688343446943,
+            "mean_abs_dev_six": 0.29333321846489474
+          },
+          "groupwise": {
+            "overall_coverage": 0.9047930283224401,
+            "per_dataset_coverage": {
+              "BIT": 0.8741058655221745,
+              "CALCE": 0.7944954128440367,
+              "MIT": 0.9229392749942277,
+              "Oxford": 1.0,
+              "RWTH": 0.9001642771804063,
+              "XJTU": 0.9305171733122779
+            },
+            "mean_width": 0.1427801102399826,
+            "mean_abs_dev_five": 0.037003889424140124,
+            "mean_abs_dev_six": 0.04750324118678343
+          },
+          "normalized_groupwise": {
+            "overall_coverage": 0.8961601307189543,
+            "per_dataset_coverage": {
+              "BIT": 0.8669527896995708,
+              "CALCE": 0.7614678899082569,
+              "MIT": 0.9193604248441468,
+              "Oxford": 1.0,
+              "RWTH": 0.8938172043010753,
+              "XJTU": 0.9009080142123964
+            },
+            "mean_width": 0.1855403184890747,
+            "mean_abs_dev_five": 0.03960611102952807,
+            "mean_abs_dev_six": 0.04967175919127339
+          },
+          "test_mae": 0.03448411077260971,
+          "test_rmse": 0.1178085133433342
+        },
+        "naive_calibration": {
+          "persistence": {
+            "pooled": {
+              "per_dataset_coverage": {
+                "BIT": 0.1659513590844063,
+                "CALCE": 0.803302752293578,
+                "MIT": 0.9083929808358346,
+                "Oxford": 0.0,
+                "RWTH": 0.9917114695340502,
+                "XJTU": 0.5854717726016581
+              },
+              "mean_abs_dev_five": 0.2490757132780485
+            },
+            "groupwise": {
+              "per_dataset_coverage": {
+                "BIT": 0.8884120171673819,
+                "CALCE": 0.7493577981651376,
+                "MIT": 0.894827984299238,
+                "Oxford": 1.0,
+                "RWTH": 0.8888142174432497,
+                "XJTU": 0.8487958941966048
+              },
+              "mean_abs_dev_five": 0.04595841774567759
+            }
+          },
+          "drift": {
+            "pooled": {
+              "per_dataset_coverage": {
+                "BIT": 0.12875536480686695,
+                "CALCE": 0.4910091743119266,
+                "MIT": 0.9971715539136458,
+                "Oxford": 0.40425531914893614,
+                "RWTH": 0.9731929510155317,
+                "XJTU": 0.4946703513620213
+              },
+              "mean_abs_dev_five": 0.35118592288967254
+            },
+            "groupwise": {
+              "per_dataset_coverage": {
+                "BIT": 0.8927038626609443,
+                "CALCE": 0.7823853211009174,
+                "MIT": 0.9100669591318402,
+                "Oxford": 1.0,
+                "RWTH": 0.8885902031063322,
+                "XJTU": 0.8910382945124359
+              },
+              "mean_abs_dev_five": 0.03106985555024211
+            }
+          }
+        }
+      },
+      "50": {
+        "horizon": 50,
+        "mae_real": {
+          "MIT": {
+            "n_test_windows": 16484,
+            "n_test_cells": 21,
+            "model": 0.001879068641967557,
+            "persistence": 0.01045080385077005,
+            "drift": 0.0030032361964597207,
+            "model_beats_persistence": true,
+            "model_beats_drift": true
+          },
+          "RWTH": {
+            "n_test_windows": 13152,
+            "n_test_cells": 6,
+            "model": 0.007283333062000991,
+            "persistence": 0.017361439581973826,
+            "drift": 0.013985604225461008,
+            "model_beats_persistence": true,
+            "model_beats_drift": true
+          },
+          "XJTU": {
+            "n_test_windows": 2213,
+            "n_test_cells": 8,
+            "model": 0.008659251710073134,
+            "persistence": 0.034242213931239045,
+            "drift": 0.02643886114752283,
+            "model_beats_persistence": true,
+            "model_beats_drift": true
+          },
+          "BIT": {
+            "n_test_windows": 276,
+            "n_test_cells": 10,
+            "model": 0.09751314557245265,
+            "persistence": 0.2559537406777871,
+            "drift": 0.45663105644884994,
+            "model_beats_persistence": true,
+            "model_beats_drift": true
+          },
+          "CALCE": {
+            "n_test_windows": 2645,
+            "n_test_cells": 2,
+            "model": 0.029620862024856014,
+            "persistence": 0.03374006985408452,
+            "drift": 0.08548744039466699,
+            "model_beats_persistence": true,
+            "model_beats_drift": true
+          },
+          "Oxford": {
+            "n_test_windows": 7,
+            "n_test_cells": 1,
+            "model": 0.006860287403296746,
+            "persistence": 0.13242961910594753,
+            "drift": 0.06738948852406605,
+            "model_beats_persistence": true,
+            "model_beats_drift": true
+          }
+        },
+        "pooled_mae_real": {
+          "model": 0.007224220636161586,
+          "persistence": 0.018322438623599207,
+          "drift": 0.01853435862203809
+        },
+        "model_calibration": {
+          "raw_gaussian": {
+            "overall_coverage": 0.866722258964258,
+            "per_dataset_coverage": {
+              "BIT": 0.4963768115942029,
+              "CALCE": 0.5568998109640831,
+              "MIT": 0.8892259160397962,
+              "Oxford": 1.0,
+              "RWTH": 0.9400091240875912,
+              "XJTU": 0.6796204247627655
+            },
+            "mean_width": 0.26224252581596375,
+            "mean_abs_dev_five": 0.2035772321453487,
+            "mean_abs_dev_six": 0.1863143601211239
+          },
+          "pooled": {
+            "overall_coverage": 0.916065215516002,
+            "per_dataset_coverage": {
+              "BIT": 0.3188405797101449,
+              "CALCE": 0.6321361058601134,
+              "MIT": 0.943035670953652,
+              "Oxford": 0.7142857142857143,
+              "RWTH": 0.989507299270073,
+              "XJTU": 0.693176683235427
+            },
+            "mean_width": 0.27372434735298157,
+            "mean_abs_dev_five": 0.23767792028360796,
+            "mean_abs_dev_six": 0.22901731452205423
+          },
+          "groupwise": {
+            "overall_coverage": 0.9218448974897202,
+            "per_dataset_coverage": {
+              "BIT": 0.8731884057971014,
+              "CALCE": 0.8604914933837429,
+              "MIT": 0.9375758311089541,
+              "Oxford": 1.0,
+              "RWTH": 0.910051703163017,
+              "XJTU": 0.9539087211929508
+            },
+            "mean_width": 0.29185137152671814,
+            "mean_abs_dev_five": 0.03357127125681551,
+            "mean_abs_dev_six": 0.04464272604734626
+          },
+          "normalized_groupwise": {
+            "overall_coverage": 0.906346148316416,
+            "per_dataset_coverage": {
+              "BIT": 0.8804347826086957,
+              "CALCE": 0.806805293005671,
+              "MIT": 0.9204683329289007,
+              "Oxford": 1.0,
+              "RWTH": 0.9066301703163017,
+              "XJTU": 0.9213737008585631
+            },
+            "mean_width": 0.35199791193008423,
+            "mean_abs_dev_five": 0.03224642569787974,
+            "mean_abs_dev_six": 0.04353868808156645
+          },
+          "test_mae": 0.05640256777405739,
+          "test_rmse": 0.14408326148986816
+        },
+        "naive_calibration": {
+          "persistence": {
+            "pooled": {
+              "per_dataset_coverage": {
+                "BIT": 0.2463768115942029,
+                "CALCE": 0.9262759924385633,
+                "MIT": 0.8653846153846154,
+                "Oxford": 0.0,
+                "RWTH": 0.9979470802919708,
+                "XJTU": 0.5372797107998193
+              },
+              "mean_abs_dev_five": 0.23503638699037932
+            },
+            "groupwise": {
+              "per_dataset_coverage": {
+                "BIT": 0.9420289855072463,
+                "CALCE": 0.8007561436672967,
+                "MIT": 0.8892865809269594,
+                "Oxford": 1.0,
+                "RWTH": 0.8942366180048662,
+                "XJTU": 0.9055580659737912
+              },
+              "mean_abs_dev_five": 0.03266154177638303
+            }
+          },
+          "drift": {
+            "pooled": {
+              "per_dataset_coverage": {
+                "BIT": 0.09057971014492754,
+                "CALCE": 0.5398865784499055,
+                "MIT": 0.9658456685270566,
+                "Oxford": 0.0,
+                "RWTH": 0.9735401459854015,
+                "XJTU": 0.5833709896068685
+              },
+              "mean_abs_dev_five": 0.32510970726215127
+            },
+            "groupwise": {
+              "per_dataset_coverage": {
+                "BIT": 0.894927536231884,
+                "CALCE": 0.8022684310018904,
+                "MIT": 0.9049381218150935,
+                "Oxford": 1.0,
+                "RWTH": 0.8866332116788321,
+                "XJTU": 0.8888386805241754
+              },
+              "mean_abs_dev_five": 0.026454052475662328
+            }
+          }
+        }
+      }
+    },
     "lodo_target_calibration": {
       "alpha": 0.1,
       "sufficient_p05": 0.85,
@@ -7440,6 +10726,7 @@
     "CalSizeNASAOnePLow": "66.7",
     "CalSizeNASAOnePHigh": "66.7",
     "CalSizeRuleFloor": "85",
+    "CalSizeNRepeats": "500",
     "CalSizeMITMinBudget": "2",
     "CalSizeMITMinBudgetPLow": "85.8",
     "CalSizeRWTHMinBudget": "1",
@@ -7650,6 +10937,355 @@
     "EnsGroupwiseWidthVsMcPercent": "41",
     "EnsMemberMAEMin": "0.01960",
     "EnsMemberMAEMax": "0.02439",
+    "EsNSplits": "5",
+    "EsNormBestSplits": "5",
+    "EsNormBeatsMcGroupwiseSplits": "5",
+    "EsNormNarrowerSplits": "5",
+    "EsMoreAccurateSplits": "5",
+    "EsGroupwiseBeatsPooledSplits": "5",
+    "EsPooledBITMin": "36.6",
+    "EsPooledBITMax": "52.4",
+    "EsGroupwiseBITMin": "86.3",
+    "EsGroupwiseBITMax": "91.1",
+    "EsEnsNormDevMean": "1.98",
+    "EsEnsNormDevMin": "1.27",
+    "EsEnsNormDevMax": "2.73",
+    "EsEnsNormWidth": "0.0713",
+    "EsEnsGwDevMean": "4.49",
+    "EsEnsGwDevMin": "1.99",
+    "EsEnsGwDevMax": "7.51",
+    "EsEnsGwWidth": "0.0591",
+    "EsEnsPooledDevMean": "28.03",
+    "EsEnsPooledDevMin": "23.76",
+    "EsEnsPooledDevMax": "31.52",
+    "EsEnsPooledWidth": "0.0457",
+    "EsMcGwDevMean": "3.77",
+    "EsMcGwDevMin": "2.21",
+    "EsMcGwDevMax": "5.14",
+    "EsMcGwWidth": "0.0978",
+    "EsMcNormDevMean": "3.96",
+    "EsMcNormDevMin": "2.18",
+    "EsMcNormDevMax": "6.43",
+    "EsMcNormWidth": "0.1263",
+    "EsMcPooledDevMean": "20.84",
+    "EsMcPooledDevMin": "17.35",
+    "EsMcPooledDevMax": "25.60",
+    "EsMcPooledWidth": "0.0834",
+    "BvNSplits": "5",
+    "BvPriorScale": "1",
+    "BvOwnDevMean": "3.77",
+    "BvOwnDevMin": "2.21",
+    "BvOwnDevMax": "5.14",
+    "BvOwnBeatsOwn": "0",
+    "BvOwnBITMin": "87.7",
+    "BvOwnBITMax": "90.2",
+    "BvOwnDevMain": "4.43",
+    "BvOwnFurtherMean": "3.60",
+    "BvOwnFurtherMin": "2.21",
+    "BvOwnFurtherMax": "5.14",
+    "BvHierLinDevMean": "11.30",
+    "BvHierLinDevMin": "9.29",
+    "BvHierLinDevMax": "13.97",
+    "BvHierLinBeatsOwn": "0",
+    "BvHierLinBITMin": "41.5",
+    "BvHierLinBITMax": "55.9",
+    "BvHierLinDevMain": "13.97",
+    "BvHierLinFurtherMean": "10.63",
+    "BvHierLinFurtherMin": "9.29",
+    "BvHierLinFurtherMax": "12.90",
+    "BvEbLinJointDevMean": "10.81",
+    "BvEbLinJointDevMin": "8.58",
+    "BvEbLinJointDevMax": "13.56",
+    "BvEbLinJointBeatsOwn": "0",
+    "BvEbLinJointBITMin": "42.9",
+    "BvEbLinJointBITMax": "57.9",
+    "BvEbLinJointDevMain": "13.56",
+    "BvEbLinJointFurtherMean": "10.12",
+    "BvEbLinJointFurtherMin": "8.58",
+    "BvEbLinJointFurtherMax": "12.48",
+    "BvEbLogJointDevMean": "4.00",
+    "BvEbLogJointDevMin": "2.02",
+    "BvEbLogJointDevMax": "5.87",
+    "BvEbLogJointBeatsOwn": "3",
+    "BvEbLogJointBITMin": "82.7",
+    "BvEbLogJointBITMax": "89.3",
+    "BvEbLogJointDevMain": "5.87",
+    "BvEbLogJointFurtherMean": "3.53",
+    "BvEbLogJointFurtherMin": "2.02",
+    "BvEbLogJointFurtherMax": "4.93",
+    "BvBayesLogDevMean": "3.76",
+    "BvBayesLogDevMin": "2.04",
+    "BvBayesLogDevMax": "5.02",
+    "BvBayesLogBeatsOwn": "4",
+    "BvBayesLogBITMin": "87.0",
+    "BvBayesLogBITMax": "90.0",
+    "BvBayesLogDevMain": "4.80",
+    "BvBayesLogFurtherMean": "3.50",
+    "BvBayesLogFurtherMin": "2.04",
+    "BvBayesLogFurtherMax": "5.02",
+    "BvBayesNoiseDevMean": "3.48",
+    "BvBayesNoiseDevMin": "2.17",
+    "BvBayesNoiseDevMax": "5.61",
+    "BvBayesNoiseBeatsOwn": "4",
+    "BvBayesNoiseBITMin": "87.0",
+    "BvBayesNoiseBITMax": "90.0",
+    "BvBayesNoiseDevMain": "5.61",
+    "BvBayesNoiseFurtherMean": "2.94",
+    "BvBayesNoiseFurtherMin": "2.17",
+    "BvBayesNoiseFurtherMax": "4.07",
+    "BvBayesSpreadDevMean": "3.99",
+    "BvBayesSpreadDevMin": "2.21",
+    "BvBayesSpreadDevMax": "5.38",
+    "BvBayesSpreadBeatsOwn": "1",
+    "BvBayesSpreadBITMin": "87.2",
+    "BvBayesSpreadBITMax": "90.0",
+    "BvBayesSpreadDevMain": "4.35",
+    "BvBayesSpreadFurtherMean": "3.91",
+    "BvBayesSpreadFurtherMin": "2.21",
+    "BvBayesSpreadFurtherMax": "5.38",
+    "BvPriorLinDevMean": "20.09",
+    "BvPriorLinDevMin": "16.50",
+    "BvPriorLinDevMax": "21.48",
+    "BvPriorLinBeatsOwn": "0",
+    "BvPriorLinBITMin": "32.6",
+    "BvPriorLinBITMax": "46.3",
+    "BvPriorLinDevMain": "20.55",
+    "BvPriorLinFurtherMean": "19.97",
+    "BvPriorLinFurtherMin": "16.50",
+    "BvPriorLinFurtherMax": "21.48",
+    "BvPriorLogDevMean": "19.83",
+    "BvPriorLogDevMin": "16.08",
+    "BvPriorLogDevMax": "21.19",
+    "BvPriorLogBeatsOwn": "0",
+    "BvPriorLogBITMin": "24.8",
+    "BvPriorLogBITMax": "35.6",
+    "BvPriorLogDevMain": "20.90",
+    "BvPriorLogFurtherMean": "19.56",
+    "BvPriorLogFurtherMin": "16.08",
+    "BvPriorLogFurtherMax": "21.19",
+    "BvPriorNoiseDevMean": "9.91",
+    "BvPriorNoiseDevMin": "5.62",
+    "BvPriorNoiseDevMax": "14.93",
+    "BvPriorNoiseBeatsOwn": "0",
+    "BvPriorNoiseBITMin": "65.9",
+    "BvPriorNoiseBITMax": "88.0",
+    "BvPriorNoiseDevMain": "14.93",
+    "BvPriorNoiseFurtherMean": "8.65",
+    "BvPriorNoiseFurtherMin": "5.62",
+    "BvPriorNoiseFurtherMax": "11.84",
+    "BvPriorSpreadDevMean": "15.53",
+    "BvPriorSpreadDevMin": "9.93",
+    "BvPriorSpreadDevMax": "17.90",
+    "BvPriorSpreadBeatsOwn": "0",
+    "BvPriorSpreadBITMin": "49.2",
+    "BvPriorSpreadBITMax": "69.0",
+    "BvPriorSpreadDevMain": "17.58",
+    "BvPriorSpreadFurtherMean": "15.02",
+    "BvPriorSpreadFurtherMin": "9.93",
+    "BvPriorSpreadFurtherMax": "17.90",
+    "BvBestGainMean": "0.29",
+    "BvBestGainSplitMax": "1.8",
+    "BvHierLinBITWeightMin": "0.04",
+    "BvHierLinBITWeightMax": "0.05",
+    "BvEbLinJointBITWeightMin": "0.04",
+    "BvEbLinJointBITWeightMax": "0.06",
+    "BvEbLogJointBITWeightMin": "0.72",
+    "BvEbLogJointBITWeightMax": "0.97",
+    "BvBayesLogBITWeightMin": "0.91",
+    "BvBayesLogBITWeightMax": "0.98",
+    "BvBayesNoiseBITWeightMin": "0.63",
+    "BvBayesNoiseBITWeightMax": "0.85",
+    "BvBayesSpreadBITWeightMin": "0.84",
+    "BvBayesSpreadBITWeightMax": "0.95",
+    "BvBayesLogDevScaleHalf": "3.75",
+    "BvPriorLogDevScaleHalf": "19.85",
+    "BvBayesLogDevScaleTwo": "3.75",
+    "BvPriorLogDevScaleTwo": "19.81",
+    "BvNoiseXJTUShiftMin": "0.6",
+    "BvNoiseXJTUShiftMax": "9.6",
+    "BvNoiseOtherShiftMax": "1.1",
+    "BaNSplits": "5",
+    "BaMITNeededMin": "1",
+    "BaMITNeededMax": "5",
+    "BaMITNotReached": "0",
+    "BaMITFullMin": "88.3",
+    "BaMITFullMax": "92.3",
+    "BaMITBelowRule": "0",
+    "BaMITOneMin": "88.8",
+    "BaMITOneMax": "92.4",
+    "BaMITAvailable": "21",
+    "BaMITFullOtherMin": "88.3",
+    "BaMITFullOtherMax": "92.3",
+    "BaRWTHNeededMin": "1",
+    "BaRWTHNeededMax": "1",
+    "BaRWTHNotReached": "0",
+    "BaRWTHFullMin": "87.9",
+    "BaRWTHFullMax": "90.7",
+    "BaRWTHBelowRule": "0",
+    "BaRWTHOneMin": "88.0",
+    "BaRWTHOneMax": "90.6",
+    "BaRWTHAvailable": "7",
+    "BaRWTHFullOtherMin": "87.9",
+    "BaRWTHFullOtherMax": "89.8",
+    "BaXJTUNeededMin": "7",
+    "BaXJTUNeededMax": "7",
+    "BaXJTUNotReached": "4",
+    "BaXJTUFullMin": "70.5",
+    "BaXJTUFullMax": "93.0",
+    "BaXJTUBelowRule": "3",
+    "BaXJTUOneMin": "65.3",
+    "BaXJTUOneMax": "84.5",
+    "BaXJTUAvailable": "8",
+    "BaXJTUFullOtherMin": "70.5",
+    "BaXJTUFullOtherMax": "88.0",
+    "BaBITNeededMin": "5",
+    "BaBITNeededMax": "10",
+    "BaBITNotReached": "0",
+    "BaBITFullMin": "87.7",
+    "BaBITFullMax": "90.2",
+    "BaBITBelowRule": "0",
+    "BaBITOneMin": "80.4",
+    "BaBITOneMax": "88.0",
+    "BaBITAvailable": "11",
+    "BaBITFullOtherMin": "87.7",
+    "BaBITFullOtherMax": "90.2",
+    "BaCALCENeededMin": "1",
+    "BaCALCENeededMax": "1",
+    "BaCALCENotReached": "1",
+    "BaCALCEFullMin": "75.6",
+    "BaCALCEFullMax": "96.1",
+    "BaCALCEBelowRule": "1",
+    "BaCALCEOneMin": "75.0",
+    "BaCALCEOneMax": "94.5",
+    "BaCALCEAvailable": "2",
+    "BaCALCEFullOtherMin": "88.7",
+    "BaCALCEFullOtherMax": "96.1",
+    "HzOneNDatasets": "7",
+    "HzOneBeatsPersist": "5",
+    "HzOneBeatsDrift": "5",
+    "HzOneMITModel": "0.065",
+    "HzOneMITPersist": "0.033",
+    "HzOneMITDrift": "0.025",
+    "HzOneRWTHModel": "0.373",
+    "HzOneRWTHPersist": "0.112",
+    "HzOneRWTHDrift": "0.196",
+    "HzOneXJTUModel": "0.272",
+    "HzOneXJTUPersist": "1.176",
+    "HzOneXJTUDrift": "1.282",
+    "HzOneBITModel": "3.521",
+    "HzOneBITPersist": "3.935",
+    "HzOneBITDrift": "11.980",
+    "HzOneCALCEModel": "1.436",
+    "HzOneCALCEPersist": "1.630",
+    "HzOneCALCEDrift": "2.106",
+    "HzOneOxfordModel": "0.171",
+    "HzOneOxfordPersist": "0.274",
+    "HzOneOxfordDrift": "0.210",
+    "HzOneNASAModel": "0.789",
+    "HzOneNASAPersist": "1.549",
+    "HzOneNASADrift": "7.703",
+    "HzOnePooledModelMAE": "0.367",
+    "HzOnePooledPersistMAE": "0.344",
+    "HzOnePooledDriftMAE": "0.586",
+    "HzOnePooledDev": "19.85",
+    "HzOnePooledBIT": "44.2",
+    "HzOneGroupwiseDev": "4.43",
+    "HzOneGroupwiseBIT": "88.1",
+    "HzOneNormDev": "3.68",
+    "HzOneNormBIT": "88.1",
+    "HzOnePersistPooledDev": "29.09",
+    "HzOnePersistPooledBIT": "47.2",
+    "HzOnePersistGroupwiseDev": "3.58",
+    "HzOnePersistGroupwiseBIT": "87.6",
+    "HzOneDriftPooledDev": "37.38",
+    "HzOneDriftPooledBIT": "12.4",
+    "HzOneDriftGroupwiseDev": "2.96",
+    "HzOneDriftGroupwiseBIT": "89.7",
+    "HzTenNDatasets": "6",
+    "HzTenBeatsPersist": "6",
+    "HzTenBeatsDrift": "4",
+    "HzTenMITModel": "0.080",
+    "HzTenMITPersist": "0.233",
+    "HzTenMITDrift": "0.060",
+    "HzTenRWTHModel": "0.458",
+    "HzTenRWTHPersist": "0.507",
+    "HzTenRWTHDrift": "0.446",
+    "HzTenXJTUModel": "0.393",
+    "HzTenXJTUPersist": "1.771",
+    "HzTenXJTUDrift": "1.121",
+    "HzTenBITModel": "7.519",
+    "HzTenBITPersist": "18.803",
+    "HzTenBITDrift": "19.193",
+    "HzTenCALCEModel": "2.069",
+    "HzTenCALCEPersist": "2.570",
+    "HzTenCALCEDrift": "3.526",
+    "HzTenOxfordModel": "0.477",
+    "HzTenOxfordPersist": "2.649",
+    "HzTenOxfordDrift": "0.827",
+    "HzTenPooledModelMAE": "0.529",
+    "HzTenPooledPersistMAE": "0.969",
+    "HzTenPooledDriftMAE": "0.896",
+    "HzTenPooledDev": "26.56",
+    "HzTenPooledBIT": "23.9",
+    "HzTenGroupwiseDev": "3.70",
+    "HzTenGroupwiseBIT": "87.4",
+    "HzTenNormDev": "3.96",
+    "HzTenNormBIT": "86.7",
+    "HzTenPersistPooledDev": "24.91",
+    "HzTenPersistPooledBIT": "16.6",
+    "HzTenPersistGroupwiseDev": "4.60",
+    "HzTenPersistGroupwiseBIT": "88.8",
+    "HzTenDriftPooledDev": "35.12",
+    "HzTenDriftPooledBIT": "12.9",
+    "HzTenDriftGroupwiseDev": "3.11",
+    "HzTenDriftGroupwiseBIT": "89.3",
+    "HzFiftyNDatasets": "6",
+    "HzFiftyBeatsPersist": "6",
+    "HzFiftyBeatsDrift": "6",
+    "HzFiftyMITModel": "0.188",
+    "HzFiftyMITPersist": "1.045",
+    "HzFiftyMITDrift": "0.300",
+    "HzFiftyRWTHModel": "0.728",
+    "HzFiftyRWTHPersist": "1.736",
+    "HzFiftyRWTHDrift": "1.399",
+    "HzFiftyXJTUModel": "0.866",
+    "HzFiftyXJTUPersist": "3.424",
+    "HzFiftyXJTUDrift": "2.644",
+    "HzFiftyBITModel": "9.751",
+    "HzFiftyBITPersist": "25.595",
+    "HzFiftyBITDrift": "45.663",
+    "HzFiftyCALCEModel": "2.962",
+    "HzFiftyCALCEPersist": "3.374",
+    "HzFiftyCALCEDrift": "8.549",
+    "HzFiftyOxfordModel": "0.686",
+    "HzFiftyOxfordPersist": "13.243",
+    "HzFiftyOxfordDrift": "6.739",
+    "HzFiftyPooledModelMAE": "0.722",
+    "HzFiftyPooledPersistMAE": "1.832",
+    "HzFiftyPooledDriftMAE": "1.853",
+    "HzFiftyPooledDev": "23.77",
+    "HzFiftyPooledBIT": "31.9",
+    "HzFiftyGroupwiseDev": "3.36",
+    "HzFiftyGroupwiseBIT": "87.3",
+    "HzFiftyNormDev": "3.22",
+    "HzFiftyNormBIT": "88.0",
+    "HzFiftyPersistPooledDev": "23.50",
+    "HzFiftyPersistPooledBIT": "24.6",
+    "HzFiftyPersistGroupwiseDev": "3.27",
+    "HzFiftyPersistGroupwiseBIT": "94.2",
+    "HzFiftyDriftPooledDev": "32.51",
+    "HzFiftyDriftPooledBIT": "9.1",
+    "HzFiftyDriftGroupwiseDev": "2.65",
+    "HzFiftyDriftGroupwiseBIT": "89.5",
+    "HzNaivePooledDevMin": "23.5",
+    "HzNaivePooledDevMax": "37.4",
+    "HzModelPooledDevMin": "19.8",
+    "HzModelPooledDevMax": "26.6",
+    "HzNaiveGroupwiseDevMin": "2.6",
+    "HzNaiveGroupwiseDevMax": "4.6",
+    "HzModelGroupwiseDevMin": "3.4",
+    "HzModelGroupwiseDevMax": "4.4",
+    "HzFiftyModelVsPersistPercent": "61",
     "LodoTMITOthers": "94.0",
     "LodoTMITOwnVal": "92.1",
     "LodoTMITOwnAll": "90.8",
@@ -7767,6 +11403,10 @@
     "LodoTWidthRatioMax": "4.9",
     "LodoTOwnValBeatsOthers": "5",
     "LodoTNFive": "5",
+    "LodoTRetrainShiftFiveMax": "7.8",
+    "LodoTRetrainShiftFiveDataset": "XJTU",
+    "LodoTRetrainShiftAllMax": "17.3",
+    "LodoTRetrainShiftAllDataset": "Oxford",
     "ReplicationNSplits": "4",
     "ReplicationMeanDevOwn": "3.60",
     "ReplicationMaxDevOwn": "5.14",
@@ -7791,6 +11431,16 @@
     "ReplicationBITHierMax": "55.9",
     "ReplicationBITHgcCpMin": "38.6",
     "ReplicationBITHgcCpMax": "85.4",
+    "RepAllBITOwnMin": "87.7",
+    "RepAllBITOwnMax": "90.2",
+    "RepAllBITHierMin": "41.5",
+    "RepAllBITHierMax": "55.9",
+    "RepAllBITPriorMin": "32.6",
+    "RepAllBITPriorMax": "46.3",
+    "RepAllBITOthersPooledMin": "29.6",
+    "RepAllBITOthersPooledMax": "37.5",
+    "RepAllBITHgcCpMin": "38.6",
+    "RepAllBITHgcCpMax": "85.4",
     "ReplicationBITWeightMin": "0.042",
     "ReplicationBITWeightMax": "0.055",
     "ReplicationTestCellOverlapPercent": "20",
@@ -7898,6 +11548,7 @@
     "FieldLabOwnEvTwo": "90.5",
     "FieldLabModelMAE": "0.291",
     "FieldModelMAE": "0.264",
+    "FieldBudgetNRepeats": "500",
     "FieldBudgetEvOneAvailable": "15",
     "FieldBudgetEvOne": "7",
     "FieldBudgetEvOneOnePLow": "78.3",

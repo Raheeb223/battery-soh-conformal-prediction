@@ -279,7 +279,8 @@ def _print_window_summary(name: str, labels: np.ndarray):
     print(f"  [windows:{name}] {parts}")
 
 
-def run(window: int = None, split_seed: int = None, raw_df=None, out_path: str = None):
+def run(window: int = None, split_seed: int = None, raw_df=None, out_path: str = None,
+        horizon: int = None):
     """window: override config.INPUT_WINDOW for this run (used by the window-size
     ablation in experiments.py). The cell split itself is NOT affected by window
     size for a GIVEN split_seed — it's computed once per seed so every window-size
@@ -295,7 +296,10 @@ def run(window: int = None, split_seed: int = None, raw_df=None, out_path: str =
     is parsed once rather than once per variant. Pass None to load fresh.
 
     out_path: where to write the cache (default: cache_path_for(window, split_seed)). The field
-    check (field_preprocessing.py) passes its own path so it never touches the laboratory caches."""
+    check (field_preprocessing.py) passes its own path so it never touches the laboratory caches.
+
+    horizon: override config.FORECAST_HORIZON (horizon_experiment.py). The cell split does not
+    depend on it; pass out_path so a longer horizon never overwrites the one-step cache."""
     os.makedirs(config.CACHE_DIR, exist_ok=True)
     w = window if window is not None else config.INPUT_WINDOW
 
@@ -317,9 +321,9 @@ def run(window: int = None, split_seed: int = None, raw_df=None, out_path: str =
         if soh_std[k] == 0 or np.isnan(soh_std[k]):
             soh_std[k] = 1.0
 
-    X_train, y_train, lab_train, cell_train, cyc_train = make_windows(df, train_ids, soh_mean, soh_std, window=w)
-    X_val, y_val, lab_val, cell_val, cyc_val = make_windows(df, val_ids, soh_mean, soh_std, window=w)
-    X_test, y_test, lab_test, cell_test, cyc_test = make_windows(df, test_ids, soh_mean, soh_std, window=w)
+    X_train, y_train, lab_train, cell_train, cyc_train = make_windows(df, train_ids, soh_mean, soh_std, window=w, horizon=horizon)
+    X_val, y_val, lab_val, cell_val, cyc_val = make_windows(df, val_ids, soh_mean, soh_std, window=w, horizon=horizon)
+    X_test, y_test, lab_test, cell_test, cyc_test = make_windows(df, test_ids, soh_mean, soh_std, window=w, horizon=horizon)
 
     print(f"[windows] window={w}  train: {X_train.shape}, val: {X_val.shape}, test: {X_test.shape}")
     _print_window_summary("train", lab_train)

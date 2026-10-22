@@ -1,41 +1,120 @@
 # How Far Does Calibrated Uncertainty Transfer Across Battery Datasets?
 
+[![checks](https://github.com/Raheeb223/battery-soh-conformal-prediction/actions/workflows/checks.yml/badge.svg)](https://github.com/Raheeb223/battery-soh-conformal-prediction/actions/workflows/checks.yml)
+[![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](requirements.txt)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
 Code and results for the paper *How Far Does Calibrated Uncertainty Transfer Across Battery
 Datasets? An Empirical Study of Conformal Calibration for State-of-Health Prediction on Seven Public
 Datasets* (R. Sadman, submitted to the *Journal of Energy Storage*).
 
-The study trains one state-of-health (SOH) predictor across seven public lithium-ion battery
-datasets (339 cells from seven research groups) and compares seven ways of calibrating its prediction
-intervals, reporting coverage per dataset rather than only in aggregate:
+The study trains one state-of-health (SOH) predictor on seven public lithium-ion battery datasets
+(339 cells from seven research groups) and asks how well its prediction intervals transfer between
+datasets. It reports coverage per dataset, not only in aggregate, for several ways of calibrating
+the intervals. It then repeats the comparison on further cell-level splits, other predictors,
+longer forecast horizons, a deep ensemble, datasets left out of training, and electric-vehicle
+field data.
 
-| Strategy | Calibrates each dataset on | Code |
+**Contents:** [Main findings](#main-findings) ·
+[Reviewer quick start](#reviewer-quick-start-no-raw-data-no-gpu) ·
+[Where each result comes from](#where-each-result-in-the-paper-comes-from) ·
+[Calibration methods](#calibration-methods) · [Tests](#what-the-tests-check) ·
+[Repository map](#repository-map) · [Data](#data) · [Full reproduction](REPRODUCIBILITY.md)
+
+## Main findings
+
+Every number below is read from [`results_registry.json`](results_registry.json), the same file the
+paper's numbers are generated from.
+
+1. **One pooled quantile hides large errors on individual datasets.** Pooled calibration reaches
+   90% coverage overall but covers only 44.2% of BIT's test points. Calibrating each dataset on its
+   own cells (groupwise) is closer to the 90% target in 26 of 30 dataset–split pairs over 5
+   cell-level splits. The same holds for seven predictors, persistence and drift forecasts,
+   horizons of 10 and 50 cycles, and a deep ensemble.
+2. **Borrowing from other datasets does not beat own data.** Linear empirical-Bayes shrinkage cuts
+   BIT's coverage to 41.5%. A Bayesian model on the log scale avoids this, but only by returning
+   each dataset's own quantile: 3.76 vs. 3.77 points from the target, averaged over 5 splits.
+   Without any of the dataset's own cells, the best borrowing method is still 9.91 points off.
+3. **A dataset never seen in training needs its own calibration cells.** Calibrated on the other
+   datasets, coverage ranges from 21.2% (BIT) to 97.2% (RWTH). The left-out dataset's own cells
+   restore coverage, with intervals up to 4.9 times wider.
+4. **How many calibration cells are enough depends on the dataset.** It ranges from 1 cell (RWTH)
+   to 10 (BIT). For some datasets, on some splits, own cells under-cover however many are used.
+5. **Laboratory calibration does not transfer to the field.** On EVBattery data from 191 vehicles,
+   laboratory calibration covers only 15.6–19.6% of test points; calibrating on field data restores
+   about 90%.
+
+## Reviewer quick start (no raw data, no GPU)
+
+Every per-experiment result file is in [`outputs/`](outputs/). The commands below rerun the
+verification checks, rebuild every number in the paper from those files, and redraw the figures.
+They take a few minutes on a laptop, with Python 3.10:
+
+```bash
+git clone https://github.com/Raheeb223/battery-soh-conformal-prediction.git
+cd battery-soh-conformal-prediction
+python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+
+python tests/run_checks.py                  # 6 checks PASS; 2 SKIP (need a model checkpoint / raw data)
+python make_results_registry.py             # ends with "0 value(s) UNVERIFIED"
+git diff --stat results_registry.json       # empty: the rebuilt numbers match the committed ones
+python figures/make_results_figures.py      # results figures -> figures/out/
+python figures/make_prediction_figures.py   # example predictions and error spreads -> figures/out/
+```
+
+**To trace a number in the paper,** search for it in `results_registry.json`. The `values` table
+holds every number exactly as printed in the paper, and the `sections` table holds the raw results
+behind it. For example, the 44.2% BIT coverage is `values.PooledCoverageBIT`. The build step in
+[`make_results_registry.py`](make_results_registry.py) that produces each value names the
+`outputs/` file it reads, and the next table names the script that wrote that file.
+
+Rerunning the experiments themselves (training, leave-one-dataset-out, field check) needs the raw
+datasets and a GPU; [REPRODUCIBILITY.md](REPRODUCIBILITY.md) gives the environment, data layout and
+run order. Every defect found while auditing the pipeline is recorded, with its evidence and fix, in
+[ERROR_REGISTER.md](ERROR_REGISTER.md).
+
+## Where each result in the paper comes from
+
+Sections, tables and figures are named by their title in the paper, since journal typesetting may
+renumber them. All output files are in `outputs/`; figure scripts are in `figures/`.
+
+| Paper section | Result | Script | Output read by the registry |
+|---|---|---|---|
+| Introduction, Methods | Problem-setting figure; pipeline diagram | `figures/make_problem_setting.py`, `figures/make_block_diagram.py` | (drawings) |
+| Data | Cell, window and test-cell counts; data-quality corrections | `preprocessing.py`, loaders, `verify_calce_v2.py`, `verify_rwth_v2.py`, `xjtu_bridging_*.py` | `data_counts.json`, `rwth_verification_v2.json`, `xjtu_bridging_*.json`, `data_layer_report.json` |
+| One pooled quantile hides large errors | Coverage per dataset, pooled vs. groupwise (figure) | `train.py`, `experiments.py`, `figures/make_results_figures.py` | `conformal_{pooled,groupwise,normalized_groupwise}_results.json` |
+| | Example predictions; error spread per dataset (figures) | `figures/make_prediction_figures.py` | `figure_inputs.npz`, `conformal_*_predictions.npz` |
+| | Coverage for every point predictor (table) | `baseline_conformal_coverage.py` | `baseline_conformal_results.json` |
+| | Robustness over 5 splits, with cell-bootstrap gains (table) | `repeated_split_experiment.py`, `pooled_vs_groupwise_bootstrap.py`, `dataset_level_wilcoxon.py` | `repeated_split_summary.json`, `pooled_vs_groupwise_bootstrap.json`, `dataset_level_wilcoxon.json` |
+| Borrowing from other datasets | Coverage of every method on the main split (table) | `hierarchical_calibration_v2.py`, `run_nested_hp_search_all.py`, `mwhc_calibration.py`, `train_cqr.py` | `hierarchical_calibration_v2.json`, `nested_hp_search_results.json`, `mwhc_results.json`, `cqr_*_results.json` |
+| | Every method over 5 splits, including log-scale, Bayesian and covariate borrowing (table) | `split_replication.py`, `borrowing_variants.py`, `hgc_cp_validation_only.py` | `split_replication.json`, `borrowing_variants.json`, `hgc_cp_validation_only.json` |
+| How much calibration data is enough | Coverage vs. number of calibration cells (figure); cells needed on every split (table) | `calibration_size_sensitivity.py`, `budget_across_splits.py` | `calibration_size_sensitivity.json`, `budget_across_splits.json` |
+| A dataset never seen in training | Leave-one-dataset-out, calibrated on other or own cells (table) | `leave_one_out.py`, `lodo_target_calibration.py` | `lodo_*_results.json`, `lodo_target_calibration.json` |
+| Field data from electric vehicles | Field coverage (table and figure) | `field_check.py`, `figures/make_results_figures.py` | `field_check.json` |
+| Longer horizons and naive forecasts | Error of model, persistence and drift at 1, 10, 50 cycles; their calibration (two tables) | `horizon_experiment.py`, `persistence_baselines.py` | `horizon_experiment.json`, `persistence_baselines.json` |
+| Deep ensemble | Ensemble vs. MC-Dropout on every split (table) | `deep_ensemble.py`, `deep_ensemble_splits.py` | `deep_ensemble.json`, `deep_ensemble_splits.json` |
+| Learning the interval directly (CQR) | CQR vs. groupwise calibration (figure) | `train_cqr.py`, `figures/make_results_figures.py` | `cqr_*_results.json` |
+| How precise each coverage value is | Coverage range over splits (figure); cell-clustered intervals | `repeated_split_experiment.py`, `cell_clustered_bootstrap.py`, `predictor_consistent_recalibration.py` | `repeated_split_summary.json`, `predictor_consistent_recalibration.json` |
+| Appendix: HGC-CP and HGC-CP-val | Design chosen per target and its coverage (table) | `run_nested_hp_search_all.py`, `hgc_cp_validation_only.py` | `nested_hp_search_results.json`, `hgc_cp_validation_only.json` |
+| Appendix: MWHC | Sensitivity to the temperature (figure) | `mwhc_calibration.py` | `mwhc_results.json` |
+| Appendix: point accuracy | Accuracy of every predictor, ablations, window sizes, seeds (table) | `experiments.py`, `baselines.py` | `baseline_*_results.json`, `ablation_*_results.json`, `window_*_results.json`, `multiseed_*_results.json` |
+| Appendix: interval centre, deployment cost | Single pass vs. MC-Dropout mean; latency and size (tables) | `deterministic_predictor_comparison.py`, `deployability_benchmark.py` | `deterministic_predictor_results.json`, `deployability_results.json` |
+| Appendix: deep ensemble on the main split | Calibration around the ensemble (table) | `deep_ensemble.py` | `deep_ensemble.json` |
+| Appendix: independent checks | Verification of the statistical code | `tests/` | (see [tests/README.md](tests/README.md)) |
+
+## Calibration methods
+
+| Method | Calibrates each dataset on | Code |
 |---|---|---|
 | Pooled | all datasets together | `conformal.py` |
 | Groupwise (Mondrian) | its own validation cells | `conformal.py` |
-| Normalized groupwise | its own cells, scaled by MC-Dropout uncertainty | `conformal.py` |
+| Normalized groupwise | its own cells, scaled by the model's uncertainty | `conformal.py` |
 | Hierarchical (empirical Bayes) | its own cells, shrunk toward the other datasets | `hierarchical_calibration_v2.py` |
+| Stronger borrowing (log scale, Bayesian, covariates) | its own cells, or none, with better-specified shrinkage | `borrowing_variants.py` |
 | HGC-CP | the other datasets, weighted by similarity (MMD) | `hgc_cp.py` |
 | MWHC | hierarchical, with similarity-weighted shrinkage | `mwhc_calibration.py` |
 | CQR | a model trained to output the interval directly | `train_cqr.py` |
-
-## For reviewers: what you can check without the raw data
-
-The repository includes every per-experiment result file (`outputs/*.json`), so the following run
-in a few minutes with only `pip install -r requirements.txt` (Python 3.10):
-
-```bash
-python tests/run_checks.py                  # verification checks (see tests/README.md)
-python make_results_registry.py             # rebuild results_registry.json from outputs/
-python figures/make_results_figures.py      # redraw the results figures into figures/out/
-python figures/make_prediction_figures.py   # example predictions, error spreads, strategy comparison
-python figures/make_block_diagram.py        # the pipeline diagram (Figure 2)
-python figures/make_problem_setting.py      # Figure 1
-```
-
-`results_registry.json` contains, under `values`, every number printed in the paper, formatted as
-printed; the manuscript's numbers are generated from it and never typed by hand. Reproducing the
-results themselves (training, calibration, leave-one-dataset-out) needs the raw datasets and a GPU;
-see [REPRODUCIBILITY.md](REPRODUCIBILITY.md).
 
 ## What the tests check
 
@@ -46,6 +125,7 @@ check and why it matters. In short:
 |---|---|
 | `check_conformal.py` | split-conformal coverage on synthetic data; the calibration quantile against an independent implementation; groupwise and normalized calibration reduce correctly; the missing-data fallback |
 | `check_hierarchical_calibration.py` | the DerSimonian–Laird estimator against hand calculations and an independent implementation |
+| `check_bayesian_borrowing.py` | the Bayesian log-scale borrowing against a brute-force posterior, its limits, and its meta-regression |
 | `check_hgc_cp.py` | HGC-CP's similarity weights and its reduction to ordinary split conformal |
 | `check_hgc_cp_split_equivalence.py` | the fast HGC-CP code path gives bit-identical intervals |
 | `check_evbattery_loader.py` | the field-data loader refuses unsafe pickle files and reads valid ones |
@@ -89,8 +169,12 @@ listed there.
 | `mwhc_calibration.py` | MWHC and its temperature sweep |
 | `calibration_size_sensitivity.py` | coverage vs. number of calibration cells |
 | `leave_one_out.py` | each dataset withheld from training |
-| `lodo_target_calibration.py` | the withheld dataset calibrated on a few of its own cells, and how many are needed |
+| `lodo_target_calibration.py` | the withheld dataset calibrated on its own cells, and how many it needs |
 | `deep_ensemble.py` | a five-member deep ensemble as a second source of uncertainty, calibrated with the same methods |
+| `deep_ensemble_splits.py` | the same deep ensemble on the four further cell-level splits |
+| `borrowing_variants.py` | stronger borrowing baselines: shrinkage on the log scale, a Bayesian hierarchical model, and label-free covariates, on all five splits |
+| `budget_across_splits.py` | the calibration-cell budget repeated on all five splits |
+| `horizon_experiment.py` | 10- and 50-cycle forecast horizons, with persistence and drift forecasts and their calibration |
 | `pooled_vs_groupwise_bootstrap.py` | size of the groupwise gain on each dataset, with paired cell-bootstrap intervals |
 | `repeated_split_experiment.py` | further cell-level splits with the model seed fixed |
 | `split_replication.py` | the calibration-strategy comparison re-run on those splits with every design frozen; a held-out check of HGC-CP |

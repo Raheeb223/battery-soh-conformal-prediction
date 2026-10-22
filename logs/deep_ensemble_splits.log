@@ -1,0 +1,24 @@
+[conformal] WARNING: no calibration data for ['NASA'] — this means that group had 0 validation cells (a split bug, not expected behavior). Falling back to a pooled qhat across all calibrated groups so results aren't silently wrong, but you should fix the split so every dataset gets validation cells.
+[normalized conformal] WARNING: no calibration data for ['NASA'] — falling back to a pooled qhat across all calibrated groups.
+[conformal] WARNING: no calibration data for ['NASA'] — this means that group had 0 validation cells (a split bug, not expected behavior). Falling back to a pooled qhat across all calibrated groups so results aren't silently wrong, but you should fix the split so every dataset gets validation cells.
+[normalized conformal] WARNING: no calibration data for ['NASA'] — falling back to a pooled qhat across all calibrated groups.
+[conformal] WARNING: no calibration data for ['NASA'] — this means that group had 0 validation cells (a split bug, not expected behavior). Falling back to a pooled qhat across all calibrated groups so results aren't silently wrong, but you should fix the split so every dataset gets validation cells.
+[normalized conformal] WARNING: no calibration data for ['NASA'] — falling back to a pooled qhat across all calibrated groups.
+[conformal] WARNING: no calibration data for ['NASA'] — this means that group had 0 validation cells (a split bug, not expected behavior). Falling back to a pooled qhat across all calibrated groups so results aren't silently wrong, but you should fix the split so every dataset gets validation cells.
+[normalized conformal] WARNING: no calibration data for ['NASA'] — falling back to a pooled qhat across all calibrated groups.
+source/calibration                   mean dev5     min     max    width
+deep_ensemble/raw_gaussian               20.44   14.34   33.24   0.0398
+deep_ensemble/pooled                     28.03   23.76   31.52   0.0457
+deep_ensemble/groupwise                   4.49    1.99    7.51   0.0591
+deep_ensemble/normalized_groupwise        1.98    1.27    2.73   0.0713
+mc_dropout/raw_gaussian                   8.70    6.12   10.49   0.2535
+mc_dropout/pooled                        20.84   17.35   25.60   0.0834
+mc_dropout/groupwise                      3.77    2.21    5.14   0.0978
+mc_dropout/normalized_groupwise           3.96    2.18    6.43   0.1263
+split 42: closest = deep_ensemble/normalized_groupwise
+split 43: closest = deep_ensemble/normalized_groupwise
+split 44: closest = deep_ensemble/normalized_groupwise
+split 45: closest = deep_ensemble/normalized_groupwise
+split 46: closest = deep_ensemble/normalized_groupwise
+ensemble + normalized-groupwise closest in 5 of 5 splits; beats MC groupwise in 5; narrower than MC groupwise in 5
+saved C:\Users\User\PycharmProjects\outputs\deep_ensemble_splits.json

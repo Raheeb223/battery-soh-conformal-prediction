@@ -1,0 +1,1702 @@
+{
+  "prior_scale": 1.0,
+  "splits": {
+    "42": {
+      "fit_groups": [
+        "MIT",
+        "RWTH",
+        "XJTU",
+        "BIT",
+        "CALCE"
+      ],
+      "targets": [
+        "MIT",
+        "RWTH",
+        "XJTU",
+        "BIT",
+        "CALCE"
+      ],
+      "q": {
+        "MIT": 0.0015175881070926896,
+        "RWTH": 0.008102529325815018,
+        "XJTU": 0.007971393053573885,
+        "BIT": 0.06869575651626009,
+        "CALCE": 0.011381067149970373,
+        "Oxford": 0.013539716566227503,
+        "NASA": 0.011546285111910186
+      },
+      "covariate_noise": {
+        "MIT": 0.0001341886818408966,
+        "RWTH": 0.0005837082862854004,
+        "XJTU": 0.004250790923833847,
+        "BIT": 0.006281406618654728,
+        "CALCE": 0.0012998580932617188,
+        "Oxford": 0.0037777796387672424,
+        "NASA": 0.0027492865920066833
+      },
+      "covariate_spread": {
+        "MIT": 0.003212982539037321,
+        "RWTH": 0.019602830859109938,
+        "XJTU": 0.0048364030164306845,
+        "BIT": 0.019736803742575384,
+        "CALCE": 0.010541496254600642,
+        "Oxford": 0.0060902992562310064,
+        "NASA": 0.007329612220615404
+      },
+      "per_target": {
+        "MIT": {
+          "coverage": {
+            "own": 0.9218294980871353,
+            "hier_linear_loo": 0.9297664592017358,
+            "prior_linear_loo": 0.999714497801633,
+            "eb_linear_joint": 0.9240564152343973,
+            "eb_log_joint": 0.9351339005310341,
+            "bayes_log": 0.9259978301832924,
+            "bayes_log_noise": 0.9243419174327643,
+            "bayes_log_spread": 0.923999314794724,
+            "prior_log": 0.9998286986809798,
+            "prior_log_noise": 0.9771598241306458,
+            "prior_log_spread": 0.9961742705418831
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 1.0581529195138646,
+            "prior_linear_loo": 6.398450951377298,
+            "eb_linear_joint": 1.0135759217367886,
+            "eb_log_joint": 1.1081424656775367,
+            "bayes_log": 1.0277119501063807,
+            "bayes_log_noise": 1.0158351121777078,
+            "bayes_log_spread": 1.0127280202061872,
+            "prior_log": 9.554281970210791,
+            "prior_log_noise": 1.9460509526442586,
+            "prior_log_spread": 3.571120158958046
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.9892278507228026,
+            "eb_linear_joint": 0.9967107853575824,
+            "eb_log_joint": 0.9410203615676054,
+            "bayes_log": 0.9847685006443472,
+            "bayes_log_noise": 0.9233112326345273,
+            "bayes_log_spread": 0.9713202102644817
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.9263975332610062,
+              "weight_own": 0.9830779655182363,
+              "prior_coverage": 0.9998286986809798
+            },
+            "2.0": {
+              "coverage": 0.9255410266659053,
+              "weight_own": 0.9867958132703726,
+              "prior_coverage": 0.9998286986809798
+            }
+          }
+        },
+        "RWTH": {
+          "coverage": {
+            "own": 0.9071842927264614,
+            "hier_linear_loo": 0.9071842927264614,
+            "prior_linear_loo": 0.9209430313847985,
+            "eb_linear_joint": 0.9071842927264614,
+            "eb_log_joint": 0.9071842927264614,
+            "bayes_log": 0.9071842927264614,
+            "bayes_log_noise": 0.9070355496058308,
+            "bayes_log_spread": 0.9071842927264614,
+            "prior_log": 0.9411720957905697,
+            "prior_log_noise": 0.7535326491149784,
+            "prior_log_spread": 0.9991075412762159
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 1.0000348167912632,
+            "prior_linear_loo": 1.0697561904483,
+            "eb_linear_joint": 0.9999543314083518,
+            "eb_log_joint": 1.0000652146931541,
+            "bayes_log": 1.0000293389886519,
+            "bayes_log_noise": 0.9995097292338196,
+            "bayes_log_spread": 1.000486891332688,
+            "prior_log": 1.187688211533974,
+            "prior_log_noise": 0.6071446814317819,
+            "prior_log_spread": 6.367537636328239
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.9995008788318379,
+            "eb_linear_joint": 0.998848116781232,
+            "eb_log_joint": 0.9990115309670579,
+            "bayes_log": 0.9997540835532854,
+            "bayes_log_noise": 0.9984524023185763,
+            "bayes_log_spread": 0.9995241434287864
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.9071842927264614,
+              "weight_own": 0.9997261791689669,
+              "prior_coverage": 0.940577123308047
+            },
+            "2.0": {
+              "coverage": 0.9071842927264614,
+              "weight_own": 0.9997872986733315,
+              "prior_coverage": 0.9418414398334077
+            }
+          }
+        },
+        "XJTU": {
+          "coverage": {
+            "own": 0.9301343570057582,
+            "hier_linear_loo": 0.9293666026871401,
+            "prior_linear_loo": 0.927063339731286,
+            "eb_linear_joint": 0.9297504798464491,
+            "eb_log_joint": 0.9332053742802303,
+            "bayes_log": 0.9324376199616122,
+            "bayes_log_noise": 0.9746641074856046,
+            "bayes_log_spread": 0.9143953934740883,
+            "prior_log": 0.9585412667946257,
+            "prior_log_noise": 0.999616122840691,
+            "prior_log_spread": 0.7796545105566218
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 0.9897926745926686,
+            "prior_linear_loo": 0.9717987179826331,
+            "eb_linear_joint": 0.9913284203327478,
+            "eb_log_joint": 1.0287020213663831,
+            "bayes_log": 1.0152410695867575,
+            "bayes_log_noise": 1.4908188744660016,
+            "bayes_log_spread": 0.8801456810039402,
+            "prior_log": 1.2068051775084048,
+            "prior_log_noise": 5.439950095510612,
+            "prior_log_spread": 0.37157682483552557
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.63805456074495,
+            "eb_linear_joint": 0.6363852134482494,
+            "eb_log_joint": 0.6561219305488661,
+            "bayes_log": 0.8899527595169366,
+            "bayes_log_noise": 0.6683703526219312,
+            "bayes_log_spread": 0.8180246537007786
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.9324376199616122,
+              "weight_own": 0.8793085199018903,
+              "prior_coverage": 0.9581573896353167
+            },
+            "2.0": {
+              "coverage": 0.9324376199616122,
+              "weight_own": 0.9032824122168659,
+              "prior_coverage": 0.9593090211132438
+            }
+          }
+        },
+        "BIT": {
+          "coverage": {
+            "own": 0.8809523809523809,
+            "hier_linear_loo": 0.41478696741854637,
+            "prior_linear_loo": 0.3258145363408521,
+            "eb_linear_joint": 0.42857142857142855,
+            "eb_log_joint": 0.8270676691729323,
+            "bayes_log": 0.8696741854636592,
+            "bayes_log_noise": 0.8696741854636592,
+            "bayes_log_spread": 0.8721804511278195,
+            "prior_log": 0.2644110275689223,
+            "prior_log_noise": 0.6591478696741855,
+            "prior_log_spread": 0.4924812030075188
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 0.13756912801870066,
+            "prior_linear_loo": 0.10388534972835728,
+            "eb_linear_joint": 0.14700460156033215,
+            "eb_log_joint": 0.5581566541681908,
+            "bayes_log": 0.8416154197249642,
+            "bayes_log_noise": 0.8339119071058045,
+            "bayes_log_spread": 0.8526269116801541,
+            "prior_log": 0.08354780931126253,
+            "prior_log_noise": 0.27664366146478436,
+            "prior_log_spread": 0.17866581260593983
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.03758869278627761,
+            "eb_linear_joint": 0.03804191699916535,
+            "eb_log_joint": 0.7185107607277481,
+            "bayes_log": 0.9145002500075858,
+            "bayes_log_noise": 0.7182069964912217,
+            "bayes_log_spread": 0.8544887160421931
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.8696741854636592,
+              "weight_own": 0.9059315144376766,
+              "prior_coverage": 0.2644110275689223
+            },
+            "2.0": {
+              "coverage": 0.8734335839598998,
+              "weight_own": 0.9251163804172076,
+              "prior_coverage": 0.2644110275689223
+            }
+          }
+        },
+        "CALCE": {
+          "coverage": {
+            "own": 0.7564710171345242,
+            "hier_linear_loo": 0.7531899380240612,
+            "prior_linear_loo": 0.5946044476850164,
+            "eb_linear_joint": 0.7542836310608823,
+            "eb_log_joint": 0.7550127597520963,
+            "bayes_log": 0.7561064527889172,
+            "bayes_log_noise": 0.7561064527889172,
+            "bayes_log_spread": 0.7561064527889172,
+            "prior_log": 0.6901203062340503,
+            "prior_log_noise": 0.7178271965001822,
+            "prior_log_spread": 0.7440758293838863
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 0.9866154859912173,
+            "prior_linear_loo": 0.5716734909469495,
+            "eb_linear_joint": 0.9898223974655065,
+            "eb_log_joint": 0.9960267424162378,
+            "bayes_log": 0.999196149166052,
+            "bayes_log_noise": 0.999213072165452,
+            "bayes_log_spread": 0.9993626623159582,
+            "prior_log": 0.7736275811578729,
+            "prior_log_noise": 0.8741636714238752,
+            "prior_log_spread": 0.9489548293671318
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.968751609517764,
+            "eb_linear_joint": 0.9678224658085055,
+            "eb_log_joint": 0.985459647982999,
+            "bayes_log": 0.9963514435095536,
+            "bayes_log_noise": 0.9785961786487299,
+            "bayes_log_spread": 0.9929854421805522
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.7561064527889172,
+              "weight_own": 0.9959395191373258,
+              "prior_coverage": 0.6893911775428363
+            },
+            "2.0": {
+              "coverage": 0.7561064527889172,
+              "weight_own": 0.9968426039774592,
+              "prior_coverage": 0.6912139992708713
+            }
+          }
+        }
+      },
+      "mean_abs_dev": {
+        "own": 0.044344949946489944,
+        "hier_linear_loo": 0.13966808983454596,
+        "eb_linear_joint": 0.1356272256349994,
+        "eb_log_joint": 0.058688627722539445,
+        "bayes_log": 0.04796782092375793,
+        "bayes_log_noise": 0.05605218725432466,
+        "bayes_log_spread": 0.04345841941570738,
+        "prior_linear_loo": 0.20546037697836977,
+        "prior_log": 0.2090021454926405,
+        "prior_log_noise": 0.14925364633639815,
+        "prior_log_spread": 0.17581405377401443
+      },
+      "mean_abs_dev_prior_scale": {
+        "0.5": {
+          "bayes_log": 0.04804776153930068,
+          "prior_log": 0.208952201302517
+        },
+        "2.0": {
+          "bayes_log": 0.04712458052103239,
+          "prior_log": 0.20907082655756754
+        }
+      }
+    },
+    "43": {
+      "fit_groups": [
+        "MIT",
+        "RWTH",
+        "XJTU",
+        "BIT",
+        "CALCE"
+      ],
+      "targets": [
+        "MIT",
+        "RWTH",
+        "XJTU",
+        "BIT",
+        "CALCE"
+      ],
+      "q": {
+        "MIT": 0.0012490452997410745,
+        "RWTH": 0.007540384243439831,
+        "XJTU": 0.003988160330505919,
+        "BIT": 0.05932478413247228,
+        "CALCE": 0.015482494356518533,
+        "Oxford": 0.004077378692555017
+      },
+      "covariate_noise": {
+        "MIT": 0.00011233706027269363,
+        "RWTH": 0.0005536377429962158,
+        "XJTU": 0.0021344702690839767,
+        "BIT": 0.007321537937968969,
+        "CALCE": 0.0017155557870864868,
+        "Oxford": 0.00316808745265007
+      },
+      "covariate_spread": {
+        "MIT": 0.003147220080331142,
+        "RWTH": 0.019705722062339937,
+        "XJTU": 0.00488324584362823,
+        "BIT": 0.02132791863459407,
+        "CALCE": 0.01402641605429757,
+        "Oxford": 0.005613462007645744
+      },
+      "per_target": {
+        "MIT": {
+          "coverage": {
+            "own": 0.8970193012460298,
+            "hier_linear_loo": 0.8975690202785243,
+            "prior_linear_loo": 0.9994502809675055,
+            "eb_linear_joint": 0.8974468604935255,
+            "eb_log_joint": 0.8984852186660152,
+            "bayes_log": 0.8981187393110188,
+            "bayes_log_noise": 0.8970803811385292,
+            "bayes_log_spread": 0.8974468604935255,
+            "prior_log": 0.9995724407525043,
+            "prior_log_noise": 0.9353163938431468,
+            "prior_log_spread": 0.9721475690202785
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 1.0023210410356551,
+            "prior_linear_loo": 7.842653005301289,
+            "eb_linear_joint": 1.001572542506788,
+            "eb_log_joint": 1.005905806996838,
+            "bayes_log": 1.0042096650248715,
+            "bayes_log_noise": 1.0005810914076043,
+            "bayes_log_spread": 1.001482025929379,
+            "prior_log": 10.054213605212926,
+            "prior_log_noise": 1.2550671704556597,
+            "prior_log_spread": 1.868181477400768
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.9996607980802392,
+            "eb_linear_joint": 0.9996947072339069,
+            "eb_log_joint": 0.9967939368492973,
+            "bayes_log": 0.9977122844152877,
+            "bayes_log_noise": 0.9928324992237695,
+            "bayes_log_spread": 0.9933147380645244
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.8982408990960176,
+              "weight_own": 0.9974844098565511,
+              "prior_coverage": 0.9995724407525043
+            },
+            "2.0": {
+              "coverage": 0.8979965795260201,
+              "weight_own": 0.9980070251890966,
+              "prior_coverage": 0.9995724407525043
+            }
+          }
+        },
+        "RWTH": {
+          "coverage": {
+            "own": 0.8980446092208336,
+            "hier_linear_loo": 0.8980446092208336,
+            "prior_linear_loo": 0.9296776894097949,
+            "eb_linear_joint": 0.8980446092208336,
+            "eb_log_joint": 0.8980446092208336,
+            "bayes_log": 0.8980446092208336,
+            "bayes_log_noise": 0.8978652155713688,
+            "bayes_log_spread": 0.8984631944029181,
+            "prior_log": 0.9129342821264127,
+            "prior_log_noise": 0.6868384859175986,
+            "prior_log_spread": 0.9976678825569575
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 1.0002063907082288,
+            "prior_linear_loo": 1.1635966356649696,
+            "eb_linear_joint": 1.0000516564217972,
+            "eb_log_joint": 1.0000320668576732,
+            "bayes_log": 1.000022632901456,
+            "bayes_log_noise": 0.999134104359577,
+            "bayes_log_spread": 1.0017136684183012,
+            "prior_log": 1.0673999449940843,
+            "prior_log_noise": 0.529975334631613,
+            "prior_log_spread": 4.878457083016241
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.9987384171600485,
+            "eb_linear_joint": 0.9972648625584516,
+            "eb_log_joint": 0.9991727516427604,
+            "bayes_log": 0.9994096529392223,
+            "bayes_log_noise": 0.9981369697634728,
+            "bayes_log_spread": 0.9982642529404977
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.8980446092208336,
+              "weight_own": 0.9993507078987414,
+              "prior_coverage": 0.9123363032948634
+            },
+            "2.0": {
+              "coverage": 0.8980446092208336,
+              "weight_own": 0.9994858364512608,
+              "prior_coverage": 0.913592058841117
+            }
+          }
+        },
+        "XJTU": {
+          "coverage": {
+            "own": 0.705177743431221,
+            "hier_linear_loo": 0.7268160741885626,
+            "prior_linear_loo": 0.8829211746522411,
+            "eb_linear_joint": 0.7217928902627512,
+            "eb_log_joint": 0.7148377125193199,
+            "bayes_log": 0.7121329211746522,
+            "bayes_log_noise": 0.7422720247295209,
+            "bayes_log_spread": 0.6955177743431221,
+            "prior_log": 0.8906491499227203,
+            "prior_log_noise": 0.9783616692426584,
+            "prior_log_spread": 0.5309119010819165
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 1.0691339960100898,
+            "prior_linear_loo": 2.230167984159544,
+            "eb_linear_joint": 1.0540174711464996,
+            "eb_log_joint": 1.0312530223537126,
+            "bayes_log": 1.0221794255861807,
+            "bayes_log_noise": 1.1188094049207833,
+            "bayes_log_spread": 0.9723844428731643,
+            "prior_log": 2.357652004580408,
+            "prior_log_noise": 5.196266378575861,
+            "prior_log_spread": 0.6176109029740836
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.9438011743921929,
+            "eb_linear_joint": 0.94169101028154,
+            "eb_log_joint": 0.9544556343462476,
+            "bayes_log": 0.9675348007617872,
+            "bayes_log_noise": 0.9087542659957554,
+            "bayes_log_spread": 0.9137063163684345
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.7129057187017002,
+              "weight_own": 0.9644358709527023,
+              "prior_coverage": 0.8906491499227203
+            },
+            "2.0": {
+              "coverage": 0.7113601236476044,
+              "weight_own": 0.9715963205206668,
+              "prior_coverage": 0.8910355486862442
+            }
+          }
+        },
+        "BIT": {
+          "coverage": {
+            "own": 0.8768115942028986,
+            "hier_linear_loo": 0.4577294685990338,
+            "prior_linear_loo": 0.3466183574879227,
+            "eb_linear_joint": 0.4806763285024155,
+            "eb_log_joint": 0.8683574879227053,
+            "bayes_log": 0.8719806763285024,
+            "bayes_log_noise": 0.8731884057971014,
+            "bayes_log_spread": 0.8719806763285024,
+            "prior_log": 0.24758454106280192,
+            "prior_log_noise": 0.7439613526570048,
+            "prior_log_spread": 0.5978260869565217
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 0.16548005686126577,
+            "prior_linear_loo": 0.11695824942335091,
+            "eb_linear_joint": 0.17784247985639648,
+            "eb_log_joint": 0.8296738081093287,
+            "bayes_log": 0.8753718916626388,
+            "bayes_log_noise": 0.9190664284958585,
+            "bayes_log_spread": 0.8574410055975982,
+            "prior_log": 0.08295832192109782,
+            "prior_log_noise": 0.3481717828417976,
+            "prior_log_spread": 0.23417466381469126
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.0549484861913141,
+            "eb_linear_joint": 0.05552987134983034,
+            "eb_log_joint": 0.9077453289384427,
+            "bayes_log": 0.9342218019259596,
+            "bayes_log_noise": 0.8315891357978165,
+            "bayes_log_spread": 0.8392597055403501
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.8719806763285024,
+              "weight_own": 0.9282299023478802,
+              "prior_coverage": 0.24758454106280192
+            },
+            "2.0": {
+              "coverage": 0.8719806763285024,
+              "weight_own": 0.9421852099597754,
+              "prior_coverage": 0.24758454106280192
+            }
+          }
+        },
+        "CALCE": {
+          "coverage": {
+            "own": 0.8870139398385913,
+            "hier_linear_loo": 0.8749082905355833,
+            "prior_linear_loo": 0.528980190755686,
+            "eb_linear_joint": 0.8782098312545855,
+            "eb_log_joint": 0.8859134262655907,
+            "bayes_log": 0.8862802641232576,
+            "bayes_log_noise": 0.8859134262655907,
+            "bayes_log_spread": 0.8862802641232576,
+            "prior_log": 0.6148202494497432,
+            "prior_log_noise": 0.7909024211298606,
+            "prior_log_spread": 0.8462949376375642
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 0.9415039048796223,
+            "prior_linear_loo": 0.3344436984589984,
+            "eb_linear_joint": 0.9603186171865816,
+            "eb_log_joint": 0.9964928693592066,
+            "bayes_log": 0.9974949813502642,
+            "bayes_log_noise": 0.9965992956106242,
+            "bayes_log_spread": 0.9977805640984124,
+            "prior_log": 0.43202578538315434,
+            "prior_log_noise": 0.6754031773191758,
+            "prior_log_spread": 0.798849468537799
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.9121094714527708,
+            "eb_linear_joint": 0.9212320052147983,
+            "eb_log_joint": 0.994838507053012,
+            "bayes_log": 0.996317247704728,
+            "bayes_log_noise": 0.9885288967415627,
+            "bayes_log_spread": 0.9892913303553332
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.8859134262655907,
+              "weight_own": 0.9959511414653719,
+              "prior_coverage": 0.6137197358767424
+            },
+            "2.0": {
+              "coverage": 0.8862802641232576,
+              "weight_own": 0.9967910777113159,
+              "prior_coverage": 0.6159207630227439
+            }
+          }
+        }
+      },
+      "mean_abs_dev": {
+        "own": 0.047186562412085166,
+        "hier_linear_loo": 0.1289865074354925,
+        "eb_linear_joint": 0.12476589605317775,
+        "eb_log_joint": 0.04687230908110709,
+        "bayes_log": 0.0466885579683471,
+        "bayes_log_noise": 0.04073610929957783,
+        "bayes_log_spread": 0.050062246061734886,
+        "prior_linear_loo": 0.21412164949629015,
+        "prior_log": 0.2118905564887303,
+        "prior_log_noise": 0.11839516067626825,
+        "prior_log_spread": 0.1789565051802467
+      },
+      "mean_abs_dev_prior_scale": {
+        "0.5": {
+          "bayes_log": 0.04658293407747114,
+          "prior_log": 0.21199106343702062
+        },
+        "2.0": {
+          "bayes_log": 0.04686754943075642,
+          "prior_log": 0.21172472936436626
+        }
+      }
+    },
+    "44": {
+      "fit_groups": [
+        "MIT",
+        "RWTH",
+        "XJTU",
+        "BIT",
+        "CALCE"
+      ],
+      "targets": [
+        "MIT",
+        "RWTH",
+        "XJTU",
+        "BIT",
+        "CALCE"
+      ],
+      "q": {
+        "MIT": 0.0013320718695472298,
+        "RWTH": 0.007718467140106152,
+        "XJTU": 0.003347784609736092,
+        "BIT": 0.08909075161448579,
+        "CALCE": 0.02047770270766252,
+        "Oxford": 0.007381715990889553
+      },
+      "covariate_noise": {
+        "MIT": 0.00011894851922988892,
+        "RWTH": 0.0005633831024169922,
+        "XJTU": 0.0005543157458305359,
+        "BIT": 0.006981740705668926,
+        "CALCE": 0.001908324658870697,
+        "Oxford": 0.0041494593024253845
+      },
+      "covariate_spread": {
+        "MIT": 0.003467507338522927,
+        "RWTH": 0.0194124850536806,
+        "XJTU": 0.005027700663923747,
+        "BIT": 0.020384348358176537,
+        "CALCE": 0.01659730775614725,
+        "Oxford": 0.0026075553586613377
+      },
+      "per_target": {
+        "MIT": {
+          "coverage": {
+            "own": 0.8826275608282529,
+            "hier_linear_loo": 0.8827374086889658,
+            "prior_linear_loo": 0.9971439556214643,
+            "eb_linear_joint": 0.8827374086889658,
+            "eb_log_joint": 0.8829021804800351,
+            "bayes_log": 0.8827923326193222,
+            "bayes_log_noise": 0.8826275608282529,
+            "bayes_log_spread": 0.8826275608282529,
+            "prior_log": 0.9978579667160982,
+            "prior_log_noise": 0.8206733673861701,
+            "prior_log_spread": 0.9314000109847861
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 1.0004580019503728,
+            "prior_linear_loo": 9.224074593158916,
+            "eb_linear_joint": 1.000497634270343,
+            "eb_log_joint": 1.001293060565878,
+            "bayes_log": 1.0008942161943413,
+            "bayes_log_noise": 1.0001003707168825,
+            "bayes_log_spread": 1.000131738596479,
+            "prior_log": 11.12855255979138,
+            "prior_log_noise": 0.7782477834275624,
+            "prior_log_spread": 1.3645806812065857
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.9999443096064871,
+            "eb_linear_joint": 0.9999072831885185,
+            "eb_log_joint": 0.9993265723617926,
+            "bayes_log": 0.9995341935798421,
+            "bayes_log_noise": 0.9728616808519884,
+            "bayes_log_spread": 0.9987878916760711
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.8827923326193222,
+              "weight_own": 0.9994960498214326,
+              "prior_coverage": 0.9978579667160982
+            },
+            "2.0": {
+              "coverage": 0.8827923326193222,
+              "weight_own": 0.9995901452967316,
+              "prior_coverage": 0.9977481188553853
+            }
+          }
+        },
+        "RWTH": {
+          "coverage": {
+            "own": 0.8789150218650278,
+            "hier_linear_loo": 0.8790332112043494,
+            "prior_linear_loo": 0.9529606429500059,
+            "eb_linear_joint": 0.8789150218650278,
+            "eb_log_joint": 0.8789150218650278,
+            "bayes_log": 0.8789150218650278,
+            "bayes_log_noise": 0.8786195485167237,
+            "bayes_log_spread": 0.8792695898829925,
+            "prior_log": 0.9260725682543435,
+            "prior_log_noise": 0.7854863491313083,
+            "prior_log_spread": 0.9989953906157665
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 1.0002119590655847,
+            "prior_linear_loo": 1.42310568162947,
+            "eb_linear_joint": 1.0001152941328144,
+            "eb_log_joint": 1.0000411386992958,
+            "bayes_log": 1.0000284516232512,
+            "bayes_log_noise": 0.9983376794842763,
+            "bayes_log_spread": 1.0005448143889186,
+            "prior_log": 1.2278436909735368,
+            "prior_log_noise": 0.73846457442976,
+            "prior_log_spread": 6.325308187286097
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.9994990398976246,
+            "eb_linear_joint": 0.9988339458722553,
+            "eb_log_joint": 0.9997460586340949,
+            "bayes_log": 0.9998243510315454,
+            "bayes_log_noise": 0.9885172658220288,
+            "bayes_log_spread": 0.9995425631233353
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.8789150218650278,
+              "weight_own": 0.9998099618102414,
+              "prior_coverage": 0.9260725682543435
+            },
+            "2.0": {
+              "coverage": 0.8789150218650278,
+              "weight_own": 0.9998454556600094,
+              "prior_coverage": 0.9260725682543435
+            }
+          }
+        },
+        "XJTU": {
+          "coverage": {
+            "own": 0.733852140077821,
+            "hier_linear_loo": 0.7879377431906615,
+            "prior_linear_loo": 0.9766536964980544,
+            "eb_linear_joint": 0.7770428015564202,
+            "eb_log_joint": 0.7505836575875486,
+            "bayes_log": 0.7431906614785992,
+            "bayes_log_noise": 0.8295719844357977,
+            "bayes_log_spread": 0.7295719844357976,
+            "prior_log": 0.9824902723735408,
+            "prior_log_noise": 0.9334630350194553,
+            "prior_log_spread": 0.6038910505836576
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 1.176309945258805,
+            "prior_linear_loo": 3.0515264957011956,
+            "eb_linear_joint": 1.1332550102101473,
+            "eb_log_joint": 1.0554980560208889,
+            "bayes_log": 1.0381290734554696,
+            "bayes_log_noise": 1.3588099016292077,
+            "bayes_log_spread": 0.9823363489529389,
+            "prior_log": 3.4615049543025886,
+            "prior_log_noise": 2.002525276258966,
+            "prior_log_spread": 0.7364903488287085
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.9140591429707353,
+            "eb_linear_joint": 0.9131043724974021,
+            "eb_log_joint": 0.9458418072118204,
+            "bayes_log": 0.9624809442839477,
+            "bayes_log_noise": 0.5077533605499983,
+            "bayes_log_spread": 0.910857654432987
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.7439688715953308,
+              "weight_own": 0.959561111036289,
+              "prior_coverage": 0.9824902723735408
+            },
+            "2.0": {
+              "coverage": 0.7428015564202335,
+              "weight_own": 0.9668251117043052,
+              "prior_coverage": 0.9824902723735408
+            }
+          }
+        },
+        "BIT": {
+          "coverage": {
+            "own": 0.8947368421052632,
+            "hier_linear_loo": 0.521181001283697,
+            "prior_linear_loo": 0.3594351732991014,
+            "eb_linear_joint": 0.5571245186136072,
+            "eb_log_joint": 0.8870346598202824,
+            "bayes_log": 0.8908857509627728,
+            "bayes_log_noise": 0.8908857509627728,
+            "bayes_log_spread": 0.8870346598202824,
+            "prior_log": 0.2631578947368421,
+            "prior_log_noise": 0.8754813863928113,
+            "prior_log_spread": 0.6020539152759948
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 0.1299072410413271,
+            "prior_linear_loo": 0.08181475492778213,
+            "eb_linear_joint": 0.14313988138750972,
+            "eb_log_joint": 0.9370110990517609,
+            "bayes_log": 0.9559703466499632,
+            "bayes_log_noise": 0.9785812923559569,
+            "bayes_log_spread": 0.9443207848034072,
+            "prior_log": 0.057959243828327345,
+            "prior_log_noise": 0.7907832719927731,
+            "prior_log_spread": 0.16214256399685964
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.052377759685914314,
+            "eb_linear_joint": 0.05298166829189061,
+            "eb_log_joint": 0.9715153473238697,
+            "bayes_log": 0.9802855165563236,
+            "bayes_log_noise": 0.6278902510136743,
+            "bayes_log_spread": 0.9511946757846265
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.8908857509627728,
+              "weight_own": 0.9787133287757459,
+              "prior_coverage": 0.2631578947368421
+            },
+            "2.0": {
+              "coverage": 0.8908857509627728,
+              "weight_own": 0.9826089616652749,
+              "prior_coverage": 0.2631578947368421
+            }
+          }
+        },
+        "CALCE": {
+          "coverage": {
+            "own": 0.9473293768545994,
+            "hier_linear_loo": 0.9161721068249258,
+            "prior_linear_loo": 0.6428041543026706,
+            "eb_linear_joint": 0.9239614243323442,
+            "eb_log_joint": 0.9458456973293768,
+            "bayes_log": 0.9465875370919882,
+            "bayes_log_noise": 0.9491839762611276,
+            "bayes_log_spread": 0.9473293768545994,
+            "prior_log": 0.7329376854599406,
+            "prior_log_noise": 0.9506676557863502,
+            "prior_log_spread": 0.94473293768546
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 0.7753411309431676,
+            "prior_linear_loo": 0.27566863516908857,
+            "eb_linear_joint": 0.820880428620476,
+            "eb_log_joint": 0.9901864040322816,
+            "bayes_log": 0.9932003459893265,
+            "bayes_log_noise": 1.0221359227732951,
+            "bayes_log_spread": 0.9990852574585763,
+            "prior_log": 0.36194748406848565,
+            "prior_log_noise": 1.074565968602724,
+            "prior_log_spread": 0.9636233036650499
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.6898396507939746,
+            "eb_linear_joint": 0.6942367162397405,
+            "eb_log_joint": 0.9878803204622482,
+            "bayes_log": 0.9916152817227883,
+            "bayes_log_noise": 0.7642660690931506,
+            "bayes_log_spread": 0.9786416259167511
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.9462166172106825,
+              "weight_own": 0.9909361235150478,
+              "prior_coverage": 0.732566765578635
+            },
+            "2.0": {
+              "coverage": 0.9465875370919882,
+              "weight_own": 0.9926146002475109,
+              "prior_coverage": 0.7329376854599406
+            }
+          }
+        }
+      },
+      "mean_abs_dev": {
+        "own": 0.05143956239564693,
+        "hier_linear_loo": 0.10905654849145044,
+        "eb_linear_joint": 0.10562833472166464,
+        "eb_log_joint": 0.0492820355152966,
+        "bayes_log": 0.05016075403325324,
+        "bayes_log_noise": 0.03349582630351611,
+        "bayes_log_spread": 0.053765116377454805,
+        "prior_linear_loo": 0.20490379349355053,
+        "prior_log": 0.20206504542943993,
+        "prior_log_noise": 0.060497917579103146,
+        "prior_log_spread": 0.153836674685272
+      },
+      "mean_abs_dev_prior_scale": {
+        "0.5": {
+          "bayes_log": 0.04993092803364581,
+          "prior_log": 0.20213922940570103
+        },
+        "2.0": {
+          "bayes_log": 0.05023857504492639,
+          "prior_log": 0.20204307585729736
+        }
+      }
+    },
+    "45": {
+      "fit_groups": [
+        "MIT",
+        "RWTH",
+        "XJTU",
+        "BIT",
+        "CALCE"
+      ],
+      "targets": [
+        "MIT",
+        "RWTH",
+        "XJTU",
+        "BIT",
+        "CALCE"
+      ],
+      "q": {
+        "MIT": 0.001589869165427459,
+        "RWTH": 0.008741912685786125,
+        "XJTU": 0.004174738203119794,
+        "BIT": 0.0773834946945574,
+        "CALCE": 0.02504762242684997,
+        "Oxford": 0.004941102229701034,
+        "NASA": 0.017488620697042427
+      },
+      "covariate_noise": {
+        "MIT": 0.00015593413263559341,
+        "RWTH": 0.0006008148193359375,
+        "XJTU": 0.0016611367464065552,
+        "BIT": 0.006464123725891113,
+        "CALCE": 0.0020607709884643555,
+        "Oxford": 0.0031680911779403687,
+        "NASA": 0.005175657570362091
+      },
+      "covariate_spread": {
+        "MIT": 0.0032840722410045335,
+        "RWTH": 0.019551997686870153,
+        "XJTU": 0.005062932589799579,
+        "BIT": 0.022218869311733343,
+        "CALCE": 0.012143219432077097,
+        "Oxford": 0.005275518691988857,
+        "NASA": 0.01122385487814283
+      },
+      "per_target": {
+        "MIT": {
+          "coverage": {
+            "own": 0.8884966908288686,
+            "hier_linear_loo": 0.8884966908288686,
+            "prior_linear_loo": 0.9997478726757012,
+            "eb_linear_joint": 0.8884966908288686,
+            "eb_log_joint": 0.8884966908288686,
+            "bayes_log": 0.8884966908288686,
+            "bayes_log_noise": 0.8884966908288686,
+            "bayes_log_spread": 0.8884966908288686,
+            "prior_log": 0.9999369681689253,
+            "prior_log_noise": 0.8525685471162937,
+            "prior_log_spread": 0.9723290261582099
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 1.0001183303689385,
+            "prior_linear_loo": 7.084562606540689,
+            "eb_linear_joint": 1.0000857533913738,
+            "eb_log_joint": 1.0002554438911082,
+            "bayes_log": 1.0001903889226977,
+            "bayes_log_noise": 1.0000010612502954,
+            "bayes_log_spread": 1.0000474723261668,
+            "prior_log": 10.12429821080409,
+            "prior_log_noise": 0.906019668216763,
+            "prior_log_spread": 1.6381529118061744
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.9999805523623323,
+            "eb_linear_joint": 0.9999797089287809,
+            "eb_log_joint": 0.9998608227332092,
+            "bayes_log": 0.9998961571331825,
+            "bayes_log_noise": 0.9995814764076999,
+            "bayes_log_spread": 0.9997280959198064
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.8884966908288686,
+              "weight_own": 0.9998864595901628,
+              "prior_coverage": 0.9999369681689253
+            },
+            "2.0": {
+              "coverage": 0.8884966908288686,
+              "weight_own": 0.9999092915171012,
+              "prior_coverage": 0.9999369681689253
+            }
+          }
+        },
+        "RWTH": {
+          "coverage": {
+            "own": 0.8970846717982908,
+            "hier_linear_loo": 0.8970846717982908,
+            "prior_linear_loo": 0.8994484514212983,
+            "eb_linear_joint": 0.8970846717982908,
+            "eb_log_joint": 0.8970846717982908,
+            "bayes_log": 0.8970846717982908,
+            "bayes_log_noise": 0.8970846717982908,
+            "bayes_log_spread": 0.8970846717982908,
+            "prior_log": 0.9390266076731923,
+            "prior_log_noise": 0.5937935632462573,
+            "prior_log_spread": 0.9994545123946906
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 1.0000072456075821,
+            "prior_linear_loo": 1.009612096270757,
+            "eb_linear_joint": 0.999952658644994,
+            "eb_log_joint": 1.0000287863927095,
+            "bayes_log": 1.0000211669479253,
+            "bayes_log_noise": 0.9997142624517502,
+            "bayes_log_spread": 1.0004935377426178,
+            "prior_log": 1.1950284378787042,
+            "prior_log_noise": 0.5426317282214429,
+            "prior_log_spread": 7.174862796896036
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.99924619902069,
+            "eb_linear_joint": 0.9990442081687971,
+            "eb_log_joint": 0.9997797106767061,
+            "bayes_log": 0.9998356389476454,
+            "bayes_log_noise": 0.9993378551635214,
+            "bayes_log_spread": 0.999569710861373
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.8970846717982908,
+              "weight_own": 0.9998202911260847,
+              "prior_coverage": 0.938723559003576
+            },
+            "2.0": {
+              "coverage": 0.8970846717982908,
+              "weight_own": 0.9998564266339329,
+              "prior_coverage": 0.9397539244802715
+            }
+          }
+        },
+        "XJTU": {
+          "coverage": {
+            "own": 0.8796920115495669,
+            "hier_linear_loo": 0.9100096246390761,
+            "prior_linear_loo": 0.9764196342637151,
+            "eb_linear_joint": 0.9027911453320501,
+            "eb_log_joint": 0.8936477382098171,
+            "bayes_log": 0.8893166506256015,
+            "bayes_log_noise": 0.9201154956689124,
+            "bayes_log_spread": 0.8792107795957652,
+            "prior_log": 0.9855630413859481,
+            "prior_log_noise": 0.9942252165543792,
+            "prior_log_spread": 0.8426371511068335
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 1.1333551669932973,
+            "prior_linear_loo": 2.3591764643431885,
+            "eb_linear_joint": 1.0978773830733242,
+            "eb_log_joint": 1.0528054202249777,
+            "bayes_log": 1.0389385185394584,
+            "bayes_log_noise": 1.1966033466052597,
+            "bayes_log_spread": 0.9857066515683298,
+            "prior_log": 2.989520744332725,
+            "prior_log_noise": 5.123502205008557,
+            "prior_log_spread": 0.8265420097578476
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.901885317696595,
+            "eb_linear_joint": 0.9011623598008071,
+            "eb_log_joint": 0.9408354368502979,
+            "bayes_log": 0.956012968944659,
+            "bayes_log_noise": 0.8577331479446687,
+            "bayes_log_spread": 0.8968900690140997
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.8907603464870067,
+              "weight_own": 0.9521511776320307,
+              "prior_coverage": 0.9855630413859481
+            },
+            "2.0": {
+              "coverage": 0.8888354186717998,
+              "weight_own": 0.961340703004108,
+              "prior_coverage": 0.9860442733397498
+            }
+          }
+        },
+        "BIT": {
+          "coverage": {
+            "own": 0.8848837209302326,
+            "hier_linear_loo": 0.4686046511627907,
+            "prior_linear_loo": 0.35930232558139535,
+            "eb_linear_joint": 0.49534883720930234,
+            "eb_log_joint": 0.8767441860465116,
+            "bayes_log": 0.8813953488372093,
+            "bayes_log_noise": 0.8837209302325582,
+            "bayes_log_spread": 0.8813953488372093,
+            "prior_log": 0.3058139534883721,
+            "prior_log_noise": 0.8116279069767441,
+            "prior_log_spread": 0.6895348837209302
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 0.1361580969096539,
+            "prior_linear_loo": 0.09497243493723116,
+            "eb_linear_joint": 0.1481755274787979,
+            "eb_log_joint": 0.8800966773689257,
+            "bayes_log": 0.9093664838750933,
+            "bayes_log_noise": 0.9455309158980858,
+            "bayes_log_spread": 0.9136723236775679,
+            "prior_log": 0.07808787579159467,
+            "prior_log_noise": 0.4143254656264302,
+            "prior_log_spread": 0.24619200622300705
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.045507632653781396,
+            "eb_linear_joint": 0.04571035396774505,
+            "eb_log_joint": 0.9376949638969846,
+            "bayes_log": 0.9536836721558801,
+            "bayes_log_noise": 0.8515206127382818,
+            "bayes_log_spread": 0.8919796877502426
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.8813953488372093,
+              "weight_own": 0.9496306378979379,
+              "prior_coverage": 0.30465116279069765
+            },
+            "2.0": {
+              "coverage": 0.8825581395348837,
+              "weight_own": 0.9592805432247588,
+              "prior_coverage": 0.3081395348837209
+            }
+          }
+        },
+        "CALCE": {
+          "coverage": {
+            "own": 0.9608423823626193,
+            "hier_linear_loo": 0.8845014807502468,
+            "prior_linear_loo": 0.5432708127673577,
+            "eb_linear_joint": 0.9072063178677197,
+            "eb_log_joint": 0.9572227706482396,
+            "bayes_log": 0.9582099374794341,
+            "bayes_log_noise": 0.9582099374794341,
+            "bayes_log_spread": 0.9568937150378414,
+            "prior_log": 0.6798288910825929,
+            "prior_log_noise": 0.9190523198420533,
+            "prior_log_spread": 0.843040473840079
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 0.5492834431527044,
+            "prior_linear_loo": 0.23859075962309728,
+            "eb_linear_joint": 0.6053823508272044,
+            "eb_log_joint": 0.9413960549383983,
+            "bayes_log": 0.9560451242980185,
+            "bayes_log_noise": 0.9506590099890219,
+            "bayes_log_spread": 0.9327842926043142,
+            "prior_log": 0.3212402720070462,
+            "prior_log_noise": 0.6431606254430725,
+            "prior_log_spread": 0.4747914379773847
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.4080495311244346,
+            "eb_linear_joint": 0.4094983171388131,
+            "eb_log_joint": 0.9344979535169303,
+            "bayes_log": 0.9513126803540608,
+            "bayes_log_noise": 0.8452936312106544,
+            "bayes_log_spread": 0.8870280304908014
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.9582099374794341,
+              "weight_own": 0.9470663002492322,
+              "prior_coverage": 0.6791707798617966
+            },
+            "2.0": {
+              "coverage": 0.9582099374794341,
+              "weight_own": 0.9571821830170978,
+              "prior_coverage": 0.6814741691345837
+            }
+          }
+        }
+      },
+      "mean_abs_dev": {
+        "own": 0.022137057451132102,
+        "hier_linear_loo": 0.09426442601977585,
+        "eb_linear_joint": 0.0858134526726616,
+        "eb_log_joint": 0.020249896752950303,
+        "bayes_log": 0.020383315077892795,
+        "bayes_log_noise": 0.021804628057725782,
+        "bayes_log_spread": 0.022141244795541516,
+        "prior_linear_loo": 0.214829183433873,
+        "prior_log": 0.20777675453142014,
+        "prior_log_noise": 0.11105750381142747,
+        "prior_log_spread": 0.0993142059770116
+      },
+      "mean_abs_dev_prior_scale": {
+        "0.5": {
+          "bayes_log": 0.020094575905611745,
+          "prior_log": 0.208080325181191
+        },
+        "2.0": {
+          "bayes_log": 0.02024700332911824,
+          "prior_log": 0.20722429239412837
+        }
+      }
+    },
+    "46": {
+      "fit_groups": [
+        "MIT",
+        "RWTH",
+        "XJTU",
+        "BIT",
+        "CALCE"
+      ],
+      "targets": [
+        "MIT",
+        "RWTH",
+        "XJTU",
+        "BIT",
+        "CALCE"
+      ],
+      "q": {
+        "MIT": 0.0014931597535201352,
+        "RWTH": 0.008521155970652373,
+        "XJTU": 0.01106620662119035,
+        "BIT": 0.09261738466964639,
+        "CALCE": 0.015807127930917018,
+        "Oxford": 0.006814085361030348,
+        "NASA": 0.03909459337592125
+      },
+      "covariate_noise": {
+        "MIT": 0.0001395922154188156,
+        "RWTH": 0.0005948096513748169,
+        "XJTU": 0.001049865037202835,
+        "BIT": 0.006960555911064148,
+        "CALCE": 0.001995787024497986,
+        "Oxford": 0.0049581378698349,
+        "NASA": 0.016479134559631348
+      },
+      "covariate_spread": {
+        "MIT": 0.0034456540235922976,
+        "RWTH": 0.01963460146743168,
+        "XJTU": 0.004931835617437468,
+        "BIT": 0.018806057356141322,
+        "CALCE": 0.011704844950196492,
+        "Oxford": 0.003888500577721484,
+        "NASA": 0.031511112525652814
+      },
+      "per_target": {
+        "MIT": {
+          "coverage": {
+            "own": 0.9230981866430783,
+            "hier_linear_loo": 0.9237616099071208,
+            "prior_linear_loo": 0.9998894294559929,
+            "eb_linear_joint": 0.9235957540911102,
+            "eb_log_joint": 0.9255307386112339,
+            "bayes_log": 0.9238721804511278,
+            "bayes_log_noise": 0.9237616099071208,
+            "bayes_log_spread": 0.9236510393631137,
+            "prior_log": 0.9998894294559929,
+            "prior_log_noise": 0.9462627156125608,
+            "prior_log_spread": 0.9997788589119858
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 1.0027651541132856,
+            "prior_linear_loo": 8.80508395652567,
+            "eb_linear_joint": 1.001697688694478,
+            "eb_log_joint": 1.0150997259082821,
+            "bayes_log": 1.004329899952156,
+            "bayes_log_noise": 1.0024933766584256,
+            "bayes_log_spread": 1.0019885554524957,
+            "prior_log": 13.009726589769201,
+            "prior_log_noise": 1.1994994465513564,
+            "prior_log_spread": 5.780252690476671
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.9996457239757205,
+            "eb_linear_joint": 0.9996998127481507,
+            "eb_log_joint": 0.9924742569873811,
+            "bayes_log": 0.9978651951335075,
+            "bayes_log_noise": 0.9645868012940001,
+            "bayes_log_spread": 0.9963807883846327
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.9239274657231313,
+              "weight_own": 0.9976675456139943,
+              "prior_coverage": 0.9998894294559929
+            },
+            "2.0": {
+              "coverage": 0.9237616099071208,
+              "weight_own": 0.9981327969792224,
+              "prior_coverage": 0.9998894294559929
+            }
+          }
+        },
+        "RWTH": {
+          "coverage": {
+            "own": 0.8941848818712073,
+            "hier_linear_loo": 0.8941848818712073,
+            "prior_linear_loo": 0.9673010074824722,
+            "eb_linear_joint": 0.8941848818712073,
+            "eb_log_joint": 0.8941848818712073,
+            "bayes_log": 0.8941848818712073,
+            "bayes_log_noise": 0.8940670476639369,
+            "bayes_log_spread": 0.8941848818712073,
+            "prior_log": 0.961527131326224,
+            "prior_log_noise": 0.791079950509633,
+            "prior_log_spread": 0.9993519118600129
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 1.0001047191443204,
+            "prior_linear_loo": 1.5163839094469707,
+            "eb_linear_joint": 1.0001083794564758,
+            "eb_log_joint": 1.0001329149109461,
+            "bayes_log": 1.000042420644146,
+            "bayes_log_noise": 0.9993067704250395,
+            "bayes_log_spread": 1.0003180247999606,
+            "prior_log": 1.445656522370247,
+            "prior_log_noise": 0.6949231692151717,
+            "prior_log_spread": 8.753145030529994
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.9997972068021397,
+            "eb_linear_joint": 0.999348013217706,
+            "eb_log_joint": 0.9994678545024469,
+            "bayes_log": 0.9998496738613539,
+            "bayes_log_noise": 0.9973373713574513,
+            "bayes_log_spread": 0.9997444537887243
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.8941848818712073,
+              "weight_own": 0.99983571745825,
+              "prior_coverage": 0.9613503800153185
+            },
+            "2.0": {
+              "coverage": 0.8941848818712073,
+              "weight_own": 0.9998685538490051,
+              "prior_coverage": 0.9618217168443999
+            }
+          }
+        },
+        "XJTU": {
+          "coverage": {
+            "own": 0.8375,
+            "hier_linear_loo": 0.8278225806451613,
+            "prior_linear_loo": 0.8153225806451613,
+            "eb_linear_joint": 0.8298387096774194,
+            "eb_log_joint": 0.8362903225806452,
+            "bayes_log": 0.8383064516129032,
+            "bayes_log_noise": 0.8439516129032258,
+            "bayes_log_spread": 0.8008064516129032,
+            "prior_log": 0.8475806451612903,
+            "prior_log_noise": 0.8512096774193548,
+            "prior_log_spread": 0.5766129032258065
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 0.9372282798276768,
+            "prior_linear_loo": 0.8823968589790492,
+            "eb_linear_joint": 0.9455538262244181,
+            "eb_log_joint": 0.9949995733105114,
+            "bayes_log": 1.0037431721575396,
+            "bayes_log_noise": 1.027244094066373,
+            "bayes_log_spread": 0.7978366356457773,
+            "prior_log": 1.0381594881309242,
+            "prior_log_noise": 1.051513249593989,
+            "prior_log_spread": 0.26987656613092054
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.46624112564186937,
+            "eb_linear_joint": 0.4661334934583071,
+            "eb_log_joint": 0.5674318348058546,
+            "bayes_log": 0.8330478826537754,
+            "bayes_log_noise": 0.3297736236430578,
+            "bayes_log_spread": 0.7596477495479551
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.8383064516129032,
+              "weight_own": 0.8207669001101292,
+              "prior_coverage": 0.8471774193548387
+            },
+            "2.0": {
+              "coverage": 0.8383064516129032,
+              "weight_own": 0.8507650785071805,
+              "prior_coverage": 0.847983870967742
+            }
+          }
+        },
+        "BIT": {
+          "coverage": {
+            "own": 0.9022988505747126,
+            "hier_linear_loo": 0.5586206896551724,
+            "prior_linear_loo": 0.4632183908045977,
+            "eb_linear_joint": 0.5793103448275863,
+            "eb_log_joint": 0.8931034482758621,
+            "bayes_log": 0.9,
+            "bayes_log_noise": 0.9,
+            "bayes_log_spread": 0.9,
+            "prior_log": 0.3563218390804598,
+            "prior_log_noise": 0.8804597701149425,
+            "prior_log_spread": 0.5896551724137931
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 0.13444839713486043,
+            "prior_linear_loo": 0.09637218630193736,
+            "eb_linear_joint": 0.1450636593812996,
+            "eb_log_joint": 0.7525061141330974,
+            "bayes_log": 0.9176619060223961,
+            "bayes_log_noise": 0.9197630612559866,
+            "bayes_log_spread": 0.9238439164633019,
+            "prior_log": 0.07184232389886236,
+            "prior_log_noise": 0.6252403230467877,
+            "prior_log_spread": 0.150092378408117
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.042137050515408114,
+            "eb_linear_joint": 0.04230531122273093,
+            "eb_log_joint": 0.8668897154125794,
+            "bayes_log": 0.9591474582939484,
+            "bayes_log_noise": 0.6442397592197008,
+            "bayes_log_spread": 0.9339735052116118
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.9,
+              "weight_own": 0.9555630043261303,
+              "prior_coverage": 0.35517241379310344
+            },
+            "2.0": {
+              "coverage": 0.9,
+              "weight_own": 0.9640784325941638,
+              "prior_coverage": 0.35747126436781607
+            }
+          }
+        },
+        "CALCE": {
+          "coverage": {
+            "own": 0.9228571428571428,
+            "hier_linear_loo": 0.9214285714285714,
+            "prior_linear_loo": 0.7638095238095238,
+            "eb_linear_joint": 0.9228571428571428,
+            "eb_log_joint": 0.9228571428571428,
+            "bayes_log": 0.9228571428571428,
+            "bayes_log_noise": 0.9228571428571428,
+            "bayes_log_spread": 0.9228571428571428,
+            "prior_log": 0.8533333333333334,
+            "prior_log_noise": 0.9576190476190476,
+            "prior_log_spread": 0.9104761904761904
+          },
+          "half_width_over_own": {
+            "own": 1.0,
+            "hier_linear_loo": 0.9957154397775039,
+            "prior_linear_loo": 0.45564599374573234,
+            "eb_linear_joint": 0.9977292377508143,
+            "eb_log_joint": 0.9994949081128152,
+            "bayes_log": 0.9998697965988143,
+            "bayes_log_noise": 1.002040692969639,
+            "bayes_log_spread": 0.9999353342617431,
+            "prior_log": 0.6629433063759036,
+            "prior_log_noise": 1.7349341091115877,
+            "prior_log_spread": 0.9285609438301782
+          },
+          "weight_own": {
+            "hier_linear_loo": 0.9921290921472617,
+            "eb_linear_joint": 0.9938846232820667,
+            "eb_log_joint": 0.9986276945410202,
+            "bayes_log": 0.9996121434007081,
+            "bayes_log_noise": 0.9931875327985171,
+            "bayes_log_spread": 0.9993408803211719
+          },
+          "prior_scale_sensitivity": {
+            "0.5": {
+              "coverage": 0.9228571428571428,
+              "weight_own": 0.9995761463977377,
+              "prior_coverage": 0.8533333333333334
+            },
+            "2.0": {
+              "coverage": 0.9228571428571428,
+              "weight_own": 0.9996608444491809,
+              "prior_coverage": 0.8538095238095238
+            }
+          }
+        }
+      },
+      "mean_abs_dev": {
+        "own": 0.023313859640745282,
+        "hier_linear_loo": 0.09291240583283022,
+        "eb_linear_joint": 0.08862379211440803,
+        "eb_log_joint": 0.024961845748132448,
+        "bayes_log": 0.022847597964832045,
+        "bayes_log_noise": 0.021720018439420175,
+        "bayes_log_spread": 0.030303369747229202,
+        "prior_linear_loo": 0.16496798833583645,
+        "prior_log": 0.1608361486414267,
+        "prior_log_noise": 0.056226473037535626,
+        "prior_log_spread": 0.16866777712171793
+      },
+      "mean_abs_dev_prior_scale": {
+        "0.5": {
+          "bayes_log": 0.022858655019232742,
+          "prior_log": 0.16111132859800717
+        },
+        "2.0": {
+          "bayes_log": 0.022825483856030625,
+          "prior_log": 0.1604892974310622
+        }
+      }
+    }
+  },
+  "summary": {
+    "mean_abs_dev": {
+      "own": {
+        "mean": 0.037684398369219885,
+        "min": 0.022137057451132102,
+        "max": 0.05143956239564693,
+        "beats_own_splits": 0,
+        "ties_or_beats_own_splits": 5
+      },
+      "hier_linear_loo": {
+        "mean": 0.11297759552281898,
+        "min": 0.09291240583283022,
+        "max": 0.13966808983454596,
+        "beats_own_splits": 0,
+        "ties_or_beats_own_splits": 0
+      },
+      "eb_linear_joint": {
+        "mean": 0.10809174023938231,
+        "min": 0.0858134526726616,
+        "max": 0.1356272256349994,
+        "beats_own_splits": 0,
+        "ties_or_beats_own_splits": 0
+      },
+      "eb_log_joint": {
+        "mean": 0.040010942964005175,
+        "min": 0.020249896752950303,
+        "max": 0.058688627722539445,
+        "beats_own_splits": 3,
+        "ties_or_beats_own_splits": 3
+      },
+      "bayes_log": {
+        "mean": 0.037609609193616625,
+        "min": 0.020383315077892795,
+        "max": 0.05016075403325324,
+        "beats_own_splits": 4,
+        "ties_or_beats_own_splits": 4
+      },
+      "bayes_log_noise": {
+        "mean": 0.03476175387091291,
+        "min": 0.021720018439420175,
+        "max": 0.05605218725432466,
+        "beats_own_splits": 4,
+        "ties_or_beats_own_splits": 4
+      },
+      "bayes_log_spread": {
+        "mean": 0.03994607927953356,
+        "min": 0.022141244795541516,
+        "max": 0.053765116377454805,
+        "beats_own_splits": 1,
+        "ties_or_beats_own_splits": 1
+      },
+      "prior_linear_loo": {
+        "mean": 0.200856598347584,
+        "min": 0.16496798833583645,
+        "max": 0.214829183433873,
+        "beats_own_splits": 0,
+        "ties_or_beats_own_splits": 0
+      },
+      "prior_log": {
+        "mean": 0.19831413011673155,
+        "min": 0.1608361486414267,
+        "max": 0.2118905564887303,
+        "beats_own_splits": 0,
+        "ties_or_beats_own_splits": 0
+      },
+      "prior_log_noise": {
+        "mean": 0.09908614028814654,
+        "min": 0.056226473037535626,
+        "max": 0.14925364633639815,
+        "beats_own_splits": 0,
+        "ties_or_beats_own_splits": 0
+      },
+      "prior_log_spread": {
+        "mean": 0.15531784334765253,
+        "min": 0.0993142059770116,
+        "max": 0.1789565051802467,
+        "beats_own_splits": 0,
+        "ties_or_beats_own_splits": 0
+      }
+    },
+    "bit_coverage": {
+      "own": {
+        "min": 0.8768115942028986,
+        "max": 0.9022988505747126
+      },
+      "hier_linear_loo": {
+        "min": 0.41478696741854637,
+        "max": 0.5586206896551724
+      },
+      "eb_linear_joint": {
+        "min": 0.42857142857142855,
+        "max": 0.5793103448275863
+      },
+      "eb_log_joint": {
+        "min": 0.8270676691729323,
+        "max": 0.8931034482758621
+      },
+      "bayes_log": {
+        "min": 0.8696741854636592,
+        "max": 0.9
+      },
+      "bayes_log_noise": {
+        "min": 0.8696741854636592,
+        "max": 0.9
+      },
+      "bayes_log_spread": {
+        "min": 0.8719806763285024,
+        "max": 0.9
+      },
+      "prior_linear_loo": {
+        "min": 0.3258145363408521,
+        "max": 0.4632183908045977
+      },
+      "prior_log": {
+        "min": 0.24758454106280192,
+        "max": 0.3563218390804598
+      },
+      "prior_log_noise": {
+        "min": 0.6591478696741855,
+        "max": 0.8804597701149425
+      },
+      "prior_log_spread": {
+        "min": 0.4924812030075188,
+        "max": 0.6895348837209302
+      }
+    },
+    "bit_weight_own": {
+      "hier_linear_loo": {
+        "min": 0.03758869278627761,
+        "max": 0.0549484861913141
+      },
+      "eb_linear_joint": {
+        "min": 0.03804191699916535,
+        "max": 0.05552987134983034
+      },
+      "eb_log_joint": {
+        "min": 0.7185107607277481,
+        "max": 0.9715153473238697
+      },
+      "bayes_log": {
+        "min": 0.9145002500075858,
+        "max": 0.9802855165563236
+      },
+      "bayes_log_noise": {
+        "min": 0.6278902510136743,
+        "max": 0.8515206127382818
+      },
+      "bayes_log_spread": {
+        "min": 0.8392597055403501,
+        "max": 0.9511946757846265
+      }
+    },
+    "prior_scale_sensitivity": {
+      "0.5": {
+        "bayes_log": 0.037502970915052426,
+        "prior_log": 0.19845482958488736
+      },
+      "2.0": {
+        "bayes_log": 0.03746063843637281,
+        "prior_log": 0.19811044432088434
+      }
+    }
+  }
+}

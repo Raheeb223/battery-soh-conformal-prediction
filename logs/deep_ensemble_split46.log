@@ -1,0 +1,7 @@
+[split 46] training member split46_ens_seed123
+[split 46] member split46_ens_seed123: test MAE 0.02360, best epoch 66
+[split 46] training member split46_ens_seed2024
+[split 46] member split46_ens_seed2024: test MAE 0.02597, best epoch 45
+[split 46] training member split46_ens_seed7
+[split 46] member split46_ens_seed7: test MAE 0.02368, best epoch 79
+[split 46] member split46_ens_seed99 exists

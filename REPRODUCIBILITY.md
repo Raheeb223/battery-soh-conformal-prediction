@@ -96,6 +96,13 @@ python lodo_target_calibration.py          # leave-one-dataset-out models retrai
                                            # calibrated on cells of the left-out dataset
 python deep_ensemble.py                    # five-member deep ensemble (trains seeds 7 and 99), calibrated
                                            # like the MC-Dropout model
+python deep_ensemble_splits.py             # the same ensemble on the four further splits (trains four
+                                           # members per split; --split <seed> trains one split only)
+python borrowing_variants.py               # stronger borrowing baselines (log scale, Bayesian, covariates)
+                                           # on all five splits (no retraining)
+python budget_across_splits.py             # the calibration-cell budget on all five splits (no retraining)
+python horizon_experiment.py               # 10- and 50-cycle horizons: model vs. persistence and drift,
+                                           # and calibration of all three (trains two models)
 python field_check.py                      # field check on the EVBattery fleet data: builds the field
                                            # caches, trains one model per vehicle split, repeats the
                                            # main analyses, applies the laboratory model to the field

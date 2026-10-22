@@ -75,6 +75,14 @@ STEPS = [
      os.path.join(config.OUTPUT_DIR, "lodo_target_calibration.json")),
     ("deep_ensemble", [sys.executable, "deep_ensemble.py"],
      os.path.join(config.OUTPUT_DIR, "deep_ensemble.json")),
+    ("deep_ensemble_splits", [sys.executable, "deep_ensemble_splits.py"],
+     os.path.join(config.OUTPUT_DIR, "deep_ensemble_splits.json")),
+    ("borrowing_variants", [sys.executable, "borrowing_variants.py"],
+     os.path.join(config.OUTPUT_DIR, "borrowing_variants.json")),
+    ("budget_across_splits", [sys.executable, "budget_across_splits.py"],
+     os.path.join(config.OUTPUT_DIR, "budget_across_splits.json")),
+    ("horizon_experiment", [sys.executable, "horizon_experiment.py"],
+     os.path.join(config.OUTPUT_DIR, "horizon_experiment.json")),
     ("field_check", [sys.executable, "field_check.py"],
      os.path.join(config.OUTPUT_DIR, "field_check.json")),
     ("deterministic_predictor", [sys.executable, "deterministic_predictor_comparison.py"],
@@ -89,7 +97,7 @@ STEPS = [
 # flagged so --execute without --only prints a warning before launching all
 # of them back to back.
 GPU_HEAVY = {"train", "experiments", "leave_one_out", "repeated_split", "train_cqr", "field_check",
-             "lodo_target_calibration", "deep_ensemble"}
+             "lodo_target_calibration", "deep_ensemble", "deep_ensemble_splits", "horizon_experiment"}
 
 
 def main():

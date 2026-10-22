@@ -1,0 +1,39 @@
+# Runs what a reviewer can run without the raw datasets: the verification checks, a rebuild of
+# every number in the paper from outputs/, and the results figures.
+name: checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+
+      - name: Install pinned dependencies (CPU build of PyTorch)
+        run: |
+          pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          pip install -r requirements.txt
+
+      - name: Verification checks
+        run: python tests/run_checks.py
+
+      - name: Rebuild every number in the paper and compare with the committed registry
+        run: |
+          python make_results_registry.py | tee registry.log
+          grep -q "^0 value(s) UNVERIFIED" registry.log
+          git diff --exit-code results_registry.json
+
+      - name: Redraw the results figures
+        run: |
+          python figures/make_results_figures.py
+          python figures/make_prediction_figures.py

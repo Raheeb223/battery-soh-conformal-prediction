@@ -1,0 +1,2 @@
+[split 46] training member split46_ens_seed99
+[split 46] member split46_ens_seed99: test MAE 0.02551, best epoch 72

@@ -1,0 +1,13 @@
+[split 43] training member split43_ens_seed123
+[conformal] WARNING: no calibration data for ['NASA'] — this means that group had 0 validation cells (a split bug, not expected behavior). Falling back to a pooled qhat across all calibrated groups so results aren't silently wrong, but you should fix the split so every dataset gets validation cells.
+[conformal] WARNING: no calibration data for ['NASA'] — this means that group had 0 validation cells (a split bug, not expected behavior). Falling back to a pooled qhat across all calibrated groups so results aren't silently wrong, but you should fix the split so every dataset gets validation cells.
+[split 43] member split43_ens_seed123: test MAE 0.02570, best epoch 53
+[split 43] training member split43_ens_seed2024
+[conformal] WARNING: no calibration data for ['NASA'] — this means that group had 0 validation cells (a split bug, not expected behavior). Falling back to a pooled qhat across all calibrated groups so results aren't silently wrong, but you should fix the split so every dataset gets validation cells.
+[conformal] WARNING: no calibration data for ['NASA'] — this means that group had 0 validation cells (a split bug, not expected behavior). Falling back to a pooled qhat across all calibrated groups so results aren't silently wrong, but you should fix the split so every dataset gets validation cells.
+[split 43] member split43_ens_seed2024: test MAE 0.02847, best epoch 93
+[split 43] training member split43_ens_seed7
+[conformal] WARNING: no calibration data for ['NASA'] — this means that group had 0 validation cells (a split bug, not expected behavior). Falling back to a pooled qhat across all calibrated groups so results aren't silently wrong, but you should fix the split so every dataset gets validation cells.
+[conformal] WARNING: no calibration data for ['NASA'] — this means that group had 0 validation cells (a split bug, not expected behavior). Falling back to a pooled qhat across all calibrated groups so results aren't silently wrong, but you should fix the split so every dataset gets validation cells.
+[split 43] member split43_ens_seed7: test MAE 0.02694, best epoch 95
+[split 43] member split43_ens_seed99 exists

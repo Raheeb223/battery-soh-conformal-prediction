@@ -1,0 +1,89 @@
+
+=== split 42 (fit groups: MIT, RWTH, XJTU, BIT, CALCE)
+method                 MIT    RWTH    XJTU     BIT   CALCE     dev
+own                   92.2    90.7    93.0    88.1    75.6    4.43
+hier_linear_loo       93.0    90.7    92.9    41.5    75.3   13.97
+eb_linear_joint       92.4    90.7    93.0    42.9    75.4   13.56
+eb_log_joint          93.5    90.7    93.3    82.7    75.5    5.87
+bayes_log             92.6    90.7    93.2    87.0    75.6    4.80
+bayes_log_noise       92.4    90.7    97.5    87.0    75.6    5.61
+bayes_log_spread      92.4    90.7    91.4    87.2    75.6    4.35
+prior_linear_loo     100.0    92.1    92.7    32.6    59.5   20.55
+prior_log            100.0    94.1    95.9    26.4    69.0   20.90
+prior_log_noise       97.7    75.4   100.0    65.9    71.8   14.93
+prior_log_spread      99.6    99.9    78.0    49.2    74.4   17.58
+BIT weight on own quantile: hier_linear_loo 0.038, eb_linear_joint 0.038, eb_log_joint 0.719, bayes_log 0.915, bayes_log_noise 0.718, bayes_log_spread 0.854
+
+=== split 43 (fit groups: MIT, RWTH, XJTU, BIT, CALCE)
+method                 MIT    RWTH    XJTU     BIT   CALCE     dev
+own                   89.7    89.8    70.5    87.7    88.7    4.72
+hier_linear_loo       89.8    89.8    72.7    45.8    87.5   12.90
+eb_linear_joint       89.7    89.8    72.2    48.1    87.8   12.48
+eb_log_joint          89.8    89.8    71.5    86.8    88.6    4.69
+bayes_log             89.8    89.8    71.2    87.2    88.6    4.67
+bayes_log_noise       89.7    89.8    74.2    87.3    88.6    4.07
+bayes_log_spread      89.7    89.8    69.6    87.2    88.6    5.01
+prior_linear_loo      99.9    93.0    88.3    34.7    52.9   21.41
+prior_log            100.0    91.3    89.1    24.8    61.5   21.19
+prior_log_noise       93.5    68.7    97.8    74.4    79.1   11.84
+prior_log_spread      97.2    99.8    53.1    59.8    84.6   17.90
+BIT weight on own quantile: hier_linear_loo 0.055, eb_linear_joint 0.056, eb_log_joint 0.908, bayes_log 0.934, bayes_log_noise 0.832, bayes_log_spread 0.839
+
+=== split 44 (fit groups: MIT, RWTH, XJTU, BIT, CALCE)
+method                 MIT    RWTH    XJTU     BIT   CALCE     dev
+own                   88.3    87.9    73.4    89.5    94.7    5.14
+hier_linear_loo       88.3    87.9    78.8    52.1    91.6   10.91
+eb_linear_joint       88.3    87.9    77.7    55.7    92.4   10.56
+eb_log_joint          88.3    87.9    75.1    88.7    94.6    4.93
+bayes_log             88.3    87.9    74.3    89.1    94.7    5.02
+bayes_log_noise       88.3    87.9    83.0    89.1    94.9    3.35
+bayes_log_spread      88.3    87.9    73.0    88.7    94.7    5.38
+prior_linear_loo      99.7    95.3    97.7    35.9    64.3   20.49
+prior_log             99.8    92.6    98.2    26.3    73.3   20.21
+prior_log_noise       82.1    78.5    93.3    87.5    95.1    6.05
+prior_log_spread      93.1    99.9    60.4    60.2    94.5   15.38
+BIT weight on own quantile: hier_linear_loo 0.052, eb_linear_joint 0.053, eb_log_joint 0.972, bayes_log 0.980, bayes_log_noise 0.628, bayes_log_spread 0.951
+
+=== split 45 (fit groups: MIT, RWTH, XJTU, BIT, CALCE)
+method                 MIT    RWTH    XJTU     BIT   CALCE     dev
+own                   88.8    89.7    88.0    88.5    96.1    2.21
+hier_linear_loo       88.8    89.7    91.0    46.9    88.5    9.43
+eb_linear_joint       88.8    89.7    90.3    49.5    90.7    8.58
+eb_log_joint          88.8    89.7    89.4    87.7    95.7    2.02
+bayes_log             88.8    89.7    88.9    88.1    95.8    2.04
+bayes_log_noise       88.8    89.7    92.0    88.4    95.8    2.18
+bayes_log_spread      88.8    89.7    87.9    88.1    95.7    2.21
+prior_linear_loo     100.0    89.9    97.6    35.9    54.3   21.48
+prior_log            100.0    93.9    98.6    30.6    68.0   20.78
+prior_log_noise       85.3    59.4    99.4    81.2    91.9   11.11
+prior_log_spread      97.2    99.9    84.3    69.0    84.3    9.93
+BIT weight on own quantile: hier_linear_loo 0.046, eb_linear_joint 0.046, eb_log_joint 0.938, bayes_log 0.954, bayes_log_noise 0.852, bayes_log_spread 0.892
+
+=== split 46 (fit groups: MIT, RWTH, XJTU, BIT, CALCE)
+method                 MIT    RWTH    XJTU     BIT   CALCE     dev
+own                   92.3    89.4    83.8    90.2    92.3    2.33
+hier_linear_loo       92.4    89.4    82.8    55.9    92.1    9.29
+eb_linear_joint       92.4    89.4    83.0    57.9    92.3    8.86
+eb_log_joint          92.6    89.4    83.6    89.3    92.3    2.50
+bayes_log             92.4    89.4    83.8    90.0    92.3    2.28
+bayes_log_noise       92.4    89.4    84.4    90.0    92.3    2.17
+bayes_log_spread      92.4    89.4    80.1    90.0    92.3    3.03
+prior_linear_loo     100.0    96.7    81.5    46.3    76.4   16.50
+prior_log            100.0    96.2    84.8    35.6    85.3   16.08
+prior_log_noise       94.6    79.1    85.1    88.0    95.8    5.62
+prior_log_spread     100.0    99.9    57.7    59.0    91.0   16.87
+BIT weight on own quantile: hier_linear_loo 0.042, eb_linear_joint 0.042, eb_log_joint 0.867, bayes_log 0.959, bayes_log_noise 0.644, bayes_log_spread 0.934
+
+method                mean     min     max  beats own  BIT min  BIT max
+own                   3.77    2.21    5.14          0     87.7     90.2
+hier_linear_loo      11.30    9.29   13.97          0     41.5     55.9
+eb_linear_joint      10.81    8.58   13.56          0     42.9     57.9
+eb_log_joint          4.00    2.02    5.87          3     82.7     89.3
+bayes_log             3.76    2.04    5.02          4     87.0     90.0
+bayes_log_noise       3.48    2.17    5.61          4     87.0     90.0
+bayes_log_spread      3.99    2.21    5.38          1     87.2     90.0
+prior_linear_loo     20.09   16.50   21.48          0     32.6     46.3
+prior_log            19.83   16.08   21.19          0     24.8     35.6
+prior_log_noise       9.91    5.62   14.93          0     65.9     88.0
+prior_log_spread     15.53    9.93   17.90          0     49.2     69.0
+saved outputs/borrowing_variants.json

@@ -1,0 +1,36 @@
+{
+  "run_name": "horizon10_groupwise",
+  "model_variant": "full",
+  "seed": 42,
+  "conformal_mode": "groupwise",
+  "calibration_predictor": "mc_mean",
+  "best_epoch": 70,
+  "best_val_loss": 0.008118290885091348,
+  "test_mae": 0.03448411077260971,
+  "test_rmse": 0.1178085133433342,
+  "overall_coverage": 0.9064270152505447,
+  "per_dataset_mae": {
+    "BIT": 0.3022492825984955,
+    "CALCE": 0.1192682757973671,
+    "MIT": 0.01738828793168068,
+    "Oxford": 0.07268579304218292,
+    "RWTH": 0.01921396702528,
+    "XJTU": 0.06633000075817108
+  },
+  "per_dataset_coverage": {
+    "BIT": 0.8741058655221745,
+    "CALCE": 0.7992660550458716,
+    "MIT": 0.9246709766797506,
+    "Oxford": 1.0,
+    "RWTH": 0.9010603345280764,
+    "XJTU": 0.9324911172522701
+  },
+  "dataset_signature": [
+    "BIT",
+    "CALCE",
+    "MIT",
+    "Oxford",
+    "RWTH",
+    "XJTU"
+  ]
+}

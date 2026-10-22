@@ -1,0 +1,541 @@
+{
+  "1": {
+    "horizon": 1,
+    "mae_real": {
+      "MIT": {
+        "n_test_windows": 17513,
+        "n_test_cells": 21,
+        "model": 0.0006535947790188667,
+        "persistence": 0.0003261458550082318,
+        "drift": 0.00024991111315162654,
+        "model_beats_persistence": false,
+        "model_beats_drift": false
+      },
+      "RWTH": {
+        "n_test_windows": 13446,
+        "n_test_cells": 6,
+        "model": 0.003728403835804996,
+        "persistence": 0.0011220450173712053,
+        "drift": 0.001957674348307203,
+        "model_beats_persistence": false,
+        "model_beats_drift": false
+      },
+      "XJTU": {
+        "n_test_windows": 2605,
+        "n_test_cells": 8,
+        "model": 0.00272141155217063,
+        "persistence": 0.011759954667253342,
+        "drift": 0.012817916490485316,
+        "model_beats_persistence": true,
+        "model_beats_drift": true
+      },
+      "BIT": {
+        "n_test_windows": 798,
+        "n_test_cells": 11,
+        "model": 0.035212730885946834,
+        "persistence": 0.039346880789875506,
+        "drift": 0.11980195034737225,
+        "model_beats_persistence": true,
+        "model_beats_drift": true
+      },
+      "CALCE": {
+        "n_test_windows": 2743,
+        "n_test_cells": 2,
+        "model": 0.014361333538424378,
+        "persistence": 0.01630354158341544,
+        "drift": 0.021063276495823128,
+        "model_beats_persistence": true,
+        "model_beats_drift": true
+      },
+      "Oxford": {
+        "n_test_windows": 56,
+        "n_test_cells": 1,
+        "model": 0.0017129421510438199,
+        "persistence": 0.002735541948733575,
+        "drift": 0.0020969700975340894,
+        "model_beats_persistence": true,
+        "model_beats_drift": true
+      },
+      "NASA": {
+        "n_test_windows": 3,
+        "n_test_cells": 1,
+        "model": 0.007890098266305861,
+        "persistence": 0.015488680727328692,
+        "drift": 0.07702779621973702,
+        "model_beats_persistence": true,
+        "model_beats_drift": true
+      }
+    },
+    "pooled_mae_real": {
+      "model": 0.0036669974498732246,
+      "persistence": 0.0034375356096078905,
+      "drift": 0.0058609754759725635
+    },
+    "model_calibration": {
+      "raw_gaussian": {
+        "overall_coverage": 0.9665536540738349,
+        "per_dataset_coverage": {
+          "BIT": 0.7506265664160401,
+          "CALCE": 0.7644914327378782,
+          "MIT": 0.9977159824130646,
+          "NASA": 1.0,
+          "Oxford": 0.9464285714285714,
+          "RWTH": 0.9950914770191879,
+          "XJTU": 0.8890595009596929
+        },
+        "mean_width": 0.2446356564760208,
+        "mean_abs_dev_five": 0.09772599186372825,
+        "mean_abs_dev_six": 0.08917642179120211
+      },
+      "pooled": {
+        "overall_coverage": 0.8991228070175439,
+        "per_dataset_coverage": {
+          "BIT": 0.4423558897243108,
+          "CALCE": 0.6321545752825374,
+          "MIT": 0.9490664078113401,
+          "NASA": 0.6666666666666666,
+          "Oxford": 0.8214285714285714,
+          "RWTH": 0.9486092518221032,
+          "XJTU": 0.7309021113243762
+        },
+        "mean_width": 0.084699846804142,
+        "mean_abs_dev_five": 0.1984526166604438,
+        "mean_abs_dev_six": 0.17847241864560792
+      },
+      "groupwise": {
+        "overall_coverage": 0.9041276504143795,
+        "per_dataset_coverage": {
+          "BIT": 0.8809523809523809,
+          "CALCE": 0.7564710171345242,
+          "MIT": 0.9218294980871353,
+          "NASA": 0.6666666666666666,
+          "Oxford": 1.0,
+          "RWTH": 0.9071842927264614,
+          "XJTU": 0.9301343570057582
+        },
+        "mean_width": 0.0968228429555893,
+        "mean_abs_dev_five": 0.044344949946489944,
+        "mean_abs_dev_six": 0.05362079162207495
+      },
+      "normalized_groupwise": {
+        "overall_coverage": 0.8972930793240771,
+        "per_dataset_coverage": {
+          "BIT": 0.8809523809523809,
+          "CALCE": 0.7597520962449872,
+          "MIT": 0.9198309826985668,
+          "NASA": 1.0,
+          "Oxford": 0.9821428571428571,
+          "RWTH": 0.8963260449204224,
+          "XJTU": 0.8986564299424185
+        },
+        "mean_width": 0.11332687735557556,
+        "mean_abs_dev_five": 0.036828806127671566,
+        "mean_abs_dev_six": 0.044381147963535816
+      },
+      "test_mae": 0.024789657443761826,
+      "test_rmse": 0.10174031555652618
+    },
+    "naive_calibration": {
+      "persistence": {
+        "pooled": {
+          "per_dataset_coverage": {
+            "BIT": 0.4724310776942356,
+            "CALCE": 0.6868392271235874,
+            "MIT": 0.9593444869525495,
+            "NASA": 0.0,
+            "Oxford": 0.26785714285714285,
+            "RWTH": 0.9856462888591403,
+            "XJTU": 0.2310940499040307
+          },
+          "mean_abs_dev_five": 0.2909252842179672
+        },
+        "groupwise": {
+          "per_dataset_coverage": {
+            "BIT": 0.8759398496240601,
+            "CALCE": 0.7969376594969012,
+            "MIT": 0.9008165362873294,
+            "NASA": 0.0,
+            "Oxford": 1.0,
+            "RWTH": 0.9121671872675888,
+            "XJTU": 0.9389635316698657
+          },
+          "mean_abs_dev_five": 0.03581394922076451
+        }
+      },
+      "drift": {
+        "pooled": {
+          "per_dataset_coverage": {
+            "BIT": 0.12406015037593984,
+            "CALCE": 0.5493984688297484,
+            "MIT": 0.9965168731799234,
+            "NASA": 0.0,
+            "Oxford": 0.8392857142857143,
+            "RWTH": 0.9779860181466608,
+            "XJTU": 0.33205374280230326
+          },
+          "mean_abs_dev_five": 0.37379810586371853
+        },
+        "groupwise": {
+          "per_dataset_coverage": {
+            "BIT": 0.8972431077694235,
+            "CALCE": 0.7903755012759752,
+            "MIT": 0.9162336549991434,
+            "NASA": 0.0,
+            "Oxford": 1.0,
+            "RWTH": 0.8909712925777182,
+            "XJTU": 0.889827255278311
+          },
+          "mean_abs_dev_five": 0.029563299619543116
+        }
+      }
+    }
+  },
+  "10": {
+    "horizon": 10,
+    "mae_real": {
+      "MIT": {
+        "n_test_windows": 17324,
+        "n_test_cells": 21,
+        "model": 0.0007964004543800517,
+        "persistence": 0.0023259921314146875,
+        "drift": 0.0005968770236305985,
+        "model_beats_persistence": true,
+        "model_beats_drift": false
+      },
+      "RWTH": {
+        "n_test_windows": 13392,
+        "n_test_cells": 6,
+        "model": 0.00458401889861639,
+        "persistence": 0.005074058951509873,
+        "drift": 0.0044628207433484056,
+        "model_beats_persistence": true,
+        "model_beats_drift": false
+      },
+      "XJTU": {
+        "n_test_windows": 2533,
+        "n_test_cells": 8,
+        "model": 0.003934618554610641,
+        "persistence": 0.017706788382532444,
+        "drift": 0.011211710054491933,
+        "model_beats_persistence": true,
+        "model_beats_drift": true
+      },
+      "BIT": {
+        "n_test_windows": 699,
+        "n_test_cells": 11,
+        "model": 0.07518529016192396,
+        "persistence": 0.18803408001137187,
+        "drift": 0.19193003037874065,
+        "model_beats_persistence": true,
+        "model_beats_drift": true
+      },
+      "CALCE": {
+        "n_test_windows": 2725,
+        "n_test_cells": 2,
+        "model": 0.020685005664648037,
+        "persistence": 0.025703095320544073,
+        "drift": 0.0352565794957686,
+        "model_beats_persistence": true,
+        "model_beats_drift": true
+      },
+      "Oxford": {
+        "n_test_windows": 47,
+        "n_test_cells": 1,
+        "model": 0.004774620016251754,
+        "persistence": 0.026490493608665074,
+        "drift": 0.008266934335464951,
+        "model_beats_persistence": true,
+        "model_beats_drift": true
+      }
+    },
+    "pooled_mae_real": {
+      "model": 0.005291339158476316,
+      "persistence": 0.009690097767217912,
+      "drift": 0.008963166415980457
+    },
+    "model_calibration": {
+      "raw_gaussian": {
+        "overall_coverage": 0.9297113289760348,
+        "per_dataset_coverage": {
+          "BIT": 0.5336194563662375,
+          "CALCE": 0.6425688073394495,
+          "MIT": 0.9691179866081736,
+          "Oxford": 0.8297872340425532,
+          "RWTH": 0.9790919952210275,
+          "XJTU": 0.8191867350967232
+        },
+        "mean_width": 0.24428027868270874,
+        "mean_abs_dev_five": 0.17056699660535818,
+        "mean_abs_dev_six": 0.15384129149737294
+      },
+      "pooled": {
+        "overall_coverage": 0.9020152505446624,
+        "per_dataset_coverage": {
+          "BIT": 0.23891273247496422,
+          "CALCE": 0.5218348623853211,
+          "MIT": 0.9685407527129993,
+          "Oxford": 0.46808510638297873,
+          "RWTH": 0.9601254480286738,
+          "XJTU": 0.7398341887090407
+        },
+        "mean_width": 0.12071538716554642,
+        "mean_abs_dev_five": 0.26561688343446943,
+        "mean_abs_dev_six": 0.29333321846489474
+      },
+      "groupwise": {
+        "overall_coverage": 0.9047930283224401,
+        "per_dataset_coverage": {
+          "BIT": 0.8741058655221745,
+          "CALCE": 0.7944954128440367,
+          "MIT": 0.9229392749942277,
+          "Oxford": 1.0,
+          "RWTH": 0.9001642771804063,
+          "XJTU": 0.9305171733122779
+        },
+        "mean_width": 0.1427801102399826,
+        "mean_abs_dev_five": 0.037003889424140124,
+        "mean_abs_dev_six": 0.04750324118678343
+      },
+      "normalized_groupwise": {
+        "overall_coverage": 0.8961601307189543,
+        "per_dataset_coverage": {
+          "BIT": 0.8669527896995708,
+          "CALCE": 0.7614678899082569,
+          "MIT": 0.9193604248441468,
+          "Oxford": 1.0,
+          "RWTH": 0.8938172043010753,
+          "XJTU": 0.9009080142123964
+        },
+        "mean_width": 0.1855403184890747,
+        "mean_abs_dev_five": 0.03960611102952807,
+        "mean_abs_dev_six": 0.04967175919127339
+      },
+      "test_mae": 0.03448411077260971,
+      "test_rmse": 0.1178085133433342
+    },
+    "naive_calibration": {
+      "persistence": {
+        "pooled": {
+          "per_dataset_coverage": {
+            "BIT": 0.1659513590844063,
+            "CALCE": 0.803302752293578,
+            "MIT": 0.9083929808358346,
+            "Oxford": 0.0,
+            "RWTH": 0.9917114695340502,
+            "XJTU": 0.5854717726016581
+          },
+          "mean_abs_dev_five": 0.2490757132780485
+        },
+        "groupwise": {
+          "per_dataset_coverage": {
+            "BIT": 0.8884120171673819,
+            "CALCE": 0.7493577981651376,
+            "MIT": 0.894827984299238,
+            "Oxford": 1.0,
+            "RWTH": 0.8888142174432497,
+            "XJTU": 0.8487958941966048
+          },
+          "mean_abs_dev_five": 0.04595841774567759
+        }
+      },
+      "drift": {
+        "pooled": {
+          "per_dataset_coverage": {
+            "BIT": 0.12875536480686695,
+            "CALCE": 0.4910091743119266,
+            "MIT": 0.9971715539136458,
+            "Oxford": 0.40425531914893614,
+            "RWTH": 0.9731929510155317,
+            "XJTU": 0.4946703513620213
+          },
+          "mean_abs_dev_five": 0.35118592288967254
+        },
+        "groupwise": {
+          "per_dataset_coverage": {
+            "BIT": 0.8927038626609443,
+            "CALCE": 0.7823853211009174,
+            "MIT": 0.9100669591318402,
+            "Oxford": 1.0,
+            "RWTH": 0.8885902031063322,
+            "XJTU": 0.8910382945124359
+          },
+          "mean_abs_dev_five": 0.03106985555024211
+        }
+      }
+    }
+  },
+  "50": {
+    "horizon": 50,
+    "mae_real": {
+      "MIT": {
+        "n_test_windows": 16484,
+        "n_test_cells": 21,
+        "model": 0.001879068641967557,
+        "persistence": 0.01045080385077005,
+        "drift": 0.0030032361964597207,
+        "model_beats_persistence": true,
+        "model_beats_drift": true
+      },
+      "RWTH": {
+        "n_test_windows": 13152,
+        "n_test_cells": 6,
+        "model": 0.007283333062000991,
+        "persistence": 0.017361439581973826,
+        "drift": 0.013985604225461008,
+        "model_beats_persistence": true,
+        "model_beats_drift": true
+      },
+      "XJTU": {
+        "n_test_windows": 2213,
+        "n_test_cells": 8,
+        "model": 0.008659251710073134,
+        "persistence": 0.034242213931239045,
+        "drift": 0.02643886114752283,
+        "model_beats_persistence": true,
+        "model_beats_drift": true
+      },
+      "BIT": {
+        "n_test_windows": 276,
+        "n_test_cells": 10,
+        "model": 0.09751314557245265,
+        "persistence": 0.2559537406777871,
+        "drift": 0.45663105644884994,
+        "model_beats_persistence": true,
+        "model_beats_drift": true
+      },
+      "CALCE": {
+        "n_test_windows": 2645,
+        "n_test_cells": 2,
+        "model": 0.029620862024856014,
+        "persistence": 0.03374006985408452,
+        "drift": 0.08548744039466699,
+        "model_beats_persistence": true,
+        "model_beats_drift": true
+      },
+      "Oxford": {
+        "n_test_windows": 7,
+        "n_test_cells": 1,
+        "model": 0.006860287403296746,
+        "persistence": 0.13242961910594753,
+        "drift": 0.06738948852406605,
+        "model_beats_persistence": true,
+        "model_beats_drift": true
+      }
+    },
+    "pooled_mae_real": {
+      "model": 0.007224220636161586,
+      "persistence": 0.018322438623599207,
+      "drift": 0.01853435862203809
+    },
+    "model_calibration": {
+      "raw_gaussian": {
+        "overall_coverage": 0.866722258964258,
+        "per_dataset_coverage": {
+          "BIT": 0.4963768115942029,
+          "CALCE": 0.5568998109640831,
+          "MIT": 0.8892259160397962,
+          "Oxford": 1.0,
+          "RWTH": 0.9400091240875912,
+          "XJTU": 0.6796204247627655
+        },
+        "mean_width": 0.26224252581596375,
+        "mean_abs_dev_five": 0.2035772321453487,
+        "mean_abs_dev_six": 0.1863143601211239
+      },
+      "pooled": {
+        "overall_coverage": 0.916065215516002,
+        "per_dataset_coverage": {
+          "BIT": 0.3188405797101449,
+          "CALCE": 0.6321361058601134,
+          "MIT": 0.943035670953652,
+          "Oxford": 0.7142857142857143,
+          "RWTH": 0.989507299270073,
+          "XJTU": 0.693176683235427
+        },
+        "mean_width": 0.27372434735298157,
+        "mean_abs_dev_five": 0.23767792028360796,
+        "mean_abs_dev_six": 0.22901731452205423
+      },
+      "groupwise": {
+        "overall_coverage": 0.9218448974897202,
+        "per_dataset_coverage": {
+          "BIT": 0.8731884057971014,
+          "CALCE": 0.8604914933837429,
+          "MIT": 0.9375758311089541,
+          "Oxford": 1.0,
+          "RWTH": 0.910051703163017,
+          "XJTU": 0.9539087211929508
+        },
+        "mean_width": 0.29185137152671814,
+        "mean_abs_dev_five": 0.03357127125681551,
+        "mean_abs_dev_six": 0.04464272604734626
+      },
+      "normalized_groupwise": {
+        "overall_coverage": 0.906346148316416,
+        "per_dataset_coverage": {
+          "BIT": 0.8804347826086957,
+          "CALCE": 0.806805293005671,
+          "MIT": 0.9204683329289007,
+          "Oxford": 1.0,
+          "RWTH": 0.9066301703163017,
+          "XJTU": 0.9213737008585631
+        },
+        "mean_width": 0.35199791193008423,
+        "mean_abs_dev_five": 0.03224642569787974,
+        "mean_abs_dev_six": 0.04353868808156645
+      },
+      "test_mae": 0.05640256777405739,
+      "test_rmse": 0.14408326148986816
+    },
+    "naive_calibration": {
+      "persistence": {
+        "pooled": {
+          "per_dataset_coverage": {
+            "BIT": 0.2463768115942029,
+            "CALCE": 0.9262759924385633,
+            "MIT": 0.8653846153846154,
+            "Oxford": 0.0,
+            "RWTH": 0.9979470802919708,
+            "XJTU": 0.5372797107998193
+          },
+          "mean_abs_dev_five": 0.23503638699037932
+        },
+        "groupwise": {
+          "per_dataset_coverage": {
+            "BIT": 0.9420289855072463,
+            "CALCE": 0.8007561436672967,
+            "MIT": 0.8892865809269594,
+            "Oxford": 1.0,
+            "RWTH": 0.8942366180048662,
+            "XJTU": 0.9055580659737912
+          },
+          "mean_abs_dev_five": 0.03266154177638303
+        }
+      },
+      "drift": {
+        "pooled": {
+          "per_dataset_coverage": {
+            "BIT": 0.09057971014492754,
+            "CALCE": 0.5398865784499055,
+            "MIT": 0.9658456685270566,
+            "Oxford": 0.0,
+            "RWTH": 0.9735401459854015,
+            "XJTU": 0.5833709896068685
+          },
+          "mean_abs_dev_five": 0.32510970726215127
+        },
+        "groupwise": {
+          "per_dataset_coverage": {
+            "BIT": 0.894927536231884,
+            "CALCE": 0.8022684310018904,
+            "MIT": 0.9049381218150935,
+            "Oxford": 1.0,
+            "RWTH": 0.8866332116788321,
+            "XJTU": 0.8888386805241754
+          },
+          "mean_abs_dev_five": 0.026454052475662328
+        }
+      }
+    }
+  }
+}

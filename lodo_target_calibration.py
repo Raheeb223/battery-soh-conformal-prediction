@@ -1,5 +1,5 @@
 """
-Leave-one-dataset-out with a few calibration cells from the left-out dataset.
+Leave-one-dataset-out with calibration cells from the left-out dataset.
 
 leave_one_out.py shows that a model never trained on a dataset is badly calibrated on it when its
 interval comes from the other datasets (coverage as low as 21.2%). That test mixes two failures: the
